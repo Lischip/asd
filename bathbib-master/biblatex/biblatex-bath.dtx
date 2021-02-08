@@ -1,0 +1,4300 @@
+% \iffalse meta-comment
+%<*internal|bbx|cbx|dbx|lbx|lbx-gb>
+\def\Version{2020/01/16 v3.2}
+%</internal|bbx|cbx|dbx|lbx|lbx-gb>
+%<*internal>
+\iffalse
+%</internal>
+%<*bbx|cbx|dbx|lbx|lbx-gb>
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%</bbx|cbx|dbx|lbx|lbx-gb>
+%<*bbx>
+\ProvidesFile{bath.bbx}
+    [\Version\space Biblography style as recommended by the University of Bath Library]
+%</bbx>
+%<*cbx>
+\ProvidesFile{bath.cbx}
+    [\Version\space Citation style as recommended by the University of Bath Library]
+%</cbx>
+%<*dbx>
+\ProvidesFile{bath.dbx}
+    [\Version\space Data model required by the biblatex-bath style]
+%</dbx>
+%<*lbx>
+\ProvidesFile{english-bath.lbx}
+    [\Version\space Generic English conventions required by the biblatex-bath style]
+%</lbx>
+%<*lbx-gb>
+\ProvidesFile{british-bath.lbx}
+    [\Version\space British English conventions required by the biblatex-bath style]
+%</lbx-gb>
+%<*readme>
+# biblatex-bath: Harvard referencing style as recommended by the University of Bath Library
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+
+\nopreamble\nopostamble
+
+\usedir{doc/latex/\jobname}
+\generate{
+  \file{README.md}{\from{\jobname.dtx}{readme}}
+  \file{\jobname.bib}{\from{\jobname.dtx}{bib}}
+}
+
+\preamble
+----------------------------------------------------------------
+biblatex-bath --- Harvard referencing style as recommended by the University of Bath Library
+Author:  Alex Ball
+E-mail:  a.j.ball@bath.ac.uk
+License: Released under the LaTeX Project Public License v1.3c or later
+See:     http://www.latex-project.org/lppl.txt
+----------------------------------------------------------------
+
+\endpreamble
+\postamble
+
+Copyright (C) 2020 by University of Bath
+\endpostamble
+
+\usedir{tex/latex/\jobname}
+\generate{
+  \file{bath.bbx}{\from{\jobname.dtx}{bbx}}
+  \file{bath.cbx}{\from{\jobname.dtx}{cbx}}
+  \file{bath.dbx}{\from{\jobname.dtx}{dbx}}
+  \file{english-bath.lbx}{\from{\jobname.dtx}{lbx}}
+  \file{british-bath.lbx}{\from{\jobname.dtx}{lbx-gb}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/\jobname}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+%<*driver>
+\ProvidesFile{biblatex-bath.dtx}
+    [\Version\space Harvard referencing style as recommended by the University of Bath Library]
+
+\documentclass[10pt,a4paper]{article}
+\usepackage[british]{babel}
+\usepackage[hmargin=3cm,vmargin=2.5cm]{geometry}
+\frenchspacing
+
+% For typesetting the CJK example
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage{CJKutf8}
+\else
+  \ifLuaTeX
+    \usepackage{luatexja-fontspec}
+  \else
+    \ifXeTeX
+    \usepackage{ctex}
+    \fi
+  \fi
+\fi
+
+% For typesetting the examples
+
+\newcounter{example}
+\newcommand{\eg}[1]{\protect\hfill\normalfont\textit{#1}}
+
+\usepackage{xpatch,csquotes,xcolor,xparse,multicol,fancyvrb}
+\xdefinecolor{Green}{rgb}{0,.5,0}
+\xdefinecolor{Slate}{RGB}{80,86,94}
+\xdefinecolor{BathStone}{RGB}{213,211,185}
+\colorlet{ok}{Green}
+\colorlet{todo}{red}
+\colorlet{hacked}{orange}
+\colorlet{manual}{purple}
+\RecustomVerbatimEnvironment
+  {Verbatim}{Verbatim}
+  {commentchar=\%}
+
+\usepackage[tightLists=false]{markdown}
+\markdownSetup{rendererPrototypes={%
+    link = {\href{#3}{#1}}%
+}}
+
+\usepackage{fontawesome}[2015/07/07]
+\newcommand{\booksym}{\makebox[1em][c]{\faicon{book}}}
+\newcommand{\cogsym}{\makebox[1em][c]{\faicon{cog}}}
+\makeatletter
+\newcommand{\hangfrom}[1]{%
+  \setbox\@tempboxa\hbox{{#1}}%
+  \hangindent \wd\@tempboxa\noindent\box\@tempboxa}
+\makeatother
+\newenvironment{tips}{%
+  \begin{list}{\makebox[2em][c]{\faLightbulbO}}{%
+    \setlength{\leftmargin}{2em}
+    \setlength{\labelwidth}{2em}
+    \setlength{\labelsep}{0pt}}
+}{\end{list}}
+\newenvironment{info}{%
+  \begin{list}{\makebox[2em][c]{\faInfoCircle}}{%
+    \setlength{\leftmargin}{2em}
+    \setlength{\labelwidth}{2em}
+    \setlength{\labelsep}{0pt}}
+}{\end{list}}
+\newenvironment{hacks}{%
+  \begin{list}{\makebox[2em][c]{\faWrench}}{%
+    \setlength{\leftmargin}{2em}
+    \setlength{\labelwidth}{2em}
+    \setlength{\labelsep}{0pt}}
+}{\end{list}}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,breakable,skins,xparse}
+\colorlet{Option}{violet}
+\newcommand*{\key}[1]{\textcolor{Option}{\ttfamily #1}}
+\lstloadlanguages{[LaTeX]TeX}
+\lstdefinestyle{dtxlatex}%
+  { columns=fullflexible
+  , basicstyle=\ttfamily
+  , language={[LaTeX]TeX}
+  , texcsstyle=*\color{red!75!black}
+  , moretexcs=
+    { printbibliography
+    , textcite
+    , autocite
+    , noop
+    , addbibresource
+    , assignrefcontextentries
+    , newrefcontext
+    }
+  , moredelim=**[s][\color{violet}]{[}{]}
+  , moredelim=**[s][\color{blue!75!black}]{\{}{\}}
+  , mathescape
+  }
+\lstset{style=dtxlatex}
+\tcbset
+  { colframe = Slate
+  , colback = BathStone!25
+  , listing options =
+    { style = tcblatex
+    , style = dtxlatex
+    , basicstyle=\ttfamily\small
+    }
+  }
+\NewTColorBox{bibexbox}{D(){ok}d<>m}%
+  {bicolor
+  ,colframe = #1
+  ,colback = #1!5!white
+  ,colbacklower = white
+  ,fontlower = \footnotesize
+  ,before upper = {\hangfrom{\booksym\space}\biburlsetup}
+  ,after upper = {\par\hangfrom{\cogsym\space}\fullcite{#3}}
+  ,IfNoValueTF={#2}{}%
+    {overlay = {
+      \node[anchor=south east,text=teal] at (frame.south east) {#2};
+      }
+    }
+  }
+
+% For typesetting the implementation
+\usepackage{doc}
+\makeatletter
+\newwrite\ydocwrite
+\def\ydocfname{\jobname.listing}
+\def\ydoc@catcodes{%
+  \let\do\@makeother
+  \dospecials
+  \catcode`\\=\active
+  \catcode`\^^M=\active
+  \catcode`\ =\active
+}
+\def\macrocode{%
+  \begingroup
+  \ydoc@catcodes
+  \macro@code
+}
+\def\endmacrocode{}
+\begingroup
+\endlinechar\m@ne
+\@firstofone{%
+\catcode`\|=0\relax
+\catcode`\(=1\relax
+\catcode`\)=2\relax
+\catcode`\*=14\relax
+\catcode`\{=12\relax
+\catcode`\}=12\relax
+\catcode`\ =12\relax
+\catcode`\%=12\relax
+\catcode`\\=\active
+\catcode`\^^M=\active
+\catcode`\ =\active
+}*
+|gdef|macro@code#1^^M%    \end{macrocode}(*
+|endgroup|expandafter|macro@@code|expandafter(|ydoc@removeline#1|noexpand|lastlinemacro)*
+)*
+|gdef|ydoc@removeline#1^^M(|noexpand|firstlinemacro)*
+|gdef|ydoc@defspecialmacros(*
+|def^^M(|noexpand|newlinemacro)*
+|def (|noexpand|spacemacro)*
+|def\(|noexpand|bslashmacro)*
+)*
+|gdef|ydoc@defrevspecialmacros(*
+|def|newlinemacro(|noexpand^^M)*
+|def|spacemacro(|noexpand )*
+|def|bslashmacro(|noexpand\)*
+)*
+|endgroup
+\def\macro@@code#1{%
+  {\ydoc@defspecialmacros
+  \xdef\themacrocode{#1}}%
+  \PrintMacroCode
+  \end{macrocode}%
+}
+\def\PrintMacroCode{%
+  \begingroup
+  \let\firstlinemacro\empty
+  \let\lastlinemacro\empty
+  \def\newlinemacro{^^J}%
+  \let\bslashmacro\bslash
+  \let\spacemacro\space
+  \immediate\openout\ydocwrite=\ydocfname\relax
+  \immediate\write\ydocwrite{\themacrocode}%
+  \immediate\closeout\ydocwrite
+  \let\input\@input
+  \tcbinputlisting{enhanced,breakable,size=small,listing only,listing file=\ydocfname}%
+  \endgroup
+}
+\makeatother
+
+% Documentation
+
+\usepackage[backend=biber,bibencoding=utf8,hyperref=false,isbn=false,style=bath,sorting=ynt]{biblatex}
+\addbibresource{biblatex-bath.bib}
+\assignrefcontextentries[]{*}
+\makeatletter
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\usedriver
+     {\defcounter{maxnames}{\blx@maxbibnames}}
+     {\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+\makeatother
+\xpretobibmacro{finentry}{%
+  \ifboolexpr{ test {\ifcitation} and not test {\iffootnote} }{%
+    \finentrypunct
+  }{}%
+}{}{}
+
+\usepackage{readprov}
+\usepackage[british,cleanlook]{isodate}
+
+\usepackage[colorlinks,citecolor=black]{hyperref}
+
+\sloppy
+
+\title{biblatex-bath: Harvard referencing style as recommended by the University of Bath Library}
+\author{%
+  Maintainer: Alex Ball\thanks{%
+    To contact the maintainer about this package, please visit the repository
+    where the code is hosted: \url{https://github.com/alex-ball/bathbib}.%
+  }%
+}
+\date{Package \UseVersionOf{biblatex-bath.dtx} --\printdateTeX{\UseDateOf{biblatex-bath.dtx}}}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\begin{markdown*}{hybrid=true}
+%</driver>
+%<*driver|readme>
+
+This package provides a [biblatex] style to format reference lists in the
+[Harvard style][bath-harvard] recommended by the University of Bath Library.
+
+## Installation
+
+The files you need are included in the zip archive available from [GitHub].
+If you use the zip archive from [CTAN], you will need to run `luatex
+biblatex-bath.dtx` to generate them.
+
+You can use this style simply by copying all the `.bbx`, `.cbx`, `.dbx` and
+`.lbx` files into your working directory, that is, the directory holding the
+main `.tex` file for your document. If you want the style to be available for
+all your documents without having to copy the files over each time, you can
+install them using the instructions below.
+
+### Managed way
+
+The latest stable release of biblatex-bath has been packaged for TeX Live and
+MiKTeX. If you are running TeX Live and have `tlmgr` installed, you can install
+the package simply by running `tlmgr install biblatex-bath`. If you are running
+MiKTeX, you can install the package by running `mpm --install=biblatex-bath`.
+Both `tlmgr` and `mpm` have GUI versions that you might find friendlier.
+
+### Automated way
+
+A makefile is provided which you can use with the Make utility on
+UNIX-like systems:
+
+  * Running `make source` generates the derived files
+      - `README.md`
+      - `bath.bbx`, `bath.cbx`, `bath.dbx`
+      - `english-bath.lbx`, `british-bath.lbx`
+      - `biblatex-bath.bib`
+      - `biblatex-bath.ins`
+  * Running `make` generates the above files and also `biblatex-bath.pdf`.
+    Ensure you have (at least) the [luatexja], [adobemapping] and [ipaex]
+    packages installed first.
+  * Running `make inst` installs the files in the user's TeX tree.
+    You can undo this with `make uninst`.
+  * Running `make install` installs the files in the local TeX tree.
+    You can undo this with `make uninstall`.
+
+### Manual way
+
+You do not need to follow the first step if you downloaded the zip archive from
+[GitHub]. You do not need to follow the second step if you already have the PDF
+documentation.
+
+ 1. Run `luatex biblatex-bath.dtx` to generate the source files.
+
+ 2. Compile `biblatex-bath.dtx` with [LuaLaTeX] and [Biber] to generate the
+    documentation. You will need, among other things, the [luatexja],
+    [adobemapping] and [ipaex] packages installed; this is just for the
+    documentation, not for the biblatex style itself.
+
+ 3. If you are using TeX Live, find your home TeX tree using the following
+    command at the command prompt/terminal:
+
+    ```
+    kpsewhich -var-value=TEXMFHOME
+    ```
+
+    If you are using MikTeX, consult the MikTeX manual entry for [integrating
+    local additions](http://docs.miktex.org/manual/localadditions.html). You
+    can use one of the roots (TeX trees) already defined – preferably one of
+    the User roots – or set up a new one.
+
+ 4. Move the files to your TeX tree as follows:
+      - `source/latex/biblatex-bath`:
+        `biblatex-bath.dtx`,
+        (`biblatex-bath.ins`)
+      - `tex/latex/biblatex-bath`:
+        `bath.bbx`,
+        `bath.cbx`,
+        `bath.dbx`,
+        `english-bath.lbx`,
+        `british-bath.lbx`
+      - `doc/latex/biblatex-bath`:
+        `biblatex-bath.pdf`,
+        `README.md`
+
+ 5. You may then have to update your installation's file name database
+    before TeX and friends can see the files.
+
+[bath-harvard]: https://library.bath.ac.uk/referencing/harvard-bath
+[biblatex]: http://ctan.org/pkg/biblatex
+[GitHub]: https://github.com/alex-ball/bathbib/releases
+[CTAN]: http://ctan.org/pkg/biblatex-bath
+[LuaLaTeX]: http://ctan.org/pkg/lualatex-doc
+[Biber]: http://ctan.org/pkg/biber
+[luatexja]: http://ctan.org/pkg/luatexja
+[adobemapping]: http://ctan.org/pkg/adobemapping
+[ipaex]: http://ctan.org/pkg/ipaex
+%</driver|readme>
+%<*driver>
+\end{markdown*}
+
+\section{Using the style}
+
+This style has been tested with \textsf{biblatex} versions 3.12 and 3.14.
+
+To use the style, specify it when you load \textsf{biblatex}. To get the sorting
+order of your \emph{citations} right, specify the \texttt{ynt} sorting scheme.
+To avoid possible inconsistencies (e.g.\@ in how disambiguation letters are
+assigned), force all entries to use the global reference context:
+
+\begin{tcblisting}{listing only}
+\usepackage[style=bath,sorting=ynt]{biblatex}
+\assignrefcontextentries[]{*}
+\end{tcblisting}
+
+Remember also to specify your \texttt{.bib} file in the preamble:
+
+\begin{tcblisting}{listing only}
+\addbibresource{file.bib}
+\end{tcblisting}
+
+To get the sorting order of your \emph{references} right, create a new reference
+context just before you print your bibliography, using the \texttt{nyt} sorting
+scheme:
+
+\begin{tcblisting}{listing only}
+\newrefcontext[sorting=nyt]
+\printbibliography
+\end{tcblisting}
+
+If you forget these extra steps, the \texttt{nyt} sorting scheme will be used
+throughout.
+
+To make a citation in the text, use the key that corresponds to the entry in your \texttt{.bib} file:
+
+\begin{tcblisting}{}
+While collections can be supplemented by other means \autocite{williams1997edd},
+the absence of an invisible collection amongst historians is noted by
+\textcite[556]{stieg1981inh}. It may be, as \textcite{burchard1965hhl} points
+out, that they have no assistants or are reluctant to delegate, or it may be
+down to economic factors \autocite{adams2009tc1, adams2014tc2, adams2017tc3,
+gb.pa2014}\dots
+\end{tcblisting}
+
+Please refer to the documentation for \href{http://www.ctan.org/pkg/biblatex}{\textsf{biblatex}}
+for the full range of commands available for in-text citations.
+
+It is strongly recommended to use Biber in place of BibTeX to process your
+references, as the style relies on Biber functionality to deal with some of the
+more exotic types of entry.
+
+
+\section{Change history}
+
+\subsection{Version 1 to version 2}
+
+If you have previously used version 1 of this style, there are some changes
+you need to be aware of.
+
+\begin{itemize}
+\item
+  The code for styling legal references has been completely overhauled, so you can
+  represent them more semantically in your bibliography file. The examples below
+  show the fields you should now use. As far as possible they have been made
+  consistent with the \href{http://ctan.org/pkg/oscola}{\textsf{biblatex-oscola}}
+  style, a specialist style implementing the \emph{Oxford Standard for the Citation
+  of Legal Authorities}, to enable the same entries to be used with both styles.
+
+  For the sake of backwards compatibility, the version 1 semantics still work,
+  but should be considered deprecated; support may be withdrawn in future (major)
+  versions of this style.
+
+\item
+  In version 1, the \texttt{titleaddon} field was printed unadorned, so you had
+  to supply your own brackets. This was to allow greater freedom to `hack' entries.
+
+  With version 2, you should not need to resort to such dirty tricks, so the
+  style now applies the brackets for you, in common with styles such as
+  \href{http://ctan.org/pkg/biblatex-apa}{\textsf{biblatex-apa}}. Again, for the
+  sake of backwards compatibility, before it does this it strips off any brackets
+  you may have added by hand around your field value.
+
+\item
+  Since version 1 was released, there have been improvements made both to the
+  Harvard (Bath) style itself and to \textsf{biblatex} internals. You may therefore
+  notice some changes in how certain entries are styled, and if you have made your
+  own adaptations to the style, these may no longer work with version 2.
+\end{itemize}
+
+There is now a companion Bib\TeX\ style available (\texttt{bathx} in version 2+
+of the \textsf{bath-bst} package) which is compatible with this style in the
+sense that it will render the same \texttt{.bib} file the same way, so long as some
+adjustments are made that won't affect the \textsf{biblatex} rendering (mainly
+concerning the handling of dates).
+
+\subsection{Version 2 to version 3}
+
+If you have previously used version 2 of this style, there are some changes
+you need to be aware of.
+
+\begin{itemize}
+\item
+  Journal titles are now coerced to sentence case, so any capital letters you
+  want to keep need to be protected with braces.
+\item
+  Entries of type \texttt{unpublished} are now explicitly marked as unpublished.
+\item
+  With entry types that usually expect an \texttt{institution} or
+  \texttt{organization} instead of a \texttt{publisher}, if you gave a
+  \texttt{publisher} in earlier versions the \texttt{institution}\slash
+  \texttt{organization} would be ignored. Now they are printed before the
+  publication block.
+\item
+  Some changes to the Harvard (Bath) style cannot be applied automatically
+  (e.g.~the update to how standards are referenced), so you may need to update
+  your .bib file accordingly.
+\end{itemize}
+
+\section{Examples}
+
+The examples below are shown in three parts.
+The first, marked with \faBook, shows an extract from the
+\href{https://library.bath.ac.uk/referencing/harvard-bath}{\emph{Referencing guide: Harvard Bath}} or
+\href{https://library.bath.ac.uk/images/referencing}{\emph{Referencing images}}.
+The second, marked with \faCog, shows the reference as formatted by \textsf{biblatex}.
+The last shows how the reference was entered in the \texttt{.bib} file.
+The bottom right corner shows the source of the example: `RX' indicates the `Reference examples (A-Z)' section of the Guide; `RL' indicates the `Organise a reference list' section of the Guide; `RI' indicates \emph{Referencing images}.
+
+% Some examples are highlighted in
+% \tcbox[colframe=hacked,colback=hacked!5!white,nobeforeafter,size=fbox,tcbox raise base]{orange}.
+% This indicates that some fields have been `abused' to achieve the right effect;
+% in other words, they contain information that would normally be entered in another field.
+% Particular care should be taken with such items when switching between different styles,
+% though of course any item might need adjustment to take account of differing conventions.
+
+You may notice that the examples tend to use BibTeX aliases and conventions for
+fields (e.g.\@ \texttt{address}, \texttt{journal}, \texttt{year}) rather than the
+native \textsf{biblatex} fields. This is simply to ease transitions to and from
+BibTeX, and not a symptom of recalcitrance on the part of the author.
+
+
+\subsection{Books and book chapters}
+
+\subsubsection*{Book with author(s)}
+
+\begin{bibexbox}<RX>{rang.etal2012rdp}
+  Rang, H.P., Dale, M.M., Ritter, J.M., Flower, R.J. and Henderson, G., 2012. \emph{Rang and Dale's pharmacology}. 7th ed. Edinburgh:\@ Elsevier Churchill Livingstone.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{rang.etal2012rdp,
+  author = {Rang, H. P. and Dale, M. M. and Ritter, J. M. and Flower, R. J. and Henderson, G.},
+  year = {2012},
+  title = {Rang and {Dale's} Pharmacology},
+  edition = {7},
+  address = {Edinburgh},
+  publisher = {Elsevier Churchill Livingstone}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{ou1972em}
+  Open University, 1972. \emph{Electricity and magnetism}. Bletchley:\@ Open University Press.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{ou1972em,
+  author = {{Open University}},
+  year = {1972},
+  title = {Electricity and Magnetism},
+  address = {Bletchley},
+  publisher = {Open University Press}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Book with editor(s) instead of author(s)}
+
+\begin{bibexbox}<RX>{rothman.etal2008me}
+  Rothman, K.J., Greenland, S. and Lash, T.L., eds, 2008. \emph{Modern epidemiology}. 3rd ed. Philadelphia, Pa.:\@ Lippincott Williams \& Wilkins.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{rothman.etal2008me,
+  editor = {Kenneth J. Rothman and Sander Greenland and Timothy L. Lash},
+  year = {2008},
+  title = {Modern Epidemiology},
+  edition = {3},
+  address = {Philadelphia, Pa.},
+  publisher = {Lippincott Williams \& Wilkins}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Electronic book}
+
+\begin{bibexbox}<RX>{haynes2014crc}
+  Haynes, W.M., ed.\@, 2014. \emph{CRC handbook of chemistry and physics} [Online]. 94th ed. Boca Raton, Fla.:\@ CRC Press/Taylor and Francis. Available from:\@ \url{http://www.hbcpnetbase.com} [Accessed 16 June 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{haynes2014crc,
+  editor = {Haynes, W. M.},
+  year = {2014},
+  title = {{CRC} Handbook of Chemistry and Physics},
+  edition = {94},
+  address = {Boca Raton, Fla.},
+  publisher = {CRC Press/{Taylor and Francis}},
+  url = {http://www.hbcpnetbase.com},
+  urldate = {2016-06-16}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{hodds2016re}
+  Hodds, J., 2016. \emph{Referencing ebooks} [Kindle version 4.18]. Bath:\@ University of Bath.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{hodds2016re,
+  author = {Hodds, J.},
+  year = {2016},
+  title = {Referencing ebooks},
+  titleaddon = {Kindle version 4.18},
+  address = {Bath},
+  publisher = {University of Bath}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{One chapter\slash paper from a collection (by different authors) in an edited book}
+
+\begin{bibexbox}<RL>{burchard1965hhl}
+  Burchard, J.E., 1965. How humanists use a library. In:\@ C.F.J. Overhage and J.R. Harman, eds. \emph{Intrex:\@ report on a planning conference and information transfer experiments}. Cambridge, Mass.:\@ MIT Press, pp.41--87.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@incollection{burchard1965hhl,
+  author = {Burchard, J. E.},
+  year = {1965},
+  title = {How Humanists use a Library},
+  editor = {C. F. J. Overhage and J. R. Harman},
+  booktitle = {Intrex},
+  booksubtitle = {Report on a Planning Conference and Information Transfer Experiments},
+  address = {Cambridge, Mass.},
+  publisher = {MIT Press},
+  pages = {41-87}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{reid1967ptp}
+  Reid, D.R., 1967. Physical testing of polymer films. In:\@ S.H. Pinner, ed. \emph{Modern packaging films}. London:\@ Butterworths, pp.143--183.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@incollection{reid1967ptp,
+  author = {D. R. Reid},
+  year = {1967},
+  title = {Physical Testing of Polymer Films},
+  editor = {S. H. Pinner},
+  booktitle = {Modern Packaging Films},
+  address = {London},
+  publisher = {Butterworths},
+  pages = {143-183}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Articles and periodicals}
+
+\subsubsection*{Journal article}
+
+\begin{bibexbox}<RL>{stieg1981cer}
+  Stieg, M.F., 1981a. Continuing education and the reference librarian in the academic and research library. \emph{Library journal}, 105(22), pp.2547--2551.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{stieg1981cer,
+  author = {Stieg, M. F.},
+  year = {1981},
+  title = {Continuing Education and the Reference Librarian in the Academic and Research Library},
+  journal = {Library Journal},
+  volume = {105},
+  number ={22},
+  pages = {2547-2551}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RL>{stieg1981inh}
+  Stieg, M.F., 1981b. The information needs of historians. \emph{College and research libraries}, 42(6), pp.549--560.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{stieg1981inh,
+  author = {Stieg, M. F.},
+  year = {1981},
+  title = {The Information Needs of Historians},
+  journal = {College and Research Libraries},
+  volume = {42},
+  number ={6},
+  pages = {549-560}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{newman2010mcb}
+  Newman, R., 2010. Malaria control beyond 2010. \emph{Brit.\@ Med.\@ J.}, 341(7765), pp.157--208.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{newman2010mcb,
+  author = {Newman, R.},
+  year = {2010},
+  title = {Malaria control beyond 2010},
+  journal = {{Brit.\@ Med.\@ J.\isdot}},
+  volume = {341},
+  number = {7765},
+  pages = {157-208}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Electronic journal article}
+
+\begin{bibexbox}<RX>{williams1997edd}
+  Williams, F., 1997. Electronic document delivery:\@ a trial in an academic library. \emph{Ariadne} [Online], 10. Available from:\@ \url{http://www.ariadne.ac.uk/issue10/edd/} [Accessed 5 December 1997].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{williams1997edd,
+  author = {Williams, F.},
+  year = {1997},
+  title = {Electronic Document Delivery},
+  subtitle = {A Trial in an Academic Library},
+  journal = {Ariadne},
+  volume = {10},
+  url = {http://www.ariadne.ac.uk/issue10/edd/},
+  urldate = {1997-12-05}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}
+\item
+If citing an article yet to be officially published, use the \texttt{pubstate}
+field with the keyword \texttt{inpress} for `in press' and
+\texttt{inpreparation} or \texttt{submitted} (whichever is more accurate)
+for `preprint'.
+\end{tips}
+
+\begin{bibexbox}<RX>{liontou.etal2019dra}
+  Liontou, C., Kontopodis, E., Oikonomidis, N., Maniotis, C., Tassopoulos, A., Tsiafoutis, I., Lazaris, E. and Koutouzis, M., 2019. Distal radial access:\@ a review article. \emph{Cardiovascular revascularization medicine} [Online], in press. Available from: \url{https://www.sciencedirect.com/science/article/pii/S1553838919303367} [Accessed 19 June 2019].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{liontou.etal2019dra,
+  author = {Liontou, C. and Kontopodis, E. and Oikonomidis, N. and Maniotis, C. and
+    Tassopoulos, A. and Tsiafoutis, I. and Lazaris, E. and Koutouzis, M.},
+  year = {2019},
+  title = {Distal Radial Access: a Review Article},
+  journal = {Cardiovascular Revascularization Medicine},
+  pubstate = {inpress},
+  url = {https://www.sciencedirect.com/science/article/pii/S1553838919303367},
+  urldate = {2019-06-19}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Preprint in a digital repository}
+
+\begin{bibexbox}<RX>{shah.corrick2016hsc}
+  Shah, I. and Corrick, I., 2016. \emph{How should central banks respond to non-neutral inflation expectations?} Bath:\@ University of Bath. \emph{OPUS} [Online]. Available from:\@ \url{http://opus.bath.ac.uk} [Accessed 4 May 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@report{shah.corrick2016hsc,
+  author = {Shah, I. and Corrick, I.},
+  year = {2016},
+  title = {How should central banks respond to non-neutral inflation expectations?},
+  address = {Bath},
+  institution = {University of Bath},
+  library = {OPUS},
+  url = {http://opus.bath.ac.uk},
+  urldate = {2016-05-04}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}
+\item
+The Harvard (Bath) style treats preprints as grey literature, and so the
+\texttt{report} entry type is the best match semantically. Use \texttt{library}
+to specify the name of the preprint repository.
+
+In standard \textsf{biblatex}, you would typically use the natural entry type
+for the work and provide preprint details using the \texttt{eprinttype},
+\texttt{eprintclass} and \texttt{eprint} fields.
+\end{tips}
+
+
+\subsubsection*{Newspaper article}
+
+\begin{bibexbox}<RX>{haurant2004bbh}
+  Haurant, S., 2004. Britain's borrowing hits £1 trillion. \emph{The Guardian}, 29 July, p.16c.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{haurant2004bbh,
+  author = {Haurant, S.},
+  date = {2004-07-29},
+  title = {Britain's Borrowing Hits \pounds 1 Trillion},
+  journal = {{The Guardian}},
+  pages = {16c}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{independent1992pub}
+  The Independent, 1992. Picking up the bills. \emph{The Independent}, 4 June, p.28a.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{independent1992pub,
+  author = {{The Independent}},
+  date = {1992-06-04},
+  title = {Picking Up the Bills},
+  journal = {{The Independent}},
+  pages = {28a}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Conference papers}
+
+\subsubsection*{Conference paper (when proceedings have a named editor)}
+
+\begin{bibexbox}<RX>{crawford1965oim}
+  Crawford, G.I., 1965. Oxygen in metals. In:\@ J.M.A. Lenihan and S.J. Thompson, eds. \emph{Activation analysis:\@ proceedings of a NATO Advanced Study Institute}, 2--4 August 1964, Glasgow. London:\@ Academic Press, pp.113--118.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@inproceedings{crawford1965oim,
+  author = {Crawford, G. I.},
+  year = {1965},
+  title = {Oxygen in Metals},
+  editor = {J. M. A. Lenihan and S. J. Thompson},
+  booktitle = {Activation Analysis},
+  booksubtitle = {Proceedings of a {NATO} {Advanced} {Study} {Institute}},
+  eventdate = {1964-08-02/1964-08-04},
+  venue = {Glasgow},
+  address = {London},
+  publisher = {Academic Press},
+  pages = {113-118}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Conference paper (when proceedings have no named editor or are part of a major series)}
+
+\begin{bibexbox}<RX>{soper1972rbc}
+  Soper, D., 1972. Review of bracken control experiments with asulam. \emph{Proceedings of the 11th British Weed Control Conference}, 15--17 November 1972, Brighton. Brighton:\@ University of Sussex, pp.24--31.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@inproceedings{soper1972rbc,
+  author = {Soper, D.},
+  year = {1972},
+  title = {Review of Bracken Control Experiments with Asulam},
+  booktitle = {Proceedings of the 11th {British} {Weed} {Control} {Conference}},
+  eventdate = {1972-11-15/1972-11-17},
+  venue = {Brighton},
+  address = {Brighton},
+  publisher = {University of Sussex},
+  pages = {24-31}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Grey literature}
+
+\subsubsection*{Thesis/dissertation}
+
+\begin{bibexbox}<RX>{burrell1973ist}
+  Burrell, J.G., 1973. \emph{The importance of school tours in education}. Thesis (M.A.). Queen's University, Belfast.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@thesis{burrell1973ist,
+  author = {Burrell, J. G.},
+  year = {1973},
+  title = {The Importance of School Tours in Education},
+  type = {Thesis \parentext{M.A.}},
+  school = {Queen's University, Belfast}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Report}
+
+\begin{bibexbox}<RX>{unesco1993gip}
+  UNESCO, 1993. \emph{General information programme and UNISIST}\@. (PGI-93/WS/22). Paris:\@ UNESCO.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@report{unesco1993gip,
+  author = {{UNESCO}},
+  year = {1993},
+  title = {General Information Programme and {UNISIST}},
+  address = {Paris},
+  institution = {UNESCO},
+  number = {PGI-93/WS/22}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{bre2007dqb}
+  BRE, 2007. \emph{Designing quality buildings:\@ a BRE guide}. (Report 497). Bracknell:\@ BRE.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@techreport{bre2007dqb,
+  author = {{BRE}},
+  year = {2007},
+  title = {Designing Quality Buildings: a {BRE} Guide},
+  address = {Bracknell},
+  institution = {BRE},
+  type = {Report},
+  number = {497}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Standard}
+
+\begin{bibexbox}<RX>{bs5605:1990}
+  BSI, 1990. \emph{BS 5605:1990 Recommendations for citing and referencing
+  published material.} London: BSI.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@standard{bs5605:1990,
+  author = {{BSI}},
+  year = {1990},
+  title = {{BS}~5605:1990 {Recommendations} for Citing and Referencing Published Material},
+  address = {London},
+  organization = {BSI}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{astm.d1655}
+  ASTM, 2019. \emph{ASTM D1655 - 19 Standard specification for aviation
+  turbine fuels.} West Conshohocken, Pa.: ASTM.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@standard{astm.d1655,
+  author = {{ASTM}},
+  year = {2019},
+  title = {{ASTM~D1655} - 19 {Standard} Specification for Aviation Turbine Fuels},
+  address = {West Conshohocken, Pa.},
+  organization = {ASTM}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Patent}
+
+\begin{bibexbox}<RX>{pm1981opa}
+  Phillipp Morris Inc., 1981. \emph{Optical perforating apparatus and system}. European patent application 0021165A1. 1981-01-07.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@patent{pm1981opa,
+  author = {{Phillipp Morris Inc.}},
+  year = {1981},
+  title = {Optical perforating apparatus and system},
+  type = {European patent application},
+  number = {0021165A1. 1981-01-07}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{info}\item
+Note that \textsf{biblatex} has special localisation keys for full patents and
+patent requests\slash applications.
+\end{info}
+
+
+\subsubsection*{Unpublished written material and personal communications}
+
+\begin{bibexbox}<RX>{harris2013fgr}
+  Harris, G., 2013. \emph{Focus group recommendations:\@ internal task group
+  report}. Unpublished.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@unpublished{harris2013fgr,
+  author = {Harris, G.},
+  year = {2013},
+  title = {Focus group recommendations: internal task group report}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{hadley2015bir}
+  Hadley, S., 2015. \emph{Biomechanics:\@ introductory reading, BM289:\@ sport
+  biomechanics}. University of Bath. Unpublished.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@unpublished{hadley2015bir,
+  author = {Hadley, S.},
+  year = {2015},
+  title = {Biomechanics: introductory reading, {BM289}: sport biomechanics},
+  howpublished = {University of Bath}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{thomas2015wcr}
+  Thomas, D., 2015. Word count and referencing style. \emph{Frequently
+  asked questions discussion board:\@ PHYS 2011:\@ housing studies.}
+  University of Bath. Unpublished.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@unpublished{thomas2015wcr,
+  author = {Thomas, D.},
+  year = {2015},
+  title = {Word count and referencing style},
+  booktitle = {Frequently asked questions discussion board: {PHYS} 2011: housing studies},
+  howpublished = {University of Bath}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Audiovisual materials}
+
+\subsubsection*{Image}
+
+\begin{bibexbox}<RI>{nasa2015nat}
+   NASA, 2015, \emph{NASA astronaut Tim Kopra on Dec.\@ 21 spacewalk} [Online]. Washington:\@ NASA. Available from:\@ \url{http://www.nasa.gov/image-feature/nasa-astronaut-tim-kopra-on-dec-21-spacewalk} [Accessed 7 January 2015].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@image{nasa2015nat,
+  author = {{NASA}},
+  year = {2015},
+  title = {{NASA} Astronaut {Tim} {Kopra} on {Dec.\@} 21 Spacewalk},
+  address = {Washington},
+  publisher = {NASA},
+  url = {http://www.nasa.gov/image-feature/nasa-astronaut-tim-kopra-on-dec-21-spacewalk},
+  urldate = {2015-01-07}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+You can use either the \texttt{publisher} or the \texttt{organization} field to
+record the source of the image.
+\end{tips}
+
+\begin{bibexbox}<RI>{iliff2006rcb}
+   Iliff, D., 2006. \emph{Royal Crescent in Bath, England - July 2006} [Online]. San Francisco:\@ Wikimedia Foundation. Available from:\@ \url{https://commons.wikimedia.org/wiki/File:Royal_Crescent_in_Bath,_England_-_July_2006.jpg} [Accessed 7 January 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@image{iliff2006rcb,
+  author = {D. Iliff},
+  year = {2006},
+  title = {{Royal} {Crescent} in {Bath,} {England} - {July} 2006},
+  address = {San Francisco},
+  organization = {Wikimedia Foundation},
+  url = {https://commons.wikimedia.org/wiki/File:Royal_Crescent_in_Bath,_England_-_July_2006.jpg},
+  urldate = {2015-01-07}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RI>{anon1946peb}
+  Anon., 1946. \emph{Prototype electric bicycle displayed at the \enquote{Britain Can Make It} exhibition organised by the Council of Industrial Design and held at the Victoria and Albert Museum, London, 1946. Designed by B.~G. Bowden} [Photograph]. At:\@ London. Design Council Slide Collection.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@image{anon1946peb,
+  author = {Anon\adddot},
+  year = {1946},
+  title = {Prototype electric bicycle displayed at the \enquote{Britain Can Make It} exhibition
+    organised by the {Council} of {Industrial} {Design} and held at the {Victoria} and {Albert}
+    {Museum}, {London}, 1946. {Designed} by {B.~G.} {Bowden}},
+  titleaddon = {Photograph},
+  address = {London},
+  library = {Design Council Slide Collection}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Use the \texttt{library} field to record the archive and register number.
+If the image is on display rather than archived,
+use \texttt{institution} instead for the museum, gallery or building.
+If you also wish to provide the name of the organisation that published the image,
+use the \texttt{publisher} field if the location you provide relates to the publisher,
+but the \texttt{organization} field if the location relates to the archive.
+\end{tips}
+
+
+\subsubsection*{Map}
+
+\begin{bibexbox}<RX>{andrews.dury1773wilts}
+  Andrews, J. and Dury, A., 1773. \emph{Map of Wiltshire}, 1 inch to 2 miles. Devizes:\@ Wiltshire Record Society.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@manual{andrews.dury1773wilts,
+  author = {Andrews, J. and Dury, A.},
+  year = {1773},
+  title = {Map of {Wiltshire}},
+  series = {1 inch to 2 miles},
+  address = {Devizes},
+  publisher = {Wiltshire Record Society}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{info}\item
+The \texttt{book} entry type would also work for this reference.
+\end{info}
+
+\subsubsection*{Film, video or DVD}
+
+\begin{bibexbox}<RX>{macbeth1948}
+  \emph{Macbeth}, 1948. Film.\@ Directed by Orson Welles. USA:\@ Republic Pictures.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@video{macbeth1948,
+  year = {1948},
+  title = {Macbeth},
+  type = {Film},
+  note = {Directed by Orson Welles},
+  address = {USA},
+  publisher = {Republic Pictures}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{info}\item
+In the above entry, the following would also work instead of using \texttt{note}:
+
+\begin{tcolorbox}%
+  [ colframe = Slate
+  , colback = white
+  , fontupper = \footnotesize
+  ]
+\begin{Verbatim}
+  editor = {Orson Welles},
+  editortype = {director},
+\end{Verbatim}
+\end{tcolorbox}
+
+\item
+You can also use \texttt{movie} as an alias for \texttt{video}.
+\end{info}
+
+
+\subsubsection*{Streamed video (YouTube, TED Talks, etc.)}
+
+\begin{bibexbox}<RX>{moran2016sol}
+  Moran, C., 2016. \emph{Save our libraries} [Online]. Available from:\@ \url{https://www.youtube.com/watch?v=gKTfCz4JtVE&feature=youtu.be} [Accessed 29 April 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@video{moran2016sol,
+  author = {Moran, C.},
+  year = {2016},
+  title = {Save Our Libraries},
+  url = {https://www.youtube.com/watch?v=gKTfCz4JtVE&feature=youtu.be},
+  urldate = {2016-04-29}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RI>{uob2015wie}
+   University of Bath, 2015. \emph{What is engineering?} [Online]. Available from:\@ \url{https://www.youtube.com/watch?v=NoyZarq-Zbo} [Accessed 12 January 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@video{uob2015wie,
+  author = {{University of Bath}},
+  year = {2015},
+  title = {What is Engineering?},
+  url = {https://www.youtube.com/watch?v=NoyZarq-Zbo},
+  urldate = {2016-01-12}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RI>{chakrabarti2016hac}
+   Chakrabarti, V., 2016. \emph{How architecture and city planning can combat social inequality} [Online]. Available from:\@ \url{https://www.curbed.com/2016/5/5/11593058/vishaan-chakrabarti-pau-curbed-appeal-podcast} [Accessed 28 March 2019].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@audio{chakrabarti2016hac,
+  author = {Chakrabarti, V.},
+  year = {2016},
+  title = {How Architecture and City Planning Can Combat Social Inequality},
+  url = {https://www.curbed.com/2016/5/5/11593058/vishaan-chakrabarti-pau-curbed-appeal-podcast},
+  urldate = {2019-03-28}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Television or radio broadcast}
+
+\begin{bibexbox}<RX>{rsfo2006ep5}
+  \emph{Rick Stein's French odyssey:\@ Episode 5}, 2006. TV. BBC2, 23 August. 20.30 hrs.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@video{rsfo2006ep5,
+  date = {2006-08-23T20:30:00},
+  title = {Rick {Stein's} {French} Odyssey},
+  subtitle = {{Episode} 5},
+  type = {TV},
+  publisher = {BBC2}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Use \texttt{type} for the medium and \texttt{publisher} for the channel.
+\end{tips}
+
+\begin{bibexbox}<RX>{archers20060823}
+  \emph{The Archers}, 2006. Radio. BBC Radio 4, 23 August. 19.02 hrs.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@audio{archers20060823,
+  date = {2006-08-23T19:02:00},
+  title = {The {Archers}},
+  type = {Radio},
+  publisher = {BBC Radio 4}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{info}\item
+You can also use \texttt{music} as an alias for \texttt{audio}.
+\end{info}
+
+
+\subsubsection*{Music score}
+
+\begin{bibexbox}<RX>{beethoven1950symph1}
+  Beethoven, L. van, 1950. \emph{Symphony no.1 in C, Op.21}. Harmondsworth:\@ Penguin.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{beethoven1950symph1,
+  author = {Ludwig van Beethoven},
+  year = {1950},
+  title = {Symphony no.1 in {C,} {Op.21}},
+  address = {Harmondsworth},
+  publisher = {Penguin}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Digital media}
+
+\subsubsection*{Website\slash webpage}
+
+\begin{bibexbox}<RX>{holland2002gci}
+  Holland, M., 2002. \emph{Guide to citing internet sources} [Online]. Poole:\@ Bournemouth University. Available from:\@ \url{http://www.bournemouth.ac.uk/library/using/guide_to_citing_internet_sourc.html} [Accessed 4 November 2002].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@online{holland2002gci,
+  author = {Holland, M.},
+  year = {2002},
+  title = {Guide to Citing Internet Sources},
+  address = {Poole},
+  organization = {Bournemouth University},
+  url = {http://www.bournemouth.ac.uk/library/using/guide_to_citing_internet_sourc.html},
+  urldate = {2002-11-04}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Email discussion lists (jiscmail\slash listserv etc.)}
+
+\begin{bibexbox}<RX>{clark2004euk}
+  Clark, T., 5 July 2004. A European UK Libraries Plus? \emph{Lis-link} [Online]. Available from:\@ \url{lis-link@jiscmail.ac.uk} [Accessed 30 July 2004].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@letter{clark2004euk,
+  author = {Clark, T.},
+  date = {2004-07-05},
+  title = {A {European} {UK} {Libraries} {Plus}?},
+  journal = {Lis-link},
+  url = {lis-link@jiscmail.ac.uk},
+  urldate = {2004-07-30}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Use the \texttt{journal} field to specify the mailing list. If you omit the
+\texttt{journal} field, the entry will be formatted as an unpublished work.
+\end{tips}
+
+
+\subsubsection*{Database}
+
+\begin{bibexbox}<RX>{bvd2008bt}
+  Bureau van Dijk, 2008. \emph{BT Group plc company report}. \emph{FAME} [Online]. London:\@ Bureau van Dijk. Available from:\@ \url{http://www.portal.euromonitor.com} [Accessed 6 November 2014].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@dataset{bvd2008bt,
+  author = {{Bureau van Dijk}},
+  year = {2008},
+  title = {{BT} {Group} PLC Company Report},
+  library = {FAME},
+  address = {London},
+  publisher = {Bureau van Dijk},
+  url = {http://www.portal.euromonitor.com},
+  urldate = {2014-11-06}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Use the \texttt{title} field for the entry title,
+and the \texttt{library} field for the name of the database itself.
+\end{tips}
+
+
+\subsubsection*{Dataset}
+
+\begin{bibexbox}<RX>{wilson2013rgc}
+  Wilson, D., 2013. \emph{Real geometry and connectedness via triangular description:\@ CAD example bank} [Online]. Bath:\@ University of Bath. Available from:\@ \url{https://doi.org/10.15125/BATH-00069} [Accessed 20 April 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@dataset{wilson2013rgc,
+  author = {Wilson, D.},
+  year = {2013},
+  title = {Real Geometry and Connectedness via Triangular Description},
+  subtitle = {{CAD} Example Bank},
+  address = {Bath},
+  publisher = {University of Bath},
+  doi = {10.15125/BATH-00069},
+  urldate = {2016-04-20}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Computer program}
+
+\begin{bibexbox}<RX>{screencasto}
+  @screencasto, n.d. \emph{Screencast-O-Matic} (v.2) [computer program]. Available from:\@ \url{https://screencast-o-matic.com/} [Accessed 16 May 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@software{screencasto,
+  author = {@screencasto},
+  title = {{Screencast-O-Matic}},
+  version = {2},
+  titleaddon = {computer program},
+  url = {https://screencast-o-matic.com/},
+  urldate = {2016-05-16}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Works in languages other than English}
+
+\subsubsection*{Work in translation}
+
+\begin{bibexbox}<RX>{aristotle2007ne}
+  Aristotle, 2007. \emph{Nicomachean ethics} (W.D. Ross, Trans.). South Dakota:\@ NuVisions.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{aristotle2007ne,
+  author = {Aristotle},
+  year = {2007},
+  title = {Nicomachean Ethics},
+  translator = {W. D. Ross},
+  address = {South Dakota},
+  publisher = {NuVisions}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Work in the Roman alphabet}
+
+\begin{bibexbox}<RX>{esquivel2003cap}
+  Esquivel, L., 2003. \emph{Como agua para chocolate} [Like water for chocolate]. Barcelona:\@ Debolsillo.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{esquivel2003cap,
+  author = {Esquivel, L.},
+  year = {2003},
+  title = {Como Agua para Chocolate},
+  titleaddon = {Like water for chocolate},
+  address = {Barcelona},
+  publisher = {Debolsillo}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Use the \texttt{titleaddon} field to supply the English translation of the title.
+\end{tips}
+
+\begin{bibexbox}<RX>{thurfjell1975vhv}
+  Thurfjell, W., 1975. Vart har våran doktor tagit vägen? [Where has our doctor gone?]. \emph{Läkartidningen}, 72, p.789.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{thurfjell1975vhv,
+  author = {Thurfjell, W.},
+  year = {1975},
+  title = {Vart har våran doktor tagit vägen?},
+  titleaddon = {Where has our doctor gone?},
+  journal = {Läkartidningen},
+  volume = {72},
+  pages = {789}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{Work in a non-Roman alphabet}
+
+\begin{bibexbox}<RX>{hua1999qys1}
+  Hua, L. 華林甫, 1999.  Qingdai yilai Sanxia diqu shuihan zaihai de chubu yanjiu 清代以來三峽地區水旱災害的初步硏 [A preliminary study of floods and droughts in the Three Gorges region since the Qing dynasty]. \emph{Zhongguo shehui kexue} 中國社會科學, 1, pp.168--79.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{hua1999qys1,
+  author = {given=Linfu, family=Hua, cjk=華林甫},
+  year = {1999},
+  title = {Qingdai yilai {Sanxia} diqu shuihan zaihai de chubu yanjiu
+    {清代以來三峽地區水旱災害的初步硏}},
+  titleaddon = {A preliminary study of floods and droughts in the {Three} {Gorges} region since
+    the {Qing} dynasty},
+  journal = {Zhongguo shehui kexue \textup{中國社會科學}},
+  volume = {1},
+  pages = {168-79}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+To supply a transliterated version of an author name, specify the name using the
+name parts \texttt{family}, \texttt{given} and \texttt{cjk}. Please note that if
+you do supply a \texttt{cjk} component, any \texttt{prefix} or \texttt{suffix}
+component you may supply will be ignored.
+\end{tips}
+
+\begin{bibexbox}<RX>{hua1999qys2}
+  Hua, L., 1999. Qingdai yilai Sanxia diqu shuihan zaihai de chubu yanjiu [A preliminary study of floods and droughts in the Three Gorges region since the Qing dynasty]. \emph{Zhongguo shehui kexue}, 1, pp.168--79.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@article{hua1999qys2,
+  author = {Hua, Linfu},
+  year = {1999},
+  title = {Qingdai yilai {Sanxia} diqu shuihan zaihai de chubu yanjiu},
+  titleaddon = {A preliminary study of floods and droughts in the {Three} {Gorges} region since
+    the {Qing} dynasty},
+  journal = {Zhongguo shehui kexue},
+  volume = {1},
+  pages = {168-79}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Although not a feature of the Harvard (Bath) Style, if you want to suppress the
+punctuation between the family name and the initial (and thereby be more
+faithful to the original orthography), you can specify this using
+\textsf{biblatex}'s data annotations feature, using the keyword \texttt{cjk}:
+\end{tips}
+
+\begin{bibexbox}{hua2001foo}
+  Hua L. 華林甫, 2001. \emph{Lorem ipsum}.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{hua2001foo,
+  author = {given=Linfu, family=Hua, cjk=華林甫},
+  author+an = {1=cjk},
+  year = {2001},
+  title = {Lorem ipsum}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{bibexbox}<RX>{pamporov2006rvb}
+  Pamporov, A., 2006. \emph{Romskoto vsekidnevie v Balgariya} [Roma everyday life in Bulgaria]. Veliko Tarnovo: Faber.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@book{pamporov2006rvb,
+  author = {Pamporov, A.},
+  year = {2006},
+  title = {Romskoto vsekidnevie v {Balgariya}},
+  titleaddon = {Roma everyday life in Bulgaria},
+  address = {Veliko Tarnovo},
+  publisher = {Faber}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Legal references: UK legislation and parliamentary reports}
+
+% UK Primary Legislation
+
+\subsubsection*{Act of Parliament (UK Statutes) before 1963}
+
+\begin{bibexbox}<RX>{gb.wa1735}
+  \emph{Witchcraft Act 1735} (9 Geo.2, c.5).
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@legislation{gb.wa1735,
+  title = {Witchcraft {Act}},
+  year = {1735},
+  series = {9 Geo.2},
+  chapter = {5}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{info}\item
+You could instead combine the series and chapter in the \texttt{number} field:
+
+\begin{tcolorbox}%
+  [ colframe = Slate
+  , colback = white
+  , fontupper = \footnotesize
+  ]
+\begin{Verbatim}
+  number = {9 Geo.2, c.5}
+\end{Verbatim}
+\end{tcolorbox}
+\end{info}
+
+\subsubsection*{Act of Parliament (UK Statutes) 1963 onwards}
+
+\begin{bibexbox}<RX>{gb.pa2014}
+  \emph{Pensions Act 2014}, c.19. London:\@ TSO.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@legislation{gb.pa2014,
+  title = {Pensions {Act}},
+  year = {2014},
+  chapter = {19},
+  address = {London},
+  publisher = {TSO}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{House of Commons/House of Lords bill}
+
+\begin{bibexbox}<RX>{gb.bill1987/88-66}
+  Great Britain.\@ Parliament.\@ House of Commons, 1988. \emph{Local government finance bill}. (Bills | 1987/88, 66). London:\@ HMSO.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@legislation{gb.bill1987/88-66,
+  author = {{Great Britain. Parliament. House of Commons}},
+  year = {1988},
+  title = {Local Government Finance Bill},
+  address = {London},
+  publisher = {HMSO},
+  series = {{Bills | 1987/88}},
+  number = {66}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+% UK secondary legislation
+
+\subsubsection*{Statutory instrument}
+
+\begin{bibexbox}<RX>{gb.hmr2012}
+  \emph{The Human Medicines Regulations 2012} [Online], No.1916, United Kingdom:\@ HMSO. Available from:\@ \url{http://www.legislation.gov.uk/uksi/2012/1916/pdfs/uksi_20121916_en.pdf} [Accessed 17 April 2016].
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@legislation{gb.hmr2012,
+  entrysubtype = {secondary},
+  title = {The {Human} {Medicines} {Regulations}},
+  year = {2012},
+  number = {No.1916},
+  address = {United Kingdom},
+  publisher = {HMSO},
+  url = {http://www.legislation.gov.uk/uksi/2012/1916/pdfs/uksi_20121916_en.pdf},
+  urldate = {2016-04-17}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Use the \texttt{entrysubtype} `secondary' to put the number in the right place.
+\end{tips}
+
+% Parliamentary reports
+
+\subsubsection*{House of Commons paper}
+
+\begin{tips}\item
+Use this form for reports of House of Commons select committees.
+\end{tips}
+
+\begin{bibexbox}<RX>{gb.hc2003/04-30}
+  Great Britain.\@ Parliament.\@ House of Commons, 2004. \emph{National Savings investment deposits:\@ account 2002--2003}. (HC 2003/04, 30). London:\@ National Audit Office.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@report{gb.hc2003/04-30,
+  author = {{Great Britain. Parliament. House of Commons}},
+  year = {2004},
+  title = {National {Savings} Investment Deposits},
+  subtitle = {Account 2002--2003},
+  address = {London},
+  publisher = {National Audit Office},
+  series = {HC 2003/04},
+  number = {30}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsubsection*{House of Lords paper}
+
+\begin{tips}\item
+Use this form for reports of House of Lords select committees.
+\end{tips}
+
+\begin{bibexbox}<RX>{gb.hl1986/87-66}
+  Great Britain.\@ Parliament.\@ House of Lords, 1987. \emph{Social fund (maternity and funeral expenses) bill}. (HL 1986/87, (66)). London:\@ HMSO.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@report{gb.hl1986/87-66,
+  author = {{Great Britain. Parliament. House of Lords}},
+  year = {1987},
+  title = {Social Fund (Maternity and Funeral Expenses) Bill},
+  address = {London},
+  publisher = {HMSO},
+  series = {HL 1986/87},
+  number = {66}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{hacks}\item
+For joint committees, you will have to hack this slightly, putting the session
+years in \texttt{series} and the HL and HC numbers in \texttt{number}.
+\end{hacks}
+
+
+\subsubsection*{Command paper}
+
+\begin{bibexbox}<RX>{gb.cm6041}
+  Great Britain.\@ Ministry of Defence, 2004. \emph{Delivering security in a changing world:\@ defence white paper}. (Cm.\@ 6041). London:\@ TSO.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@report{gb.cm6041,
+  author = {{Great Britain. Ministry of Defence}},
+  year = {2004},
+  title = {Delivering Security in a Changing World},
+  subtitle = {Defence White Paper},
+  address = {London},
+  publisher = {TSO},
+  series = {Cm},
+  number = {6041}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Legal references: EU legislation and reports}
+
+% European legislation
+
+\subsubsection*{EU regulation or directive, decision, recommendation or opinion}
+
+\begin{bibexbox}<RX>{eu.dir1984/2003}
+  Council Regulation (EC) 1984/2003 of 8 April 2003 introducing a system for the statistical monitoring of trade in bluefin tuna, swordfish and big eye tuna within the Community [2003] \emph{OJ} L295.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@legislation{eu.dir1984/2003,
+  title = {Council {Regulation} ({EC}) 1984/2003 of 8 {April} 2003 Introducing a System for
+    the Statistical Monitoring of Trade in Bluefin Tuna, Swordfish and Big Eye Tuna within
+    the {Community}},
+  shorttitle = {Council {Regulation} \parentext{EC} 1984/2003},
+  year = {2003},
+  journal = {OJ},
+  series = {L},
+  volume = {295}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{info}\item
+The \texttt{shorttitle} will be used in citations instead of the full title.
+\end{info}
+
+
+% European reports
+
+\subsubsection*{EU publication}
+
+\begin{bibexbox}<RX>{ec2015gra}
+  European Commission, 2015. \emph{General report on the activities of the European Union 2014}. Luxembourg:\@ Publications Office of the European Union.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@report{ec2015gra,
+  author = {{European Commission}},
+  year = {2015},
+  title = {General Report on the Activities of the {European} {Union} 2014},
+  address = {Luxembourg},
+  publisher = {Publications Office of the European Union}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+
+\subsection{Legal references: case reports}
+
+\subsubsection*{Legal case study}
+
+\begin{bibexbox}<RX>{seldon-v-c.w.j2012}
+  \emph{Seldon v.~Clarkson Wright \& Jakes}. [2012]. UKSC 16.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@jurisdiction{seldon-v-c.w.j2012,
+  title = {Seldon v.~{Clarkson} {Wright} \& {Jakes}},
+  year = {2012},
+  journal = {UKSC},
+  pages = {16}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{info}\item
+Generally speaking, the year should be in square brackets if it is essential to the citation
+(unless it is a Scottish case, in which case it is printed bare), and in parentheses if it is
+not.
+\end{info}
+\begin{tips}\item
+By default, the style assumes the year is essential if and only if a volume number is
+\emph{not} provided; to override this, you can use the \key{year-essential} option:
+
+\begin{tcolorbox}%
+  [ colframe = Slate
+  , colback = white
+  , fontupper = \footnotesize
+  ]
+  \begin{Verbatim}
+  options = {year-essential=true},
+  \end{Verbatim}
+\end{tcolorbox}
+
+To use Scottish style for a case, you can either use the \key{scottish-style} option or
+the keyword \texttt{sc}:
+
+\begin{tcolorbox}%
+  [ colframe = Slate
+  , colback = white
+  , fontupper = \footnotesize
+  ]
+  \begin{Verbatim}
+  options = {scottish-style},
+  keywords = {sc},
+  \end{Verbatim}
+\end{tcolorbox}
+\end{tips}
+
+\begin{hacks}\item
+This should cover most cases, but legal references tend to enforce their own conventions
+no matter what the rest of the reference list is doing,
+and it is out of scope for this style to cater for every variation.
+Therefore if you need a different format (e.g.\@ for an American case),
+you may prefer to format the reference more-or-less by hand:
+
+\begin{tcolorbox}%
+  [ colframe = Slate
+  , colback = white
+  , fontupper = \footnotesize
+  ]
+  \begin{Verbatim}
+  title = {Seldon v.~{Clarkson} {Wright} \& {Jakes}},
+  sortyear = {2012},
+  note = {[2012]. UKSC 16}
+  \end{Verbatim}
+\end{tcolorbox}
+\end{hacks}
+
+\subsubsection*{Judgment of the European Court of Justice}
+
+\begin{bibexbox}<RX>{srl.etal-v-comm2005}
+  \emph{Alessandrini Srl and others v.~Commission} (C-295/03 P) [2005] ECR I--5700.
+  \tcblower
+\begin{Verbatim}
+%</driver>
+%<*driver|bib>
+@jurisdiction{srl.etal-v-comm2005,
+  title = {Alessandrini {Srl} and others v.\@ {Commission}},
+  number = {C-295/03 P},
+  year = {2005},
+  journal = {ECR},
+  volume = {I},
+  pages = {5700}}
+%</driver|bib>
+%<*driver>
+\end{Verbatim}
+\end{bibexbox}
+
+\begin{tips}\item
+Use the \texttt{number} field (or the non-standard \texttt{casenmuber} field)
+for the case number. For Commission Decisions, use the (non-standard)
+\texttt{casenumber} or (\textsf{biblatex-oscola}) \texttt{userb} field for the
+Commission case number, \texttt{number} for the formal decision number, and give
+`Commission' as the \texttt{institution}.
+\end{tips}
+
+
+\newrefcontext[sorting=nyt]
+\printbibliography[heading=bibnumbered]
+
+\section{Licence}
+
+\begin{markdown*}{hybrid=true}
+%</driver>
+%<readme>
+%<readme>## Licence
+%<readme>
+%<*driver|readme>
+Copyright 2016-2020 University of Bath.
+
+This work consists of the documented LaTeX file biblatex-bath.dtx and a Makefile.
+
+The text files contained in this work may be distributed and/or modified
+under the conditions of the [LaTeX Project Public License (LPPL)][lppl],
+either version 1.3c of this license or (at your option) any later
+version.
+
+This work is `maintained' (as per LPPL maintenance status) by [Alex Ball][me].
+
+[lppl]: http://www.latex-project.org/lppl.txt "LaTeX Project Public License (LPPL)"
+[me]: https://github.com/alex-ball/bathbib "Alex Ball"
+%</driver|readme>
+%<*driver>
+\end{markdown*}
+
+\newpage
+\lstset
+  { aboveskip=0pt
+  , belowskip=0pt
+  , numbers=left
+  , numberstyle=\color{gray}\footnotesize\itshape
+  , firstnumber=last
+  , basicstyle=\ttfamily\footnotesize
+  , breaklines=true
+  }%
+\MakeShortVerb{\|}%
+\DocInput{\jobname.dtx}
+
+\end{document}
+%</driver>
+%<*bib>
+@book{adams2009tc1,
+  author = {Adams, Gomez},
+  year = {2009},
+  title = {Test Citation One},
+  address = {London},
+  publisher = {Imperial College Bookstall}}
+@book{adams2014tc2,
+  author = {Adams, Gomez},
+  year = {2014},
+  title = {Test Citation Two},
+  address = {Oxford},
+  publisher = {Oxford University Press}}
+@book{adams2017tc3,
+  author = {Adams, Gomez},
+  year = {2017},
+  title = {Test Citation Three},
+  address = {Cambridge},
+  publisher = {Cambridge University Press}}
+%</bib>
+%<*bbx>
+% \fi
+%
+% \section{Implementation: bibliography style}
+%
+% \setcounter{lstnumber}{20}
+%
+% \subsection{Preliminaries}
+%
+% For ease of maintenance, we will patch some definitions with \textsf{xpatch}
+% instead of writing out our own in full.
+%
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+%    \end{macrocode}
+%
+% Some string analysis is required.
+%
+%    \begin{macrocode}
+\RequirePackage{xstring}
+%    \end{macrocode}
+%
+% Language support may be widened in future, but for now we support British and
+% American English. Adapted language files have the following suffix:
+%
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\ifcsdef{DeclareLanguageMappingSuffix}{%
+  \DeclareLanguageMappingSuffix{-bath}
+}{%
+  \DeclareLanguageMapping{english}{english-bath}
+  \DeclareLanguageMapping{british}{british-bath}
+}
+%    \end{macrocode}
+%
+% We begin by loading the default author--year style.
+%
+%    \begin{macrocode}
+\RequireBibliographyStyle{authoryear}
+\ExecuteBibliographyOptions{%
+  maxcitenames=3,maxbibnames=9999,isbn=false,giveninits=true,dashed=false,
+  alldates=comp,labeldate=year}
+\ExecuteBibliographyOptions[audio,video,music,movie]{%
+  useeditor=false}
+%    \end{macrocode}
+%
+% We provide some additional bibliography strings.
+%
+%    \begin{macrocode}
+\NewBibliographyString{%
+  online, hours, at, unpublished, legalchapter,
+  director, performer, reader, conductor,
+  directors, performers, readers, conductors,
+  bydirector, byperformer, byreader, byconductor,
+}
+%    \end{macrocode}
+%
+% We allow the bibliography look more like the Bib\TeX\ default.
+%
+%    \begin{macrocode}
+\setlength{\bibitemsep}{1em plus 0.2em minus 0.2em}
+\renewcommand*{\bibfont}{\normalfont\normalsize}
+%    \end{macrocode}
+%
+% To maintain compatibility with older versions of \textsf{biblatex},
+% we backport some newer features if necessary.
+%
+%    \begin{macrocode}
+\ifcsdef{letbibmacro}{}{%
+  \def\letbibmacro#1#2{%
+    \ifcsundef{abx@macro@#2}
+      {\blx@error
+        {Bibliography macro '#2' undefined}
+        {Use '\string\newbibmacro' to define this macro}}
+      {\csletcs{abx@macro@#1}{abx@macro@#2}}}
+}
+\ifcsdef{iflabeldateisdate}{}{%
+  \def\iflabeldateisdate{%
+    \ifboolexpr{%
+      togl {blx@labeldateparts}
+      and not test {\iffieldundef{labeldatesource}}
+      and
+      (test {\iffieldequalstr{labeldatesource}{}}
+      or test {\iffieldequalstr{labeldatesource}{year}})}}%
+}
+
+%    \end{macrocode}
+%
+% \subsection{Name handling}
+%
+% Names are usually reversed. There are no spaces between initials.
+%
+%    \begin{macrocode}
+\DeclareNameAlias{author}{family-given}
+\DeclareNameAlias{editor}{family-given}
+\DeclareNameAlias{bookeditor}{given-family}
+\renewcommand*{\bibinitdelim}{}
+%    \end{macrocode}
+%
+% The handling of CJK names is based on code supplied to TeX.sx by user Moewe in
+% answer to \href{http://tex.stackexchange.com/a/320738/16293}{question 320738}.
+%
+% The CJK part is printed after the anglicized name. If the name is also
+% annotated as `cjk' (see `Data Annotations' in the \textsf{biblatex} manual),
+% it is always printed in family-given order with no intermediate punctuation.
+%
+%    \begin{macrocode}
+\newbibmacro*{name:cjk-given-family}[3]{%
+  \ifitemannotation{cjk}{%
+    \usebibmacro{name:delim}{#2#1#3}%
+    \usebibmacro{name:hook}{#2#1#3}%
+    \mkbibnamefamily{#1}\isdot
+    \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}}%
+    \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnamecjk{#3}}%
+  }{%
+    \usebibmacro{name:delim}{#2#1#3}%
+    \usebibmacro{name:hook}{#2#1#3}%
+    \ifdefvoid{#2}{}{\mkbibnamegiven{#2}\isdot\bibnamedelimd}%
+    \mkbibnamefamily{#1}\isdot
+    \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnamecjk{#3}}%
+  }%
+}
+\newbibmacro*{name:cjk-family-given}[3]{%
+  \ifitemannotation{cjk}{%
+    \usebibmacro{name:delim}{#2#1#3}%
+    \usebibmacro{name:hook}{#2#1#3}%
+    \mkbibnamefamily{#1}\isdot
+    \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}}%
+    \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnamecjk{#3}}%
+  }{%
+    \usebibmacro{name:delim}{#1}%
+    \usebibmacro{name:hook}{#1}%
+    \mkbibnamefamily{#1}\isdot
+    \ifboolexpe{%
+      test {\ifdefvoid{#2}}
+      and
+      test {\ifdefvoid{#3}}}
+      {}
+      {\revsdnamepunct}%
+    \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
+    \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnamecjk{#3}}%
+  }%
+}
+
+\DeclareNameFormat{given-family}{%
+  \ifdefvoid{\namepartcjk}{%
+    \ifgiveninits{%
+      \usebibmacro{name:given-family}
+        {\namepartfamily}
+        {\namepartgiveni}
+        {\namepartprefix}
+        {\namepartsuffix}%
+    }{%
+      \usebibmacro{name:given-family}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartprefix}
+        {\namepartsuffix}%
+    }%
+  }{%
+    \ifgiveninits{%
+      \usebibmacro{name:cjk-given-family}
+        {\namepartfamily}
+        {\namepartgiveni}
+        {\namepartcjk}%
+    }{%
+      \usebibmacro{name:cjk-given-family}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartcjk}%
+    }%
+  }%
+  \usebibmacro{name:andothers}%
+}
+
+\DeclareNameFormat{family-given}{%
+  \ifdefvoid{\namepartcjk}{%
+    \ifgiveninits{%
+      \usebibmacro{name:family-given}
+        {\namepartfamily}
+        {\namepartgiveni}
+        {\namepartprefix}
+        {\namepartsuffix}%
+    }{%
+      \usebibmacro{name:family-given}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartprefix}
+        {\namepartsuffix}%
+    }%
+  }{%
+    \ifgiveninits{%
+      \usebibmacro{name:cjk-family-given}
+        {\namepartfamily}
+        {\namepartgiveni}
+        {\namepartcjk}%
+    }{%
+      \usebibmacro{name:cjk-family-given}
+        {\namepartfamily}
+        {\namepartgiven}
+        {\namepartcjk}%
+    }%
+  }
+  \usebibmacro{name:andothers}%
+}
+
+%    \end{macrocode}
+%
+% With videos, names in credits are printed in full.
+%
+%    \begin{macrocode}
+\DeclareNameFormat{given-family:full}{%
+  \usebibmacro{name:given-family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
+  \usebibmacro{name:andothers}}
+
+\renewbibmacro*{byauthor}[1][byauthor]{%
+  \ifboolexpr{
+    test \ifuseauthor
+    or
+    test {\ifnameundef{author}}
+  }{}
+  {\usebibmacro{bytypestrg}{author}{author}%
+    \setunit{\addspace}%
+    \printnames[#1]{author}}}
+
+\renewbibmacro*{byeditor}[1][byeditor]{%
+  \ifnameundef{editor}
+  {}
+  {\usebibmacro{bytypestrg}{editor}{editor}%
+    \setunit{\addspace}%
+    \printnames[#1]{editor}%
+    \newunit}%
+  \ifstrequal{#1}{byeditor}{%
+    \usebibmacro{byeditora}%
+    \usebibmacro{byeditorb}%
+    \usebibmacro{byeditorc}
+  }{%
+    \usebibmacro{byeditora}[#1]%
+    \usebibmacro{byeditorb}[#1]%
+    \usebibmacro{byeditorc}[#1]}}
+
+\newbibmacro*{byeditora}[1][byeditora]{%
+  \ifnameundef{editora}
+  {}
+  {\usebibmacro{bytypestrg}{editora}{editor}%
+    \setunit{\addspace}%
+    \printnames[#1]{editora}%
+    \newunit}}
+\newbibmacro*{byeditorb}[1][byeditorb]{%
+  \ifnameundef{editorb}
+  {}
+  {\usebibmacro{bytypestrg}{editorb}{editor}%
+    \setunit{\addspace}%
+    \printnames[#1]{editorb}%
+    \newunit}}
+\newbibmacro*{byeditorc}[1][byeditorc]{%
+  \ifnameundef{editorc}
+  {}
+  {\usebibmacro{bytypestrg}{editorc}{editor}%
+    \setunit{\addspace}%
+    \printnames[#1]{editorc}%
+    \newunit}}
+
+\renewbibmacro*{bytranslator}[1][bytranslator]{%
+  \ifnameundef{translator}
+  {}
+  {\setunit{\addspace}%
+    \printtext[parens]{%
+    \printnames[#1]{translator}%
+    \setunit{\addcomma\space}%
+    \bibcpstring{translator}%
+    \clearname{translator}}}}
+
+\renewbibmacro*{byeditor+others}[1][byeditor]{%
+  \ifnameundef{editor}
+  {}
+  {\usebibmacro{byeditor+othersstrg}%
+    \setunit{\addspace}%
+    \printnames[#1]{editor}%
+    \clearname{editor}%
+    \newunit}%
+  \ifstrequal{#1}{byeditor}{%
+    \usebibmacro{byeditorx}%
+    \usebibmacro{bytranslator+others}%
+  }{%
+    \usebibmacro{byeditora}[#1]%
+    \usebibmacro{byeditorb}[#1]%
+    \usebibmacro{byeditorc}[#1]%
+    \usebibmacro{bytranslator+others}[#1]}}
+
+\renewbibmacro*{bytranslator+others}[1][bytranslator]{%
+  \ifnameundef{translator}
+  {\usebibmacro{withothers}}
+  {\setunit{\addspace}%
+    \printtext[parens]{%
+    \printnames[bytranslator]{translator}%
+    \setunit{\addcomma\space}%
+    \bibcpstring{translator}%
+    \clearname{translator}%
+    \newunit
+    \usebibmacro{withothers}}}}
+
+%    \end{macrocode}
+%
+% With collections, editors appear in natural order between `In' and the title,
+% followed by `ed.'
+%
+%    \begin{macrocode}
+\newbibmacro*{bookeditor}{%
+  \ifnameundef{editor}{}{%
+    \printnames[bookeditor]{editor}%
+    \setunit*{\addcomma\space}%
+    \usebibmacro{editor+othersstrg}%
+    \clearname{editor}%
+  }}
+
+%    \end{macrocode}
+%
+% \subsection{Titles}
+%
+% Most titles are set in italics, but some are set roman and unquoted.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{sentencecase}{\MakeSentenceCase*{#1}}
+\DeclareFieldFormat{midsentencecase}{\MakeSentenceCase*{{}#1}}
+\DeclareFieldFormat{title}{\mkbibemph{#1}}
+\DeclareFieldFormat
+  [article,inbook,incollection,inproceedings]%
+  {title}{#1}
+\DeclareFieldFormat
+  [patent,thesis]%
+  {title}{\mkbibemph{#1}}
+\DeclareFieldFormat
+  [unpublished]%
+  {title}{\iffieldundef{booktitle}{\mkbibemph{#1}}{#1}}
+
+%    \end{macrocode}
+%
+% Online resources are clearly tarred and feathered with an `[Online]' label.
+% The \texttt{isonline} macro prints this label if the resource has a URL and
+% does nothing otherwise. We add a safeguard to stop it being used repeatedly.
+%
+%    \begin{macrocode}
+\newtoggle{bbx:onlineshown}
+\newbibmacro*{isonline}{%
+  \ifboolexpr{(
+      test {\iffieldundef{doi}}
+      and
+      test {\iffieldundef{url}}
+      and
+      not test {\ifentrytype{online}}
+    ) or
+    togl {bbx:onlineshown}
+  }{}{%
+    \bibstring[\mkbibbrackets]{online}%
+    \toggletrue{bbx:onlineshown}}}
+
+%    \end{macrocode}
+%
+% The |titleaddon| field follows the title after a space and wrapped in
+% brackets. Version 1 of this style encouraged people to supply the brackets
+% manually, so we strip them off if they have been supplied.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{titleaddon}{\mkbibbrackets{%
+  \IfBeginWith{#1}{[}{%
+    \IfEndWith{#1}{]}{%
+      \StrBetween{#1}{[}{]}%
+    }{#1}%
+  }{#1}%
+}}
+
+%    \end{macrocode}
+%
+% We need to supply a new |title| macro. The standard version hard-codes the
+% case used (we use sentence case, not title case) and puts default unit
+% punctuation between the |title| and |titleaddon| fields. We also need to add
+% conditional code for printing the automatic `[Online]' label.
+%
+%    \begin{macrocode}
+\renewbibmacro*{title}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }{}{%
+    \printtext[title]{%
+      \printfield[sentencecase]{title}%
+      \setunit{\subtitlepunct}%
+      \printfield[midsentencecase]{subtitle}%
+      \setunit{\addspace}%
+    }%
+    \printfield{version}%
+    \clearfield{version}%
+    \setunit*{\addspace}%
+    \printfield{titleaddon}%
+    \ifboolexpr{
+      test {\iffieldundef{journaltitle}}
+      and
+      test {\iffieldundef{booktitle}}
+      and
+      test {\iffieldundef{library}}
+      and
+      not test {\ifentrytype{software}}
+      and (
+        test {\iffieldundef{type}}
+        or
+        test {\nottoggle{bbx:labelistitle}}
+        or
+        not (
+          test {\ifentrytype{audio}}
+          or
+          test {\ifentrytype{video}}
+          or
+          test {\ifentrytype{music}}
+          or
+          test {\ifentrytype{movie}}
+      ))
+    }{%
+      \setunit*{\addspace}%
+      \usebibmacro{isonline}%
+    }{}%
+  }%
+}
+
+%    \end{macrocode}
+%
+% Similar changes are needed for the |booktitle| and |maintitle| macros.
+%
+%    \begin{macrocode}
+\renewbibmacro*{booktitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{booktitle}}
+    and
+    test {\iffieldundef{booksubtitle}}
+  }{}{%
+    \printtext[booktitle]{%
+      \printfield[sentencecase]{booktitle}%
+      \setunit{\subtitlepunct}%
+      \printfield[midsentencecase]{booksubtitle}%
+      \setunit{\addspace}%
+    }%
+    \printfield{booktitleaddon}
+    \setunit*{\addspace}%
+    \usebibmacro{isonline}%
+  }%
+}
+
+\renewbibmacro*{maintitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{maintitle}}
+    and
+    test {\iffieldundef{mainsubtitle}}
+  }{}{
+    \printtext[maintitle]{%
+      \printfield[sentencecase]{maintitle}%
+      \setunit{\subtitlepunct}%
+      \printfield[midsentencecase]{mainsubtitle}%
+      \setunit{\addspace}%
+    }%
+    \printfield{maintitleaddon}%
+  }%
+}
+
+%    \end{macrocode}
+%
+% Subtitles are set off with a colon
+%
+%    \begin{macrocode}
+\renewcommand*{\subtitlepunct}{\addcolon\space}
+
+%    \end{macrocode}
+%
+% In the standard author--year styles, if a title is promoted to the head of
+% a reference (due to missing authors/editors), the subtitle and titleaddon
+% fields are discarded. We want to show the subtitle directly after the title,
+% and show titleaddon after the |date+extradate| macro.
+%
+%    \begin{macrocode}
+\providetoggle{bbx:labelistitle}
+\renewbibmacro*{labeltitle}{%
+  \iffieldundef{label}{%
+    \ifboolexpr{
+      test {\iffieldundef{title}}
+      and
+      test {\iffieldundef{subtitle}}
+    }{}{%
+      \printtext[title]{%
+        \printfield[sentencecase]{title}%
+        \setunit{\subtitlepunct}%
+        \printfield[midsentencecase]{subtitle}}%
+      \clearfield{title}\clearfield{subtitle}%
+      \toggletrue{bbx:labelistitle}}%
+  }{%
+    \printfield{label}%
+  }%
+}
+\DeclareDelimFormat{yearlabeltitleaddondelim}{\addspace}
+\newbibmacro*{labeltitleaddon}{%
+  \iftoggle{bbx:labelistitle}{%
+    \setunit{\printdelim{yearlabeltitleaddondelim}}%
+    \printfield{version}%
+    \clearfield{version}%
+    \setunit*{\addspace}%
+    \printfield{titleaddon}%
+    \clearfield{titleaddon}%
+    \ifboolexpr{
+      test {\iffieldundef{journaltitle}}
+      and
+      test {\iffieldundef{booktitle}}
+      and (
+        test {\iffieldundef{library}}
+        or
+        test {\ifentrytype{image}}
+      ) and
+      not test {\ifentrytype{software}}
+      and (
+        test {\iffieldundef{type}}
+        or
+        not (
+          test {\ifentrytype{audio}}
+          or
+          test {\ifentrytype{video}}
+          or
+          test {\ifentrytype{music}}
+          or
+          test {\ifentrytype{movie}}
+      ))
+    }{%
+      \setunit*{\addspace}%
+      \usebibmacro{isonline}%
+    }{}%
+  }{}%
+}
+\xapptobibmacro{author}{\usebibmacro{labeltitleaddon}}{}{}
+\xapptobibmacro{bbx:editor}{\usebibmacro{labeltitleaddon}}{}{}
+\xapptobibmacro{bbx:translator}{\usebibmacro{labeltitleaddon}}{}{}
+
+%    \end{macrocode}
+%
+% \subsection{Dates}
+%
+% If the main publication date is missing, we fall back immediately to `n.d.\@'
+% rather than use URL date or anything like that. However, for some resources
+% (ISO standards, Acts of Parliament), the date is part of the label and should
+% not be repeated, so we declare an option for removing the `n.d.' Unless
+% already set, the option is inserted if |sortyear| is used.
+%
+%    \begin{macrocode}
+\DeclareLabeldate{%
+  \field{date}
+  \field{year}
+  \literal{nodate}
+}
+\newtoggle{bbx:nonodate}
+\DeclareBibliographyOption[boolean]{nonodate}[true]{%
+  \settoggle{bbx:nonodate}{#1}}
+\DeclareTypeOption[boolean]{nonodate}[true]{%
+  \settoggle{bbx:nonodate}{#1}}
+\DeclareEntryOption[boolean]{nonodate}[true]{%
+  \settoggle{bbx:nonodate}{#1}}
+%    \end{macrocode}
+%
+% Unless already set, the \key{nonodate} option is inserted if |sortyear| is
+% used. We accomplish this with source maps; the first one works where options
+% (not including |nonodate|) have been set, the second where no options have
+% been set.
+%
+%    \begin{macrocode}
+\DeclareStyleSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=true]{
+      \step[notmatch=\regexp{nonodate}, fieldsource=options, final]
+      \step[fieldsource=sortyear, final]
+      \step[fieldset=options, append, fieldvalue={,nonodate}]
+    }
+    \map[overwrite=true]{
+      \step[notfield=options, final]
+      \step[fieldsource=sortyear, final]
+      \step[fieldset=options, fieldvalue={nonodate}]
+    }
+  }
+}
+
+%    \end{macrocode}
+%
+% The punctuation before the label year is controlled by the following
+% commands, and should be a comma. The exceptions to this are |legislation|
+% entries, where there should just be a space, and English/Welsh legal case
+% reports, where there should be a period.
+%
+%    \begin{macrocode}
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\DeclareDelimFormat[parencite,bib,biblist]{nameyeardelim}{\addcomma\space}
+\newcommand{\dononameyeardelim}{%
+  \ifentrytype{legislation}{%
+    \addspace
+  }{%
+    \ifentrytype{jurisdiction}{%
+      \ifboolexpr{
+        togl {bbx:eu-oj}
+        or
+        test {\iffieldequalstr{journaltitle}{ECR}}
+        or
+        test {\iffieldequalstr{type}{ECR}}
+      }{%
+        \addspace
+      }{%
+        \ifboolexpr{
+          test {\ifkeyword{sc}}
+          or
+          togl {bbx:scotstyle}
+        }{%
+          \addcomma\space
+        }{%
+          \addperiod\space}}%
+    }{%
+      \addcomma\space}}}
+\DeclareDelimFormat{nonameyeardelim}{\dononameyeardelim}
+\DeclareDelimFormat*[bib,biblist]{nonameyeardelim}{\dononameyeardelim}
+\DeclareDelimFormat[parencite]{nonameyeardelim}{%
+  \ifboolexpr{
+    test {\ifentrytype{jurisdiction}}
+    or
+    test {\ifentrytype{legislation}}
+  }{\addspace}{\addcomma\space}}
+
+%    \end{macrocode}
+%
+% The punctuation after the label year is controlled by the following
+% commands, and should be a comma. The exceptions to this are |legislation|
+% and |jurisdiction| entries, where there should just be a space if the label
+% is the title.
+%
+%    \begin{macrocode}
+\DeclareDelimFormat{nametitledelim}{%
+  \ifboolexpr{
+    (
+      test {\ifentrytype{jurisdiction}}
+      or
+      test {\ifentrytype{legislation}}
+    ) and
+    togl {bbx:labelistitle}
+  }{\addspace}{\addcomma\space}}
+\DeclareDelimFormat[bib,biblist]{nametitledelim}{%
+  \ifboolexpr{
+    (
+      test {\ifentrytype{jurisdiction}}
+      or
+      test {\ifentrytype{legislation}}
+    ) and
+    togl {bbx:labelistitle}
+  }{\addspace}{\labelnamepunct}}
+
+
+%    \end{macrocode}
+%
+% We allow the date macro to print the time as well.
+%
+%    \begin{macrocode}
+\renewbibmacro*{date}{%
+  \printdate
+  \setunit*{\bibdatetimesep}
+  \printtime
+}
+\DeclareFieldFormat{time}{#1~\bibstring{hours}}
+
+%    \end{macrocode}
+%
+% We provide a new date merging option that moves the year but leaves the
+% month and day in place, and set this as the default. Note that dates are
+% preceded by a comma, and are given bare rather than in parentheses.
+%
+% We start by patching the error message of the existing option code, then
+% add a per-type version of the option.
+%
+%    \begin{macrocode}
+\xpatchcmd{\KV@blx@opt@pre@mergedate}{%
+  'true' (=compact)%
+}{%
+  'year', 'true' (=year)%
+}{}{\wlog{WARNING: biblatex-bath failed to patch KV@blx@opt@pre@datemerge}}
+\ifdefined\KV@blx@opt@typ@mergedate
+  \xpatchcmd{\KV@blx@opt@typ@mergedate}{%
+    'true' (=compact)%
+  }{%
+    'year', 'true' (=year)%
+  }{}{\wlog{WARNING: biblatex-bath failed to patch KV@blx@opt@typ@datemerge}}
+\else
+  \DeclareTypeOption[boolean]{mergedate}[true]{%
+    \ifcsdef{bbx@opt@mergedate@#1}{%
+      \csuse{bbx@opt@mergedate@#1}%
+    }{%
+      \PackageError{biblatex}
+        {Invalid option 'mergedate=#1'}
+        {Valid values are 'maximum', 'compact', 'basic', 'minimum',\MessageBreak
+          'year', 'true' (=year), and 'false'.}}}
+\fi
+\xpatchcmd{\KV@blx@opt@ent@mergedate}{%
+  'true' (=compact)%
+}{%
+  'year', 'true' (=year)%
+}{}{\wlog{WARNING: biblatex-bath failed to patch KV@blx@opt@ent@datemerge}}
+
+%    \end{macrocode}
+%
+% We define a configurable field format for date labels to replace the
+% hard-coded parentheses in the options from the standard author--year style.
+% We also amend the logic for printing the label date so the |nonodate| option
+% is respected.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{datelabel}{#1}
+\xpatchcmd{\bbx@opt@mergedate@maximum}{%
+  \iffieldundef{labelyear}%
+}{%
+  \ifboolexpr{
+    togl {bbx:nonodate}
+    and
+    not test {\iflabeldateisdate}}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@maximum}}
+\xpatchcmd{\bbx@opt@mergedate@maximum}{%
+  \printtext[parens]%
+}{%
+  \printtext[datelabel]%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@maximum}}
+\xpatchcmd{\bbx@opt@mergedate@compact}{%
+  \iffieldundef{labelyear}%
+}{%
+  \ifboolexpr{
+    togl {bbx:nonodate}
+    and
+    not test {\iflabeldateisdate}}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@compact}}
+\xpatchcmd{\bbx@opt@mergedate@compact}{%
+  \printtext[parens]%
+}{%
+  \printtext[datelabel]%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@compact}}
+\xpatchcmd{\bbx@opt@mergedate@basic}{%
+  \iffieldundef{labelyear}%
+}{%
+  \ifboolexpr{
+    togl {bbx:nonodate}
+    and
+    not test {\iflabeldateisdate}}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@basic}}
+\xpatchcmd{\bbx@opt@mergedate@basic}{%
+  \printtext[parens]%
+}{%
+  \printtext[datelabel]%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@basic}}
+\xpatchcmd{\bbx@opt@mergedate@minimum}{%
+  \iffieldundef{labelyear}%
+}{%
+  \ifboolexpr{
+    togl {bbx:nonodate}
+    and
+    not test {\iflabeldateisdate}}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@minimum}}
+\xpatchcmd{\bbx@opt@mergedate@minimum}{%
+  \printtext[parens]%
+}{%
+  \printtext[datelabel]%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@minimum}}
+\xpatchcmd{\bbx@opt@mergedate@false}{%
+  \iffieldundef{labelyear}%
+}{%
+  \ifboolexpr{
+    togl {bbx:nonodate}
+    and
+    not test {\iflabeldateisdate}}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@false}}
+\xpatchcmd{\bbx@opt@mergedate@false}{%
+  \printtext[parens]%
+}{%
+  \printtext[datelabel]%
+}{}{\wlog{WARNING: biblatex-bath failed to patch bbx@opt@mergedate@false}}
+%    \end{macrocode}
+%
+% If an older version of biblatex is used, we update the logic for
+% |\bbx@opt@mergedate@maximum|, which is used by the |letter| driver.
+%
+%    \begin{macrocode}
+\xpatchcmd{\bbx@opt@mergedate@maximum}{%
+  \iffieldsequal{year}{labelyear}
+    {\printlabeldateextra}%
+    {\printfield{labelyear}%
+    \printfield{extrayear}}%
+}{%
+  \iflabeldateisdate
+    {\printfield{issue}%
+    \setunit*{\addspace}%
+    \printdateextra}
+    {\printlabeldateextra}%
+}{}{}
+
+%    \end{macrocode}
+%
+% Lastly, here is our new (default) option, which always merges the year, and
+% only the year, with the label date. Other date and time componenents are
+% displayed later in the reference. Therefore we clear the year from the date
+% used for the label, but leave the month and day alone.
+%
+%    \begin{macrocode}
+\def\bbx@opt@mergedate@year{%
+  \renewbibmacro*{date+extradate}{%
+    \iffieldundef{labelyear}{}{%
+      \ifboolexpr{
+        togl {bbx:nonodate}
+        and
+        not test {\iflabeldateisdate}
+      }{}{%
+        \printtext[datelabel]{\printlabeldateextra}%
+      }%
+      \iflabeldateisdate{%
+        \clearfield{year}%
+      }{}}}
+  \ifcsundef{abx@macro@date+extrayear}{}{%
+    \renewbibmacro*{date+extrayear}{\usebibmacro{date+extradate}}%
+  }
+  \renewbibmacro*{issue+date}{%
+    \ifboolexpr{
+      test {\iffieldundef{issue}}
+      and
+      test {\iffieldundef{month}}
+    }{}{%
+      \ifboolexpr{(
+        test {\iffieldundef{volume}}
+        and
+        test {\iffieldundef{number}}
+        ) and
+        test {\iffieldundef{eid}}
+      }{%
+        \newunit
+        \printfield{issue}%
+      }{%
+        \printtext[parens]{%
+          \printfield{issue}%
+        }%
+      }
+      \setunit{\addcomma\space}%
+      \printdate
+    }%
+    \newunit
+  }%
+}%
+
+\def\bbx@opt@mergedate@true{\bbx@opt@mergedate@year}
+\ExecuteBibliographyOptions{mergedate}
+
+%    \end{macrocode}
+%
+% The problem with moving years but leaving months and days behind is that the
+% regular date range macros in |biblatex.sty| do nothing at all if no year
+% is printed. We therefore need to patch the macros with extra routines for
+% printing year-free date ranges: the rather extravagently named
+% |\mknoyeardaterangefull| and |\mknoyeardaterangetrunc|.
+%
+%    \begin{macrocode}
+\newrobustcmd*{\mknoyeardaterangefull}[2]{%
+  \iffieldundef{#2month}{}{%
+    \datecircaprint
+    \printtext[#2date]{%
+    \iffieldundef{#2season}{%
+      \csuse{mkbibdate#1}{}{#2month}{#2day}%
+      \blx@printtime{#2}{}%
+    }{%
+      \csuse{mkbibseasondate#1}{}{#2season}}%
+    \dateuncertainprint
+    \iffieldundef{#2endmonth}{}{%
+      \iffieldequalstr{#2endmonth}{}{%
+        \mbox{\bibdaterangesep}%
+      }{%
+        \bibdaterangesep
+        \enddatecircaprint
+        \iffieldundef{#2season}{%
+          \csuse{mkbibdate#1}{}{#2endmonth}{#2endday}%
+          \blx@printtime{#2}{end}%
+        }{%
+          \csuse{mkbibseasondate#1}{}{#2endseason}}%
+        \enddateuncertainprint}}}}}
+%    \end{macrocode}
+%
+% There is a potential problem for |\mknoyeardaterangetrunc|, in that if
+% the year and endyear are missing, it cannot tell if they are the same, so
+% if the months are the same but the years are different, the range would
+% be erroneously compressed. However, the only reason the year should
+% be missing is that it is in the label, so we test |labelyear| instead.
+%
+%    \begin{macrocode}
+\newrobustcmd*{\mknoyeardaterangetrunc}[2]{%
+  \iffieldundef{#2month}{}{%
+    \datecircaprint
+    \printtext[#2date]{%
+      \iffieldundef{#2season}{%
+        \ifboolexpr{
+          test {\iffieldsequal{labelyear}{labelendyear}}
+          and
+          test {\iffieldsequal{#2month}{#2endmonth}}
+        }{%
+          \csuse{mkbibdate#1}{}{}{#2day}%
+        }{%
+          \csuse{mkbibdate#1}{}{#2month}{#2day}}%
+      }{%
+        \csuse{mkbibseasondate#1}{}{#2season}}%
+      \dateuncertainprint
+      \iffieldundef{#2endmonth}{}{%
+        \iffieldequalstr{#2endmonth}{}{%
+          \mbox{\bibdaterangesep}%
+        }{%
+          \bibdaterangesep
+          \enddatecircaprint
+          \iffieldundef{#2season}{%
+            \csuse{mkbibdate#1}{}{#2endmonth}{#2endday}%
+          }{%
+            \csuse{mkbibseasondate#1}{}{#2endseason}}%
+          \enddateuncertainprint}}}}}
+%    \end{macrocode}
+%
+% Now we patch the four date range commands. The |extra| commands,
+% which print disambiguating labels as well, should only print those
+% labels if the year is present, so they can use the same non-year
+% date range functions as the non-|extra| commands.
+%
+%    \begin{macrocode}
+\xpatchcmd{\mkdaterangefull}{%
+  \iffieldundef{#2year} {\blx@nounit}%
+}{%
+  \iffieldundef{#2year} {\mknoyeardaterangefull{#1}{#2}}%
+}{\@tempswafalse}{\@tempswatrue}%
+\if@tempswa
+  \xpatchcmd{\mkdaterangefull}{%
+    \iffieldundef{#2year} {}%
+  }{%
+    \iffieldundef{#2year} {\mknoyeardaterangefull{#1}{#2}}%
+  }{}{\wlog{WARNING: biblatex-bath failed to patch mkdaterangefull}}%
+\fi
+\xpatchcmd{\mkdaterangetrunc@i}{%
+  \iffieldundef{#2year} {\blx@nounit}%
+}{%
+  \iffieldundef{#2year} {\mknoyeardaterangetrunc{#1}{#2}}%
+}{\@tempswafalse}{\@tempswatrue}%
+\if@tempswa
+  \xpatchcmd{\mkdaterangetrunc}{%
+    \iffieldundef{#2year} {}%
+  }{%
+    \iffieldundef{#2year} {\mknoyeardaterangetrunc{#1}{#2}}%
+  }{}{\wlog{WARNING: biblatex-bath failed to patch mkdaterangetrunc@i}}%
+\fi
+\xpatchcmd{\mkdaterangefullextra}{%
+  \iffieldundef{#2year} {\blx@nounit}%
+}{%
+  \iffieldundef{#2year} {\mknoyeardaterangefull{#1}{#2}}%
+}{\@tempswafalse}{\@tempswatrue}%
+\if@tempswa
+  \xpatchcmd{\mkdaterangefullextra}{%
+    \iffieldundef{#2year} {}%
+  }{%
+    \iffieldundef{#2year} {\mknoyeardaterangefull{#1}{#2}}%
+  }{}{\wlog{WARNING: biblatex-bath failed to patch mkdaterangefullextra}}%
+\fi
+\xpatchcmd{\mkdaterangetruncextra@i}{%
+  \iffieldundef{#2year} {\blx@nounit}%
+}{%
+  \iffieldundef{#2year} {\mknoyeardaterangetrunc{#1}{#2}}%
+}{\@tempswafalse}{\@tempswatrue}%
+\if@tempswa
+  \xpatchcmd{\mkdaterangetruncextra}{%
+    \iffieldundef{#2year} {}%
+  }{%
+    \iffieldundef{#2year} {\mknoyeardaterangetrunc{#1}{#2}}%
+  }{}{\wlog{WARNING: biblatex-bath failed to patch mkdaterangetruncextra@i}}%
+\fi
+
+%    \end{macrocode}
+%
+% \subsection{Versions}
+%
+% Versions are printed with `v.\@' in parentheses.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{version}{\mkbibparens{\biblcsstring{version}#1}}
+%    \end{macrocode}
+%
+% \subsection{Types}
+%
+% Types are always printed longhand.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{type}{\ifbibstring{#1}{\biblstring{#1}}{#1}}
+%    \end{macrocode}
+%
+% \subsection{Events}
+%
+% Events are printed as date then venue with no intermediate punctuation.
+%
+%    \begin{macrocode}
+\renewbibmacro*{event+venue+date}{%
+  \printfield{eventtitle}%
+  \setunit*{\addspace}%
+  \printfield{eventtitleaddon}%
+  \ifboolexpr{
+    test {\iffieldundef{venue}}
+    and
+    test {\iffieldundef{eventyear}}
+  }
+    {}
+    {\setunit{\addcomma\space}%
+     \printeventdate
+     \setunit*{\addcomma\space}%
+     \printfield{venue}%
+     \newunit}}
+
+%    \end{macrocode}
+%
+% \subsection{Publishers}
+%
+% We patch the secondary publication macros so they will use the
+% publisher list instead, if provided.
+%
+%    \begin{macrocode}
+\letbibmacro{plain:institution+location+date}{institution+location+date}
+\renewbibmacro*{institution+location+date}{%
+  \iflistundef{publisher}{%
+    \usebibmacro{plain:institution+location+date}%
+  }{%
+    \printlist{institution}%
+    \newunit
+    \usebibmacro{publisher+location+date}}}
+\letbibmacro{plain:organization+location+date}{organization+location+date}
+\renewbibmacro*{organization+location+date}{%
+  \iflistundef{publisher}{%
+    \usebibmacro{plain:organization+location+date}%
+  }{%
+    \printlist{organization}%
+    \newunit
+    \usebibmacro{publisher+location+date}}}
+
+%    \end{macrocode}
+%
+% We use the \texttt{library} field for databases and preprint repositories.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{library}{\mkbibemph{#1}}
+\newbibmacro*{library}{%
+  \iffieldundef{library}{}{%
+    \printfield{library}%
+    \setunit*{\addspace}%
+    \usebibmacro{isonline}%
+  }%
+}
+
+%    \end{macrocode}
+%
+% \subsection{Page numbers}
+%
+%    \begin{macrocode}
+\renewcommand*{\ppspace}{}
+\DeclareNumChars{ab}
+%    \end{macrocode}
+%
+% \subsection{URLs}
+%
+% URLs are prefaced by a `from' statement, and the URL date is enclosed in
+% brackets rather than parentheses.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{url}{\bibsentence\bibstring{urlfrom}\addcolon\space\url{#1}}
+\DeclareFieldFormat{doi}{\bibsentence\bibstring{urlfrom}\addcolon\space\url{https://doi.org/#1}}
+\DeclareFieldFormat{urldate}{\mkbibbrackets{\bibstring{urlseen}\space#1}}
+%    \end{macrocode}
+%
+% Since URLs and DOIs are presented in exactly the same way, we combine them
+% such that the DOI overrides the URL. 
+%
+%    \begin{macrocode}
+\renewbibmacro*{url}{%
+  \iffieldundef{doi}%
+    {\printfield{url}}%
+    {\printfield{doi}}%
+}
+\renewbibmacro*{doi+eprint+url}{%
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%
+  \newunit\newblock
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}}
+%    \end{macrocode}
+%
+% This backports changes to the |online| driver in biblatex v3.15 to earlier
+% versions, so the above works as intended.
+%
+%    \begin{macrocode}
+\xpatchbibdriver{online}{%
+  \iftoggle{bbx:doi}
+    {\printfield{doi}}
+    {}%
+  \newunit\newblock
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{url+urldate}%
+}{%
+  \toggletrue{bbx:url}%
+  \usebibmacro{doi+eprint+url}%
+}{}{}
+
+%    \end{macrocode}
+%
+% \subsection{Articles}
+%
+% Compared with the standard styles, the main differences in the driver are the
+% omission of `in' and the position of the publication state.
+%
+%    \begin{macrocode}
+\xpatchbibdriver{article}{%
+  \usebibmacro{in:}\usebibmacro{journal+issuetitle}%
+}{%
+  \usebibmacro{journal+issuetitle}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch article driver}}
+\xpatchbibdriver{article}{%
+  \usebibmacro{addendum+pubstate}%
+}{%
+  \printfield{addendum}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch article driver}}
+%    \end{macrocode}
+%
+% The journal title is in sentence case rather than title case.
+%
+%    \begin{macrocode}
+\xpatchbibmacro{journal}{%
+  \printfield[titlecase]{journaltitle}%
+}{%
+  \printfield[sentencecase]{journaltitle}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch journal macro}}
+\xpatchbibmacro{journal}{%
+  \printfield[titlecase]{journalsubtitle}%
+}{%
+  \printfield[sentencecase]{journalsubtitle}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch journal macro}}
+%    \end{macrocode}
+%
+% The journal title is followed by a comma. The issue number is separated from
+% the volume by parentheses rather than a dot. The pubstate is in the volume
+% position.
+%
+%    \begin{macrocode}
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit*{\addspace}%
+  \usebibmacro{isonline}%
+  \setunit*{\addcomma\space}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addcomma\space}}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \setunit{\addcomma\space}%
+  \printfield{pubstate}%
+  \newunit}
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \printfield[parens]{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+%    \end{macrocode}
+%
+% \subsection{Books}
+%
+% Compared with the standard styles, the main difference is that the series is
+% separated by a comma rather than a period. This also affects proceedings and
+% certain forms of grey literature.
+%
+%    \begin{macrocode}
+\xpatchbibdriver{book}{%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+}{%
+  \setunit{\addcomma\space}%
+  \usebibmacro{series+number}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch book driver}}
+
+\xpatchbibdriver{collection}{%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+}{%
+  \setunit{\addcomma\space}%
+  \usebibmacro{series+number}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch collection driver}}
+
+\xpatchbibdriver{inbook}{%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+}{%
+  \setunit{\addcomma\space}%
+  \usebibmacro{series+number}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch inbook driver}}
+
+\xpatchbibdriver{incollection}{%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+}{%
+  \setunit{\addcomma\space}%
+  \usebibmacro{series+number}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch incollection driver}}
+
+\xpatchbibdriver{inproceedings}{%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+}{%
+  \setunit{\addcomma\space}%
+  \usebibmacro{series+number}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch inproceedings driver}}
+
+\xpatchbibdriver{proceedings}{%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+}{%
+  \setunit{\addcomma\space}%
+  \usebibmacro{series+number}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch proceedings driver}}
+
+%    \end{macrocode}
+%
+% \subsection{Works in collections}
+%
+% Compared with the standard styles, the main difference is that the editors
+% precede the booktitle.
+%
+%    \begin{macrocode}
+\xpatchbibdriver{incollection}{%
+  \usebibmacro{in:}%
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+}{%
+  \ifnameundef{editor}{}{\usebibmacro{in:}}%
+  \usebibmacro{bookeditor}%
+  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}%
+  \usebibmacro{byeditor+others}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch incollection driver}}
+
+\xpatchbibdriver{inproceedings}{%
+  \usebibmacro{in:}%
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \usebibmacro{event+venue+date}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+}{%
+  \ifnameundef{editor}{}{\usebibmacro{in:}}%
+  \usebibmacro{bookeditor}%
+  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}%
+  \usebibmacro{byeditor+others}%
+  \newunit
+  \usebibmacro{event+venue+date}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch inproceedings driver}}
+
+%    \end{macrocode}
+%
+% \subsection{Datasets}
+%
+% We patch the new datasets driver from biblatex v3.13 so it can emulate what
+% we had previously done with the online driver.
+%
+%    \begin{macrocode}
+\xpatchbibdriver{dataset}{%
+  \printlist{organization}%
+  \newunit
+  \usebibmacro{publisher+location+date}%
+}{%
+  \usebibmacro{library}%
+  \newunit\newblock
+  \usebibmacro{organization+location+date}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch dataset driver}}
+
+%    \end{macrocode}
+%
+% \subsection{Online works}
+%
+% Compared with the standard styles, the main difference is that the
+% organization's address is printed.
+%
+%    \begin{macrocode}
+\xpatchbibdriver{online}{%
+  \printlist{organization}%
+  \newunit\newblock
+  \usebibmacro{date}%
+}{%
+  \usebibmacro{library}%
+  \newunit\newblock
+  \usebibmacro{organization+location+date}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch online driver}}
+
+%    \end{macrocode}
+%
+% \subsection{Reports}
+%
+% Compared with the standard styles, the main differences are that we use a
+% special macro for printing the |type|, |series| and |number| in parentheses,
+% and we support the |library| field.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat{forceparens}{(#1)}
+\newbibmacro{series+type+number}{%
+  \ifboolexpr{
+    test {\iffieldundef{series}}
+    and
+    test {\iffieldundef{type}}
+    and
+    test {\iffieldundef{number}}
+  }{}{%
+    \printtext[parens]{%
+      \printfield{series}%
+      \IfStrEqCase{\thefield{series}}{%
+        {C}{\printunit*{\adddot\space}}%
+        {Cd}{\printunit*{\adddot\space}}%
+        {Cmd}{\printunit*{\adddot\space}}%
+        {Cmnd}{\printunit*{\adddot\space}}%
+        {Cm}{\printunit*{\adddot\space}}%
+      }{%
+        \setunit*{\addcomma\space}}%
+      \printfield{type}%
+      \setunit*{\addspace}%
+      \IfBeginWith{\thefield{series}}{HL}{%
+        \printfield[forceparens]{number}%
+      }{%
+        \printfield{number}%
+      }}}}
+
+\DeclareBibliographyDriver{report}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{series+type+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{institution+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isrn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{library}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+%    \end{macrocode}
+%
+% \subsection{Manuals}
+%
+% The \texttt{manual} driver is useful for a variety of technical publications,
+% such as standards, patents and maps. (Patents have their own driver, in fact,
+% but we set things up so the \texttt{manual} driver can be used instead if
+% needed for compatibility.)
+%
+%    \begin{macrocode}
+\newbibmacro{manual:series+type+number}{%
+  \iffieldundef{series}{%
+    \newunit\newblock
+    \printfield{type}%
+    \setunit{\addspace}%
+    \printfield{number}%
+  }{%
+    \setunit{\addcomma\space}%
+    \usebibmacro{series+number}%
+    \newunit\newblock
+    \printfield{type}%
+  }%
+}
+\xpatchbibdriver{manual}{%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{type}%
+}{%
+  \usebibmacro{manual:series+type+number}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch manual driver}}
+\xpatchbibdriver{manual}{%
+  \printlist{organization}%
+  \newunit
+  \usebibmacro{publisher+location+date}%
+}{%
+  \usebibmacro{organization+location+date}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch manual driver}}
+
+%    \end{macrocode}
+%
+% \subsection{Standards}
+%
+% A special quirk with standards is that they are often best known by their
+% number, so it comes at the head of the reference if no authors are specified.
+%
+% To achieve this cleanly with correct sorting, we copy the number into
+% |sortkey| as a simple fix (providing neither |author| nor |sortkey| are
+% already specified). We then move the number to |label| so that citations
+% come out correctly and the date (if given) is put in the right place.
+%
+%    \begin{macrocode}
+\DeclareStyleSourcemap{%
+  \maps[datatype=bibtex]{%
+    \map[overwrite=false]{
+      \pertype{standard}
+      \step[notfield=author,
+        fieldsource=number,
+        final]
+      \step[fieldset=sortkey,
+        origfieldval]
+    }
+    \map[overwrite=false]{
+      \pertype{standard}
+      \step[notfield=author,
+      fieldsource=number,
+      fieldtarget=label]
+    }
+  }}
+\ExecuteBibliographyOptions[standard]{useeditor=false}
+
+%    \end{macrocode}
+%
+% \subsection{Audiovisual materials}
+%
+% The \texttt{audio} and \texttt{video} drivers are based on \texttt{misc}.
+%
+%    \begin{macrocode}
+\newbibmacro*{type+online}{%
+  \printfield{type}%
+  \ifboolexpr{
+    test {\iffieldundef{type}}
+    or
+    test {\nottoggle{bbx:labelistitle}}
+  }{}{%
+    \setunit{\addspace}%
+    \usebibmacro{isonline}}}
+\DeclareBibliographyDriver{audio}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{type+online}%
+  \newunit\newblock
+  \usebibmacro{byauthor}[given-family:full]%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}[given-family:full]%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+\DeclareBibliographyAlias{movie}{audio}
+\DeclareBibliographyAlias{music}{audio}
+\DeclareBibliographyAlias{video}{audio}
+%    \end{macrocode}
+%
+% \subsection{Case reports}
+%
+% We provide a test to see if a work was published in the Official Journal of
+% the EU; if so, the title is not italic (unless reporting a decision of the
+% European Commission).
+%
+%    \begin{macrocode}
+\newtoggle{bbx:eu-oj}
+\newbibmacro*{eucheck}{%
+  \IfBeginWith{\thefield{journaltitle}}{OJ}{%
+    \toggletrue{bbx:eu-oj}%
+  }{}}
+\DeclareFieldFormat[jurisdiction,legislation]{title}{%
+  \ifboolexpr{
+    togl{bbx:eu-oj}
+    and
+    not test {\iffieldequalstr{type}{Commission Decision}}
+  }{#1}{\mkbibemph{#1}}}
+
+%    \end{macrocode}
+%
+% The year is printed in square brackets, unless the case is Scottish, in which
+% case the year is printed bare, or a volume number is present, in which case the
+% year is printed in parentheses. With ECR and OJ cases, however, the year is
+% always printed in square brackets despite the presence of a volume number.
+% We provide a \key{year-essential} option for forcing the brackets/parentheses
+% choice, and \key{scottish-style} for activating Scottish style.
+%
+%    \begin{macrocode}
+\newtoggle{bbx:scotstyle}
+\DeclareEntryOption[boolean]{scottish-style}[true]{%
+  \settoggle{bbx:scotstyle}{#1}}
+\newtoggle{bbx:year-essential}
+\DeclareEntryOption[boolean]{year-essential}[true]{%
+  \settoggle{bbx:year-essential}{#1}}
+\DeclareFieldFormat[jurisdiction]{datelabel}{%
+  \ifboolexpr{
+    test {\iffieldundef{volume}}
+    or
+    togl {bbx:year-essential}
+    or
+    togl {bbx:eu-oj}
+    or
+    test {\iffieldequalstr{journaltitle}{ECR}}
+  }{%
+    \ifboolexpr{
+      test {\ifkeyword{sc}}
+      or
+      togl {bbx:scotstyle}
+    }{%
+      #1%
+    }{%
+      \mkbibbrackets{#1}}%
+  }{%
+    \mkbibparens{#1}}}
+
+%    \end{macrocode}
+%
+% A case number should normally go after the title and before the year, but
+% Version 1 of this style used |number| with |type| at the end of the reference.
+% (It relied on the case number being given in the |issue| field.)
+% To maintain backwards compatibility, we rely on a `trick' that case numbers
+% are usually only present in EU cases where a page number is always provided.
+% (And we support the \textsf{oscola} semantics for numbering European
+% Commission cases.) We have to be a bit careful to ensure the last print
+% command prints something otherwise |(no)nameyeardelim| will not be triggered.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat[jurisdiction]{issue}{\mkbibparens{#1}}
+\newbibmacro*{casenumber}{%
+  \iffieldundef{issue}{%
+    \ifboolexpr{
+      test {\iffieldundef{pages}}
+      or
+      test {\iffieldundef{number}}
+    }{}{%
+      \iffieldundef{userb}{%
+        \printfield[parens]{number}%
+        \clearfield{number}%
+      }{%
+        \printfield[parens]{userb}%
+        \setunit{\addspace}%
+        \printfield{type}%
+        \setunit*{\addspace}%
+        \printfield{number}%
+        \clearfield{type}\clearfield{number}}}%
+  }{%
+    \printfield{issue}}}
+%    \end{macrocode}
+%
+% For ease, if `Commission' is given as the |institution|, this is deleted but
+% the |type| is set to `Commission Decision'.
+%
+%    \begin{macrocode}
+\DeclareStyleSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=false]{
+      \step[match=\regexp{Commission}, fieldsource=institution, final]
+      \step[fieldset=type, fieldvalue={Commission Decision}]
+      \step[fieldset=institution, null]
+    }
+    \map[overwrite=false]{
+      \step[fieldsource=casenumber, final]
+      \step[notfield=number, fieldsource=casenumber, fieldtarget=number]
+      \step[fieldsource=casenumber, fieldtarget=userb]
+    }
+  }
+}
+
+%    \end{macrocode}
+%
+% Law reports have a special way of printing journals, volume and page numbers.
+% Here are several macros implementing this: a deprecated one using
+% |type|/|number| and three proper ones using |journaltitle|, for UK journals,
+% ECR and OJ respectively. The |reporter| macro chooses between them (again,
+% this is a little messy for backwards compatibility).
+%
+%    \begin{macrocode}
+\newbibmacro{jurisdiction:type+number}{%
+  \usebibmacro{journal}%
+  \setunit*{\addspace}%
+  \ifboolexpr{
+    test {\iffieldundef{type}}
+    and
+    test {\iffieldundef{number}}
+  }{}{%
+    \printfield{volume}%
+    \setunit*{\addperiod\space}%
+    \printfield{type}%
+    \setunit*{\addspace}%
+    \printfield{number}}}
+\DeclareFieldFormat[jurisdiction]{journaltitle}{%
+  \iftoggle{bbx:eu-oj}{\mkbibemph{#1}}{#1}}
+\DeclareFieldFormat[jurisdiction,legislation]{volume}{#1}
+\DeclareFieldFormat[jurisdiction,legislation]{pages}{#1}
+\newbibmacro{journal+volume+pages}{%
+  \printfield{volume}%
+  \setunit{\addperiod\space}%
+  \printfield{journaltitle}%
+  \setunit*{\addspace}%
+  \printfield{pages}%
+}
+\newbibmacro{eu:journal+volume+pages}{%
+  \printfield{journaltitle}%
+  \setunit{\addspace}%
+  \printfield{volume}%
+  \setunit*{\printtext{--\allowbreak}}%
+  \printfield{pages}%
+}
+\newbibmacro{eu:journal+series+volume+pages}{%
+  \printfield{journaltitle}%
+  \setunit{\addspace}%
+  \printfield{series}%
+  \clearfield{series}%
+  \printfield{volume}%
+  \setunit*{\printtext{/}}%
+  \printfield{pages}%
+}
+\newbibmacro{reporter}{%
+  \iffieldundef{journaltitle}{%
+    \usebibmacro{jurisdiction:type+number}%
+  }{%
+    \iffieldequalstr{journaltitle}{ECR}{%
+      \usebibmacro{eu:journal+volume+pages}%
+    }{%
+      \iffieldequalstr{journaltitle}{OJ}{%
+        \iffieldundef{series}{%
+          \usebibmacro{jurisdiction:type+number}%
+        }{%
+          \usebibmacro{eu:journal+series+volume+pages}%
+        }%
+      }{%
+        \usebibmacro{journal+volume+pages}%
+        }}}}
+
+%    \end{macrocode}
+%
+% It's not a feature of Harvard (Bath), but OSCOLA puts the institution in
+% parentheses at the end.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat[jurisdiction]{institution}{\mkbibparens{#1}}
+
+\DeclareBibliographyDriver{jurisdiction}{%
+  \savebibmacro{title}%
+  \xapptobibmacro{labeltitle}{%
+    \setunit*{\addspace}%
+    \usebibmacro{casenumber}%
+  }{}{}%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{eucheck}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \printfield{note}%
+  \setunit{\addspace}%
+  \usebibmacro{reporter}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \printfield{institution}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isrn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}%
+  \restorebibmacro{title}}
+
+%    \end{macrocode}
+%
+% \subsection{Legislation}
+%
+% Legislation is mostly formatted like a report, except there is no
+% |nametitledelim| there is no |date+extradate|. There is also some variation
+% in how the series\slash number\slash chapter information is punctuated.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat[legislation]{datelabel}{%
+  \iftoggle{bbx:eu-oj}{%
+    \mkbibbrackets{#1}%
+  }{#1}}
+\DeclareFieldFormat[legislation]{labeldate}{%
+  \iftoggle{bbx:labelistitle}{\printtext[title]{#1}}{#1}}
+\DeclareFieldFormat[legislation]{chapter}{\biblcsstring{legalchapter}#1}
+\newbibmacro*{journal+series+volume+number+chapter+pages}{%
+  \iftoggle{bbx:eu-oj}{%
+    \setunit{\addspace}%
+    \usebibmacro{eu:journal+series+volume+pages}%
+  }{%
+    \iffieldequalstr{entrysubtype}{secondary}{%
+      \setunit{\addcomma\space}%
+      \printfield{number}%
+      \clearfield{number}%
+      \printunit{\addcomma\space}%
+    }{%
+      \ifboolexpr{
+        test {\iffieldundef{series}}
+        and
+        test {\iffieldundef{type}}
+      }{%
+        \iffieldundef{number}{%
+          \setunit{\addcomma\space}%
+          \printfield{chapter}%
+        }{%
+          \setunit{\addspace}%
+          \printtext[parens]{%
+            \printfield{number}%
+            \setunit*{\addcomma\space}%
+            \printfield{chapter}}}%
+      }{%
+        \iffieldundef{chapter}{}{\setunit{\addspace}}%
+        \printtext[parens]{%
+          \printfield{series}%
+          \setunit{\addcomma\space}%
+          \printfield{type}%
+          \setunit*{\addspace}%
+          \printfield{number}%
+          \setunit*{\addcomma\space}%
+          \printfield{chapter}}}}}}
+
+\DeclareBibliographyDriver{legislation}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{eucheck}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{journal+series+volume+number+chapter+pages}
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{institution+location+date}%
+  \newunit\newblock
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isrn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+%    \end{macrocode}
+%
+% \subsection{Letters}
+%
+% This driver is used for emails. It is based loosely on the one for articles.
+% The particular foible with this type is that the date must be printed complete
+% at the start.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat[letter]{title}{\iffieldundef{journaltitle}{\emph{#1}}{#1}}
+\ExecuteBibliographyOptions[letter]{mergedate=maximum}
+\DeclareBibliographyDriver{letter}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{bytranslator+others}%
+  \newunit\newblock
+  \usebibmacro{journal+issuetitle}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}%
+}
+
+%    \end{macrocode}
+%
+% \subsection{Software}
+%
+% The driver for software entries is based on misc. The main difference is in
+% how the type is printed.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat[software]{type}{\mkbibbrackets{#1}}
+\DeclareBibliographyDriver{software}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \setunit{\addspace}
+  \printfield{type}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{organization+location+date}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+%    \end{macrocode}
+%
+% \subsection{Images}
+%
+% The driver for image is based on misc. The main difference is the
+% support for the \texttt{library} field.
+%
+%    \begin{macrocode}
+\DeclareFieldFormat[image]{library}{#1}
+\DeclareBibliographyDriver{image}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{organization+location+date+library}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+%    \end{macrocode}
+%
+% The following code works slightly differently
+%
+%    \begin{macrocode}
+\newbibmacro*{organization+location+date+library}{%
+  \ifboolexpr{
+    test {\iffieldundef{library}}
+    or
+    not test {\iflistundef{publisher}}
+  }{%
+    \printlist{location}%
+    \setunit*{\addcolon\space}%
+    \clearfield{location}%
+  }{}%
+  \iflistundef{publisher}{%
+    \printlist{organization}%
+  }{%
+    \printlist{publisher}%
+  }%
+  \setunit{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit
+  \iffieldundef{library}{%
+    \iffieldundef{institution}{}{%
+      \bibsentence
+      \bibstring{at}%
+      \setunit{\addcolon\space}%
+      \printlist{location}%
+      \setunit*{\addperiod\space}%
+      \printfield{institution}%
+    }%
+  }{%
+    \bibsentence
+    \bibstring{at}%
+    \setunit{\addcolon\space}%
+    \printlist{location}%
+    \setunit*{\addperiod\space}%
+    \printfield{library}%
+  }%
+}
+
+%    \end{macrocode}
+%
+% \subsection{Unpublished}
+%
+% This driver is used for miscellaneous unpublished written material. It differs
+% from the standard version by supporting |maintitle| and |booktitle|, and
+% including a label at the end. The unpublished label is delegated to a macro
+% in case future versions of the style place conditions on whether it is displayed.
+%
+%    \begin{macrocode}
+\newbibmacro*{isunpublished}{%
+  \bibstring{unpublished}%
+}
+\DeclareBibliographyDriver{unpublished}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \ifnameundef{editor}{}{\usebibmacro{in:}}%
+  \usebibmacro{bookeditor}%
+  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}%
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit\newblock
+  \usebibmacro{event+venue+date}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{location+date}%
+  \newunit\newblock
+  \usebibmacro{isunpublished}%
+  \newunit\newblock
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+%    \end{macrocode}
+%
+% \subsection{Aliases}
+%
+% We define some handy semantic aliases.
+%
+%    \begin{macrocode}
+\DeclareBibliographyAlias{standard}{manual}
+%    \end{macrocode}
+%
+% \iffalse
+%</bbx>
+%<*dbx>
+% \fi
+%
+% \section{Implementation: data model}
+%
+% \setcounter{lstnumber}{20}
+%
+%    \begin{macrocode}
+\DeclareDatamodelConstant[type=list]{nameparts}{prefix,family,suffix,given,cjk}
+%    \end{macrocode}
+% \iffalse
+%</dbx>
+%<*lbx>
+% \fi
+%
+% \section{Implementation: General English language localization}
+%
+% \setcounter{lstnumber}{20}
+%
+% The strings are mostly the same except for the following changes. Note that
+% month names are never abbreviated.
+%
+%    \begin{macrocode}
+\InheritBibliographyExtras{english}
+\DeclareBibliographyStrings
+{inherit          = {english}
+,editors          = {{editors}{eds}}
+,version          = {{version~}{v\adddot}}
+,inpreparation    = {{preprint}{preprint}}
+,submitted        = {{preprint}{preprint}}
+,urlseen          = {{Accessed}{Accessed}}
+,january          = {{January}{January}}
+,february         = {{February}{February}}
+,march            = {{March}{March}}
+,april            = {{April}{April}}
+,may              = {{May}{May}}
+,june             = {{June}{June}}
+,july             = {{July}{July}}
+,august           = {{August}{August}}
+,september        = {{September}{September}}
+,october          = {{October}{October}}
+,november         = {{November}{November}}
+,december         = {{December}{December}}
+,patreq           = {{patent application}{pat\adddot\ appl\adddot}}
+,patreqde         = {{German patent application}{German pat\adddot\ appl\adddot}}
+,patreqeu         = {{European patent application}{European pat\adddot\ appl\adddot}}
+,patreqfr         = {{French patent application}{French pat\adddot\ appl\adddot}}
+,patrequk         = {{British patent application}{British pat\adddot\ appl\adddot}}
+,patrequs         = {{U.S\adddotspace patent application}{U.S\adddotspace pat\adddot\ appl\adddot}}
+%    \end{macrocode}
+%
+% These are the new strings we define in this style.
+%
+%    \begin{macrocode}
+,online           = {{Online}{Online}}
+,hours            = {{hours}{hrs\adddot}}
+,at               = {{at}{at}}
+,unpublished      = {{unpublished}{unpublished}}
+,legalchapter     = {{chapter}{c\adddot}}
+,director         = {{director}{dir\adddot}}
+,directors        = {{directors}{dir\adddot}}
+,bydirector       = {{directed by}{directed by}}
+,performer        = {{}{}}
+,performers       = {{}{}}
+,byperformer      = {{}{}}
+,reader           = {{reader}{reader}}
+,readers          = {{readers}{readers}}
+,byreader         = {{read by}{read by}}
+,conductor        = {{conductor}{cond\adddot}}
+,conductors       = {{conductors}{cond\adddot}}
+,byconductor      = {{conducted by}{conducted by}}
+}
+%    \end{macrocode}
+% \iffalse
+%</lbx>
+%<*lbx-gb>
+% \fi
+%
+% \section{Implementation: British English language localization}
+%
+% \setcounter{lstnumber}{20}
+%
+% We use the standard version with a few changes. We display the day as a
+% cardinal number instead of an ordinal. The date is separated from the time
+% by a period, not just a space, and the time separator is a period instead of a
+% colon.
+%
+%    \begin{macrocode}
+\InheritBibliographyExtras{british}
+\DeclareBibliographyExtras{%
+  \protected\def\mkbibdatelong#1#2#3{%
+    \iffieldundef{#3}
+      {}
+      {\thefield{#3}%
+       \iffieldundef{#2}{}{\nobreakspace}}%
+    \iffieldundef{#2}
+      {}
+      {\mkbibmonth{\thefield{#2}}%
+       \iffieldundef{#1}{}{\space}}%
+    \iffieldbibstring{#1}
+      {\bibstring{\thefield{#1}}}
+      {\dateeraprintpre{#1}\stripzeros{\thefield{#1}}}}%
+  \renewrobustcmd*{\bibdatetimesep}{\addperiod\space}%
+  \renewrobustcmd*{\bibtimesep}{\addperiod}%
+  }
+
+\DeclareBibliographyStrings
+{inherit          = {english}
+}
+%    \end{macrocode}
+% \iffalse
+%</lbx-gb>
+%<*cbx>
+% \fi
+%
+% \section{Implementation: citation style}
+%
+% \setcounter{lstnumber}{20}
+%
+% The standard |authoryear-comp| style is a close match for what we need.
+%
+%    \begin{macrocode}
+\RequireCitationStyle{authoryear-comp}
+%    \end{macrocode}
+%
+% This sets \key{uniquename} to |full|, but that conflicts with
+% \key{giveninits} set by the bibliography style, so we set it to |init|
+% instead. If left alone, \textsf{biblatex} would do this anyway, but if we do
+% it explicitly, we avoid the warning message.
+%
+%    \begin{macrocode}
+\ExecuteBibliographyOptions{uniquename=init}
+%    \end{macrocode}
+%
+% Compressed citations are delimited with a semicolon, just like
+% non-compressed citations.
+%
+%    \begin{macrocode}
+\renewcommand*{\compcitedelim}{\addsemicolon\space}
+%    \end{macrocode}
+%
+% We need to suppress the display of `n.d.' in citations if the \key{nonodate}
+% toggle is true.
+%
+%    \begin{macrocode}
+\xpatchbibmacro{cite:labeldate+extradate}{%
+  \iffieldundef{labelyear}%
+}{%
+  \ifboolexpr{
+    togl {bbx:nonodate}
+    and
+    not test {\iflabeldateisdate}}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch cite:labeldate+extradate}}
+%    \end{macrocode}
+%
+% We activate the label-is-title toggle if the |labeltitle| is printed.
+%
+%    \begin{macrocode}
+\providetoggle{bbx:labelistitle}
+\xpatchbibmacro{cite:label}{%
+  \printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}%
+}{%
+  \printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}%
+  \toggletrue{bbx:labelistitle}%
+}{}{\wlog{WARNING: biblatex-bath failed to patch cite:label}}
+%    \end{macrocode}
+% \iffalse
+%</cbx>
+% \fi
+
