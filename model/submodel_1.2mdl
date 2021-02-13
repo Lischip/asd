@@ -1,0 +1,253 @@
+{UTF-8}
+Probability insects entering when ventilator system not working=
+	(1-Ventilator systems working)*0.5
+	~	Dmnl
+	~		|
+
+"Constant visits/degree"=
+	0.82
+	~	visits/Degrees
+	~		|
+
+Probability of campylobacter infected vermin on farms=
+	"Probability of campy infected vermin/degree" * Temperature - 0.05 + Lookup level hygiene\
+		(Level hygiene on farm)
+	~	Dmnl
+	~		|
+
+Human infection rate in broiler houses=
+	Probability of humans physically carrying campylobacter * (1-Probability humans following the hygiene protocol\
+		)
+	~	Dmnl
+	~		|
+
+Infection rate in broiler house=
+	(Insects infection rate in broiler house + Human infection rate in broiler houses)
+	~	Dmnl
+	~		|
+
+"Probability ventilator system working/degree"=
+	0.042
+	~	Dmnl/Degrees
+	~		|
+
+Insects infection rate in broiler house=
+	Development rate insects * (Probability insects entering the broilerhouse when ventilator is working\
+		 + Probability insects entering when ventilator system not working) * Probability of campylobacter infected vermin on farms
+	~	Dmnl
+	~		|
+
+Level hygiene on farm=
+	1
+	~	Dmnl
+	~		|
+
+Lookup level hygiene(
+	[(0,0)-(10,10)],(0,0.2),(1,0.18),(2,0.15),(3,0.1),(4,0.05)
+	
+	)
+	~	Dmnl
+	~		|
+
+Lookup level hygiene mud(
+	[(0,0)-(10,10)],(1,0.8),(2,0.6),(3,0.4),(4,0.2))
+	~	Dmnl
+	~		|
+
+Probability humans following the hygiene protocol=
+	("Constant of dmnl/visits"* Total visits)+1.16
+	~	Dmnl
+	~		|
+
+Probability insects entering the broilerhouse when ventilator is working=
+	Ventilator systems working*0.9
+	~	Dmnl
+	~		|
+
+temp=
+	1
+	~	Degrees
+	~		|
+
+"Probability of walking through water/mud before entering broilerhouse"=
+	Lookup level hygiene mud (Level hygiene on farm)
+	~	Dmnl
+	~		|
+
+Total visits=
+	Visits of veterinarian + Visits of the farmer + Visits of other people
+	~	visits
+	~		|
+
+Probability of humans physically carrying campylobacter=
+	Probability of campylobacter infected vermin on farms * "Probability of walking through water/mud before entering broilerhouse"
+	~	Dmnl
+	~		|
+
+Visits of the farmer=
+	"Constant visits/degree"* Temperature+2.8
+	~	visits
+	~		|
+
+Ventilator systems working=
+	"Probability ventilator system working/degree" * Temperature + 0.04
+	~	Dmnl
+	~		|
+
+"Constant of dmnl/visits"=
+	-0.029
+	~	Dmnl/visits
+	~		|
+
+Development rate insects=
+	MAX(0.041 *Temperature*(1/temp)- 0.0412, 0.1)
+	~	Dmnl
+	~		|
+
+Input sinus function=
+	1
+	~	1/Week
+	~		|
+
+"Probability of campy infected vermin/degree"=
+	0.03
+	~	Dmnl/Degrees
+	~		|
+
+Temperature=
+	13.45 +(8.45 * SIN(((2*3.14)/52)* (Input sinus function* Time-17)))
+	~	Degrees
+	~		|
+
+Visits of other people=
+	1000
+	~	visits
+	~		|
+
+Visits of veterinarian=
+	1000
+	~	visits
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Week
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Week
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Week [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Week [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,80,0
+10,1,Temperature,126,308,54,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Input sinus function,184,199,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,3,2,1,1,0,0,0,0,128,0,-1--1--1,,1|(154,240)|
+10,4,Time,62,224,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,5,4,1,0,0,0,0,0,64,0,-1--1--1,,1|(86,256)|
+10,6,Development rate insects,360,421,57,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Ventilator systems working,179,411,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Probability insects entering when ventilator system not working,412,536,84,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,Probability insects entering the broilerhouse when ventilator is working,359,634,96,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,Insects infection rate in broiler house,777,535,65,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,11,"Probability of campy infected vermin/degree",416,255,72,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,12,Probability of campylobacter infected vermin on farms,524,397,81,42,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,13,Level hygiene on farm,641,275,54,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,14,Lookup level hygiene mud,853,240,42,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,15,Infection rate in broiler house,1322,407,49,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Human infection rate in broiler houses,1053,273,66,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Probability of humans physically carrying campylobacter,877,424,69,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,"Probability of walking through water/mud before entering broilerhouse",804,330,95,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,19,Visits of veterinarian,627,80,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,Visits of the farmer,399,112,59,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,Visits of other people,491,64,45,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,22,Total visits,535,181,34,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,Probability humans following the hygiene protocol,828,141,66,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,"Constant of dmnl/visits",927,50,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,25,"Constant visits/degree",292,41,40,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,26,"Probability ventilator system working/degree",90,491,73,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,26,7,1,0,0,0,0,64,0,-1--1--1,,1|(115,444)|
+1,28,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(151,359)|
+1,29,7,8,1,0,0,0,0,64,0,-1--1--1,,1|(272,481)|
+1,30,7,9,1,0,0,0,0,64,0,-1--1--1,,1|(229,520)|
+1,31,6,10,1,0,0,0,0,64,0,-1--1--1,,1|(566,498)|
+1,32,9,10,1,0,0,0,0,64,0,-1--1--1,,1|(536,622)|
+1,33,8,10,1,0,0,0,0,64,0,-1--1--1,,1|(584,548)|
+1,34,12,10,1,0,0,0,0,64,0,-1--1--1,,1|(669,482)|
+1,35,13,12,0,0,0,0,0,64,0,-1--1--1,,1|(598,319)|
+10,36,Lookup level hygiene,538,245,42,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,36,12,0,0,0,0,0,64,0,-1--1--1,,1|(532,302)|
+1,38,11,12,0,0,0,0,0,64,0,-1--1--1,,1|(456,308)|
+1,39,1,12,1,0,0,0,0,64,0,-1--1--1,,1|(310,292)|
+1,40,16,15,1,0,0,0,0,64,0,-1--1--1,,1|(1236,372)|
+1,41,10,15,1,0,0,0,0,64,0,-1--1--1,,1|(1034,454)|
+1,42,23,16,1,0,0,0,0,64,0,-1--1--1,,1|(939,188)|
+1,43,17,16,1,0,0,0,0,64,0,-1--1--1,,1|(953,342)|
+1,44,12,17,1,0,0,0,0,64,0,-1--1--1,,1|(657,424)|
+1,45,18,17,1,0,0,0,0,64,0,-1--1--1,,1|(839,379)|
+1,46,13,18,0,0,0,0,0,64,0,-1--1--1,,1|(700,295)|
+1,47,14,18,0,0,0,0,0,64,0,-1--1--1,,1|(834,274)|
+1,48,25,20,1,0,0,0,0,64,0,-1--1--1,,1|(374,115)|
+1,49,1,20,1,0,0,0,0,64,0,-1--1--1,,1|(311,221)|
+1,50,19,22,1,0,0,0,0,128,0,-1--1--1,,1|(574,124)|
+1,51,20,22,1,0,0,0,0,128,0,-1--1--1,,1|(499,138)|
+1,52,21,22,1,0,0,0,0,128,0,-1--1--1,,1|(536,134)|
+1,53,24,23,1,0,0,0,0,64,0,-1--1--1,,1|(902,89)|
+1,54,22,23,1,0,0,0,0,64,0,-1--1--1,,1|(660,143)|
+1,55,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(225,376)|
+10,56,temp,299,335,17,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,57,56,6,1,0,0,0,0,64,0,-1--1--1,,1|(322,370)|
+///---\\\
+:L<%^E!@
+1:Current.vdfx
+9:Current
+15:0,0,0,0,0,0
+19:80,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+4:Time
+5:Temperature
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:3
+41:0
+76:1
+77:1
+78:0
+79:1
+80:1
+81:0
+24:0
+25:100
+26:100
+91:0
+90:0
+87:0
+75:
+43:
