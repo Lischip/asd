@@ -1,33 +1,30 @@
 {UTF-8}
-Probability of campylobacter infection during slaughterprocess=
-	Probability of carcass contamination+"Probability of cross-contamination"
-	~	dmmnl
+Probability of carcass contamination  = A FUNCTION OF( Probability of contamination during evisceration\
+		,Probability of contamination during plucking,Probability of contamination during scalding\
+		)
+	~	
 	~		|
 
-Probability of carcass contamination=
-	Probability of contamination during evisceration + Probability of contamination during plucking\
-		 + Probability of contamination during scalding
-	~	dmnl
+Probability of cmapylobacter infection during slaughterprocess  = A FUNCTION OF( Probability of carcass contamination\
+		,"Probability of cross-contamination")
+	~	
 	~		|
 
-Probability of contamination during evisceration=
-	0,19
-	~	dmnl
+Probability of contamination during evisceration  = A FUNCTION OF( )
+	~	
 	~		|
 
-Probability of contamination during plucking=
-	0,5
-	~	dmnl
+Probability of contamination during plucking  = A FUNCTION OF( )
+	~	
 	~		|
 
-Probability of contamination during scalding=
-	-0,4375
-	~	dmnl
+Probability of contamination during scalding  = A FUNCTION OF( )
+	~	
 	~		|
 
-Probability of contamination via the slaughter equipment=
-	Probability of poor cleaning
-	~	dmnl
+Probability of contamination via the slaughter equipment  = A FUNCTION OF( Probability of poor cleaning\
+		)
+	~	
 	~		|
 
 "Probability of cross-contamination"  = A FUNCTION OF( Probability of contamination via the slaughter equipment\
@@ -35,20 +32,18 @@ Probability of contamination via the slaughter equipment=
 	~	
 	~		|
 
-Probability of human working in the slaughterhouse working strictly=
-	0.8
-	~	dmnl
-	~		|
-
-Probability of poor cleaning=
-	(1-Probability of using the right water temperature) * (1-Probability of human working in the slaughterhouse working strictly\
+Probability of human working in the slaughterhouse working strictly  = A FUNCTION OF( \
 		)
-	~	dmnl
+	~	
 	~		|
 
-Probability of using the right water temperature=
-	0.8
-	~	dmnl
+Probability of poor cleaning  = A FUNCTION OF( Probability of human working in the slaughterhouse working strictly\
+		,Probability of using the right water temperature)
+	~	
+	~		|
+
+Probability of using the right water temperature  = A FUNCTION OF( )
+	~	
 	~		|
 
 ********************************************************
@@ -86,7 +81,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 10,2,Probability of contamination during plucking,933,174,66,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,3,Probability of contamination during scalding,1145,175,66,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,4,Probability of carcass contamination,869,292,69,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,5,Probability of campylobacter infection during slaughterprocess,1167,381,92,28,8,3,0,4,0,0,0,0,-1--1--1,255-128-192,|12||0-0-0,0,0,0,0,0,0
+10,5,Probability of cmapylobacter infection during slaughterprocess,1167,381,92,28,8,3,0,4,0,0,0,0,-1--1--1,255-128-192,|0||0-0-0,0,0,0,0,0,0
 10,6,"Probability of cross-contamination",893,461,64,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,7,Probability of contamination via the slaughter equipment,639,378,67,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,8,Probability of poor cleaning,432,389,60,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
@@ -103,7 +98,6 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 1,19,1,4,1,0,0,0,0,128,0,-1--1--1,,1|(701,269)|
 ///---\\\
 :L<%^E!@
-9:Current
 15:0,0,0,0,0,0
 19:100,0
 27:0,
@@ -111,7 +105,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 42:1
 72:0
 73:0
-5:Percentage infected when arriving
+5:FINAL TIME
 35:Date
 36:YYYY-MM-DD
 37:2000
