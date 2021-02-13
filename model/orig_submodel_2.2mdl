@@ -1,43 +1,43 @@
 {UTF-8}
+"Catchers infection rate(thinning)"=
+	(1-Probability of catcher following the hygien protocol)*(Probability of catchers getting in touch with Campylobacter on the farm\
+		+Probability of getting infected by other farmhouse)
+	~	dmnl
+	~		|
+
+Infection rate after thinning=
+	"Catchers infection rate(thinning)"+Material infection probability
+	~	dmnl
+	~		|
+
+Probability of catcher following the hygien protocol=
+	Lookup of strictness on catchers(Constant catcher being strict on hygiene protocol)*\
+		Probability humans following the hygiene protocol
+	~	dmnl
+	~		|
+
+Probability of catchers getting in touch with Campylobacter on the farm=
+	Probability of campylobacter infected vermin on farms*"Probability of walking through water/mud before entering broilerhouse"
+	~	dmnl
+	~		|
+
+Probability of getting infected by other farmhouse=
+	Infection rate in broiler house*Probability of arriving from another farm
+	~	dmnl
+	~		|
+
 Probability of arriving from another farm=
 	0.8
 	~	dmnl
 	~		|
 
-Constant catcher being strict on hygiene protocol=A FUNCTION OF(Constant catcher being strict on hygiene protocol\
-		) ~~|
 Constant catcher being strict on hygiene protocol=
 	0.4
-	~	{d,mnl}
+	~	dmnl
 	~		|
 
 Lookup of strictness on catchers(
 	[(0,0)-(1,1)],(0,0.9),(0.2,0.91),(0.4,0.92),(0.6,0.93),(0.8,0.94),(1,0.95))
-	~	
-	~		|
-
-"Catchers infection rate(thinning)"  = A FUNCTION OF( Probability of catcher following the hygien protocol\
-		,Probability of catchers getting in touch with Campylobacter on the farm,Probability of getting infected by other farmhouse\
-		)
-	~	
-	~		|
-
-Probability of catcher following the hygien protocol  = A FUNCTION OF( Constant catcher being strict on hygiene protocol\
-		,Lookup of strictness on catchers)
-	~	
-	~		|
-
-Infection rate after thinning  = A FUNCTION OF( "Catchers infection rate(thinning)")
-	~	
-	~		|
-
-Probability of getting infected by other farmhouse  = A FUNCTION OF( Probability of arriving from another farm\
-		)
-	~	
-	~		|
-
-Probability of catchers getting in touch with Campylobacter on the farm  = A FUNCTION OF\
-		( )
 	~	
 	~		|
 
@@ -72,21 +72,31 @@ TIME STEP  = 1
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,1,Lookup of strictness on catchers,553,84,65,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,2,Constant catcher being strict on hygiene protocol,742,81,80,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,3,Probability of catcher following the hygien protocol,609,165,68,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,4,Probability of catchers getting in touch with Campylobacter on the farm,554,297,94,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,5,Probability of getting infected by other farmhouse,599,451,66,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,6,Probability of arriving from another farm,273,516,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,7,"Catchers infection rate(thinning)",1010,240,57,19,8,3,0,4,0,0,0,0,-1--1--1,255-255-0,|0||0-0-0,0,0,0,0,0,0
-10,8,Infection rate after thinning,1200,336,58,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
-1,9,1,3,1,0,0,0,0,128,0,-1--1--1,,1|(556,128)|
-1,10,2,3,1,0,0,0,0,128,0,-1--1--1,,1|(669,122)|
-1,11,3,7,1,0,0,0,0,128,0,-1--1--1,,1|(856,155)|
-1,12,4,7,1,0,0,0,0,128,0,-1--1--1,,1|(781,288)|
-1,13,5,7,1,0,0,0,0,128,0,-1--1--1,,1|(806,404)|
-1,14,7,8,1,0,0,0,0,128,0,-1--1--1,,1|(1117,255)|
-1,15,6,5,1,0,0,0,0,128,0,-1--1--1,,1|(405,445)|
+10,1,Lookup of strictness on catchers,550,88,65,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Constant catcher being strict on hygiene protocol,739,85,80,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Probability of catcher following the hygien protocol,606,169,68,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Probability of catchers getting in touch with Campylobacter on the farm,555,304,94,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Probability of getting infected by other farmhouse,596,455,66,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Probability of arriving from another farm,270,520,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,"Catchers infection rate(thinning)",1007,244,57,19,8,3,0,4,0,0,0,0,-1--1--1,255-255-0,|12||0-0-0,0,0,0,0,0,0
+10,8,Infection rate after thinning,1197,340,58,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+1,9,1,3,1,0,0,0,0,128,0,-1--1--1,,1|(553,132)|
+1,10,2,3,1,0,0,0,0,128,0,-1--1--1,,1|(666,126)|
+1,11,3,7,1,0,0,0,0,128,0,-1--1--1,,1|(853,159)|
+1,12,4,7,1,0,0,0,0,128,0,-1--1--1,,1|(780,293)|
+1,13,5,7,1,0,0,0,0,128,0,-1--1--1,,1|(803,408)|
+1,14,7,8,1,0,0,0,0,128,0,-1--1--1,,1|(1114,259)|
+1,15,6,5,1,0,0,0,0,128,0,-1--1--1,,1|(402,449)|
+10,16,Probability humans following the hygiene protocol,273,186,66,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,17,16,3,1,0,0,0,0,128,0,-1--1--1,,1|(424,146)|
+10,18,Probability of campylobacter infected vermin on farms,241,297,74,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,19,18,4,1,0,0,0,0,128,0,-1--1--1,,1|(393,276)|
+10,20,Material infection probability,890,490,60,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,21,20,8,1,0,0,0,0,128,0,-1--1--1,,1|(1062,449)|
+10,22,"Probability of walking through water/mud before entering broilerhouse",255,394,99,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,23,22,4,1,0,0,0,0,128,0,-1--1--1,,1|(461,353)|
+10,24,Infection rate in broiler house,371,607,54,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,25,24,5,1,0,0,0,0,128,0,-1--1--1,,1|(463,586)|
 ///---\\\
 :L<%^E!@
 9:Current
@@ -97,7 +107,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 42:1
 72:0
 73:0
-5:Probability of catcher following the hygien protocol
+5:Constant catcher being strict on hygiene protocol
 35:Date
 36:YYYY-MM-DD
 37:2000
@@ -119,3 +129,5 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 87:0
 75:
 43:
+83:submodel_1.mdl
+83:submodel_3.mdl
