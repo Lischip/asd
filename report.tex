@@ -32,6 +32,8 @@
 \usepackage{float}
 \usepackage{aliascnt}
 
+\usepackage[style=apa]{biblatex}
+\addbibresource{asd.bib}
 
 %\usepackage{natbib}
 %\newcommand*{\urlprefix}{Available from: }
@@ -39,8 +41,7 @@
 %\bibliographystyle{bath}
 %\renewcommand{\bibsection}{}
 
-\usepackage[style=apa]{biblatex}
-\addbibresource{asd.bib}
+
 
 \makeatletter
 \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
@@ -146,8 +147,9 @@
 	\end{center}
 	\vspace{2.5cm}
 	\begin{center}
-		\Large Elias Bach (\#\#\#\#\#\#\#) \\  David Matheus (5242223) \\ Menghua Prisse (\#\#\#\#\#\#\#) \\ Emily Ryan (\#\#\#\#\#\#\#) \\ Lisette de Schipper (5420296)
+		\Large Elias Bach (5379229) \\  David Matheus (5242223) \\ Menghua Prisse (4454308) \\ Emily Ryan (5218713) \\ Lisette de Schipper (5420296)
 	\end{center}
+	\vspace*{-2.5cm}
 	
 	\vspace{8cm}
 	\begin{center}
@@ -161,12 +163,13 @@
 	\newpage
 	\pagenumbering{Roman}
 
-\section{How to use this template (Comment section before use)}
-\input{howtouse.tex}
-\pagebreak
+%\section{How to use this template (Comment section before use)}
+%\input{howtouse.tex}
+%\pagebreak
 
 \section*{Synopsis}
 \textbf{MAXIMUM 250 WORDS}
+
 All Reports must include a one page synopsis. This should include a clear statement that sets out the terms of reference and objectives of the Report as agreed with the Supervisor.
 %\include{synopsis.tex}
 
@@ -180,6 +183,7 @@ All Reports must include a one page synopsis. This should include a clear statem
 
 \section*{Notation}
 The extent to which you list any symbols used in your report must be left to your discretion. Symbols, which are used in several parts of your report, should preferably be listed before the main text for easy reference. Symbols which are used only once or in one part of the report may be referred to in that part only. Generally, try to place yourself in the position of a reader with average background knowledge and arrange the notation in a manner which will be most convenient for him/her to follow.
+
 \pagebreak
 
 %\section*{List of Contents}
@@ -197,28 +201,19 @@ The extent to which you list any symbols used in your report must be left to you
 \cleardoublepage\pagenumbering{arabic}
 
 \section{Introduction}
-\input{introduction.tex}
+\input{chapter/introduction}
 \pagebreak
 
-\section{Literature Review}
-\input{literature.tex}
+\section{Methods}
+\input{chapter/methods}
 \pagebreak
 
-\section{Data}
-\input{data.tex}
-\pagebreak
-
-\section{Methodology}
-\input{methodology.tex}
-\pagebreak
-
-
-\section{Data Analysis and Discussion}
-\input{analysis.tex}
+\section{Results}
+\input{chapter/results}
 \pagebreak
 
 \section{Conclusion and Recommendations}
-\input{conclusion.tex}
+\input{chapter/conclusion}
 \pagebreak
 
 \printbibliography
@@ -230,9 +225,15 @@ The extent to which you list any symbols used in your report must be left to you
 
 \pagenumbering{roman}
 
-\section{Appendix}
-\input{appendix.tex}
-
+\appendix
+\section{Model documentation}
+\include{appendix/model_doc}
+\section{Report log}
+\input{appendix/elias_log}
+\input{appendix/david_log}
+\input{appendix/menghua_log}
+\input{appendix/emily_log}
+\input{appendix/lisette_log}
 
 
 \end{document}          
