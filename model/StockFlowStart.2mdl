@@ -83,8 +83,7 @@ Probability of chickens being infected=
 	~		|
 
 Temperature=
-	(-1)*(SIN(Time*52/365)*(Maximum average week temp-(Minimum average week temp))/2)+((\
-		Maximum average week temp-(Minimum average week temp))/2)+Minimum average week temp
+	(SIN(Time*52/365)*(Maximum average week temp-(Minimum average week temp))/2)+9.5
 	~	Degrees celsius
 	~		|
 
@@ -105,12 +104,12 @@ INITIAL TIME  = 0
 	|
 
 SAVEPER  = 
-        TIME STEP 
+        TIME STEP
 	~	Week [0,?]
 	~	The frequency with which output is stored.
 	|
 
-TIME STEP  = 0.0078125
+TIME STEP  = 0.0625
 	~	Week [0,?]
 	~	The time step for the simulation.
 	|
@@ -168,15 +167,14 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,9
 11,61,0,284,492,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
 10,62,Campylobacter negative chicken being slaughtered,373,492,81,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,63,12,62,0,0,0,0,0,128,0,-1--1--1,,1|(407,367)|
-1,64,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(378,437)|
-1,67,1,62,1,0,0,0,0,64,0,-1--1--1,,1|(313,467)|
+1,64,1,6,0,0,0,0,0,64,0,-1--1--1,,1|(360,421)|
+1,67,1,62,0,0,0,0,0,64,0,-1--1--1,,1|(327,449)|
 1,68,40,57,0,0,0,0,0,64,0,-1--1--1,,1|(311,597)|
 1,69,40,51,0,0,0,0,0,64,0,-1--1--1,,1|(596,582)|
 1,70,2,18,0,0,0,0,0,64,0,-1--1--1,,1|(677,424)|
 1,71,14,23,0,0,0,0,0,64,0,-1--1--1,,1|(1003,417)|
 ///---\\\
 :L<%^E!@
-1:Current.vdfx
 1:C:\Users\David Matheus\Downloads\Current
 9:Current
 23:0
@@ -188,7 +186,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,9
 72:0
 73:0
 4:Time
-5:Temperature
+5:Probability of chickens being infected
 35:Date
 36:YYYY-MM-DD
 37:2020
