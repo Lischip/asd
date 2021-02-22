@@ -9,15 +9,34 @@ Motivation to use SD for public health: \parencite{homer_system_2006}
 %why does it look potato?
     
 \subsection{Conceptualisation}
-2.	Conceptualisation
-    a.	Depict aggregate model structure
-    b.	Describe dynamic hypothesis
-    
+%2.	Conceptualisation
+  %  a.	Depict aggregate model structure
+   % b.	Describe dynamic hypothesis
+
+
+
+\textbf{Model boundaries}
+
+This model draws wider boundaries than Rommens' original model. Here, the focus is on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factor. As a result, some internal components of the model were simplified. Specifically, operational components related to transmissions occurring on individual farms, broilers, and slaughterhouses were aggregated into a single submodel, allowing for more focus on environmental transmission pathways.
+
+The sub-model of 'Infected Chickens' encompasses the majority of Rommen's original model. Details of the structure and behaviour of this sub-model are detailed in the following sections. 
+   
 \subsection{Explanation of model}
-3.	Explain model (also refer to Appendix A)
-    a.	Describe sub-models
-    b.	Explain most important assumptions
-    
+%3.	Explain model (also refer to Appendix A)
+ %   a.	Describe sub-models
+  %  b.	Explain most important assumptions
+   
+This analysis contains five main sub-models:
+\begin{itemize}
+    \item Environmental: This sub-model focuses on environmental transmission routes and influences for Campylobacter, particularly through surface waters and disease vectors (flies and birds other than poultry). According to recent reports by the RIVM, environmental transmission was the second most prevalent cause of Campylobacter infections in the Netherlands in 2019. The sub-model also includes levers for climate influences on these transmission pathways.
+    \item Untreated sewage water in surface water: Significant to the Environmental transmission subsystem, this subsystem has been modelled separately to allow for the more complex hydrodynamics and more specific inputs required to model water-borne transmission pathways.
+    \item Infected people: This sub-model focuses on the stock-flow structure for infected individuals, and goes into more detail on morbidity and mortality associated with these individuals.
+    \item Infected chickens: This sub-model is based primarily on the work by Rommens. It is a simplified stock-flow model of her original work, designed to replicate key behaviours and interactions.
+    \item Cost of illness: This sub-model tracks the impacts and probabilities of Campylobacter infections leading to serious illness and fatality, including the relative cost of illness, to reflect economic effects of human Campylobacter infections.
+
+\end{itemize}
+
+
 \subsection{Model Validation}
 4.	Validation
     a.	Use various tests to argue why model is fit for purpose
