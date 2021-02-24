@@ -13,13 +13,14 @@ Average yearly precipitation  = A FUNCTION OF( )
 	~	
 	~		|
 
-Average yearly temperature  = A FUNCTION OF( Maximum average week temperature,Minimum average week temperature\
-		)
+Brachycera development rate=
+	-0.0091 +(0.0024*MAX(Temperature,4))
 	~	
-	~		|
+	~	Legacy from Edien
+	|
 
-Brachychera population size  = A FUNCTION OF( amount of sewage,Amount of waste and foodstuffs\
-		,Average yearly precipitation,Average yearly temperature)
+Brachycera population size  = A FUNCTION OF( amount of sewage,Amount of waste and foodstuffs\
+		,Average yearly precipitation,Temperature)
 	~	
 	~		|
 
@@ -29,7 +30,12 @@ Contaminated feces of wild birds=
 	~	
 	~		|
 
-Infected people  = A FUNCTION OF( Brachychera population size)
+Infected Brachycera  = A FUNCTION OF( Brachycera population size,Presence of Campylobacter in surface water\
+		)
+	~	
+	~		|
+
+Infected people  = A FUNCTION OF( Brachycera population size,Infected Brachycera)
 	~	
 	~		|
 
@@ -45,10 +51,17 @@ Population size  = A FUNCTION OF( )
 	~	
 	~		|
 
-Presence of Campylobacter in surface water  = A FUNCTION OF( Brachychera population size\
-		,Contaminated feces of wild birds)
+Presence of Campylobacter in surface water  = A FUNCTION OF( Contaminated feces of wild birds\
+		)
 	~	
 	~		|
+
+Temperature=
+	(-1)*(SIN(Time*52/365)*(Maximum average week temperature-(Minimum average week temperature\
+		))/2)+((Maximum average week temperature-(Minimum average week temperature))/2)+Minimum average week temperature
+	~	
+	~	© David and Menghua
+	|
 
 ********************************************************
 	.Control
@@ -82,28 +95,35 @@ V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
 10,1,Presence of Campylobacter in surface water,843,271,57,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,2,Average yearly temperature,433,171,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
+10,2,Temperature,433,171,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
 10,3,Average yearly precipitation,238,179,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
-10,4,Brachychera population size,421,269,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Brachycera population size,421,269,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,5,Minimum average week temperature,392,74,58,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
 10,6,Maximum average week temperature,567,90,59,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
 1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(409,116)|
-1,8,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(427,213)|
-1,9,3,4,0,0,0,0,0,128,0,-1--1--1,,1|(322,220)|
-1,10,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(506,126)|
-1,11,4,1,0,0,0,0,0,128,0,-1--1--1,,1|(620,269)|
-10,12,Infected people,246,414,49,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
-1,13,4,12,0,0,0,0,0,128,0,-1--1--1,,1|(334,341)|
-10,14,Population size,448,467,47,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
-10,15,Amount of waste and foodstuffs,416,374,45,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,16,14,15,0,0,0,0,0,128,0,-1--1--1,,1|(436,433)|
-1,17,15,4,0,0,0,0,0,128,0,-1--1--1,,1|(418,325)|
-10,18,amount of sewage,534,370,57,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
-1,19,14,18,0,0,0,0,0,128,0,-1--1--1,,1|(485,423)|
-1,20,18,4,0,0,0,0,0,128,0,-1--1--1,,1|(487,328)|
-10,21,Contaminated feces of wild birds,845,123,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,22,1,21,1,0,0,0,0,128,0,-1--1--1,,1|(787,192)|
-1,23,21,1,1,0,0,0,0,128,0,-1--1--1,,1|(896,197)|
+1,8,3,4,0,0,0,0,0,128,0,-1--1--1,,1|(322,220)|
+1,9,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(506,126)|
+10,10,Infected people,246,414,49,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
+1,11,4,10,0,0,0,0,0,128,0,-1--1--1,,1|(334,341)|
+10,12,Population size,448,467,47,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
+10,13,Amount of waste and foodstuffs,416,374,45,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,12,13,0,0,0,0,0,128,0,-1--1--1,,1|(436,433)|
+1,15,13,4,0,0,0,0,0,128,0,-1--1--1,,1|(418,325)|
+10,16,amount of sewage,534,370,57,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|0||0-0-0,0,0,0,0,0,0
+1,17,12,16,0,0,0,0,0,128,0,-1--1--1,,1|(485,423)|
+1,18,16,4,0,0,0,0,0,128,0,-1--1--1,,1|(487,328)|
+10,19,Contaminated feces of wild birds,845,123,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,1,19,1,0,0,0,0,128,0,-1--1--1,,1|(787,192)|
+1,21,19,1,1,0,0,0,0,128,0,-1--1--1,,1|(896,197)|
+10,22,Infected Brachycera,682,373,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,4,22,1,0,0,0,0,128,0,-1--1--1,,1|(589,322)|
+1,24,1,22,1,0,0,0,0,128,0,-1--1--1,,1|(732,317)|
+1,25,22,10,1,0,0,0,0,128,0,-1--1--1,,1|(492,543)|
+10,26,Brachycera development rate,147,305,55,19,8,3,0,4,0,0,0,0,-1--1--1,192-255-192,|0||0-0-0,0,0,0,0,0,0
+1,27,2,26,0,0,0,0,0,64,0,-1--1--1,,1|(296,235)|
+10,28,Time,562,202,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,29,28,2,0,0,0,0,0,64,0,-1--1--1,,1|(515,190)|
+1,30,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(427,213)|
 ///---\\\
 :L<%^E!@
 9:Current
@@ -114,7 +134,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 42:1
 72:0
 73:0
-5:Amount of waste and foodstuffs
+5:Brachycera development rate
 35:Date
 36:YYYY-MM-DD
 37:2000
