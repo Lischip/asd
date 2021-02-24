@@ -1,16 +1,11 @@
-\subsection{Why System Dynamics?}
-System dynamics is a method of understanding socio-technical systems in the context of their structure, with the underlying belief that effects observed in systems are caused by their system structure \parencite{pruyt_triple_2013}. System dynamics is a suitable choice for the modelling of \textit{Campylobacter} transmission and subsystem effects on healthcare, environment and economic impacts due to the ability to test policy choices in the form of changes to system structures and causal relationships. 
+\subsection{How is System Dynamics used?}
+An important aspect to system dynamics models are the aforementioned accumulations, delays and feed-backs. Accumulations, more commonly referred to as stock variables refer to some value material or entities within a system. Through flow or rate variables stocks dynamically change over time, leading to the aforementioned delay and feed-back effects \parencite{sterman_system_2001}. To build the submodels for the study on \textit{Campylobacter} appropriate variables had to be chosen to represent these features. In the case of, infected populations of humans and flocks would act modelled as stocks, whilst various transmission routes provide flow variables between them. This naturally produces delays, as it takes time for the disease to spread, symptoms to surface and potential hospitalisation. Feed-back loops will also arise as \textit{Campylobacter}, as the number of contaminated chicken flocks, causes more spread of \textit{Campylobacter} in the environment, and in turn the more \textit{Campylobacter} in the environment, the more easily chicken flocks are infected. Furthermore the model was subdivided into multiple subsystems, which will be explained in the following paragraphs. 
 
-
-A major feature of system dynamics are the aforementioned accumulations, delays and feed-backs. Accumulations, more commonly referred to as stock variables refer to some value material or entities within a system. Through flow or rate variables stocks dynamically change over time, leading to the aforementioned delay and feed-back effects. (REFonSDtheory) In the case of \textit{Campylobacter}, infected populations of humans and flocks would act modelled as stocks, whilst various transmission routes provide flow variables between them. This naturally produces delays, as it takes time for the disease to spread, symptoms to surface and potential hospitalisation. Feed-back loops will also arise as \textit{Campylobacter}, as the number of contaminated chicken flocks, causes more spread of \textit{Campylobacter} in the environment, and in turn the more \textit{Campylobacter} in the environment, the more easily chicken flocks are infected. 
-
+%I guess I should mention Vensim?
 %1.	Explain basics of SD
  %   a.	Basics of SD
   %  b.	Examples from literature to clarify and justify modelling choices given problem in the field
-    
-Motivation to use SD for public health: \parencite{homer_system_2006}
 
-    
 \subsection{Conceptualisation}
 %2.	Conceptualisation
   %  a.	Depict aggregate model structure
@@ -22,7 +17,7 @@ Motivation to use SD for public health: \parencite{homer_system_2006}
 
 \textbf{Model Boundaries}
 
-This model draws wider boundaries than Rommens' original model. Here, the focus is on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factor. As a result, some internal components of the model were simplified. Specifically, operational components related to transmissions occurring on individual farms, broilers, and slaughterhouses were aggregated into a single submodel, allowing for more focus on environmental transmission pathways.
+This model draws wider boundaries than Rommens' original model. Here, the focus is on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factor. As a result, some internal components of the model were simplified. Specifically, operational components related to transmissions occurring on individual farms, broilers, and slaughterhouses were aggregated into a single sub-model, allowing for more focus on environmental transmission pathways.
 
 The sub-model of 'Infected Chickens' encompasses the majority of Rommens' original model. Details of the structure and behaviour of this sub-model are detailed in the following sections. 
 
@@ -52,9 +47,8 @@ This analysis contains five main sub-models:
 \textcolor{AMAZINGPINK}{Flies} \\
 It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} spp. at farms.
 
--The development of \textit{Brachycera} larvae is highly dependent on climatic conditions. 
 
-- Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera} spp.
+- Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera} spp. The embryos can withstand colds of -34 \degree C, the pupae -24 \degree C, and the adults -16 \degree C.  This means the number of \textit{Brachycera} spp. surviving winter may increase due to climate change.
 
 - High density is also known to trigger migration, and therefore dispersal will also increase with rising temperature \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
 
@@ -68,11 +62,10 @@ It seems that the vector potential of flies is mainly determined by the \textit{
 
 \textcolor{AMAZINGPINK}{dependent variable} \\
 \textit{Campylobacter} spp need humid surfaces to live, so surface water % brain dump V
-% eating food
 
 
 \textbf{Contaminated surface water}
-% Menghua (+ Elias?)
+% Menghua (+ Elias? whoops)
 
 \textbf{Infected people}
 %To be deleted?
