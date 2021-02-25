@@ -1,12 +1,13 @@
 {UTF-8}
-Infected people= INTEG (
-	People getting infected from contaminated meat-Recovery,
-		0)
-	~	
+"Campylobacter negative chickens being slaughtered with cross-contamination"=
+	Chickens in farm*Probability of cross contamination*(1-Probability of chickens being infected\
+		)/Week
+	~	Chickens
 	~		|
 
-Infections of campylobacter=
-	Healthy chickens*Probability of chickens being infected / Week
+Campylobacter negative chickens being slaughtered without contamination=
+	((1-Probability of cross contamination)*Chickens in farm)*(1-Probability of chickens being infected\
+		)/Week
 	~	Chickens/Week
 	~		|
 
@@ -15,27 +16,36 @@ Campylobacter positive chickens being slaughtered=
 	~	Chickens/Week
 	~		|
 
-Recovery=
-	Infected people/Recovery time
+People getting infected from contaminated meat=
+	Contaminated chicken meat*Probability of being infected from contaminated meat/Week
+	~	People/Week
+	~		|
+
+Pi=
+	ARCCOS(-1)
 	~	
 	~		|
 
-People getting infected from contaminated meat=
-	Contaminated chicken meat*Probability of being infected from contaminated meat/Week
-	~	
+Probability of being infected from contaminated meat=
+	0.05
+	~	People/Chickens
 	~		|
 
 Contaminated chicken meat= INTEG (
 	"Campylobacter negative chickens being slaughtered with cross-contamination"+Campylobacter positive chickens being slaughtered\
-		-People getting infected from contaminated meat-Contaminated chicken meat eaten without infecting people\
-		,
-		10)
+		-Contaminated chicken meat eaten,
+		0)
 	~	Chickens
 	~		|
 
-Contaminated chicken meat eaten without infecting people=
-	Contaminated chicken meat*(1-Probability of being infected from contaminated meat)/Week
+Contaminated chicken meat eaten=
+	Contaminated chicken meat/Week
 	~	Chickens/Week
+	~		|
+
+Recovery=
+	Infected people/Recovery time
+	~	People/Week
 	~		|
 
 Recovery time=
@@ -43,18 +53,36 @@ Recovery time=
 	~	Week
 	~		|
 
-Probability of being infected from contaminated meat=
-	0.05
-	~	dmnl
+Temperature=
+	(-1)*(SIN(2*Pi*(Time+8)/Weeks in a year)*(Maximum average week temp-(Minimum average week temp\
+		))/2)+((Maximum average week temp-(Minimum average week temp
+	))/2)+Minimum average week temp
+	~	Degrees celsius
+	~		|
+
+Infected people= INTEG (
+	People getting infected from contaminated meat-Recovery,
+		0)
+	~	People
+	~		|
+
+Infections of campylobacter=
+	Chickens in farm*Probability of chickens being infected / Week
+	~	Chickens/Week
 	~		|
 
 Week=
 	1
-	~	
+	~	Week
+	~		|
+
+Weeks in a year=
+	365.25/7
+	~	1/Week
 	~		|
 
 Fly infection rate=
-	(Infected chickens with Campylobacter/(Healthy chickens + Infected chickens with Campylobacter\
+	(Infected chickens with Campylobacter/(Chickens in farm + Infected chickens with Campylobacter\
 		))* Flies development rate
 	~	dmnl
 	~		|
@@ -70,29 +98,17 @@ Probability of chickens being infected=
 	~	dmnl
 	~		|
 
-"Campylobacter negative chickens being slaughtered with cross-contamination"=
-	Healthy chickens*Probability of cross contamination*(1-Probability of chickens being infected\
-		)
-	~	Chickens
-	~		|
-
-Campylobacter negative chickens being slaughtered without contamination=
-	((1-Probability of cross contamination)*Healthy chickens)*(1-Probability of chickens being infected\
-		)
-	~	
-	~		|
-
 Probability of cross contamination=
-	(Infected chickens with Campylobacter / (Healthy chickens+Infected chickens with Campylobacter\
+	(Infected chickens with Campylobacter / (Chickens in farm+Infected chickens with Campylobacter\
 		))/100
-	~	
+	~	dmnl
 	~		|
 
-Healthy chickens= INTEG (
+Chickens in farm= INTEG (
 	Chicken arriving from hatcheries - "Campylobacter negative chickens being slaughtered with cross-contamination"\
 		 - Campylobacter negative chickens being slaughtered without contamination - Infections of campylobacter\
 		,
-		(100))
+		1e-05)
 	~	Chickens
 	~		|
 
@@ -102,14 +118,14 @@ Chicken arriving from hatcheries=
 	~		|
 
 Concentration of campylobacter in the surface water=
-	(Infected chickens with Campylobacter/(Healthy chickens + Infected chickens with Campylobacter\
+	(Infected chickens with Campylobacter/(Chickens in farm + Infected chickens with Campylobacter\
 		))/100
 	~	dmnl
 	~		|
 
 Infected chickens with Campylobacter= INTEG (
 	Infections of campylobacter-Campylobacter positive chickens being slaughtered,
-		100*(1/10))
+		0)
 	~	Chickens
 	~		|
 
@@ -120,12 +136,6 @@ Maximum average week temp=
 
 Minimum average week temp=
 	-4
-	~	Degrees celsius
-	~		|
-
-Temperature=
-	(-1)*(SIN(Time*52/365)*(Maximum average week temp-(Minimum average week temp))/2)+((\
-		Maximum average week temp-(Minimum average week temp))/2)+Minimum average week temp
 	~	Degrees celsius
 	~		|
 
@@ -160,24 +170,24 @@ TIME STEP  = 0.0078125
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
-10,1,Healthy chickens,292,224,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,1,Chickens in farm,292,224,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,2,Infected chickens with Campylobacter,618,228,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
 1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(514,223)|
 1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(393,223)|
-11,5,222,452,223,11,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+11,5,398,452,223,11,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
 10,6,Infections of campylobacter,452,255,52,21,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,7,Probability of chickens being infected,691,557,52,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 1,8,7,6,0,0,0,0,0,64,0,-1--1--1,,1|(572,407)|
-10,9,Contaminated chicken meat,950,224,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,10,12,9,4,0,0,22,0,0,0,-1--1--1,,1|(849,227)|
+10,9,Contaminated chicken meat,952,222,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,10,12,9,4,0,0,22,0,0,0,-1--1--1,,1|(850,227)|
 1,11,12,2,100,0,0,22,0,0,0,-1--1--1,,1|(725,227)|
-11,12,574,790,227,11,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+11,12,442,790,227,11,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
 10,13,Campylobacter positive chickens being slaughtered,790,263,81,28,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 12,14,48,1210,224,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,15,17,14,4,0,0,22,0,0,0,-1--1--1,,1|(1152,224)|
-1,16,17,9,100,0,0,22,0,0,0,-1--1--1,,1|(1043,224)|
+1,16,17,9,100,0,0,22,0,0,0,-1--1--1,,1|(1044,224)|
 11,17,48,1094,224,11,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
-10,18,Contaminated chicken meat eaten without infecting people,1094,256,65,21,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,Contaminated chicken meat eaten,1094,256,65,21,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 12,19,48,52,220,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,20,22,1,4,0,0,22,0,0,0,-1--1--1,,1|(194,220)|
 1,21,22,19,100,0,0,22,0,0,0,-1--1--1,,1|(94,220)|
@@ -196,7 +206,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,9
 1,34,32,27,0,0,0,0,0,128,0,-1--1--1,,1|(807,675)|
 1,35,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(383,252)|
 1,36,2,13,1,0,0,0,0,64,0,-1--1--1,,1|(708,279)|
-1,37,9,18,0,0,0,0,0,64,0,-1--1--1,,1|(1009,236)|
+1,37,9,18,0,0,0,0,0,64,0,-1--1--1,,1|(1010,235)|
 1,38,1,24,1,0,0,0,0,64,0,-1--1--1,,1|(672,130)|
 10,39,Probability of cross contamination,528,487,72,27,8,131,0,0,0,0,0,0,0,0,0,0,0,0
 12,40,48,335,725,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
@@ -204,9 +214,9 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,9
 1,42,43,1,100,0,0,22,0,0,0,-1--1--1,,1|(336,419)|
 11,43,48,336,595,11,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
 10,44,Campylobacter negative chickens being slaughtered without contamination,408,595,61,61,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
-1,45,47,9,4,0,0,22,0,0,0,-1--1--1,,3|(956,757)|(956,755)|(956,503)|
+1,45,47,9,4,0,0,22,0,0,0,-1--1--1,,3|(956,757)|(956,755)|(956,502)|
 1,46,47,1,100,0,0,22,0,0,0,-1--1--1,,1|(292,757)|
-11,47,464,622,757,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+11,47,332,622,757,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
 10,48,"Campylobacter negative chickens being slaughtered with cross-contamination",622,796,92,28,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,49,39,48,1,0,0,0,0,64,0,-1--1--1,,1|(591,632)|
 1,50,1,39,1,0,0,0,0,64,0,-1--1--1,,1|(478,367)|
@@ -223,28 +233,37 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,9
 1,61,2,59,0,0,0,0,0,64,0,-1--1--1,,1|(745,345)|
 1,62,57,59,0,0,0,0,0,64,0,-1--1--1,,1|(879,484)|
 1,63,59,7,1,0,0,0,0,128,0,-1--1--1,,1|(763,472)|
-10,64,Week,820,100,21,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,65,64,13,0,0,0,0,0,128,0,-1--1--1,,1|(807,166)|
+10,64,Week,696,50,21,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,65,64,13,0,0,0,0,0,128,0,-1--1--1,,1|(735,141)|
 10,66,Infected people,1117,76,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,67,69,66,4,0,0,22,0,0,0,-1--1--1,,1|(1025,78)|
-1,68,69,9,100,0,0,22,0,0,0,-1--1--1,,1|(968,141)|
-11,69,0,968,78,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
-10,70,People getting infected from contaminated meat,968,105,77,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,73,64,6,0,0,0,0,0,128,0,-1--1--1,,1|(656,168)|
-10,74,Probability of being infected from contaminated meat,1289,179,62,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,75,74,70,0,0,0,0,0,128,0,-1--1--1,,1|(1142,145)|
-1,76,74,18,0,0,0,0,0,128,0,-1--1--1,,1|(1194,216)|
-1,77,64,70,0,0,0,0,0,128,0,-1--1--1,,1|(859,100)|
-1,78,64,18,0,0,0,0,0,128,0,-1--1--1,,1|(941,169)|
-1,79,9,70,0,0,0,0,0,64,0,-1--1--1,,1|(958,167)|
-12,80,48,1341,75,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,82,84,80,4,0,0,22,0,0,0,-1--1--1,,1|(1292,75)|
-1,83,84,66,100,0,0,22,0,0,0,-1--1--1,,1|(1199,75)|
-11,84,0,1248,75,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
-10,85,Recovery,1248,94,31,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,86,Recovery time,1485,108,46,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,87,86,85,0,0,0,0,0,128,0,-1--1--1,,1|(1365,100)|
-1,88,66,85,1,0,0,0,0,128,0,-1--1--1,,1|(1177,106)|
+1,67,64,6,0,0,0,0,0,128,0,-1--1--1,,1|(584,143)|
+10,68,Probability of being infected from contaminated meat,1289,179,62,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,64,18,0,0,0,0,0,128,0,-1--1--1,,1|(878,144)|
+12,70,48,1341,75,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,71,73,70,4,0,0,22,0,0,0,-1--1--1,,1|(1292,75)|
+1,72,73,66,100,0,0,22,0,0,0,-1--1--1,,1|(1199,75)|
+11,73,48,1248,75,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,74,Recovery,1248,94,31,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,75,Recovery time,1485,108,46,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,76,75,74,0,0,0,0,0,128,0,-1--1--1,,1|(1365,100)|
+1,77,66,74,1,0,0,0,0,128,0,-1--1--1,,1|(1177,106)|
+12,78,48,907,70,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,79,81,66,4,0,0,22,0,0,0,-1--1--1,,1|(1040,74)|
+1,80,81,78,100,0,0,22,0,0,0,-1--1--1,,1|(954,74)|
+11,81,48,997,74,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,82,People getting infected from contaminated meat,997,101,77,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,83,9,82,0,0,0,0,0,128,0,-1--1--1,,1|(973,164)|
+1,84,68,82,0,0,0,0,0,128,0,-1--1--1,,1|(1154,143)|
+1,85,64,82,0,0,0,0,0,64,0,-1--1--1,,1|(811,68)|
+10,86,Week,437,691,30,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,87,86,44,0,0,0,0,0,128,0,-1--1--1,,1|(432,674)|
+1,88,86,48,0,0,0,0,0,128,0,-1--1--1,,1|(507,731)|
+10,89,Pi,1008,641,8,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,90,Weeks in a year,1044,598,51,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,91,90,27,0,0,0,0,0,128,0,-1--1--1,,1|(913,613)|
+1,92,89,27,0,0,0,0,0,128,0,-1--1--1,,1|(917,636)|
+12,93,0,1203,456,139,38,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+David: A LOT OF THIS STUFF HAS TO GO FROM HERE BUT I KEPT IT SO I COULD EXPERIMENT RUNNING THE MODEL.
 ///---\\\
 :L<%^E!@
 1:Current.vdfx
@@ -258,7 +277,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,9
 72:0
 73:0
 4:Time
-5:Recovery time
+5:Infected people
 35:Date
 36:YYYY-MM-DD
 37:2020
