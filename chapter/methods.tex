@@ -31,11 +31,11 @@ The sub-model of 'Infected Chickens' encompasses the majority of Rommens' origin
  %   a.	Describe sub-models
   %  b.	Explain most important assumptions
    
-This analysis contains five main sub-models:
+This analysis contains three main sub-models:
+
+%Z: shorten the list in a couple of sentences? ¯\_(ツ)_/¯ 
 \begin{itemize}
     \item Environmental: This sub-model focuses on environmental transmission routes and influences for \textit{Campylobacter}, particularly through surface waters and disease vectors (flies and birds other than poultry). According to recent reports by the RIVM, environmental transmission was the second most prevalent cause of \textit{Campylobacter} infections in the Netherlands in 2019. The sub-model also includes levers for climate influences on these transmission pathways.
-    \item Contaminated surface water: Significant to the Environmental transmission subsystem, this subsystem has been modelled separately to allow for the more complex hydrodynamics and more specific inputs required to model water-borne transmission pathways.
-    \item Infected people: This sub-model focuses on the stock-flow structure for infected individuals, and goes into more detail on morbidity and mortality associated with these individuals.
     \item Infected chickens: This sub-model is based primarily on the work by Rommens. It is a simplified stock-flow model of her original work, designed to replicate key behaviours and interactions.
     \item Cost of illness: This sub-model tracks the impacts and probabilities of \textit{Campylobacter} infections leading to serious illness and fatality, including the relative cost of illness, to reflect economic effects of human \textit{Campylobacter} infections.
 
@@ -43,45 +43,43 @@ This analysis contains five main sub-models:
 
 \subsubsection*{Environmental}
 %LISETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEH
+%IDENTIFY ARCHETYPES
 
 \textcolor{AMAZINGPINK}{Flies} \\
-It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} spp. at farms.
+It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
 
 
-- Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera} spp. The embryos can withstand colds of -34 \degree C, the pupae -24 \degree C, and the adults -16 \degree C.  This means the number of \textit{Brachycera} spp. surviving winter may increase due to climate change \parencite{goulson_predicting_2005}.
+- Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. The embryos can withstand colds of -34 \degree C, the pupae -24 \degree C, and the adults -16 \degree C.  This means the number of \textit{Brachycera} surviving winter may increase due to climate change \parencite{goulson_predicting_2005}.
 
 - High density is also known to trigger migration, and therefore dispersal will also increase with rising temperature \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
 
-- \texit{Brachycera} can excrete \textit{Campylobacter} spp. on human food. We know that they can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}.
+- \texit{Brachycera} can excrete \textit{Campylobacter}  on human food. We know that they can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}.
 
 
 - UNSURE IF SIGNIFICANT: more people $\to$ more foodstuffs and wastes \parencite{garcia-garcia_framework_2015} $\to$ more \textit{Brachycera} \parencite{imai_population_1984, rozendaal_houseflies_1997}
 
 \textcolor{AMAZINGPINK}{Wild birds} \\
-In the Dutch waters, 37.7\% of the \textit{Campylobacter} strains were attributed to wild birds.
+In Dutch and Luxembourgh waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourgh has a low poultry production in Luxembourgh, it is important to include this transmission vector in the submodel.
+
+- migrating birds vs resident birds?
+
+%When French et al., 2009 investigated the wild-bird fecal contamination in playgrounds in parks in aNew Zealand city, 12.5% of the samples contained Campylobacter
 
 
 \textcolor{AMAZINGPINK}{dependent variable} \\
-\textit{Campylobacter} spp need humid surfaces to live, so surface water is recognised as a key player.
+\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. %pretty much a quote, needs to be rewritten, lol. Got tired.
 
-{\huge \textcolor{pink}{Shouldn't there be a link between infected chickens in farms and slauighterhouses and campy in surface water?}}
-
-
-\textbf{Contaminated surface water}
-% Menghua (+ Elias? whoops)
-
-\textbf{Infected people}
-%To be deleted?
-
-\textbf{Infected chickens}
+\subsubsection*{Infected chickens}
 % add sub-model diagram here
 This sub-model (presented in Figure X) is a simplification of Rommens' 2020(SOURCE) model of dynamics of transmission in farms, broilers and slaughterhouses. It is represented in our model as a stock-flow structure in which healthy chickens become infected chickens with \textit{Campylobacter} at the 'infection with \textit{Campylobacter}' rate. These infected chickens then become contaminated chicken meat when \textit{Campylobacter} positive chickens are slaughtered. Healthy chickens  contaminated chicken meat stock via '\textit{Campylobacter} negative chickens being slaughtered with cross-contamination. The contaminated chicken meat stock is reduced as contaminated chicken meat is consumed. The population of healthy chickens are also reduced by thinning, represented by the flow variable '\textit{Campylobacter} negative chickens slaughtered without contamination'.
 
 Other internal variables in this model included probabilities of infection, concentration of \textit{Campylobacter} in surface water, propagation of disease vectors, and climate effects all influence internal probabilities, with the exact values for these rates detailed in Appendix X.
 
 
-\textbf{Cost of illness}
+\subsubsection*{Cost of illness}
 %Emily
+
+The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_nodate}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Of the symptomatic infections these are assumed to be either mild or moderate/severe. Moderate/severe cases may result in death or chronic illness. Each of these outcomes contribute to key public health metrics of Years of Life Lost (YLL) in the case of death and Years Living with Disability (YLD) for all non-fatal cases. These two values are added to calculate the Disability Adjusted Life Years (DALYs) for these infections, which when multiplied by the cost of a DALY (adjusted to 2021 prices), and combined with direct healthcare costs (GP visits and hospitalisations) results in the Cost of Illness for all \textit{Campylobacter} infections.
 
 \subsection{Model Validation}
 %4.	Validation
