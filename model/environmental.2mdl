@@ -1,16 +1,34 @@
 {UTF-8}
-Increased chance of infection due to sewage overflows  = A FUNCTION OF( Average yearly precipitation\
+Infected Brachycera  = A FUNCTION OF( Brachycera population size,Presence of Campylobacter in surface water\
 		)
 	~	
 	~		|
+
+Brachycera population size  = A FUNCTION OF( Brachycera development raaaate) ~~|
+Brachycera population size=
+	~	
+	~	Legacy from Edien
+	|
+
+Presence of Campylobacter in surface water  = A FUNCTION OF( Contaminated feces of wild birds\
+		,Increased chance of infection due to sewage overflows,"run-off from farms and slaughterhouses"\
+		)
+	~	
+	~		|
+
+Brachycera development raaaate  = A FUNCTION OF( amount of sewage,Amount of waste and foodstuffs\
+		,Average yearly precipitation,Brachycera population size,Temperature) ~~|
+Brachycera development raaaate=
+	~	
+	~	-0.0091 +(0.0024*MAX(Temperature,4))
+	|
 
 "run-off from farms and slaughterhouses"  = A FUNCTION OF( Average yearly precipitation\
 		)
 	~	
 	~		|
 
-Presence of Campylobacter in surface water  = A FUNCTION OF( Contaminated feces of wild birds\
-		,Increased chance of infection due to sewage overflows,"run-off from farms and slaughterhouses"\
+Increased chance of infection due to sewage overflows  = A FUNCTION OF( Average yearly precipitation\
 		)
 	~	
 	~		|
@@ -29,29 +47,13 @@ Average yearly precipitation  = A FUNCTION OF( )
 	~	
 	~		|
 
-Brachycera development rate=
-	-0.0091 +(0.0024*MAX(Temperature,4))
-	~	
-	~	Legacy from Edien
-	|
-
-Brachycera population size  = A FUNCTION OF( amount of sewage,Amount of waste and foodstuffs\
-		,Average yearly precipitation,Temperature)
-	~	
-	~		|
-
 Contaminated feces of wild birds  = A FUNCTION OF( Presence of Campylobacter in surface water\
 		) ~~|
 Contaminated feces of wild birds=
 	~	
 	~		|
 
-Infected Brachycera  = A FUNCTION OF( Brachycera population size,Presence of Campylobacter in surface water\
-		)
-	~	
-	~		|
-
-Infected people  = A FUNCTION OF( Brachycera population size,Infected Brachycera)
+Infected people  = A FUNCTION OF( Brachycera development raaaate,Infected Brachycera)
 	~	
 	~		|
 
@@ -106,41 +108,44 @@ V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
 10,1,Presence of Campylobacter in surface water,945,407,57,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,2,Temperature,401,290,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,3,Average yearly precipitation,739,270,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,4,Brachycera population size,401,386,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,5,Minimum average week temperature,360,193,58,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,6,Maximum average week temperature,535,209,59,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(377,235)|
-1,8,3,4,0,0,0,0,0,128,0,-1--1--1,,1|(576,325)|
-1,9,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(474,245)|
-10,10,Infected people,230,555,49,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-1,11,4,10,0,0,0,0,0,128,0,-1--1--1,,1|(316,469)|
-10,12,Population size,432,608,47,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,13,Amount of waste and foodstuffs,400,515,45,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,14,12,13,0,0,0,0,0,128,0,-1--1--1,,1|(420,574)|
-1,15,13,4,0,0,0,0,0,128,0,-1--1--1,,1|(400,455)|
-10,16,amount of sewage,518,511,57,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-1,17,12,16,0,0,0,0,0,128,0,-1--1--1,,1|(469,564)|
-1,18,16,4,0,0,0,0,0,128,0,-1--1--1,,1|(467,457)|
+10,2,Temperature,272,301,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,3,Average yearly precipitation,680,227,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,4,Brachycera development raaaate,272,397,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Minimum average week temperature,231,204,58,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,6,Maximum average week temperature,406,220,59,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(248,246)|
+1,8,3,4,0,0,0,0,0,128,0,-1--1--1,,1|(482,309)|
+1,9,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(345,256)|
+10,10,Infected people,101,566,49,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+1,11,4,10,0,0,0,0,0,128,0,-1--1--1,,1|(187,480)|
+10,12,Population size,303,619,47,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,13,Amount of waste and foodstuffs,271,526,45,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,12,13,0,0,0,0,0,128,0,-1--1--1,,1|(291,585)|
+1,15,13,4,0,0,0,0,0,128,0,-1--1--1,,1|(271,466)|
+10,16,amount of sewage,389,522,57,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+1,17,12,16,0,0,0,0,0,128,0,-1--1--1,,1|(340,575)|
+1,18,16,4,0,0,0,0,0,128,0,-1--1--1,,1|(338,468)|
 10,19,Contaminated feces of wild birds,947,259,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
 1,20,1,19,1,0,0,0,0,128,0,-1--1--1,,1|(889,328)|
 1,21,19,1,1,0,0,0,0,128,0,-1--1--1,,1|(998,333)|
 10,22,Infected Brachycera,784,509,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,23,4,22,1,0,0,0,0,128,0,-1--1--1,,1|(691,458)|
-1,24,1,22,1,0,0,0,0,128,0,-1--1--1,,1|(834,453)|
-1,25,22,10,1,0,0,0,0,128,0,-1--1--1,,1|(594,679)|
-10,26,Brachycera development rate,263,387,55,19,8,3,0,4,0,0,0,0,-1--1--1,192-255-192,|12||0-0-0,0,0,0,0,0,0
-1,27,2,26,0,0,0,0,0,64,0,-1--1--1,,1|(337,334)|
-10,28,Time,554,294,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
-1,29,28,2,0,0,0,0,0,64,0,-1--1--1,,1|(495,292)|
-1,30,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(401,331)|
-10,31,Increased chance of infection due to sewage overflows,742,375,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,32,31,1,0,0,0,0,0,128,0,-1--1--1,,1|(845,390)|
-1,33,3,31,0,0,0,0,0,128,0,-1--1--1,,1|(739,311)|
-10,34,"run-off from farms and slaughterhouses",1139,309,72,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,35,34,1,0,0,0,0,0,128,0,-1--1--1,,1|(1057,350)|
-1,36,3,34,1,0,0,0,0,128,0,-1--1--1,,1|(958,97)|
+1,23,1,22,1,0,0,0,0,128,0,-1--1--1,,1|(834,453)|
+1,24,22,10,1,0,0,0,0,128,0,-1--1--1,,1|(594,679)|
+10,25,Brachycera population size,578,440,55,19,8,3,0,4,0,0,0,0,-1--1--1,192-255-192,|12||0-0-0,0,0,0,0,0,0
+10,26,Time,425,305,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,27,26,2,0,0,0,0,0,64,0,-1--1--1,,1|(366,303)|
+1,28,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(272,342)|
+10,29,Increased chance of infection due to sewage overflows,742,375,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,29,1,0,0,0,0,0,128,0,-1--1--1,,1|(845,390)|
+1,31,3,29,0,0,0,0,0,128,0,-1--1--1,,1|(705,290)|
+10,32,"run-off from farms and slaughterhouses",1139,309,72,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,32,1,0,0,0,0,0,128,0,-1--1--1,,1|(1057,350)|
+1,34,3,32,1,0,0,0,0,128,0,-1--1--1,,1|(956,98)|
+1,35,4,25,1,0,0,0,0,128,0,-1--1--1,,1|(468,456)|
+1,36,25,4,1,0,0,0,0,128,0,-1--1--1,,1|(475,387)|
+12,37,0,435,426,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
+R1
+1,38,25,22,1,0,0,0,0,128,0,-1--1--1,,1|(705,456)|
 ///---\\\
 :L<%^E!@
 9:Current
@@ -151,7 +156,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 42:1
 72:0
 73:0
-5:Brachycera population size
+5:Brachycera development raaaate
 35:Date
 36:YYYY-MM-DD
 37:2000
