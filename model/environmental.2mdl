@@ -1,0 +1,166 @@
+{UTF-8}
+Increased chance of infection due to sewage overflows  = A FUNCTION OF( Average yearly precipitation\
+		)
+	~	
+	~		|
+
+Presence of Campylobacter in surface water  = A FUNCTION OF( Contaminated feces of wild birds\
+		,Increased chance of infection due to sewage overflows)
+	~	
+	~		|
+
+amount of sewage  = A FUNCTION OF( Population size)
+	~	
+	~		|
+
+Amount of waste and foodstuffs=A FUNCTION OF(Amount of waste and foodstuffs,Population size\
+		) ~~|
+Amount of waste and foodstuffs=
+	~	
+	~		|
+
+Average yearly precipitation  = A FUNCTION OF( )
+	~	
+	~		|
+
+Brachycera development rate=
+	-0.0091 +(0.0024*MAX(Temperature,4))
+	~	
+	~	Legacy from Edien
+	|
+
+Brachycera population size  = A FUNCTION OF( amount of sewage,Amount of waste and foodstuffs\
+		,Average yearly precipitation,Temperature)
+	~	
+	~		|
+
+Contaminated feces of wild birds  = A FUNCTION OF( Presence of Campylobacter in surface water\
+		) ~~|
+Contaminated feces of wild birds=
+	~	
+	~		|
+
+Infected Brachycera  = A FUNCTION OF( Brachycera population size,Presence of Campylobacter in surface water\
+		)
+	~	
+	~		|
+
+Infected people  = A FUNCTION OF( Brachycera population size,Infected Brachycera)
+	~	
+	~		|
+
+Maximum average week temperature  = A FUNCTION OF( )
+	~	
+	~		|
+
+Minimum average week temperature  = A FUNCTION OF( )
+	~	
+	~		|
+
+Population size  = A FUNCTION OF( )
+	~	
+	~		|
+
+Temperature=
+	(-1)*(SIN(Time*52/365)*(Maximum average week temperature-(Minimum average week temperature\
+		))/2)+((Maximum average week temperature-(Minimum average week temperature))/2)+Minimum average week temperature
+	~	
+	~	© David and Menghua
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Presence of Campylobacter in surface water,843,322,57,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Temperature,311,203,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,3,Average yearly precipitation,623,188,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,4,Brachycera population size,299,301,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Minimum average week temperature,270,106,58,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,6,Maximum average week temperature,445,122,59,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(287,148)|
+1,8,3,4,0,0,0,0,0,128,0,-1--1--1,,1|(467,241)|
+1,9,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(384,158)|
+10,10,Infected people,128,470,49,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+1,11,4,10,0,0,0,0,0,128,0,-1--1--1,,1|(214,384)|
+10,12,Population size,330,523,47,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+10,13,Amount of waste and foodstuffs,298,430,45,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,12,13,0,0,0,0,0,128,0,-1--1--1,,1|(318,489)|
+1,15,13,4,0,0,0,0,0,128,0,-1--1--1,,1|(298,370)|
+10,16,amount of sewage,416,426,57,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
+1,17,12,16,0,0,0,0,0,128,0,-1--1--1,,1|(367,479)|
+1,18,16,4,0,0,0,0,0,128,0,-1--1--1,,1|(365,372)|
+10,19,Contaminated feces of wild birds,845,174,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,1,19,1,0,0,0,0,128,0,-1--1--1,,1|(787,243)|
+1,21,19,1,1,0,0,0,0,128,0,-1--1--1,,1|(896,248)|
+10,22,Infected Brachycera,682,424,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,4,22,1,0,0,0,0,128,0,-1--1--1,,1|(589,373)|
+1,24,1,22,1,0,0,0,0,128,0,-1--1--1,,1|(732,368)|
+1,25,22,10,1,0,0,0,0,128,0,-1--1--1,,1|(492,594)|
+10,26,Brachycera development rate,82,323,55,19,8,3,0,4,0,0,0,0,-1--1--1,192-255-192,|12||0-0-0,0,0,0,0,0,0
+1,27,2,26,0,0,0,0,0,64,0,-1--1--1,,1|(202,259)|
+10,28,Time,464,207,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,29,28,2,0,0,0,0,0,64,0,-1--1--1,,1|(405,205)|
+1,30,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(305,245)|
+10,31,Increased chance of infection due to sewage overflows,642,294,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,31,1,0,0,0,0,0,128,0,-1--1--1,,1|(744,308)|
+1,33,3,31,0,0,0,0,0,128,0,-1--1--1,,1|(629,229)|
+///---\\\
+:L<%^E!@
+9:Current
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+5:Brachycera development rate
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:0
+26:0
+91:0
+90:0
+87:0
+75:
+43:

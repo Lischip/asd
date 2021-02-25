@@ -32,6 +32,7 @@
 \usepackage{float}
 \usepackage{aliascnt}
 \usepackage{eurosym}
+\usepackage{gensymb}
 
 \usepackage[style=apa]{biblatex}
 \addbibresource{asd.bib}
@@ -107,16 +108,28 @@
 \definecolor{DarkRed}{RGB}{14,53,59}
 \definecolor{NewBlue2}{RGB}{62,100,125}
 \definecolor{NewBlue3}{RGB}{44,100,128}
+\definecolor{AMAZINGPINK}{RGB}{255,20,147}
+
 
 \hypersetup{
 	colorlinks,
-	citecolor=NiceBlue,
+	citecolor=AMAZINGPINK,
 	linkcolor=NewBlue1,
 	urlcolor=Blue
 	%	citebordercolor=Violet,
 	%	filebordercolor=Red,
 	%	linkbordercolor=Blue
 }
+
+% \hypersetup{
+% 	colorlinks,
+% 	citecolor=NiceBlue,
+% 	linkcolor=NewBlue1,
+% 	urlcolor=Blue
+% 	%	citebordercolor=Violet,
+% 	%	filebordercolor=Red,
+% 	%	linkbordercolor=Blue
+% }
 
 \usepackage{geometry}
 \linespread{1.25}
@@ -225,8 +238,10 @@ All Reports must include a one page synopsis. This should include a clear statem
 \input{chapter/conclusion}
 \pagebreak
 
-\printbibliography
+%TC:ignore
 
+\printbibliography
+%TC:endignore
 
 %\section{References}
 %\bibliography{irrbibfile.bib}

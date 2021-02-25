@@ -1,25 +1,30 @@
-\subsection{Why System Dynamics?}
-System dynamics is a method of understanding socio-technical systems in the context of their structure, with the underlying belief that effects observed in systems are caused by their system structure \parencite{pruyt_triple_2013}. System dynamics is a suitable choice for the modelling of \textit{Campylobacter} transmission and subsystem effects on healthcare, environment and economic impacts due to the ability to test policy choices in the form of changes to system structures and causal relationships.
+\subsection{How is System Dynamics used?}
+An important aspect to system dynamics models are the aforementioned accumulations, delays and feed-backs. Accumulations, more commonly referred to as stock variables refer to some value material or entities within a system. Through flow or rate variables stocks dynamically change over time, leading to the aforementioned delay and feed-back effects \parencite{sterman_system_2001}. To build the submodels for the study on \textit{Campylobacter} appropriate variables had to be chosen to represent these features. In the case of, infected populations of humans and flocks would act modelled as stocks, whilst various transmission routes provide flow variables between them. This naturally produces delays, as it takes time for the disease to spread, symptoms to surface and potential hospitalisation. Feed-back loops will also arise as \textit{Campylobacter}, as the number of contaminated chicken flocks, causes more spread of \textit{Campylobacter} in the environment, and in turn the more \textit{Campylobacter} in the environment, the more easily chicken flocks are infected. Furthermore the model was subdivided into multiple subsystems, which will be explained in the following paragraphs. 
 
-1.	Explain basics of SD
-    a.	Basics of SD
-    b.	Examples from literature to clarify and justify modelling choices given problem in the field
-    
-Motivation to use SD for public health: \parencite{homer_system_2006}
-%why does it look potato?
-    
+%I guess I should mention Vensim?
+%1.	Explain basics of SD
+ %   a.	Basics of SD
+  %  b.	Examples from literature to clarify and justify modelling choices given problem in the field
+
 \subsection{Conceptualisation}
 %2.	Conceptualisation
   %  a.	Depict aggregate model structure
    % b.	Describe dynamic hypothesis
 
+\textbf{Model Structure}
 
 
-\textbf{Model boundaries}
 
-This model draws wider boundaries than Rommens' original model. Here, the focus is on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factor. As a result, some internal components of the model were simplified. Specifically, operational components related to transmissions occurring on individual farms, broilers, and slaughterhouses were aggregated into a single submodel, allowing for more focus on environmental transmission pathways.
+\textbf{Model Boundaries}
 
-The sub-model of 'Infected Chickens' encompasses the majority of Rommen's original model. Details of the structure and behaviour of this sub-model are detailed in the following sections. 
+This model draws wider boundaries than Rommens' original model. Here, the focus is on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factor. As a result, some internal components of the model were simplified. Specifically, operational components related to transmissions occurring on individual farms, broilers, and slaughterhouses were aggregated into a single sub-model, allowing for more focus on environmental transmission pathways.
+
+The sub-model of 'Infected Chickens' encompasses the majority of Rommens' original model. Details of the structure and behaviour of this sub-model are detailed in the following sections. 
+
+\textbf{Dynamic Hypothesis}
+
+
+
    
 \subsection{Explanation of model}
 %3.	Explain model (also refer to Appendix A)
@@ -28,24 +33,65 @@ The sub-model of 'Infected Chickens' encompasses the majority of Rommen's origin
    
 This analysis contains five main sub-models:
 \begin{itemize}
-    \item Environmental: This sub-model focuses on environmental transmission routes and influences for Campylobacter, particularly through surface waters and disease vectors (flies and birds other than poultry). According to recent reports by the RIVM, environmental transmission was the second most prevalent cause of Campylobacter infections in the Netherlands in 2019. The sub-model also includes levers for climate influences on these transmission pathways.
-    \item Untreated sewage water in surface water: Significant to the Environmental transmission subsystem, this subsystem has been modelled separately to allow for the more complex hydrodynamics and more specific inputs required to model water-borne transmission pathways.
+    \item Environmental: This sub-model focuses on environmental transmission routes and influences for \textit{Campylobacter}, particularly through surface waters and disease vectors (flies and birds other than poultry). According to recent reports by the RIVM, environmental transmission was the second most prevalent cause of \textit{Campylobacter} infections in the Netherlands in 2019. The sub-model also includes levers for climate influences on these transmission pathways.
+    \item Contaminated surface water: Significant to the Environmental transmission subsystem, this subsystem has been modelled separately to allow for the more complex hydrodynamics and more specific inputs required to model water-borne transmission pathways.
     \item Infected people: This sub-model focuses on the stock-flow structure for infected individuals, and goes into more detail on morbidity and mortality associated with these individuals.
     \item Infected chickens: This sub-model is based primarily on the work by Rommens. It is a simplified stock-flow model of her original work, designed to replicate key behaviours and interactions.
-    \item Cost of illness: This sub-model tracks the impacts and probabilities of Campylobacter infections leading to serious illness and fatality, including the relative cost of illness, to reflect economic effects of human Campylobacter infections.
+    \item Cost of illness: This sub-model tracks the impacts and probabilities of \textit{Campylobacter} infections leading to serious illness and fatality, including the relative cost of illness, to reflect economic effects of human \textit{Campylobacter} infections.
 
 \end{itemize}
 
+\subsubsection*{Environmental}
+%LISETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEH
+
+\textcolor{AMAZINGPINK}{Flies} \\
+It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} spp. at farms.
+
+
+- Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera} spp. The embryos can withstand colds of -34 \degree C, the pupae -24 \degree C, and the adults -16 \degree C.  This means the number of \textit{Brachycera} spp. surviving winter may increase due to climate change \parencite{goulson_predicting_2005}.
+
+- High density is also known to trigger migration, and therefore dispersal will also increase with rising temperature \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
+
+- \texit{Brachycera} can excrete \textit{Campylobacter} spp. on human food. We know that they can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}.
+
+
+- UNSURE IF SIGNIFICANT: more people $\to$ more foodstuffs and wastes \parencite{garcia-garcia_framework_2015} $\to$ more \textit{Brachycera} \parencite{imai_population_1984, rozendaal_houseflies_1997}
+
+\textcolor{AMAZINGPINK}{Wild birds} \\
+In the Dutch waters, 37.7\% of the \textit{Campylobacter} strains were attributed to wild birds.
+
+
+\textcolor{AMAZINGPINK}{dependent variable} \\
+\textit{Campylobacter} spp need humid surfaces to live, so surface water is recognised as a key player.
+
+{\huge \textcolor{pink}{Shouldn't there be a link between infected chickens in farms and slauighterhouses and campy in surface water?}}
+
+
+\textbf{Contaminated surface water}
+% Menghua (+ Elias? whoops)
+
+\textbf{Infected people}
+%To be deleted?
+
+\textbf{Infected chickens}
+% add sub-model diagram here
+This sub-model (presented in Figure X) is a simplification of Rommens' 2020(SOURCE) model of dynamics of transmission in farms, broilers and slaughterhouses. It is represented in our model as a stock-flow structure in which healthy chickens become infected chickens with \textit{Campylobacter} at the 'infection with \textit{Campylobacter}' rate. These infected chickens then become contaminated chicken meat when \textit{Campylobacter} positive chickens are slaughtered. Healthy chickens  contaminated chicken meat stock via '\textit{Campylobacter} negative chickens being slaughtered with cross-contamination. The contaminated chicken meat stock is reduced as contaminated chicken meat is consumed. The population of healthy chickens are also reduced by thinning, represented by the flow variable '\textit{Campylobacter} negative chickens slaughtered without contamination'.
+
+Other internal variables in this model included probabilities of infection, concentration of \textit{Campylobacter} in surface water, propagation of disease vectors, and climate effects all influence internal probabilities, with the exact values for these rates detailed in Appendix X.
+
+
+\textbf{Cost of illness}
+%Emily
 
 \subsection{Model Validation}
-4.	Validation
-    a.	Use various tests to argue why model is fit for purpose
+%4.	Validation
+ %   a.	Use various tests to argue why model is fit for purpose
     
 \subsection{Experimental setup}
-5.	Experimental setup
-    a.	Introduce main uncertainties (potentially with table)
-    b.	Explain scenario and policy logic
-    c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
+%5.	Experimental setup
+ %   a.	Introduce main uncertainties (potentially with table)
+  %  b.	Explain scenario and policy logic
+   % c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
 
-\subsection{Data Subsection}
-\blindtext
+
+
