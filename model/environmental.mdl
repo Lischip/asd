@@ -1,19 +1,7 @@
 {UTF-8}
-immigrating  = A FUNCTION OF( )
-	~	
-	~		|
-
-Birds in the Netherlands  = A FUNCTION OF( -emigrating,immigrating)
-	~	
-	~		|
-
-Contaminated feces of wild birds  = A FUNCTION OF( Birds in the Netherlands,Presence of Campylobacter in surface water\
+Contaminated feces of wild birds  = A FUNCTION OF( Presence of Campylobacter in surface water\
 		) ~~|
 Contaminated feces of wild birds=
-	~	
-	~		|
-
-emigrating  = A FUNCTION OF( Temperature)
 	~	
 	~		|
 
@@ -161,19 +149,6 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,9
 12,37,0,748,458,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
 R1
 1,38,25,22,1,0,0,0,0,128,0,-1--1--1,,1|(1018,488)|
-10,39,Birds in the Netherlands,1257,228,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
-12,40,48,1096,222,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,41,43,39,4,0,0,22,0,0,0,-1--1--1,,1|(1185,217)|
-1,42,43,40,100,0,0,22,0,0,0,-1--1--1,,1|(1123,217)|
-11,43,0,1147,217,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
-10,44,immigrating,1147,236,36,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-12,45,48,1387,222,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,46,48,45,4,0,0,22,0,0,0,-1--1--1,,1|(1361,219)|
-1,47,48,39,100,0,0,22,0,0,0,-1--1--1,,1|(1315,219)|
-11,48,0,1339,219,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
-10,49,emigrating,1339,238,33,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,50,39,19,0,0,0,0,0,128,0,-1--1--1,,1|(1257,266)|
-1,51,2,49,1,0,0,0,0,128,0,-1--1--1,,1|(1139,141)|
 ///---\\\
 :L<%^E!@
 9:Current
@@ -184,7 +159,7 @@ R1
 42:1
 72:0
 73:0
-5:Brachycera development rate
+5:amount of sewage
 35:Date
 36:YYYY-MM-DD
 37:2000
