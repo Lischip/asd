@@ -1,4 +1,17 @@
 {UTF-8}
+Concentration of Campylobacter in the surface water=A FUNCTION OF(Concentration of Campylobacter in the surface water\
+		,Contaminated feces of wild birds,Increased chance of infection due to sewage overflows\
+		,"run-off from farms and slaughterhouses") ~~|
+Concentration of Campylobacter in the surface water=
+	~	
+	~		|
+
+Probability of getting infected by environment=A FUNCTION OF(Probability of getting infected by environment\
+		,Contaminated feces of wild birds,Infected Brachycera) ~~|
+Probability of getting infected by environment=
+	~	
+	~		|
+
 Pi=
 	ARCCOS(-1)
 	~	
@@ -6,10 +19,6 @@ Pi=
 
 Weeks in a year=
 	365.25/7
-	~	
-	~		|
-
-Infected people  = A FUNCTION OF( Infected Brachycera)
 	~	
 	~		|
 
@@ -33,19 +42,13 @@ Brachycera development rate=
 		Legacy from Edien
 	|
 
-Population size= WITH LOOKUP (
-	Time,
-		([(0,0)-(2039,2e+07)],(2020,1.7e+07),(2039,1.9e+07) ))
-	~	person
-	~		|
-
-Contaminated feces of wild birds  = A FUNCTION OF( Presence of Campylobacter in surface water\
+Contaminated feces of wild birds  = A FUNCTION OF( Concentration of Campylobacter in the surface water\
 		) ~~|
 Contaminated feces of wild birds=
 	~	
 	~		|
 
-Infected Brachycera  = A FUNCTION OF( Brachycera biomass,Presence of Campylobacter in surface water\
+Infected Brachycera  = A FUNCTION OF( Brachycera biomass,Concentration of Campylobacter in the surface water\
 		)
 	~	
 	~		|
@@ -58,12 +61,6 @@ Brachycera biomass=
 		House Fly Population and Control Threshold
 	|
 
-Presence of Campylobacter in surface water  = A FUNCTION OF( Contaminated feces of wild birds\
-		,Increased chance of infection due to sewage overflows,"run-off from farms and slaughterhouses"\
-		)
-	~	
-	~		|
-
 "run-off from farms and slaughterhouses"  = A FUNCTION OF( Average yearly precipitation\
 		)
 	~	
@@ -73,12 +70,6 @@ Increased chance of infection due to sewage overflows  = A FUNCTION OF( Average 
 		)
 	~	
 	~		|
-
-Amount of organic waste=
-	Population size
-	~	
-	~	Assumption
-	|
 
 Average yearly precipitation  = A FUNCTION OF( )
 	~	
@@ -109,7 +100,7 @@ INITIAL TIME  = 0
 	|
 
 SAVEPER  = 
-        TIME STEP 
+        TIME STEP
 	~	Week [0,?]
 	~	The frequency with which output is stored.
 	|
@@ -123,47 +114,43 @@ TIME STEP  = 1
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
-10,1,Presence of Campylobacter in surface water,1258,439,57,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,2,Temperature,588,332,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,3,Average yearly precipitation,1252,166,48,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,4,Brachycera development rate,589,432,49,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-10,5,Minimum average week temperature,429,225,58,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,6,Maximum average week temperature,589,221,59,19,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(502,274)|
-1,8,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(588,269)|
-10,9,Infected people,1078,689,49,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,10,Population size,235,431,47,11,8,3,0,4,0,0,0,0,-1--1--1,255-128-0,|12||0-0-0,0,0,0,0,0,0
-10,11,Amount of organic waste,416,430,45,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,12,10,11,0,0,0,0,0,128,0,-1--1--1,,1|(319,430)|
-10,13,Contaminated feces of wild birds,1260,586,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,14,1,13,1,0,0,0,0,128,0,-1--1--1,,1|(1316,515)|
-1,15,13,1,1,0,0,0,0,128,0,-1--1--1,,1|(1208,513)|
-10,16,Infected Brachycera,1097,541,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,17,1,16,1,0,0,0,0,128,0,-1--1--1,,1|(1147,485)|
-1,18,16,9,1,0,0,0,0,128,0,-1--1--1,,1|(1084,611)|
-10,19,Brachycera biomass,865,430,55,19,8,3,0,4,0,0,0,0,-1--1--1,192-255-192,|12||0-0-0,0,0,0,0,0,0
-10,20,Time,727,222,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
-1,21,20,2,0,0,0,0,0,64,0,-1--1--1,,1|(668,268)|
-1,22,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(588,373)|
-10,23,Increased chance of infection due to sewage overflows,1133,302,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,24,23,1,1,0,0,0,0,128,0,-1--1--1,,1|(1162,370)|
-1,25,3,23,1,0,0,0,0,128,0,-1--1--1,,1|(1178,221)|
-10,26,"run-off from farms and slaughterhouses",1402,306,72,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,27,26,1,1,0,0,0,0,128,0,-1--1--1,,1|(1351,368)|
-1,28,3,26,1,0,0,0,0,128,0,-1--1--1,,1|(1379,255)|
-1,29,4,19,1,0,0,0,0,128,0,-1--1--1,,1|(768,457)|
-1,30,19,4,1,0,0,0,0,128,0,-1--1--1,,1|(765,400)|
-12,31,0,726,428,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
+10,1,Concentration of Campylobacter in the surface water,1256,455,57,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Temperature,878,249,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Average yearly precipitation,1250,182,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Brachycera development rate,879,349,49,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Minimum average week temperature,719,142,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Maximum average week temperature,879,138,59,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(792,191)|
+1,8,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(878,186)|
+10,9,Probability of getting infected by environment,1184,721,61,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,13,Contaminated feces of wild birds,1258,602,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,1,13,1,0,0,0,0,128,0,-1--1--1,,1|(1314,531)|
+1,15,13,1,1,0,0,0,0,128,0,-1--1--1,,1|(1206,529)|
+10,16,Infected Brachycera,1095,557,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,1,16,1,0,0,0,0,128,0,-1--1--1,,1|(1145,501)|
+1,18,16,9,1,0,0,0,0,128,0,-1--1--1,,1|(1122,636)|
+10,19,Brachycera biomass,883,504,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,Time,1017,139,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,21,20,2,0,0,0,0,0,64,0,-1--1--1,,1|(958,185)|
+1,22,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(878,290)|
+10,23,Increased chance of infection due to sewage overflows,1131,318,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,1,1,0,0,0,0,128,0,-1--1--1,,1|(1160,386)|
+1,25,3,23,1,0,0,0,0,128,0,-1--1--1,,1|(1176,237)|
+10,26,"run-off from farms and slaughterhouses",1386,336,72,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,26,1,1,0,0,0,0,128,0,-1--1--1,,1|(1339,391)|
+1,28,3,26,1,0,0,0,0,128,0,-1--1--1,,1|(1369,284)|
+1,29,4,19,1,0,0,0,0,128,0,-1--1--1,,1|(834,431)|
+1,30,19,4,1,0,0,0,0,128,0,-1--1--1,,1|(921,435)|
+12,31,0,877,433,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
 R1
-1,32,19,16,1,0,0,0,0,128,0,-1--1--1,,1|(1014,462)|
-10,33,Time,234,514,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
-1,34,33,10,0,0,0,0,0,64,0,-1--1--1,,1|(234,479)|
-12,35,0,1265,513,20,20,4,7,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,19,16,1,0,0,0,0,128,0,-1--1--1,,1|(931,540)|
+12,35,0,1263,529,20,20,4,7,0,0,-1,0,0,0,0,0,0,0,0,0
 R2
-10,36,Pi,432,318,8,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,37,36,2,0,0,0,0,0,64,0,-1--1--1,,1|(483,321)|
-10,38,Weeks in a year,739,298,51,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,39,38,2,0,0,0,0,0,64,0,-1--1--1,,1|(670,313)|
+10,36,Pi,722,235,8,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,36,2,0,0,0,0,0,64,0,-1--1--1,,1|(773,238)|
+10,38,Weeks in a year,1029,215,51,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,39,38,2,0,0,0,0,0,64,0,-1--1--1,,1|(960,230)|
+1,40,13,9,1,0,0,0,0,128,0,-1--1--1,,1|(1241,650)|
 ///---\\\
 :L<%^E!@
 1:Current.vdfx
@@ -176,7 +163,7 @@ R2
 72:0
 73:0
 4:Time
-5:Temperature
+5:Brachycera development rate
 35:Date
 36:YYYY-MM-DD
 37:2000
