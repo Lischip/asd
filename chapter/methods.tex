@@ -53,21 +53,25 @@ This analysis contains three main sub-models:
 \subsubsection*{Environmental}
 %LISETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEH
 %IDENTIFY ARCHETYPES
-There are two major environmental transmission routes in the environment: flies and wild birds \parencite{mughini-gras_quantifying_2016}. The role of pets and other wild animals is relatively small, which is why they are excluded from the model.
+%WHY IS THIS SO LONG AA
 
-\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore this has a big role in determining the chance of infection by the biological disease vectors mentioned before.
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\textwidth]{images/environmental_submodel.png}
+	\caption{The environmental submodel}
+	\label{fig:environmental_submodel}
+\end{figure*}
+
+\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore this has a big role in determining the chance of infection by biological disease vectors mentioned before. This can be seen in Figure~\ref{fig:environmental_submodel}. The main biological disease vectors have been determined to be flies and wild birds \parencite{mughini-gras_quantifying_2016}. Both vectors excrete \texitt{Campylobacter} on surfaces and human food \parencite{french_molecular_2009, }.
 
 It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
 
-Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will therefore cause the number of \textit{Brachycera} in the Netherlands to increase \parencite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}. The climate driven population growt will also trigger migration, and therefore the dispersal \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
+In Dutch and Luxembourgh waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourgh has a low poultry production in Luxembourgh, it is important to include this biological transmission vector in the submodel.
+
+Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will cause the number of \textit{Brachycera} in the Netherlands to increase \parencite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}. The climate driven population growth will also trigger migration, and therefore the dispersal \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}. It is suspected that the total number of birds in the Netherlands is not affected by climate change, just their composition \parencite{mclean_reduced_2020, knudsen_challenging_2011}.
 
 An increase in Dutch population size is not expected to increase the \textit{Brachycera} biomass in the Netherlands \parencite{guenat_effects_2019-1}. Even though an increase in the population leads to more organic waste \parencite{garcia-garcia_framework_2015}, which does have the potential to increase the total number of flies \parencite{imai_population_1984, rozendaal_houseflies_1997}, this effect is possibly counterbalanced by the loss of natural habitat.
 
-In Dutch and Luxembourgh waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourgh has a low poultry production in Luxembourgh, it is important to include this biological transmission vector in the submodel.
-
-It is suspected the total number of birds in the Netherlands is not affected by climate change, just their composition \parencite{mclean_reduced_2020, knudsen_challenging_2011}.
-
-Both biological disease vectors can excretie \texitt{Campylobacter} on surfaces and human food. It has been shown \textit{Musca domestica} can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}. And  12.5\% of the wild-bird feaces samples collected in playgrounds in parks in New Zealand city contained \textit{Campylobacter} \parencite{french_molecular_2009}.
 
 \subsubsection*{Infected chickens}
 % add sub-model diagram here
