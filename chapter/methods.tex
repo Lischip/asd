@@ -86,8 +86,14 @@ Other internal variables in this model included probabilities of infection, conc
 
 \subsubsection*{Cost of illness}
 %Emily
+\begin{figure}[h]
+\caption{The conceptual Cost of Illness sub-model}
+\centering
+\includegraphics[width=0.5\textwidth]{images/testimage1.png}
+\end{figure}
+The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Of the symptomatic infections these are assumed to be either mild or moderate/severe. Moderate/severe cases may result in death or chronic illness. Each of these outcomes contribute to key public health metrics of Years of Life Lost (YLL) in the case of death and Years Living with Disability (YLD) for all non-fatal cases. These two values are added to calculate the Disability Adjusted Life Years (DALYs) for these infections, which when multiplied by the cost of a DALY (adjusted to 2021 prices), and combined with direct healthcare costs (GP visits and hospitalisations) results in the Cost of Illness for all \textit{Campylobacter} infections.
 
-The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_nodate}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Of the symptomatic infections these are assumed to be either mild or moderate/severe. Moderate/severe cases may result in death or chronic illness. Each of these outcomes contribute to key public health metrics of Years of Life Lost (YLL) in the case of death and Years Living with Disability (YLD) for all non-fatal cases. These two values are added to calculate the Disability Adjusted Life Years (DALYs) for these infections, which when multiplied by the cost of a DALY (adjusted to 2021 prices), and combined with direct healthcare costs (GP visits and hospitalisations) results in the Cost of Illness for all \textit{Campylobacter} infections.
+The causal structure adopted for this sub-model focuses on connecting variables based on available scientific data. Due to the underlying complexity of DALY and Cost of Illness metrics \parencite{jo_cost--illness_2014}, a top-down approach to applying these variables has been taken. As such, variables have been used for some elements that might otherwise have been modelled as stocks (e.g. categorisation of patients as mild, moderate or severe infections). Additionally, this more simplistic approach is considered appropriate, as we are not concerned with the detailed dynamics of transmission and recovery (as might be done in an SIR model), but only with the ultimate KPI of 'Cost of Illness'.
 
 \subsection{Model Validation}
 %4.	Validation
