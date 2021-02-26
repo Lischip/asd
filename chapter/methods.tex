@@ -1,18 +1,28 @@
 \subsection{How is System Dynamics used?}
 An important aspect to system dynamics models are the aforementioned accumulations, delays and feed-backs. Accumulations, more commonly referred to as stock variables refer to some value material or entities within a system. Through flow or rate variables stocks dynamically change over time, leading to the aforementioned delay and feed-back effects \parencite{sterman_system_2001}. To build the submodels for the study on \textit{Campylobacter} appropriate variables had to be chosen to represent these features. In the case of, infected populations of humans and flocks would act modelled as stocks, whilst various transmission routes provide flow variables between them. This naturally produces delays, as it takes time for the disease to spread, symptoms to surface and potential hospitalisation. Feed-back loops will also arise as \textit{Campylobacter}, as the number of contaminated chicken flocks, causes more spread of \textit{Campylobacter} in the environment, and in turn the more \textit{Campylobacter} in the environment, the more easily chicken flocks are infected. Furthermore the model was subdivided into multiple subsystems, which will be explained in the following paragraphs. 
 
-%I guess I should mention Vensim?
 %1.	Explain basics of SD
  %   a.	Basics of SD
   %  b.	Examples from literature to clarify and justify modelling choices given problem in the field
-
-\subsection{Conceptualisation}
 %2.	Conceptualisation
   %  a.	Depict aggregate model structure
    % b.	Describe dynamic hypothesis
 
-\textbf{Model Structure}
+\subsection{Conceptualisation}
+The model will focus on the economic impacts and health care costs associated with \textit{Campylobacter}-contaminated chicken meat. 
+The dynamic hypothesis includes four KPIs that will be examined to answer the research question: 
 
+1. Number of infected chicken flocks: is expected to increase with worsening climate conditions and no interventions.
+2. Concentration of \textit{Campylobacter} in surface waters: as climate effects continue on their current trends, \textit{Campylobacter} will be able to proliferate more easily and consequently contaminate more poultry meat. These contaminations would follow an S-growth curve in the coming years considering both a reinforcing loop of the number of contaminated chicken flocks, causing more spread of \textit{Campylobacter} in the environment, and in turn the more campylobacter in the environment, the more easily chicken flocks are infected, but also a balancing loop as surface waters will reach a certain carrying capacity. %too long a sentence?
+3. Amount of environmental transmissions via disease vectors: the prior KPIs would consequently mean that these would also increase drastically, as most transmission routes are likely to display interaction effects.
+4. Number of infected people: is expected to increase exponentially as reinforcing loops between farms and environment would greatly increase chance of infection but with a less exponential rate than that of infected flock, as different existing hygiene measures exist to reduce/minimise contamination of meat products.
+5. Cost of illness (based on DALY): is expected to increase with increasing \textit{Campylobacter} infection rates, and decrease (at different rates) with the introduction of different policies.
+%graph figure?
+ 
+\textbf{Model Structure}
+Although contamination is mainly concentrated on farms, the model will focus on farms and slaughterhouses collectively, rather than individual types of farms, as this aligns better with decision-making regarding the general impacts of policy choices across the entire poultry industry in the Netherlands. The level of aggregation excludes most of the internal processes of the slaughterhouses and broilers are excluded as these are too detailed for this scope. Furthermore this model will be tested against several climate scenarios which are based on the following assumptions: no new insect species are introduced into the system, despite their connection to climate change effects and spread of \textit{Campylobacter}, their influences were considered too detailed relative to the problem scoping. 
+%NEW
+Lastly, the human population will be split into cohorts of children, working-age and seniors. Although cohorts based on age ranges would provide more accurate representation, the DALY used as a KPI already incorporates age weightings. %REF?
 
 
 \textbf{Model Boundaries}
@@ -22,10 +32,8 @@ This model draws wider boundaries than Rommens' original model. Here, the focus 
 The sub-model of 'Infected Chickens' encompasses the majority of Rommens' original model. Details of the structure and behaviour of this sub-model are detailed in the following sections. 
 
 \textbf{Dynamic Hypothesis}
+% is it okay to merge with conceptualisation?
 
-
-
-   
 \subsection{Explanation of model}
 %3.	Explain model (also refer to Appendix A)
  %   a.	Describe sub-models
@@ -56,18 +64,17 @@ It seems that the vector potential of flies is mainly determined by the \textit{
 - \texit{Brachycera} can excrete \textit{Campylobacter}  on human food. We know that they can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}.
 
 
-- UNSURE IF SIGNIFICANT: more people $\to$ more foodstuffs and wastes \parencite{garcia-garcia_framework_2015} $\to$ more \textit{Brachycera} \parencite{imai_population_1984, rozendaal_houseflies_1997}
+- DEEMED INSIGNIFICANT: more people $\to$ more organic waste \parencite{garcia-garcia_framework_2015} \& more urbanisation $\to$ more \textit{Brachycera} \parencite{imai_population_1984, rozendaal_houseflies_1997} % reason: https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/1365-2664.13270
 
 \textcolor{AMAZINGPINK}{Wild birds} \\
 In Dutch and Luxembourgh waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourgh has a low poultry production in Luxembourgh, it is important to include this transmission vector in the submodel.
 
 It is suspected the total number of birds in the Netherlands is not affected by climate change, just their composition \parencite{mclean_reduced_2020, knudsen_challenging_2011}.
-- migrating birds vs resident birds?
 
 %When French et al., 2009 investigated the wild-bird fecal contamination in playgrounds in parks in aNew Zealand city, 12.5% of the samples contained Campylobacter
 
 
-\textcolor{AMAZINGPINK}{dependent variable} \\
+\textcolor{AMAZINGPINK}{Dependent variable} \\
 \textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. %pretty much a quote, needs to be rewritten, lol. Got tired.
 
 \subsubsection*{Infected chickens}
