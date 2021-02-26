@@ -1,13 +1,20 @@
 {UTF-8}
-Runoff from agriculture and slaughterhouses=A FUNCTION OF(Runoff from agriculture and slaughterhouses\
+Probability of contamination from runoff from agriculture and slaughterhouses=A FUNCTION OF\
+		(Probability of contamination from runoff from agriculture and slaughterhouses,Average yearly precipitation\
+		) ~~|
+Probability of contamination from runoff from agriculture and slaughterhouses=
+	~	
+	~		|
+
+Probability of contamination due to sewage overflows=A FUNCTION OF(Probability of contamination due to sewage overflows\
 		,Average yearly precipitation) ~~|
-Runoff from agriculture and slaughterhouses=
+Probability of contamination due to sewage overflows=
 	~	
 	~		|
 
 Concentration of Campylobacter in the surface water=A FUNCTION OF(Concentration of Campylobacter in the surface water\
-		,Contaminated feces of wild birds,Increased chance of infection due to sewage overflows\
-		,Runoff from agriculture and slaughterhouses) ~~|
+		,Contaminated feces of wild birds,Probability of contamination due to sewage overflows\
+		,Probability of contamination from runoff from agriculture and slaughterhouses) ~~|
 Concentration of Campylobacter in the surface water=
 	~	
 	~		|
@@ -66,11 +73,6 @@ Brachycera biomass=
 		Densities in a Simulated Condition: A Prediction for
 		House Fly Population and Control Threshold
 	|
-
-Increased chance of infection due to sewage overflows  = A FUNCTION OF( Average yearly precipitation\
-		)
-	~	
-	~		|
 
 Average yearly precipitation  = A FUNCTION OF( )
 	~	
@@ -134,12 +136,12 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,9
 10,17,Time,1017,139,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
 1,18,17,2,0,0,0,0,0,64,0,-1--1--1,,1|(958,185)|
 1,19,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(878,290)|
-10,20,Increased chance of infection due to sewage overflows,1131,318,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,Probability of contamination due to sewage overflows,1131,318,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 1,21,20,1,1,0,0,0,0,128,0,-1--1--1,,1|(1160,386)|
 1,22,3,20,1,0,0,0,0,128,0,-1--1--1,,1|(1176,237)|
-10,23,Runoff from agriculture and slaughterhouses,1386,336,72,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,24,23,1,1,0,0,0,0,128,0,-1--1--1,,1|(1339,391)|
-1,25,3,23,1,0,0,0,0,128,0,-1--1--1,,1|(1369,284)|
+10,23,Probability of contamination from runoff from agriculture and slaughterhouses,1401,326,78,28,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,1,1,0,0,0,0,128,0,-1--1--1,,1|(1345,380)|
+1,25,3,23,1,0,0,0,0,128,0,-1--1--1,,1|(1372,270)|
 1,26,4,16,1,0,0,0,0,128,0,-1--1--1,,1|(834,431)|
 1,27,16,4,1,0,0,0,0,128,0,-1--1--1,,1|(921,435)|
 12,28,0,877,433,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
@@ -164,7 +166,7 @@ R2
 72:0
 73:0
 4:Time
-5:Average yearly precipitation
+5:Probability of contamination from runoff from agriculture and slaughterhouses
 35:Date
 36:YYYY-MM-DD
 37:2000
