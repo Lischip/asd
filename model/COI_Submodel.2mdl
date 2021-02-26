@@ -12,7 +12,7 @@ Chronic illness  = A FUNCTION OF( "Moderate/severe symptoms")
 	~		|
 
 Cost of illness  = A FUNCTION OF( Disability adjusted life years,GP Visited,Hospitalisation\
-		,Value of a statistical life)
+		,Cost of DALY)
 	~	
 	~		|
 
@@ -50,7 +50,7 @@ Symptomatic infections  = A FUNCTION OF( Infected Persons)
 	~	
 	~		|
 
-Value of a statistical life  = A FUNCTION OF( )
+Cost of DALY  = A FUNCTION OF( )
 	~	
 	~		|
 
@@ -104,7 +104,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,1
 10,13,Disability adjusted life years,912,479,48,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,14,Chronic illness,659,385,38,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,15,Cost of illness,668,627,37,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,16,Value of a statistical life,1009,597,35,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Cost of DALY,1009,597,37,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 1,17,4,12,1,0,0,0,0,128,0,-1--1--1,,1|(488,359)|
 1,18,14,12,1,0,0,0,0,128,0,-1--1--1,,1|(618,418)|
 1,19,12,13,1,0,0,0,0,128,0,-1--1--1,,1|(674,482)|
@@ -123,6 +123,8 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,1
 1,32,5,15,1,0,0,0,0,128,0,-1--1--1,,1|(443,544)|
 1,33,6,15,1,0,0,0,0,128,0,-1--1--1,,1|(1072,621)|
 1,34,24,5,1,0,0,0,0,128,0,-1--1--1,,1|(459,30)|
+12,35,0,660,341,20,20,4,7,0,0,-1,0,0,0,-1,-1,0,0,0,0
+R
 ///---\\\
 :L<%^E!@
 15:0,0,0,0,0,0
@@ -132,7 +134,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,1
 42:1
 72:0
 73:0
-5:Hospitalisation
+5:Cost of DALY
 35:Date
 36:YYYY-MM-DD
 37:2000
