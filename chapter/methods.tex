@@ -9,30 +9,33 @@ An important aspect to system dynamics models are the aforementioned accumulatio
    % b.	Describe dynamic hypothesis
 
 \subsection{Conceptualisation}
-The model will focus on the economic impacts and health care costs associated with \textit{Campylobacter}-contaminated chicken meat. 
-The dynamic hypothesis includes four KPIs that will be examined to answer the research question: 
+The model will focus on the economic impacts and health care costs associated with \textit{Campylobacter}-contaminated chicken meat. The dynamic hypothesis includes three KPIs that will be examined to answer the research question: 
 \begin{itemize}
-    \item Number of infected chicken flocks: is expected to increase with worsening climate conditions and no interventions.
+    % \item Number of infected chicken flocks: is expected to increase with worsening climate conditions and no interventions.
     \item Concentration of \textit{Campylobacter} in surface waters: as climate effects continue on their current trends, \textit{Campylobacter} will be able to proliferate more easily and consequently contaminate more poultry meat. These contaminations would follow an S-growth curve in the coming years considering both a reinforcing loop of the number of contaminated chicken flocks, causing more spread of \textit{Campylobacter} in the environment, and in turn the more campylobacter in the environment, the more easily chicken flocks are infected, but also a balancing loop as surface waters will reach a certain carrying capacity. %too long a sentence?
     \item Amount of environmental transmissions via disease vectors: the prior KPIs would consequently mean that these would also increase drastically, as most transmission routes are likely to display interaction effects.
-    \item Number of infected people: is expected to increase exponentially as reinforcing loops between farms and environment would greatly increase chance of infection but with a less exponential rate than that of infected flock, as different existing hygiene measures exist to reduce/minimise contamination of meat products.
+    % \item Number of infected people: is expected to increase exponentially as reinforcing loops between farms and environment would greatly increase chance of infection but with a less exponential rate than that of infected flock, as different existing hygiene measures exist to reduce/minimise contamination of meat products.
     \item Cost of illness (based on DALY): is expected to increase with increasing \textit{Campylobacter} infection rates, and decrease (at different rates) with the introduction of different policies.
 \end{itemize}
-%graph figure?
  
-\textbf{Model Structure}
-Although contamination is mainly concentrated on farms, the model will focus on farms and slaughterhouses collectively, rather than individual types of farms, as this aligns better with decision-making regarding the general impacts of policy choices across the entire poultry industry in the Netherlands. The level of aggregation excludes most of the internal processes of the slaughterhouses and broilers are excluded as these are too detailed for this scope. Furthermore this model will be tested against several climate scenarios which are based on the following assumptions: no new insect species are introduced into the system, despite their connection to climate change effects and spread of \textit{Campylobacter}, their influences were considered too detailed relative to the problem scoping. 
+ \begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{images/dynamic_hypo.png}
+\caption{The aggregated causal loop diagram for the dynamic hypothesis}
+\end{figure}
+ 
+\subsubsection*{Model Structure}
+Although contamination is mainly concentrated on farms, the model will focus on farms and slaughterhouses collectively, rather than individual types of farms. This aligns better with decision-making regarding the general impacts of policy choices across the entire poultry industry in the Netherlands. This level of aggregation excludes most of the internal processes of slaughterhouses and broilers, as these are too detailed for this scope. Furthermore, this model will be tested against several climate scenarios which are based on the following assumptions: no new insect species are introduced into the system, despite their connection to climate change effects and spread of \textit{Campylobacter}, their influences were considered too detailed relative to the problem scoping. 
 %NEW
-Lastly, the human population will be split into cohorts of children, working-age and seniors. Although cohorts based on age ranges would provide more accurate representation, the DALY used as a KPI already incorporates age weightings. %REF?
+Lastly, the human population will be split into cohorts of children, working-age and seniors. Although cohorts based on age ranges would provide more accurate representation, the DALY used as this KPI already incorporates age weightings. %REF?
 
-
-\textbf{Model Boundaries}
+\subsubsection*{Model Boundaries}
 
 This model draws wider boundaries than Rommens' original model. Here, the focus is on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factor. As a result, some internal components of the model were simplified. Specifically, operational components related to transmissions occurring on individual farms, broilers, and slaughterhouses were aggregated into a single sub-model, allowing for more focus on environmental transmission pathways.
 
 The sub-model of 'Infected Chickens' encompasses the majority of Rommens' original model. Details of the structure and behaviour of this sub-model are detailed in the following sections. 
 
-\textbf{Dynamic Hypothesis}
+\subsubsection*{Dynamic Hypothesis}
 % is it okay to merge with conceptualisation?
 
 \subsection{Explanation of model}
@@ -44,9 +47,9 @@ This analysis contains three main sub-models:
 
 %Z: shorten the list in a couple of sentences? ¯\_(ツ)_/¯ 
 \begin{itemize}
-    \item Environmental: This sub-model focuses on environmental transmission routes and influences for \textit{Campylobacter}, particularly through surface waters and disease vectors (flies and birds other than poultry). According to recent reports by the RIVM, environmental transmission was the second most prevalent cause of \textit{Campylobacter} infections in the Netherlands in 2019. The sub-model also includes levers for climate influences on these transmission pathways.
-    \item Infected chickens: This sub-model is based primarily on the work by Rommens. It is a simplified stock-flow model of her original work, designed to replicate key behaviours and interactions.
-    \item Cost of illness: This sub-model tracks the impacts and probabilities of \textit{Campylobacter} infections leading to serious illness and fatality, including the relative cost of illness, to reflect economic effects of human \textit{Campylobacter} infections.
+    \item Environmental %This sub-model focuses on environmental transmission routes and influences for \textit{Campylobacter}, particularly through surface waters and disease vectors (flies and birds other than poultry). According to recent reports by the RIVM, environmental transmission was the second most prevalent cause of \textit{Campylobacter} infections in the Netherlands in 2019. The sub-model also includes levers for climate influences on these transmission pathways.
+    \item Infected chickens %This sub-model is based primarily on the work by Rommens. It is a simplified stock-flow model of her original work, designed to replicate key behaviours and interactions.
+    \item Cost of illness %This sub-model tracks the impacts and probabilities of \textit{Campylobacter} infections leading to serious illness and fatality, including the relative cost of illness, to reflect economic effects of human \textit{Campylobacter} infections.
 
 \end{itemize}
 
@@ -57,27 +60,38 @@ This analysis contains three main sub-models:
 
 \begin{figure*}[!ht]
 	\centering
-	\includegraphics[width=\textwidth]{images/environmental_submodel.png}
+	\includegraphics[width=0.5\textwidth]{images/environmental_submodel.png}
 	\caption{The environmental submodel}
 	\label{fig:environmental_submodel}
 \end{figure*}
 
-\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore this has a big role in determining the chance of infection by biological disease vectors mentioned before. This can be seen in Figure~\ref{fig:environmental_submodel}. The main biological disease vectors have been determined to be flies and wild birds \parencite{mughini-gras_quantifying_2016}. Both vectors excrete \texitt{Campylobacter} on surfaces and human food \parencite{french_molecular_2009, }.
+\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore, this has a big role in determining the chance of infection by biological disease vectors mentioned before. This can be seen in Figure~\ref{fig:environmental_submodel}. The main biological disease vectors have been determined to be flies and wild birds \parencite{mughini-gras_quantifying_2016}. Both vectors are considered to be major spreaders as they actively excrete \texitt{Campylobacter} on surfaces and human food \parencite{french_molecular_2009, hald_influxed_2008}.
 
-It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
+It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the \textit{Diptera} insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
 
-In Dutch and Luxembourgh waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourgh has a low poultry production in Luxembourgh, it is important to include this biological transmission vector in the submodel.
+In Dutch and Luxembourgish waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourg has a low poultry production, it is important to include this biological transmission vector in the submodel.
 
-Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will cause the number of \textit{Brachycera} in the Netherlands to increase \parencite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}. The climate driven population growth will also trigger migration, and therefore the dispersal \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}. It is suspected that the total number of birds in the Netherlands is not affected by climate change, just their composition \parencite{mclean_reduced_2020, knudsen_challenging_2011}.
+Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will cause the number of \textit{Brachycera} in the Netherlands to increase \parencite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}. The climate driven population growth will also trigger migration, and therefore the dispersal \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}. It is suspected that the total number of birds in the Netherlands is not affected by climate change, just their composition \parencite{mclean_reduced_2020, knudsen_challenging_2011}. Rainfall is not a driving factor in the total \textit{Brachycera} biomass \parencite{goulson_predicting_2005}.
+
+Climate change is also linked to different precipitation patterns. An increase in precipitation will result in an increase in 
 
 An increase in Dutch population size is not expected to increase the \textit{Brachycera} biomass in the Netherlands \parencite{guenat_effects_2019-1}. Even though an increase in the population leads to more organic waste \parencite{garcia-garcia_framework_2015}, which does have the potential to increase the total number of flies \parencite{imai_population_1984, rozendaal_houseflies_1997}, this effect is possibly counterbalanced by the loss of natural habitat.
+
 
 
 \subsubsection*{Infected chickens}
 % add sub-model diagram here
 This sub-model (presented in Figure X) is a simplification of Rommens' 2020(SOURCE) model of dynamics of transmission in farms, broilers and slaughterhouses. It is represented in our model as a stock-flow structure in which healthy chickens become infected chickens with \textit{Campylobacter} at the 'infection with \textit{Campylobacter}' rate. These infected chickens then become contaminated chicken meat when \textit{Campylobacter} positive chickens are slaughtered. Healthy chickens  contaminated chicken meat stock via '\textit{Campylobacter} negative chickens being slaughtered with cross-contamination. The contaminated chicken meat stock is reduced as contaminated chicken meat is consumed. The population of healthy chickens are also reduced by thinning, represented by the flow variable '\textit{Campylobacter} negative chickens slaughtered without contamination'.
 
-Other internal variables in this model included probabilities of infection, concentration of \textit{Campylobacter} in surface water, propagation of disease vectors, and climate effects all influence internal probabilities, with the exact values for these rates detailed in Appendix X.
+%David
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{images/Transmission submodel.png}
+\caption{The conceptual chicken infection sub-model}
+\label{fig:transmission_submodel}
+\end{figure}
+
+Other internal variables in this model included probabilities of infection, concentration of \textit{Campylobacter} in surface water, propagation of disease vectors, and climate effects all influence internal probabilities, with the exact values for these rates detailed in Appendix~\ref{ch:model_documentation}.
 
 
 \subsubsection*{Cost of illness}
