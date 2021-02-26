@@ -12,11 +12,12 @@ An important aspect to system dynamics models are the aforementioned accumulatio
 The model will focus on the economic impacts and health care costs associated with \textit{Campylobacter}-contaminated chicken meat. 
 The dynamic hypothesis includes four KPIs that will be examined to answer the research question: 
 \begin{itemize}
-1. Number of infected chicken flocks: is expected to increase with worsening climate conditions and no interventions.
-2. Concentration of \textit{Campylobacter} in surface waters: as climate effects continue on their current trends, \textit{Campylobacter} will be able to proliferate more easily and consequently contaminate more poultry meat. These contaminations would follow an S-growth curve in the coming years considering both a reinforcing loop of the number of contaminated chicken flocks, causing more spread of \textit{Campylobacter} in the environment, and in turn the more campylobacter in the environment, the more easily chicken flocks are infected, but also a balancing loop as surface waters will reach a certain carrying capacity. %too long a sentence?
-3. Amount of environmental transmissions via disease vectors: the prior KPIs would consequently mean that these would also increase drastically, as most transmission routes are likely to display interaction effects.
-4. Number of infected people: is expected to increase exponentially as reinforcing loops between farms and environment would greatly increase chance of infection but with a less exponential rate than that of infected flock, as different existing hygiene measures exist to reduce/minimise contamination of meat products.
-5. Cost of illness (based on DALY): is expected to increase with increasing \textit{Campylobacter} infection rates, and decrease (at different rates) with the introduction of different policies.
+    \item Number of infected chicken flocks: is expected to increase with worsening climate conditions and no interventions.
+    \item Concentration of \textit{Campylobacter} in surface waters: as climate effects continue on their current trends, \textit{Campylobacter} will be able to proliferate more easily and consequently contaminate more poultry meat. These contaminations would follow an S-growth curve in the coming years considering both a reinforcing loop of the number of contaminated chicken flocks, causing more spread of \textit{Campylobacter} in the environment, and in turn the more campylobacter in the environment, the more easily chicken flocks are infected, but also a balancing loop as surface waters will reach a certain carrying capacity. %too long a sentence?
+    \item Amount of environmental transmissions via disease vectors: the prior KPIs would consequently mean that these would also increase drastically, as most transmission routes are likely to display interaction effects.
+    \item Number of infected people: is expected to increase exponentially as reinforcing loops between farms and environment would greatly increase chance of infection but with a less exponential rate than that of infected flock, as different existing hygiene measures exist to reduce/minimise contamination of meat products.
+    \item Cost of illness (based on DALY): is expected to increase with increasing \textit{Campylobacter} infection rates, and decrease (at different rates) with the introduction of different policies.
+\end{itemize}
 %graph figure?
  
 \textbf{Model Structure}
@@ -58,21 +59,19 @@ There are two major environmental transmission routes in the environment: flies 
 
 It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
 
-Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will therefore cause the number of \textit{Brachycera} in the Netherlands to increase \parecite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}.
+Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will therefore cause the number of \textit{Brachycera} in the Netherlands to increase \parencite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}. The climate driven population growt will also trigger migration, and therefore the dispersal \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
 
-The increase in numbers will also trigger migration, and therefore the dispersal will also increase with climate change \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
+An increase in the size of the Dutch population is not expected to increase the \textit{Brachycera} biomass in the Netherlands \parencite{guenat_effects_2019-1}. Even though an increase in the population leads to more organic waste \parencite{garcia-garcia_framework_2015}, which does have the potential to increase the total number of flies \parencite{imai_population_1984, rozendaal_houseflies_1997}, this effect is possibly counterbalanced by the loss of natural habitat.
 
-- \texit{Brachycera} can excrete \textit{Campylobacter}  on human food. We know that they can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}.
+%- DEEMED INSIGNIFICANT: more people $\to$ more organic waste \parencite{garcia-garcia_framework_2015} \& more urbanisation $\to$ more \textit{Brachycera} \parencite{imai_population_1984, rozendaal_houseflies_1997} % reason: https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/1365-2664.13270
 
-
-- DEEMED INSIGNIFICANT: more people $\to$ more organic waste \parencite{garcia-garcia_framework_2015} \& more urbanisation $\to$ more \textit{Brachycera} \parencite{imai_population_1984, rozendaal_houseflies_1997} % reason: https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/1365-2664.13270
-
-\textcolor{AMAZINGPINK}{Wild birds} \\
-In Dutch and Luxembourgh waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourgh has a low poultry production in Luxembourgh, it is important to include this transmission vector in the submodel.
+In Dutch and Luxembourgh waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourgh has a low poultry production in Luxembourgh, it is important to include this biological transmission vector in the submodel.
 
 It is suspected the total number of birds in the Netherlands is not affected by climate change, just their composition \parencite{mclean_reduced_2020, knudsen_challenging_2011}.
 
-%When French et al., 2009 investigated the wild-bird fecal contamination in playgrounds in parks in aNew Zealand city, 12.5% of the samples contained Campylobacter
+%When French et al., 2009 investigated the wild-bird fecal contamination in playgrounds in parks in a New Zealand city, 12.5% of the samples contained Campylobacter
+
+Both biological disease vectors can excretie \texitt{Campylobacter} on surfaces and human food. It has been shown \textit{Musca domestica} can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}. And  12.5\% of the wild-bird feaces samples collected in playgrounds in parks in New Zealand city contained \textit{Campylobacter} \parencite{french
 
 
 \subsubsection*{Infected chickens}
