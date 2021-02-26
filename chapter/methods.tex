@@ -11,7 +11,7 @@ An important aspect to system dynamics models are the aforementioned accumulatio
 \subsection{Conceptualisation}
 The model will focus on the economic impacts and health care costs associated with \textit{Campylobacter}-contaminated chicken meat. 
 The dynamic hypothesis includes four KPIs that will be examined to answer the research question: 
-
+\begin{itemize}
 1. Number of infected chicken flocks: is expected to increase with worsening climate conditions and no interventions.
 2. Concentration of \textit{Campylobacter} in surface waters: as climate effects continue on their current trends, \textit{Campylobacter} will be able to proliferate more easily and consequently contaminate more poultry meat. These contaminations would follow an S-growth curve in the coming years considering both a reinforcing loop of the number of contaminated chicken flocks, causing more spread of \textit{Campylobacter} in the environment, and in turn the more campylobacter in the environment, the more easily chicken flocks are infected, but also a balancing loop as surface waters will reach a certain carrying capacity. %too long a sentence?
 3. Amount of environmental transmissions via disease vectors: the prior KPIs would consequently mean that these would also increase drastically, as most transmission routes are likely to display interaction effects.
@@ -52,14 +52,15 @@ This analysis contains three main sub-models:
 \subsubsection*{Environmental}
 %LISETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEH
 %IDENTIFY ARCHETYPES
+There are two major environmental transmission routes in the environment: flies and wild birds \parencite{mughini-gras_quantifying_2016}. The role of pets and other wild animals is relatively small, which is why they are excluded from the model.
 
-\textcolor{AMAZINGPINK}{Flies} \\
+\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore this has a big role in determining the chance of infection by the biological disease vectors mentioned before.
+
 It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the Diptera insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
 
+Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will therefore cause the number of \textit{Brachycera} in the Netherlands to increase \parecite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}.
 
-- Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. The embryos can withstand colds of -34 \degree C, the pupae -24 \degree C, and the adults -16 \degree C.  This means the number of \textit{Brachycera} surviving winter may increase due to climate change \parencite{goulson_predicting_2005}.
-
-- High density is also known to trigger migration, and therefore dispersal will also increase with rising temperature \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
+The increase in numbers will also trigger migration, and therefore the dispersal will also increase with climate change \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}.
 
 - \texit{Brachycera} can excrete \textit{Campylobacter}  on human food. We know that they can excrete \textit{Escherichia coli} for at least 3 days after ingestion \parencite{sasaki_epidemiological_2000}.
 
@@ -74,9 +75,6 @@ It is suspected the total number of birds in the Netherlands is not affected by 
 %When French et al., 2009 investigated the wild-bird fecal contamination in playgrounds in parks in aNew Zealand city, 12.5% of the samples contained Campylobacter
 
 
-\textcolor{AMAZINGPINK}{Dependent variable} \\
-\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. %pretty much a quote, needs to be rewritten, lol. Got tired.
-
 \subsubsection*{Infected chickens}
 % add sub-model diagram here
 This sub-model (presented in Figure X) is a simplification of Rommens' 2020(SOURCE) model of dynamics of transmission in farms, broilers and slaughterhouses. It is represented in our model as a stock-flow structure in which healthy chickens become infected chickens with \textit{Campylobacter} at the 'infection with \textit{Campylobacter}' rate. These infected chickens then become contaminated chicken meat when \textit{Campylobacter} positive chickens are slaughtered. Healthy chickens  contaminated chicken meat stock via '\textit{Campylobacter} negative chickens being slaughtered with cross-contamination. The contaminated chicken meat stock is reduced as contaminated chicken meat is consumed. The population of healthy chickens are also reduced by thinning, represented by the flow variable '\textit{Campylobacter} negative chickens slaughtered without contamination'.
@@ -87,11 +85,11 @@ Other internal variables in this model included probabilities of infection, conc
 \subsubsection*{Cost of illness}
 %Emily
 \begin{figure}[h]
-\caption{The conceptual Cost of Illness sub-model}
 \centering
-\includegraphics[width=0.5\textwidth]{images/testimage1.png}
+\includegraphics[width=0.5\textwidth]{images/COI_submodel.png}
+\caption{The conceptual Cost of Illness sub-model}
 \end{figure}
-The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Of the symptomatic infections these are assumed to be either mild or moderate/severe. Moderate/severe cases may result in death or chronic illness. Each of these outcomes contribute to key public health metrics of Years of Life Lost (YLL) in the case of death and Years Living with Disability (YLD) for all non-fatal cases. These two values are added to calculate the Disability Adjusted Life Years (DALYs) for these infections, which when multiplied by the cost of a DALY (adjusted to 2021 prices), and combined with direct healthcare costs (GP visits and hospitalisations) results in the Cost of Illness for all \textit{Campylobacter} infections.
+The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Of the symptomatic infections these are assumed to be either mild or moderate/severe. Moderate/severe cases may result in death or chronic illness. Each of these outcomes contribute to key public health metrics of Years of Life Lost (YLL) in the case of death and Years Living with Disability (YLD) for all non-fatal cases. These two values are added to calculate the Disability Adjusted Life Years (DALYs) for these infections, which when multiplied by the cost of a DALY (adjusted to 2021 prices), and combined with direct healthcare costs (GP visits and hospitalisations) results in the Cost of Illness for all \textit{Campylobacter} infections. The main loop in this model exists between moderate/severe symptoms and chronic illness, whereby those who suffer from moderate to severe campylobacteriosis symptoms are likely to become susceptible to other chronic illnesses (such as irritable bowel disease, or chronic inflammatory arthritis), which leads to further moderate to severe symptoms and further hospitalisation/GP visits.
 
 The causal structure adopted for this sub-model focuses on connecting variables based on available scientific data. Due to the underlying complexity of DALY and Cost of Illness metrics \parencite{jo_cost--illness_2014}, a top-down approach to applying these variables has been taken. As such, variables have been used for some elements that might otherwise have been modelled as stocks (e.g. categorisation of patients as mild, moderate or severe infections). Additionally, this more simplistic approach is considered appropriate, as we are not concerned with the detailed dynamics of transmission and recovery (as might be done in an SIR model), but only with the ultimate KPI of 'Cost of Illness'.
 
