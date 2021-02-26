@@ -1,7 +1,20 @@
 {UTF-8}
+Probability of contamination from runoff from agriculture and slaughterhouses=A FUNCTION OF\
+		(Probability of contamination from runoff from agriculture and slaughterhouses,Average yearly precipitation\
+		) ~~|
+Probability of contamination from runoff from agriculture and slaughterhouses=
+	~	
+	~		|
+
+Probability of contamination due to sewage overflows=A FUNCTION OF(Probability of contamination due to sewage overflows\
+		,Average yearly precipitation) ~~|
+Probability of contamination due to sewage overflows=
+	~	
+	~		|
+
 Concentration of Campylobacter in the surface water=A FUNCTION OF(Concentration of Campylobacter in the surface water\
-		,Contaminated feces of wild birds,Increased chance of infection due to sewage overflows\
-		,"run-off from farms and slaughterhouses") ~~|
+		,Contaminated feces of wild birds,Probability of contamination due to sewage overflows\
+		,Probability of contamination from runoff from agriculture and slaughterhouses) ~~|
 Concentration of Campylobacter in the surface water=
 	~	
 	~		|
@@ -61,16 +74,6 @@ Brachycera biomass=
 		House Fly Population and Control Threshold
 	|
 
-"run-off from farms and slaughterhouses"  = A FUNCTION OF( Average yearly precipitation\
-		)
-	~	
-	~		|
-
-Increased chance of infection due to sewage overflows  = A FUNCTION OF( Average yearly precipitation\
-		)
-	~	
-	~		|
-
 Average yearly precipitation  = A FUNCTION OF( )
 	~	
 	~		|
@@ -123,34 +126,34 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,9
 1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(792,191)|
 1,8,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(878,186)|
 10,9,Probability of getting infected by environment,1184,721,61,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-10,13,Contaminated feces of wild birds,1258,602,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,14,1,13,1,0,0,0,0,128,0,-1--1--1,,1|(1314,531)|
-1,15,13,1,1,0,0,0,0,128,0,-1--1--1,,1|(1206,529)|
-10,16,Infected Brachycera,1095,557,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,17,1,16,1,0,0,0,0,128,0,-1--1--1,,1|(1145,501)|
-1,18,16,9,1,0,0,0,0,128,0,-1--1--1,,1|(1122,636)|
-10,19,Brachycera biomass,883,504,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,20,Time,1017,139,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
-1,21,20,2,0,0,0,0,0,64,0,-1--1--1,,1|(958,185)|
-1,22,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(878,290)|
-10,23,Increased chance of infection due to sewage overflows,1131,318,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,24,23,1,1,0,0,0,0,128,0,-1--1--1,,1|(1160,386)|
-1,25,3,23,1,0,0,0,0,128,0,-1--1--1,,1|(1176,237)|
-10,26,"run-off from farms and slaughterhouses",1386,336,72,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,27,26,1,1,0,0,0,0,128,0,-1--1--1,,1|(1339,391)|
-1,28,3,26,1,0,0,0,0,128,0,-1--1--1,,1|(1369,284)|
-1,29,4,19,1,0,0,0,0,128,0,-1--1--1,,1|(834,431)|
-1,30,19,4,1,0,0,0,0,128,0,-1--1--1,,1|(921,435)|
-12,31,0,877,433,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Contaminated feces of wild birds,1258,602,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,1,10,1,0,0,0,0,128,0,-1--1--1,,1|(1314,531)|
+1,12,10,1,1,0,0,0,0,128,0,-1--1--1,,1|(1206,529)|
+10,13,Infected Brachycera,1095,557,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,1,13,1,0,0,0,0,128,0,-1--1--1,,1|(1145,501)|
+1,15,13,9,1,0,0,0,0,128,0,-1--1--1,,1|(1122,636)|
+10,16,Brachycera biomass,883,504,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Time,1017,139,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,18,17,2,0,0,0,0,0,64,0,-1--1--1,,1|(958,185)|
+1,19,2,4,0,0,0,0,0,128,0,-1--1--1,,1|(878,290)|
+10,20,Probability of contamination due to sewage overflows,1131,318,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,20,1,1,0,0,0,0,128,0,-1--1--1,,1|(1160,386)|
+1,22,3,20,1,0,0,0,0,128,0,-1--1--1,,1|(1176,237)|
+10,23,Probability of contamination from runoff from agriculture and slaughterhouses,1401,326,78,28,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,1,1,0,0,0,0,128,0,-1--1--1,,1|(1345,380)|
+1,25,3,23,1,0,0,0,0,128,0,-1--1--1,,1|(1372,270)|
+1,26,4,16,1,0,0,0,0,128,0,-1--1--1,,1|(834,431)|
+1,27,16,4,1,0,0,0,0,128,0,-1--1--1,,1|(921,435)|
+12,28,0,877,433,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
 R1
-1,32,19,16,1,0,0,0,0,128,0,-1--1--1,,1|(931,540)|
-12,35,0,1263,529,20,20,4,7,0,0,-1,0,0,0,0,0,0,0,0,0
+1,29,16,13,1,0,0,0,0,128,0,-1--1--1,,1|(931,540)|
+12,30,0,1263,529,20,20,4,7,0,0,-1,0,0,0,0,0,0,0,0,0
 R2
-10,36,Pi,722,235,8,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,37,36,2,0,0,0,0,0,64,0,-1--1--1,,1|(773,238)|
-10,38,Weeks in a year,1029,215,51,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,39,38,2,0,0,0,0,0,64,0,-1--1--1,,1|(960,230)|
-1,40,13,9,1,0,0,0,0,128,0,-1--1--1,,1|(1241,650)|
+10,31,Pi,722,235,8,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,31,2,0,0,0,0,0,64,0,-1--1--1,,1|(773,238)|
+10,33,Weeks in a year,1029,215,51,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,34,33,2,0,0,0,0,0,64,0,-1--1--1,,1|(960,230)|
+1,35,10,9,1,0,0,0,0,128,0,-1--1--1,,1|(1241,650)|
 ///---\\\
 :L<%^E!@
 1:Current.vdfx
@@ -163,7 +166,7 @@ R2
 72:0
 73:0
 4:Time
-5:Brachycera development rate
+5:Probability of contamination from runoff from agriculture and slaughterhouses
 35:Date
 36:YYYY-MM-DD
 37:2000
