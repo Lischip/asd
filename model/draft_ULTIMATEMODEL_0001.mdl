@@ -1,0 +1,262 @@
+{UTF-8}
+Chicken on Farms= INTEG (
+	Chickens arriving from hatcheries-Infections with CPY-"Non-infections with CPY",
+		initial Chickens on Farms)
+	~	Chicken
+	~		|
+
+Chickens arriving from hatcheries=
+	100
+	~	Chicken/Week
+	~		|
+
+consumption rate per person=
+	0.203
+	~	kg/(Person*Week)
+	~		|
+
+Contaminated Meat= INTEG (
+	("CPY-positive Chickens slaughtered"+"slaughtering with cross-contamination")*Meat per chicken\
+		-contaminated Meat consumption,
+		0)
+	~	kg
+	~		|
+
+contaminated Meat consumption=
+	proportion of contaminated meat * consumption rate per person * Population * Infections per kg of meat consumed
+	~	kg/Week
+	~		|
+
+contaminated slaughtered Chickens=
+	"CPY-positive Chickens slaughtered"+"slaughtering with cross-contamination"
+	~	Chicken/Week
+	~		|
+
+"CPY-negative Chickens"= INTEG (
+	"Non-infections with CPY"-"slaughtering with cross-contamination"-"slaughtering without cross-contamination"\
+		,
+		0)
+	~	Chicken
+	~		|
+
+"CPY-positive Chickens slaughtered"=
+	"CPY-positive Chickens"*slaughter rate
+	~	Chicken/Week
+	~		|
+
+"CPY-positive Chickens"= INTEG (
+	Infections with CPY-"CPY-positive Chickens slaughtered",
+		0)
+	~	Chicken
+	~		|
+
+Infected people= INTEG (
+	contaminated Meat consumption,
+		0)
+	~	Person
+	~		|
+
+Infections per kg of meat consumed=
+	1
+	~	Person/kg
+	~		|
+
+Infections with CPY=
+	Chicken on Farms*Rate of chicken infection
+	~	Chicken/Week
+	~		|
+
+initial Chickens on Farms=
+	100
+	~	Chicken
+	~		|
+
+Meat per chicken=
+	1.5
+	~	kg/Chicken
+	~		|
+
+"Non-infections with CPY"=
+	Chicken on Farms*(1-Rate of chicken infection)
+	~	Chicken/Week
+	~		|
+
+Population=
+	17
+	~	Person
+	~		|
+
+proportion of contaminated meat=
+	ZIDZ(contaminated slaughtered Chickens,Total Chickens slaughtered)
+	~	Dmnl
+	~		|
+
+Rate of chicken infection=
+	0.4
+	~	1/Week
+	~		|
+
+"Rate of cross-contamination"=
+	0.1
+	~	1/Week
+	~		|
+
+slaughter rate=
+	0.3
+	~	1/Week
+	~		|
+
+"slaughtering with cross-contamination"=
+	"CPY-negative Chickens" * "Rate of cross-contamination"
+	~	Chicken/Week
+	~		|
+
+"slaughtering without cross-contamination"=
+	"CPY-negative Chickens" * (1-"Rate of cross-contamination")
+	~	Chicken/Week
+	~		|
+
+Total Chickens slaughtered=
+	"CPY-positive Chickens slaughtered"+"slaughtering with cross-contamination"+"slaughtering without cross-contamination"
+	~	Chicken/Week
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 104
+	~	Week
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Week
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Week [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Week [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Chicken on Farms,313,117,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,142,118,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,1,4,0,0,22,0,0,0,-1--1--1,,1|(245,118)|
+1,5,6,2,100,0,0,22,0,0,0,-1--1--1,,1|(179,118)|
+11,6,0,212,118,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Chickens arriving from hatcheries,212,145,55,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,initial Chickens on Farms,289,48,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,9,8,1,0,0,0,0,0,128,1,-1--1--1,,1|(298,75)|
+10,46,"CPY-positive Chickens",542,112,46,17,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,"CPY-negative Chickens",310,284,50,25,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,51,46,4,0,0,22,0,0,0,-1--1--1,,1|(463,113)|
+1,50,51,1,100,0,0,22,0,0,0,-1--1--1,,1|(385,113)|
+11,51,0,424,113,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,52,Infections with CPY,424,140,46,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,54,56,47,4,0,0,22,0,0,0,-1--1--1,,1|(313,228)|
+1,55,56,1,100,0,0,22,0,0,0,-1--1--1,,1|(313,161)|
+11,56,0,313,191,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,57,"Non-infections with CPY",368,191,47,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,58,48,131,286,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,60,62,58,4,0,0,22,0,0,0,-1--1--1,,1|(164,290)|
+1,61,62,47,100,0,0,22,0,0,0,-1--1--1,,1|(229,290)|
+11,62,0,193,290,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,63,"slaughtering without cross-contamination",193,317,64,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,64,Contaminated Meat,545,289,48,26,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,68,64,4,0,0,22,0,0,0,-1--1--1,,1|(464,285)|
+1,67,68,47,100,0,0,22,0,0,0,-1--1--1,,1|(389,285)|
+11,68,0,425,285,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,69,"slaughtering with cross-contamination",425,312,64,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,75,77,64,4,0,0,22,0,0,0,-1--1--1,,1|(542,232)|
+1,76,77,46,100,0,0,22,0,0,0,-1--1--1,,1|(542,159)|
+11,77,0,542,196,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,78,"CPY-positive Chickens slaughtered",618,196,68,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,79,Rate of chicken infection,287,594,50,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,"Rate of cross-contamination",307,375,64,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,83,Rate of chicken infection,464,225,55,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,86,80,63,0,0,0,0,0,128,0,-1--1--1,,1|(256,349)|
+1,87,80,69,0,0,0,0,0,128,0,-1--1--1,,1|(359,346)|
+1,90,92,139,4,0,0,22,0,0,0,-1--1--1,,1|(725,290)|
+1,91,92,64,100,0,0,22,0,0,0,-1--1--1,,1|(624,290)|
+11,92,0,661,290,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,93,contaminated Meat consumption,661,317,61,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,96,47,63,1,0,0,0,0,64,0,-1--1--1,,1|(286,312)|
+1,97,47,69,1,0,0,0,0,128,0,-1--1--1,,1|(329,314)|
+10,98,Meat per chicken,549,356,55,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,100,98,64,1,0,0,0,0,128,0,-1--1--1,,1|(547,315)|
+1,101,46,78,0,0,0,0,0,64,0,-1--1--1,,1|(573,147)|
+10,102,consumption rate per person,770,221,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,103,102,93,1,0,0,0,0,128,0,-1--1--1,,1|(699,271)|
+10,105,proportion of contaminated meat,780,445,60,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,110,Total Chickens slaughtered,262,484,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,111,63,110,1,0,0,0,0,128,0,-1--1--1,,1|(200,391)|
+1,112,69,110,1,0,0,0,0,128,0,-1--1--1,,1|(376,413)|
+10,114,"CPY-positive Chickens slaughtered",456,475,72,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,115,114,110,1,0,0,0,0,128,0,-1--1--1,,1|(334,470)|
+1,116,110,105,1,0,0,0,0,128,0,-1--1--1,,1|(613,501)|
+10,117,contaminated slaughtered Chickens,528,415,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,118,69,117,1,0,0,0,0,128,0,-1--1--1,,1|(463,365)|
+1,119,114,117,0,0,0,0,0,128,0,-1--1--1,,1|(486,449)|
+1,120,117,105,0,0,0,0,0,128,0,-1--1--1,,1|(651,429)|
+1,121,105,93,0,0,0,0,0,128,0,-1--1--1,,1|(725,386)|
+10,122,Population,795,380,34,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,123,122,93,0,0,0,0,0,64,0,-1--1--1,,1|(742,355)|
+1,132,83,57,1,0,0,0,0,128,0,-1--1--1,,1|(393,220)|
+1,133,83,52,0,0,0,0,0,128,0,-1--1--1,,1|(447,188)|
+1,134,1,52,1,0,0,0,0,128,0,-1--1--1,,1|(373,148)|
+1,135,1,57,1,0,0,0,0,128,0,-1--1--1,,1|(344,154)|
+10,136,slaughter rate,721,130,42,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,137,136,78,0,0,0,0,0,128,0,-1--1--1,,1|(681,155)|
+10,139,Infected people,824,291,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,140,Infections per kg of meat consumed,973,222,62,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|0||255-0-255,0,0,0,0,0,0
+12,143,0,1018,317,89,19,8,7,0,5,-1,0,0,0,0-255-255,0-255-255,|0||0-0-0,0,0,0,0,0,0
+extend to SIR component (with delay time of 10 days)
+1,144,140,93,1,0,0,0,0,128,0,-1--1--1,,1|(776,249)|
+///---\\\
+:L<%^E!@
+1:Current
+1:Current
+9:Current
+15:0,0,0,1,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:contaminated Meat consumption
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:3
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:104
+26:104
+91:0
+90:0
+87:0
+75:
+43:
