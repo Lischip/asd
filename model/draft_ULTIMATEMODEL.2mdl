@@ -1,0 +1,115 @@
+{UTF-8}
+Chicken on Farms  = A FUNCTION OF( Chickens arriving from hatcheries,-CPY negative chickens being slaughtered\
+		,-initial Chickens on Farms) ~~|
+Chicken on Farms= INTEG (
+	Chickens arriving from hatcheries-CPY negative chickens being slaughtered,
+		initial Chickens on Farms)
+	~	Chicken
+	~		|
+
+Chickens arriving from hatcheries=
+	100
+	~	Chicken/Week
+	~		|
+
+CPY negative chickens being slaughtered=A FUNCTION OF(CPY negative chickens being slaughtered\
+		) ~~|
+CPY negative chickens being slaughtered=
+	~	Chicken/Week
+	~		|
+
+"CPY-positive Chickens"  = A FUNCTION OF( )
+	~	
+	~		|
+
+initial Chickens on Farms=
+	100
+	~	Chicken
+	~		|
+
+Probability of Chicken being infected=A FUNCTION OF(Probability of Chicken being infected\
+		) ~~|
+Probability of Chicken being infected=
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 104
+	~	Week
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Week
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Week [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Week [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Chicken on Farms,313,219,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,142,220,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(245,220)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(179,220)|
+11,5,0,212,220,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Chickens arriving from hatcheries,212,247,55,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,initial Chickens on Farms,289,150,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,7,1,0,0,0,0,0,128,0,-1--1--1,,1|(298,177)|
+12,9,48,315,450,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,12,9,4,0,0,22,0,0,0,-1--1--1,,1|(314,401)|
+1,11,12,1,100,0,0,22,0,0,0,-1--1--1,,1|(314,294)|
+11,12,0,314,355,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,13,CPY negative chickens being slaughtered,406,355,74,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Probability of Chicken being infected,613,306,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,15,"CPY-positive Chickens",526,217,46,21,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+///---\\\
+:L<%^E!@
+1:Current
+9:Current
+15:0,0,0,1,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:CPY negative chickens being slaughtered
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:3
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:104
+26:104
+91:0
+90:0
+87:0
+75:
+43:
