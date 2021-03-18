@@ -1,88 +1,113 @@
 {UTF-8}
-Probability of contamination from runoff from agriculture and slaughterhouses=A FUNCTION OF\
-		(Probability of contamination from runoff from agriculture and slaughterhouses,Average yearly precipitation\
-		) ~~|
-Probability of contamination from runoff from agriculture and slaughterhouses=
+exposure rate to brachycera=
+	0.2
 	~	
 	~		|
 
-Probability of contamination due to sewage overflows=A FUNCTION OF(Probability of contamination due to sewage overflows\
-		,Average yearly precipitation) ~~|
-Probability of contamination due to sewage overflows=
+infected brachycera=
+	Brachycera biomass*proportion of infected brachycera
 	~	
 	~		|
 
-Concentration of Campylobacter in the surface water=A FUNCTION OF(Concentration of Campylobacter in the surface water\
-		,Contaminated feces of wild birds,Probability of contamination due to sewage overflows\
-		,Probability of contamination from runoff from agriculture and slaughterhouses) ~~|
-Concentration of Campylobacter in the surface water=
+proportion of infected brachycera=
+	0.3
 	~	
 	~		|
 
-Probability of getting infected by environment=A FUNCTION OF(Probability of getting infected by environment\
-		,Contaminated feces of wild birds,Infected Brachycera) ~~|
-Probability of getting infected by environment=
+Probability of infection through brachycera=
+	exposure rate to brachycera*infected brachycera
 	~	
 	~		|
 
-Pi=
-	ARCCOS(-1)
+Probability of human infection from environment=
+	Probability of infection through brachycera*Probability of infection through surface water
 	~	
 	~		|
 
-Weeks in a year=
-	365.25/7
+balancing constant 1=
+	1
+	~	fly/(degree*Week)
+	~		|
+
+Brachycera development=
+	-0.0091 +(0.0024*MAX(Temperature,4)) * balancing constant 1
+	~	fly/Week
+	~		|
+
+Minimum average annual precipitation=
+	40
 	~	
 	~		|
 
-Maximum average week temperature=
-	23
-	~	
-	~	placeholder
-	|
-
-Minimum average week temperature=
-	-4
-	~	
-	~	placeholder
-	|
-
-Brachycera development rate  = A FUNCTION OF( Brachycera biomass,Temperature) ~~|
-Brachycera development rate=
-	~	
-	~	-0.0091 +(0.0024*MAX(Temperature,4))
-		
-		Legacy from Edien
-	|
-
-Contaminated feces of wild birds  = A FUNCTION OF( Concentration of Campylobacter in the surface water\
-		) ~~|
-Contaminated feces of wild birds=
+Maximum average annual precipitation=
+	85
 	~	
 	~		|
 
-Infected Brachycera  = A FUNCTION OF( Brachycera biomass,Concentration of Campylobacter in the surface water\
-		)
-	~	
+Probability of infection through surface water=
+	0.15
+	~	Dmnl
 	~		|
 
-Brachycera biomass=A FUNCTION OF(Brachycera biomass,Brachycera development rate) ~~|
-Brachycera biomass=
-	~	
+Precipitation=
+	(-1)*(SIN(2*Pi*(Time-2)/Weeks in a year)*(Maximum average annual precipitation-(Minimum average annual precipitation\
+		))/2)+((Maximum average annual precipitation-(Minimum average annual precipitation)\
+		)/2)
+	+Minimum average annual precipitation
+	~	Dmnl
+	~		|
+
+Brachycera biomass= INTEG (
+	Brachycera development-Brachycera death,
+		initial Brachycera)
+	~	fly
 	~	Comparison of Intrinsic Rate of Different House Fly
 		Densities in a Simulated Condition: A Prediction for
 		House Fly Population and Control Threshold
 	|
 
-Average yearly precipitation  = A FUNCTION OF( )
-	~	
+Brachycera death=
+	DELAY1I(Brachycera development, Brachycera lifetime, Brachycera biomass)
+	~	fly/Week
 	~		|
 
+Brachycera lifetime=
+	1.5
+	~	Week
+	~		|
+
+initial Brachycera=
+	0
+	~	fly
+	~		|
+
+Pi=
+	ARCCOS(-1)
+	~	Dmnl
+	~		|
+
+Weeks in a year=
+	365.25/7
+	~	Week/Year
+	~		|
+
+Maximum average annual temperature=
+	23
+	~	degree
+	~	placeholder
+	|
+
+Minimum average annual temperature=
+	-4
+	~	degree
+	~	placeholder
+	|
+
 Temperature=
-	 (-1)*(SIN(2*Pi*(Time+8)/Weeks in a year)*(Maximum average week temperature-(Minimum average week temperature\
-		))/2)+((Maximum average week temperature-(Minimum average week temperature
-	))/2)+Minimum average week temperature
-	~	
+	(-1)*(SIN(2*Pi*(Time+8)/Weeks in a year)*(Maximum average annual temperature-(Minimum average annual temperature\
+		))/2)+((Maximum average annual temperature-(Minimum average annual temperature))/2)
+	+Minimum average annual temperature
+	~	degree
 	~	© Edien
 	|
 
@@ -92,7 +117,7 @@ Temperature=
 		Simulation Control Parameters
 	|
 
-FINAL TIME  = 104
+FINAL TIME  = 52
 	~	Week
 	~	The final time for the simulation.
 	|
@@ -108,7 +133,7 @@ SAVEPER  =
 	~	The frequency with which output is stored.
 	|
 
-TIME STEP  = 1
+TIME STEP  = 0.0078125
 	~	Week [0,?]
 	~	The time step for the simulation.
 	|
@@ -117,48 +142,66 @@ TIME STEP  = 1
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
-10,1,Concentration of Campylobacter in the surface water,1256,455,57,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,2,Temperature,878,249,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,3,Average yearly precipitation,1250,182,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,4,Brachycera development rate,879,349,49,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-10,5,Minimum average week temperature,719,142,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,6,Maximum average week temperature,879,138,59,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,7,5,2,0,0,0,0,0,128,0,-1--1--1,,1|(792,191)|
-1,8,6,2,0,0,0,0,0,128,0,-1--1--1,,1|(878,186)|
-10,9,Probability of getting infected by environment,1184,721,61,22,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-10,10,Contaminated feces of wild birds,1258,602,63,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,11,1,10,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1314,531)|
-1,12,10,1,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1206,529)|
-10,13,Infected Brachycera,1095,557,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,14,1,13,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1145,501)|
-1,15,13,9,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1122,636)|
-10,16,Brachycera biomass,883,504,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,17,Time,1017,139,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
-1,18,17,2,0,0,0,0,0,64,0,-1--1--1,,1|(958,185)|
-1,19,2,4,0,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(878,290)|
-10,20,Probability of contamination due to sewage overflows,1131,318,74,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,21,20,1,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1160,386)|
-1,22,3,20,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1176,237)|
-10,23,Probability of contamination from runoff from agriculture and slaughterhouses,1401,326,78,28,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,24,23,1,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1345,380)|
-1,25,3,23,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1372,270)|
-1,26,4,16,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(834,431)|
-1,27,16,4,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(921,435)|
-12,28,0,877,433,20,20,5,7,0,0,-1,0,0,0,0,0,0,0,0,0
-B1
-1,29,16,13,1,0,0,0,0,128,0,-1--1--1,,1|(931,540)|
-12,30,0,1263,529,20,20,4,7,0,0,-1,0,0,0,0,0,0,0,0,0
-R1
-10,31,Pi,722,235,8,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,32,31,2,0,0,0,0,0,64,0,-1--1--1,,1|(773,238)|
-10,33,Weeks in a year,1029,215,51,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,34,33,2,0,0,0,0,0,64,0,-1--1--1,,1|(960,230)|
-1,35,10,9,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1241,650)|
+10,1,Temperature,275,214,41,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Minimum average annual temperature,381,41,60,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Maximum average annual temperature,442,97,60,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,2,1,0,0,0,0,0,128,0,-1--1--1,,1|(329,125)|
+1,5,3,1,0,0,0,0,0,128,0,-1--1--1,,1|(358,155)|
+10,6,Brachycera biomass,375,424,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Time,234,162,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,8,7,1,0,0,0,0,0,64,0,-1--1--1,,1|(249,182)|
+10,9,Pi,498,204,8,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,9,1,0,0,0,0,0,64,0,-1--1--1,,1|(409,207)|
+10,11,Weeks in a year,505,159,51,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,11,1,0,0,0,0,0,64,0,-1--1--1,,1|(394,185)|
+12,13,48,163,419,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,6,4,0,0,22,0,0,0,-1--1--1,,1|(293,419)|
+1,15,16,13,100,0,0,22,0,0,0,-1--1--1,,1|(206,419)|
+11,16,48,246,419,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,Brachycera development,246,446,41,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,18,48,379,584,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,21,18,4,0,0,22,0,0,0,-1--1--1,,1|(378,541)|
+1,20,21,6,100,0,0,22,0,0,0,-1--1--1,,1|(378,469)|
+11,21,48,378,501,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,22,Brachycera death,441,501,55,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,23,1,16,1,0,0,0,2,192,0,-1--1--1,|12||0-0-0,1|(280,295)|
+10,24,initial Brachycera,375,376,54,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,24,6,1,0,0,0,0,128,1,-1--1--1,,1|(375,388)|
+10,26,Brachycera lifetime,502,566,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,26,22,0,0,0,0,0,128,0,-1--1--1,,1|(476,538)|
+1,28,17,21,0,0,0,0,0,128,0,-1--1--1,,1|(322,477)|
+10,29,Time,739,154,26,11,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,30,6,22,1,0,0,0,0,128,0,-1--1--1,,1|(435,478)|
+10,31,balancing constant 1,173,340,33,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,31,16,1,0,0,0,0,128,0,-1--1--1,,1|(200,385)|
+10,33,Precipitation,703,211,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,34,11,33,0,0,0,0,0,128,0,-1--1--1,,1|(597,183)|
+1,35,9,33,0,0,0,0,0,128,0,-1--1--1,,1|(577,206)|
+10,36,Minimum average annual precipitation,646,44,61,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,Maximum average annual precipitation,578,98,61,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,36,33,0,0,0,0,0,128,0,-1--1--1,,1|(673,124)|
+1,39,37,33,0,0,0,0,0,128,0,-1--1--1,,1|(639,153)|
+10,40,Time,813,159,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,41,40,33,0,0,0,0,0,64,0,-1--1--1,,1|(764,182)|
+10,42,Probability of infection through surface water,971,390,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,43,Time,733,338,26,11,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+12,44,0,659,511,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,45,infected brachycera,530,398,36,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,6,45,1,0,0,0,0,128,0,-1--1--1,,1|(473,388)|
+10,47,Probability of human infection from environment,898,535,66,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,42,47,1,0,0,0,0,128,0,-1--1--1,,1|(948,444)|
+10,49,proportion of infected brachycera,535,300,62,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,49,45,1,0,0,0,0,128,0,-1--1--1,,1|(528,343)|
+10,51,Probability of infection through brachycera,684,475,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,45,51,1,0,0,0,0,128,0,-1--1--1,,1|(613,447)|
+1,53,51,47,1,0,0,0,0,128,0,-1--1--1,,1|(812,522)|
+10,54,exposure rate to brachycera,713,361,52,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,54,51,0,0,0,0,0,128,0,-1--1--1,,1|(700,411)|
 ///---\\\
 :L<%^E!@
-1:Current.vdfx
+1:C:\Users\Acer\Documents\University Delft\MSc Engineering and Policy Analysis\EPA1341 - Advanced System Dynamics\ASD Project\Current
 9:Current
-15:0,0,0,0,0,0
+15:0,0,0,1,0,0
 19:90,0
 27:0,
 34:0,
@@ -166,7 +209,7 @@ R1
 72:0
 73:0
 4:Time
-5:Probability of contamination from runoff from agriculture and slaughterhouses
+5:Precipitation
 35:Date
 36:YYYY-MM-DD
 37:2000
@@ -181,8 +224,8 @@ R1
 80:0
 81:0
 24:0
-25:104
-26:104
+25:52
+26:52
 91:0
 90:0
 87:0
