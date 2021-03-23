@@ -1,0 +1,152 @@
+{UTF-8}
+Acute GE patients  = A FUNCTION OF( -Acute illness recovery,-Subsequent development of sequelae\
+		,Symptom development)
+	~	
+	~		|
+
+Acute illness recovery  = A FUNCTION OF( )
+	~	
+	~		|
+
+Chronic Illness development  = A FUNCTION OF( Probability of direct development of sequelae\
+		)
+	~	
+	~		|
+
+Chronic illness recover  = A FUNCTION OF( )
+	~	
+	~		|
+
+Chronic symptoms  = A FUNCTION OF( )
+	~	
+	~		|
+
+Death  = A FUNCTION OF( )
+	~	
+	~		|
+
+Infected persons  = A FUNCTION OF( -Chronic Illness development,-Symptom development)
+	~	
+	~		|
+
+Patients with chronic symptoms  = A FUNCTION OF( Chronic symptoms)
+	~	
+	~		|
+
+Probability of developing symptoms  = A FUNCTION OF( )
+	~	
+	~		|
+
+Probability of direct development of sequelae  = A FUNCTION OF( )
+	~	
+	~		|
+
+Sequelae patients  = A FUNCTION OF( Chronic Illness development,-Chronic illness recover\
+		,-Chronic symptoms,-Death,Subsequent development of sequelae)
+	~	
+	~		|
+
+Subsequent development of sequelae  = A FUNCTION OF( )
+	~	
+	~		|
+
+Symptom development  = A FUNCTION OF( Probability of developing symptoms)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,100,0
+10,1,Infected persons,176,295,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Acute GE patients,408,296,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Sequelae patients,407,461,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Patients with chronic symptoms,671,555,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,5,7,2,4,0,0,22,0,0,0,-1--1--1,,1|(327,293)|
+1,6,7,1,100,0,0,22,0,0,0,-1--1--1,,1|(245,293)|
+11,7,420,281,293,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,8,Symptom development,281,309,58,8,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,11,3,4,0,0,22,0,0,0,-1--1--1,,1|(275,462)|
+1,10,11,1,100,0,0,22,0,0,0,-1--1--1,,1|(178,384)|
+11,11,266,178,462,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,Chronic Illness development,178,484,40,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Probability of developing symptoms,303,213,57,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,8,1,0,0,0,0,128,0,-1--1--1,,1|(249,246)|
+10,15,Probability of direct development of sequelae,202,548,64,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,16,15,12,1,0,0,0,0,128,0,-1--1--1,,1|(109,509)|
+1,17,19,3,4,0,0,22,0,0,0,-1--1--1,,1|(407,412)|
+1,18,19,2,100,0,0,22,0,0,0,-1--1--1,,1|(407,344)|
+11,19,310,407,378,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,20,Subsequent development of sequelae,456,378,41,21,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,21,23,4,4,0,0,22,0,0,0,-1--1--1,,1|(580,547)|
+1,22,23,3,100,0,0,22,0,0,0,-1--1--1,,1|(523,461)|
+11,23,244,523,547,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,24,Chronic symptoms,523,563,48,8,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,25,48,408,582,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,26,28,25,4,0,0,22,0,0,0,-1--1--1,,1|(408,553)|
+1,27,28,3,100,0,0,22,0,0,0,-1--1--1,,1|(408,501)|
+11,28,48,408,527,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,29,Death,433,527,17,8,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,30,48,643,294,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,31,33,30,4,0,0,22,0,0,0,-1--1--1,,1|(589,294)|
+1,32,33,2,100,0,0,22,0,0,0,-1--1--1,,1|(491,294)|
+11,33,48,540,294,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,34,Acute illness recovery,540,310,56,8,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,35,48,667,461,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,36,38,35,4,0,0,22,0,0,0,-1--1--1,,1|(607,461)|
+1,37,38,3,100,0,0,22,0,0,0,-1--1--1,,1|(496,461)|
+11,38,48,552,461,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,39,Chronic illness recover,552,477,58,8,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+///---\\\
+:L<%^E!@
+9:Current
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+5:Acute GE patients
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+92:0
+24:0
+25:0
+26:0
+91:0
+90:0
+87:0
+75:
+43:

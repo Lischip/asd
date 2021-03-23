@@ -1,3 +1,5 @@
+\subsection{Model explanation}
+\textcolor{red}{Add a short introduction to introduce the subsections}
 \subsection{How is System Dynamics used?}
 An important aspect to system dynamics models are the aforementioned accumulations, delays and feed-backs. Accumulations, more commonly referred to as stock variables refer to some value material or entities within a system. Through flow or rate variables stocks dynamically change over time, leading to the aforementioned delay and feed-back effects \parencite{sterman_system_2001}. To build the sub-models for the study on \textit{Campylobacter} appropriate variables had to be chosen to represent these features. In the case of, infected populations of humans and flocks would act modelled as stocks, whilst various transmission routes provide flow variables between them. This naturally produces delays, as it takes time for the disease to spread, symptoms to surface and potential hospitalisation. Feed-back loops will also arise as \textit{Campylobacter}, as the number of contaminated chicken flocks, causes more spread of \textit{Campylobacter} in the environment, and in turn the more \textit{Campylobacter} in the environment, the more easily chicken flocks are infected. Furthermore the model was subdivided into multiple subsystems, which will be explained in the following paragraphs. 
 
@@ -62,11 +64,11 @@ This analysis contains three main sub-models:
 	\label{fig:environmental_submodel}
 \end{figure*}
 
-\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore, this has a big role in determining the chance of infection by biological disease vectors mentioned before. This can be seen in Figure~\ref{fig:environmental_submodel}. The main biological disease vectors have been determined to be flies and wild birds \parencite{mughini-gras_quantifying_2016}. Both vectors are considered to be major spreaders as they actively excrete \texitt{Campylobacter} on surfaces and human food \parencite{french_molecular_2009, hald_influxed_2008}.
+\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore, this has a big role in determining the chance of infection by biological disease vectors mentioned before. This can be seen in Figure~\ref{fig:environmental_submodel}. The main biological disease vectors have been determined to be flies and wild birds \parencite{mughini-gras_quantifying_2016}. Both vectors are considered to be major spreaders as they actively excrete \texitt{Campylobacter} on surfaces and human food \parencite{french_molecular_2009, hald_influxed_2008, berndtson_campylobacter_1996}.
 
 It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the \textit{Diptera} insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
 
-In Dutch and Luxembourgish waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourg has a low poultry production, it is important to include this biological transmission vector in the sub-model.
+In Dutch and Luxembourgish waters, 37.7\% and 61.0\% of the \textit{Campylobacter} strains were attributed to poultry and wild birds respectively in a research by \cite{mughini-gras_quantifying_2016}. Since Luxembourg has a low poultry production, it is important to include this biological transmission vector in the sub-model.
 
 Extreme temperatures are important selective agents during the separate stages of the \textit{Brachycera}. Climate change will cause the number of \textit{Brachycera} in the Netherlands to increase \parencite{goulson_predicting_2005}. It is expected this rise in numbers will be most evident in summer, but it is also expected in the winter according to \citeauthor{goulson_predicting_2005}. The climate driven population growth will also trigger migration, and therefore the dispersal \parencite{feder_locomotion_2010}, which will result in increased transmission of \textit{Campylobacter}. It is suspected that the total number of birds in the Netherlands is not affected by climate change, just their composition \parencite{mclean_reduced_2020, knudsen_challenging_2011}. Rainfall is not a driving factor in the total \textit{Brachycera} biomass \parencite{goulson_predicting_2005}.
 
@@ -74,6 +76,9 @@ Climate change is also linked to different precipitation patterns in the Netherl
 
 An increase in Dutch population size is not expected to increase the \textit{Brachycera} biomass in the Netherlands \parencite{guenat_effects_2019}. Even though an increase in the population leads to more organic waste \parencite{garcia-garcia_framework_2015}, which does have the potential to increase the total number of flies \parencite{imai_population_1984, rozendaal_houseflies_1997}, this effect is possibly counterbalanced by the loss of natural habitat.
 
+%Effect of climate change on runoff of Campylobacter and Cryptosporidium from land to surface water  This study shows that for the evaluated scenarios, climate change has little impact on concentrations of Campylobacter and Cryptosporidium transported from land to the surface waters.
+
+% Seasonal effect on probability of infection through surface water?
 
 
 \subsubsection*{Infected chickens}
@@ -98,19 +103,33 @@ Other internal variables in this model included probabilities of infection, whic
 \includegraphics[width=0.5\textwidth]{images/COI_submodel.png}
 \caption{The conceptual Cost of Illness sub-model}
 \end{figure}
-The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Of the symptomatic infections these are assumed to be either mild or moderate/severe. Moderate/severe cases may result in death or chronic illness. Each of these outcomes contribute to key public health metrics of Years of Life Lost (YLL) in the case of death and Years Living with Disability (YLD) for all non-fatal cases. These two values are added to calculate the Disability Adjusted Life Years (DALYs) for these infections, which when multiplied by the cost of a DALY (adjusted to 2021 prices), and combined with direct healthcare costs (GP visits and hospitalisations) results in the Cost of Illness for all \textit{Campylobacter} infections. The main loop in this model exists between moderate/severe symptoms and chronic illness, whereby those who suffer from moderate to severe campylobacteriosis symptoms are likely to become susceptible to other chronic illnesses (such as irritable bowel disease, or chronic inflammatory arthritis), which leads to further moderate to severe symptoms and further hospitalisation/GP visits.
+The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Symptomatic infections are assumed to all develop acute gastroenteritis, with a proportion of all cases either recovering, or subsequently developing chronic illnesses. Each of these outcomes contribute to key public health metrics of Disability Adjusted Life Years (DALYs) for these infections, and the Cost of Illness for all \textit{Campylobacter} infections. 
 
-The causal structure adopted for this sub-model focuses on connecting variables based on available scientific data. Due to the underlying complexity of DALY and Cost of Illness metrics \parencite{jo_cost--illness_2014}, a top-down approach to applying these variables has been taken. As such, variables have been used for some elements that might otherwise have been modelled as stocks (e.g. categorisation of patients as mild, moderate or severe infections). Additionally, this more simplistic approach is considered appropriate, as we are not concerned with the detailed dynamics of transmission and recovery (as might be done in an SIR model), but only with the ultimate KPI of 'Cost of Illness'.
+The causal structure adopted for this sub-model focuses on connecting variables based on available scientific data. Due to the underlying complexity of DALY and Cost of Illness metrics \parencite{jo_cost--illness_2014}, a top-down approach to applying these variables has been taken. As such, variables have been used for some elements that might otherwise have been modelled as stocks (e.g. DALYs and Cost of Illness). Additionally, this more simplistic approach is considered appropriate, as we are not concerned with the detailed dynamics of transmission and recovery (as might be done in an SIR model), but only with the ultimate KPIs of 'DALY' and 'Cost of Illness'.
+
+\subsection{Key Assumptions}
+%What were the key assumptions made in developing the model?
+    %Take from validation spreadsheet
+    %Include simplifications of real-world circumstances (e.g. acute campy coming before chronic conditions)
 
 \subsection{Model Validation}
 %4.	Validation
  %   a.	Use various tests to argue why model is fit for purpose
+% From meeting with Jill:
+%Verification requires three steps:
+    %Check that the causal diagrams match the stock-flow diagrams, and add one line saying "this was checked'
+    %Check that the units are consistent with the real world and add one line saying 'units were checked for material consistency'.
+    %Confirm that you've used the appropriate numerical technique/time step and add one line saying, 'behaviour of the model for the chosen time step and half that time step is consistent, this indicates that the appropriate time step and integration method has been used'
     
+%Validation requires three steps:
+    %Show how the data matches or does not match historical data (explain why)
+    %Conduct an extreme values test to test the dynamic hypothesis and range of model applicability and provide comment to the reader on the boundaries of the model's effective use. Tell the reader the conditions under which the model behaves reliably
+    %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
 \subsection{Experimental setup}
 %5.	Experimental setup
  %   a.	Introduce main uncertainties (potentially with table)
   %  b.	Explain scenario and policy logic
+        %Parametric experiments - change parameters and observe behaviour
+        %Structural experiments - change a structure (e.g. add feedback) and observe behaviour
    % c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
-
-
 

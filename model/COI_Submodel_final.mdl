@@ -1,0 +1,124 @@
+{UTF-8}
+Acute infections  = A FUNCTION OF( Symptomatic infections)
+	~	
+	~		|
+
+DALY impact  = A FUNCTION OF( "Guillan-Barre Syndrome",Irritable Bowel Disease,Reactive Arthritis\
+		)
+	~	
+	~		|
+
+Cost of illness  = A FUNCTION OF( "Guillan-Barre Syndrome",Irritable Bowel Disease,Reactive Arthritis\
+		)
+	~	
+	~		|
+
+Reactive Arthritis  = A FUNCTION OF( Acute infections)
+	~	
+	~		|
+
+"Guillan-Barre Syndrome"  = A FUNCTION OF( Acute infections)
+	~	
+	~		|
+
+Irritable Bowel Disease  = A FUNCTION OF( Acute infections)
+	~	
+	~		|
+
+Asymptomatic infections  = A FUNCTION OF( Infected Persons)
+	~	
+	~		|
+
+Infected Persons  = A FUNCTION OF( )
+	~	
+	~		|
+
+Symptomatic infections  = A FUNCTION OF( Infected Persons)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|72,72,100,0
+10,1,Infected Persons,275,264,42,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Asymptomatic infections,258,349,39,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Symptomatic infections,469,152,59,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,1,3,1,0,0,0,0,128,0,-1--1--1,,1|(306,201)|
+1,5,1,2,1,0,0,0,0,128,0,-1--1--1,,1|(252,298)|
+10,6,Cost of illness,668,595,37,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Acute infections,552,253,42,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,Reactive Arthritis,367,392,45,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,"Guillan-Barre Syndrome",558,384,36,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,Irritable Bowel Disease,762,381,59,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,11,DALY impact,559,484,36,8,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,3,7,1,0,0,0,0,128,0,-1--1--1,,1|(561,190)|
+1,13,7,8,1,0,0,0,0,128,0,-1--1--1,,1|(418,280)|
+1,14,7,9,1,0,0,0,0,128,0,-1--1--1,,1|(560,318)|
+1,15,7,10,1,0,0,0,0,128,0,-1--1--1,,1|(711,279)|
+1,16,8,11,1,0,0,0,0,128,0,-1--1--1,,1|(489,426)|
+1,17,9,11,0,0,0,0,0,128,0,-1--1--1,,1|(558,430)|
+1,18,10,11,1,0,0,0,0,128,0,-1--1--1,,1|(660,438)|
+1,19,8,6,1,0,0,0,0,128,0,-1--1--1,,1|(499,552)|
+1,20,9,6,1,0,0,0,0,128,0,-1--1--1,,1|(633,424)|
+1,21,10,6,1,0,0,0,0,128,0,-1--1--1,,1|(774,488)|
+///---\\\
+:L<%^E!@
+9:Current
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+5:Asymptomatic infections
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+92:0
+24:0
+25:0
+26:0
+91:0
+90:0
+87:0
+75:
+43:
