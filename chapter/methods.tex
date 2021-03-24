@@ -112,24 +112,50 @@ The causal structure adopted for this sub-model focuses on connecting variables 
     %Take from validation spreadsheet
     %Include simplifications of real-world circumstances (e.g. acute campy coming before chronic conditions)
 
-\subsection{Model Validation}
+\subsection{Model Specification}
+%What are the main mechanisms/variables/parameters in our model?
+
+%What software was used for the modelling?
+The system was modelled using VenSim PLE software developed by Ventana Systems Inc.
+%Model Settings
+    %Why was the integration method chosen?
+The model uses Euler as the integration method. Euler was considered an attractive integration method for this model as it is suitable for integrating over non-linear and discontinuous functions (such as the pulse trains used to drain stocks), and it is a simple a direct method of integration. However, it does present some limitations in computational inefficiencies.
+    %Why was the time step chosen?
+TBC
+    %Why was the time period chosen
+The time period of \textcolor{red}{X} years was chosen to be able to show the effects of incremental changes in climate variability, whilst maintaining a small enough time step such that the transmission within chicken farms is realistic.
+\subsection{Model Verification & Validation}
 %4.	Validation
  %   a.	Use various tests to argue why model is fit for purpose
+In this subsection we'll verify and validate the model. Verification will be done through a comparison with the conceptualisation of the model, as well as a unit verification and a time step verification. 
+
+\subsubsection{Verification}
+
+
 % From meeting with Jill:
 %Verification requires three steps:
     %Check that the causal diagrams match the stock-flow diagrams, and add one line saying "this was checked'
-    %Check that the units are consistent with the real world and add one line saying 'units were checked for material consistency'.
+    %Check that the units are consistent with the real world and add one line saying 'units were checked for material consistency'. -- DONE
+Unit verification was performed by checking all variable units for ensure consistency with real-world equivalents. There was one anomalous variable in the model which could not be mapped to a physical value. This refers to the \textit{balancing constant} that feeds into the \textit{rate of fly development}. This was added under the assumption that temperature linearly correlates to fly populations, as documented by \citeauthor{blanckenhorn_adaptive_1998}, 1998. This factor allows conversion from the units of temperature (degrees) to fly development rate (MFly per week). This cannot be done without adding a go-between, which, in our case, is the balancing constant. 
+
+Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. The time unit used in the model is \textit{week}, to properly integrate seasonal changes in temperature across the year, months being to big and days too detailed. But for this same reason, DALY and COI are commonly reported per year. To deal with this, a PULSE TRAIN function was installed between stocks \textit{CPY Cases} and \textit{Acute GE Cases}. The PULSE TRAIN accumulates all \textit{Campylobacteriosis} cases over 52 weeks before transferring them to the cost of illness submodel. This can then be used as an input per year for the COI submodel. The units of the PULSE train remain in weeks when the time unit should be thought of as year, as happens after. 
     %Confirm that you've used the appropriate numerical technique/time step and add one line saying, 'behaviour of the model for the chosen time step and half that time step is consistent, this indicates that the appropriate time step and integration method has been used'
+
     
+\subsubsection{Validation}    
+
 %Validation requires three steps:
     %Show how the data matches or does not match historical data (explain why)
+According to
+
     %Conduct an extreme values test to test the dynamic hypothesis and range of model applicability and provide comment to the reader on the boundaries of the model's effective use. Tell the reader the conditions under which the model behaves reliably
     %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
+    
 \subsection{Experimental setup}
 %5.	Experimental setup
  %   a.	Introduce main uncertainties (potentially with table)
   %  b.	Explain scenario and policy logic
-        %Parametric experiments - change parameters and observe behaviour
-        %Structural experiments - change a structure (e.g. add feedback) and observe behaviour
+        %Parametric experiments - change parameters and observe behaviour (do multivariate for all, and univariate for one or two key variables)
+        %Structural experiments - change a structure (e.g. add feedback) and observe behaviour 
    % c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
 
