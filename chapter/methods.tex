@@ -192,22 +192,14 @@ The time step verification was performed by running the model at several differe
 
 In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry \parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume this transmission route can be found in the environment, and because of these facts, we assume the environmental transmission routes play a bigger role. Around $20$-$60\%$ of the human infections are from the environment. As can be seen in Figure~\ref{fig:val_sources} this is not the case in our model. The majority of the infections stem from food consumption. NEED TO GIVE REASON
 
-We also validated our DALYs and Cost of Illness against the datapoints from RIVM. We plotted them against the average of the values mentioned in \citetitle{vlaanderen_staat_2019}, 
-\textbf{DALYs} \\
-\parencite{vlaanderen_staat_2019} \\
-2016 2017 2018 \\
-3.573 3.074 3.201
+We also validated our DALYs and Cost of Illness against the datapoints from RIVM. We plotted them against the average of the values mentioned in \citetitle{vlaanderen_staat_2019}. As can be seen in Figure~\ref{fig:val_dalys} our model determines higher DALYs than given in the literature. This indicates that in the real world there are a lot of cases of chronic diseases overlooked. There are probably a lot more chronic diseases that can be traced back to \textit{Campylobacter}. Perhaps the specialists are overlooking the bacterium as a cause, or they are simply unable to pinpoint the cause.
 
-% diagnosis of chronic diseases attributed to CBD has increased in the past years
-% whole numbers lol
+In Figure~\ref{fig:val_coi} it can be seen that the Cost of Illness calculated by the model is lower than the validation data. This is probably due to the fact that we only look at 3 chronic conditions and the acute conditions. It may also be the case \citeauthor{vlaanderen_staat_2019} has used a different value as the cost per condition. We calibrated our values with the values mentioned by \textcite{mangen_campylobacteriosis_2007}.
 
-\textbf{CoI} \\
-\parencite{vlaanderen_staat_2019} \\
-64 55 64 M\euro{} \\
+It is estimated there are around 17 million species of \textit{Diptera} per person \parencite{gorman_trillions_2017}. We are only interested in \textit{Musca domestica}. It is unknown what their numbers are in the Netherlands, and we are unable to estimate. However, it has been guessed that the population of Houseflies will increase by 244\% by 2080 \parencite{mcalister_secret_2017}. In The amount of flies in our model after 1 year is 20.000 of which 7.700 are infectious (TIME STEP = 0.0625). This is probably not a proper reflection of the real world, but one can assume that it is only 7.700 flies that have directly caused a disease in humans and/or chickens.
 
+The model also includes an Infection risk from birds (2.5e-05). T
 
-\textbf{flies} \\
-It is estimated there are around 17 million species of \textit{Diptera} per person \parencite{gorman_trillions_2017}. We are only interested in \textit{Musca domestica}. It is unknown what their numbers are in the Netherlands, and we are unable to estimate. However, it has been guessed that the population of Houseflies will increase by 244\% by 2080 \parencite{mcalister_secret_2017}.
 
 \iffalse
 \textbf{Extra}\\
