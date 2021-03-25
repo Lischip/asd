@@ -60,7 +60,7 @@ This analysis contains three main sub-models:
 
 \begin{figure*}[!ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/environmental_submodel2.png}
+	\includegraphics[width=1\textwidth]{images/environmental_submodel2.png}
 	\caption{Diagram of the environmental sub-model}
 	\label{fig:environmental_submodel}
 \end{figure*}
@@ -198,7 +198,7 @@ In Figure~\ref{fig:val_coi} it can be seen that the Cost of Illness calculated b
 
 It is estimated there are around 17 million species of \textit{Diptera} per person \parencite{gorman_trillions_2017}. We are only interested in \textit{Musca domestica}. It is unknown what their numbers are in the Netherlands, and we are unable to estimate. However, it has been guessed that the population of Houseflies will increase by 244\% by 2080 \parencite{mcalister_secret_2017}. In The amount of flies in our model after 1 year is 20.000 of which 7.700 are infectious (TIME STEP = 0.0625). This is probably not a proper reflection of the real world, but one can assume that it is only 7.700 flies that have directly caused a disease in humans and/or chickens.
 
-The model also includes an Infection risk from birds (2.5e-05). T
+The model also includes an Infection risk from birds (2.5e-05). There are about 1.3 million birds in the Netherlands \parencite{noauthor_miljoenen_2019}. There was no literature on the risk from birds, so we assumed a somewhat safe value. We doubt \textit{Campylobacter} will ever be exterminated due to the presence of these environmental factors, even if we are somehow able to keep our farms, slaughterhouses and stores \textit{Campylobacter}free.
 
 
 \iffalse
@@ -214,9 +214,32 @@ I suppose the factor wild birds play can also be considered uncertain. There are
 \fi
 
     %Conduct an extreme values test to test the dynamic hypothesis and range of model applicability and provide comment to the reader on the boundaries of the model's effective use. Tell the reader the conditions under which the model behaves reliably
-    
+We conducted extreme values tests on multiple values, which yielded the following results regarding their applicable ranges:
+
+\begin{longtable}[c]{l|l}
+\caption{Results of the extreme values test}
+\label{tab:extreme_values}
+Variable & Range \\
+\hline
+\endfirsthead
+%
+\multicolumn{2}{c}%
+{{\bfseries Table \thetable\ continued from previous page}} \\
+Variable & Range \\
+\hline
+\endhead
+%
+minimum average weekly temperature & \\
+maximum average weekly temperature & \\
+initial fly population & \\
+infection risk from birds & \\
+rate of symptomatic cases & \\
+infections per kg of meat consumed & \\
+slaughter rate & \\
+\end{longtable}
     
     %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
+??
     
 \subsection{Experimental setup}
 %5.	Experimental setup
