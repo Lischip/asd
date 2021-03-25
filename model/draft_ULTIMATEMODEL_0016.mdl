@@ -1,0 +1,777 @@
+{UTF-8}
+rate of chicken infection from environment=
+	infectious flies*rate of chicken exposure to infectious flies
+	~	1/Week
+	~		|
+
+rate of human infection from environment=
+	MIN(infectious flies*rate of human exposure to infectious flies*population + (infection risk from birds\
+		 * population), population)
+	~	Cases/Week
+	~		|
+
+infection risk from birds=
+	2.5e-05
+	~	Dmnl
+	~		|
+
+food safety and handling policy=
+	1
+	~	Dmnl
+	~		|
+
+consumer food preparation behaviour lever=
+	IF THEN ELSE( Cost of Illness > consumer food preparation behaviour threshold , 1 , \
+		0 )
+	~	Dmnl
+	~		|
+
+consumer food preparation behaviour threshold=
+	3.45673e+12
+	~	Euro
+	~		|
+
+infections per kg of meat consumed=
+	0.0005 - meat consumption behaviour 2
+	~	Cases/kg
+	~		|
+
+food preparation policy=
+	1
+	~	Dmnl
+	~		|
+
+contaminated meat consumption=
+	MIN(proportion of contaminated meat * consumption rate per person * population, (contaminated meat\
+		/week)) + meat consumption behaviour
+	~	kg/Week
+	~		|
+
+meat consumption behaviour 2=
+	IF THEN ELSE((consumer food preparation behaviour lever = 0), 0.0001  , 0 )
+	~	Cases/kg
+	~		|
+
+meat consumption behaviour=
+	IF THEN ELSE((consumer food preparation behaviour lever = 1), -1  , 0 )
+	~	kg/Week
+	~		|
+
+week=
+	1
+	~	Week
+	~		|
+
+symptomatic infections=
+	(CPY Cases*rate of symptomatic cases)*(PULSE TRAIN(weeks per year, TIME STEP, weeks per year\
+		 , FINAL TIME)) / TIME STEP
+	~	Cases/Week
+	~		|
+
+temperature switch=
+	2
+	~	Dmnl
+	~	0 - No change
+		1 - Linear change
+		2 - Faster summer warming than winter warming
+	|
+
+temperature increase by 2050=
+	1.5
+	~	degree
+	~		|
+
+average temperature increase=
+	RAMP(temperature increase by 2050/(weeks per year*30),0,weeks per year*30)
+	~	degree
+	~		|
+
+temperature increase=
+	IF THEN ELSE(temperature switch = 0,0,(IF THEN ELSE(temperature switch = 2,(-1)*(SIN\
+		(2*pi*(Time+start of year offset)/weeks per year)*0.8*average temperature increase)\
+		+average temperature increase,average temperature increase)))
+	~	degree
+	~		|
+
+temperature=
+	((-1)*(SIN(2*pi*(Time+start of year offset)/weeks per year))*((maximum average weekly temperature\
+		-minimum average weekly temperature
+	)/2)+((maximum average weekly temperature+minimum average weekly temperature)/2))+temperature increase
+	~	degree
+	~		|
+
+proportion of infectious flies=
+	0.35 + 0.5 * "proportion of CPY-positive chickens"
+	~	Dmnl
+	~		|
+
+"proportion of CPY-positive chickens"=
+	ZIDZ( "CPY-positive chickens", "CPY-positive chickens"+"CPY-negative chickens")
+	~	Dmnl
+	~		|
+
+recovered GE= INTEG (
+	GE Recovery,
+		0)
+	~	Cases
+	~		|
+
+Acute GE Cases= INTEG (
+	symptomatic infections-Death by CPY-GBS development-GE Recovery-IBD development-ReA development\
+		,
+		0)
+	~	Cases
+	~		|
+
+asymptomatic infections=
+	(CPY Cases*(1-rate of symptomatic cases))*(PULSE TRAIN(weeks per year, TIME STEP, weeks per year\
+		 , FINAL TIME)) / TIME STEP
+	~	Cases/Week
+	~		|
+
+balancing constant=
+	1
+	~	MFly/(degree*Week)
+	~		|
+
+IBD development=
+	Acute GE Cases*IBD rate
+	~	Cases/Week
+	~		|
+
+IBD rate=
+	0.000125
+	~	1/Week
+	~		|
+
+COI per GBS Case=
+	85000
+	~	Euro/Cases
+	~		|
+
+COI per GE Case=
+	190
+	~	Euro/Cases
+	~		|
+
+COI per IBD Case=
+	173000
+	~	Euro/Cases
+	~		|
+
+COI per ReA Case=
+	20
+	~	Euro/Cases
+	~		|
+
+initial fly population=
+	0.1
+	~	MFly
+	~		|
+
+maximum average weekly temperature=
+	23
+	~	degree
+	~		|
+
+fly development rate=
+	(-0.0091 + 0.0024*MAX(temperature,4))*balancing constant
+	~	MFly/Week
+	~		|
+
+minimum average weekly temperature=
+	-4
+	~	degree
+	~		|
+
+Cost of Illness=
+	(recovered GE*COI per GE Case) + (GBS Cases*COI per GBS Case) + (IBD Cases*COI per IBD Case\
+		) + (ReA Cases*COI per ReA Case)
+	~	Euro
+	~		|
+
+CPY Cases= INTEG (
+	human CPY infections-asymptomatic infections-symptomatic infections,
+		0)
+	~	Cases
+	~		|
+
+GBS development=
+	Acute GE Cases*GBS rate
+	~	Cases/Week
+	~		|
+
+GBS rate=
+	0.00075
+	~	1/Week
+	~		|
+
+DALY=
+	(recovered GE*DALYs per GE Case) + (GBS Cases*DALYs per GBS Case) + (IBD Cases*DALYs per IBD Case\
+		) + (ReA Cases*DALYs per ReA Case)
+	~	DALY
+	~		|
+
+DALYs per GBS Case=
+	5
+	~	DALY/Cases
+	~		|
+
+DALYs per GE Case=
+	0.008
+	~	DALY/Cases
+	~		|
+
+DALYs per IBD Case=
+	11.6
+	~	DALY/Cases
+	~		|
+
+DALYs per ReA Case=
+	0.09
+	~	DALY/Cases
+	~		|
+
+Death by CPY=
+	Acute GE Cases*death rate
+	~	Cases/Week
+	~		|
+
+death rate=
+	0.000375
+	~	1/Week
+	~		|
+
+fly deaths=
+	DELAY1I(fly development, fly lifetime, fly population/fly lifetime)
+	~	MFly/Week
+	~		|
+
+fly development=
+	fly development rate
+	~	MFly/Week
+	~		|
+
+fly lifetime=
+	4
+	~	Week
+	~		|
+
+fly population= INTEG (
+	fly development-fly deaths,
+		initial fly population)
+	~	MFly
+	~		|
+
+GBS Cases= INTEG (
+	GBS development,
+		0)
+	~	Cases
+	~		|
+
+pi=
+	ARCCOS(-1)
+	~	Dmnl
+	~		|
+
+GE Recovery=
+	recovery rate*Acute GE Cases
+	~	Cases/Week
+	~		|
+
+human CPY infections=
+	(contaminated meat consumption*infections per kg of meat consumed)+rate of human infection from environment
+	~	Cases/Week
+	~		|
+
+recovery rate=
+	0.98125
+	~	1/Week
+	~		|
+
+IBD Cases= INTEG (
+	IBD development,
+		0)
+	~	Cases
+	~		|
+
+rate of human exposure to infectious flies=
+	0.001
+	~	Cases/(Week*MFly*Person)
+	~		|
+
+rate of symptomatic cases=
+	0.88
+	~	Dmnl
+	~		|
+
+infections with CPY=
+	chickens on farms*rate of chicken infection from environment
+	~	Chicken/Week
+	~		|
+
+infectious flies=
+	fly population*proportion of infectious flies
+	~	MFly
+	~		|
+
+ReA rate=
+	0.0175
+	~	1/Week
+	~		|
+
+weeks per year=
+	52
+	~	Week
+	~		|
+
+rate of chicken exposure to infectious flies=
+	1
+	~	1/(MFly*Week)
+	~		|
+
+ReA Cases= INTEG (
+	ReA development,
+		0)
+	~	Cases
+	~		|
+
+ReA development=
+	Acute GE Cases*ReA rate
+	~	Cases/Week
+	~		|
+
+"non-infections with CPY"=
+	chickens on farms*(1-rate of chicken infection from environment)
+	~	Chicken/Week
+	~		|
+
+start of year offset=
+	8
+	~	Week
+	~		|
+
+chickens on farms= INTEG (
+	chickens arriving from hatcheries-infections with CPY-"non-infections with CPY",
+		initial chickens on Farms)
+	~	Chicken
+	~		|
+
+chickens arriving from hatcheries=
+	population*(consumption rate per person/meat per chicken)
+	~	Chicken/Week
+	~		|
+
+consumption rate per person=
+	0.203
+	~	kg/(Week*Person)
+	~		|
+
+contaminated meat= INTEG (
+	("CPY-positive chickens slaughtered"+"slaughtering with cross-contamination")*meat per chicken\
+		-contaminated meat consumption,
+		0)
+	~	kg
+	~		|
+
+contaminated slaughtered chickens=
+	"CPY-positive chickens slaughtered"+"slaughtering with cross-contamination"
+	~	Chicken/Week
+	~		|
+
+"CPY-negative chickens"= INTEG (
+	"non-infections with CPY"-"slaughtering with cross-contamination"-"slaughtering without cross-contamination"\
+		,
+		0)
+	~	Chicken
+	~		|
+
+"CPY-positive chickens slaughtered"=
+	"CPY-positive chickens"*slaughter rate
+	~	Chicken/Week
+	~		|
+
+"CPY-positive chickens"= INTEG (
+	infections with CPY-"CPY-positive chickens slaughtered",
+		0)
+	~	Chicken
+	~		|
+
+initial chickens on Farms=
+	100000
+	~	Chicken
+	~		|
+
+meat per chicken=
+	1.5
+	~	kg/Chicken
+	~		|
+
+population=
+	1.7e+07
+	~	Person
+	~		|
+
+proportion of contaminated meat=
+	ZIDZ(contaminated slaughtered chickens,total chickens slaughtered)
+	~	Dmnl
+	~		|
+
+"rate of cross-contamination"=
+	0.1
+	~	1/Week
+	~		|
+
+slaughter rate=
+	0.3
+	~	1/Week
+	~		|
+
+"slaughtering with cross-contamination"=
+	"CPY-negative chickens" * "rate of cross-contamination"
+	~	Chicken/Week
+	~		|
+
+"slaughtering without cross-contamination"=
+	"CPY-negative chickens" * (1-"rate of cross-contamination")
+	~	Chicken/Week
+	~		|
+
+total chickens slaughtered=
+	"CPY-positive chickens slaughtered"+"slaughtering with cross-contamination"+"slaughtering without cross-contamination"
+	~	Chicken/Week
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 1500
+	~	Week
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Week
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Week [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.03125
+	~	Week [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,70,0
+10,1,chickens on farms,777,153,44,21,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,611,153,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(710,153)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(647,153)|
+11,5,48,681,153,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,chickens arriving from hatcheries,681,180,59,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,initial chickens on Farms,793,88,53,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,7,1,0,0,0,0,0,128,1,-1--1--1,,1|(787,112)|
+10,9,"CPY-positive chickens",1011,148,47,17,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,"CPY-negative chickens",779,320,51,25,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,13,9,4,0,0,22,0,0,0,-1--1--1,,1|(932,148)|
+1,12,13,1,100,0,0,22,0,0,0,-1--1--1,,1|(853,148)|
+11,13,1124,893,148,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,14,infections with CPY,893,176,51,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,17,10,4,0,0,22,0,0,0,-1--1--1,,1|(781,264)|
+1,16,17,1,100,0,0,22,0,0,0,-1--1--1,,1|(781,196)|
+11,17,2114,781,226,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,18,"non-infections with CPY",837,226,51,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,19,48,600,321,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,22,19,4,0,0,22,0,0,0,-1--1--1,,1|(632,325)|
+1,21,22,10,100,0,0,22,0,0,0,-1--1--1,,1|(698,325)|
+11,22,48,661,325,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,23,"slaughtering without cross-contamination",661,352,71,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,24,contaminated meat,1013,324,48,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,27,24,4,0,0,22,0,0,0,-1--1--1,,1|(932,320)|
+1,26,27,10,100,0,0,22,0,0,0,-1--1--1,,1|(858,320)|
+11,27,552,893,320,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,28,"slaughtering with cross-contamination",893,348,71,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,29,31,24,4,0,0,22,0,0,0,-1--1--1,,1|(1011,268)|
+1,30,31,9,100,0,0,22,0,0,0,-1--1--1,,1|(1011,195)|
+11,31,2312,1011,232,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,32,"CPY-positive chickens slaughtered",1087,232,73,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,33,rate of chicken infection from environment,1215,868,53,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,34,"rate of cross-contamination",777,408,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,rate of chicken infection from environment,939,268,55,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,36,34,23,0,0,0,0,0,128,0,-1--1--1,,1|(725,382)|
+1,37,34,28,0,0,0,0,0,128,0,-1--1--1,,1|(828,381)|
+1,38,39,24,100,0,0,22,0,0,0,-1--1--1,,1|(1091,325)|
+11,39,2048,1129,325,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,40,contaminated meat consumption,1129,352,67,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,10,23,1,0,0,0,0,64,0,-1--1--1,,1|(755,348)|
+1,42,10,28,1,0,0,0,0,128,0,-1--1--1,,1|(808,352)|
+10,43,meat per chicken,1016,400,59,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,44,43,24,1,0,0,0,0,128,0,-1--1--1,,1|(1011,377)|
+1,45,9,32,0,0,0,0,0,64,0,-1--1--1,,1|(1042,183)|
+10,46,proportion of contaminated meat,1145,525,67,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,total chickens slaughtered,731,520,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,23,47,1,0,0,0,0,128,0,-1--1--1,,1|(669,426)|
+1,49,28,47,1,0,0,0,0,128,0,-1--1--1,,1|(845,448)|
+10,50,"CPY-positive chickens slaughtered",905,508,72,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,51,50,47,1,0,0,0,0,128,0,-1--1--1,,1|(796,506)|
+1,52,47,46,1,0,0,0,0,128,0,-1--1--1,,1|(1009,550)|
+10,53,contaminated slaughtered chickens,997,450,73,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,54,28,53,1,0,0,0,0,128,0,-1--1--1,,1|(932,400)|
+1,55,50,53,0,0,0,0,0,128,0,-1--1--1,,1|(944,482)|
+1,56,53,46,0,0,0,0,0,128,0,-1--1--1,,1|(1064,484)|
+1,57,46,40,1,0,0,0,0,128,0,-1--1--1,,1|(1125,444)|
+1,58,35,18,1,0,0,0,0,128,0,-1--1--1,,1|(864,254)|
+1,59,35,14,1,0,0,0,0,128,0,-1--1--1,,1|(905,192)|
+1,60,1,14,1,0,0,0,0,128,0,-1--1--1,,1|(837,186)|
+1,61,1,18,1,0,0,0,0,128,0,-1--1--1,,1|(801,196)|
+10,62,slaughter rate,1176,174,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,63,62,32,1,0,0,0,0,128,0,-1--1--1,,1|(1124,184)|
+12,64,48,1233,324,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,65,39,64,4,0,0,22,0,0,0,-1--1--1,,1|(1179,325)|
+10,66,consumption rate per person,1321,368,60,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,67,66,40,1,0,0,0,0,64,0,-1--1--1,,1|(1240,368)|
+10,68,population,1313,572,37,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,69,68,40,1,0,0,0,0,64,0,-1--1--1,,1|(1296,492)|
+10,70,population,541,108,43,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,71,70,6,1,0,0,0,0,128,0,-1--1--1,,1|(621,125)|
+10,72,consumption rate per person,659,92,59,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,73,meat per chicken,527,172,35,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,74,72,6,0,0,0,0,0,128,0,-1--1--1,,1|(667,129)|
+1,75,73,6,1,0,0,0,0,128,0,-1--1--1,,1|(589,186)|
+10,76,TIME STEP,1196,277,36,11,8,3,1,0,-1,0,0,0,0,0,0,0,0,0
+1,77,24,40,1,0,0,0,0,64,0,-1--1--1,,1|(1088,380)|
+10,78,TIME STEP,1102,280,51,11,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,79,CPY Cases,1475,213,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,80,48,1268,204,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,81,83,79,4,0,0,22,0,0,0,-1--1--1,,1|(1390,204)|
+1,82,83,80,100,0,0,22,0,0,0,-1--1--1,,1|(1305,204)|
+11,83,48,1339,204,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,84,human CPY infections,1339,232,39,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,85,40,84,1,0,0,0,0,128,0,-1--1--1,,1|(1236,274)|
+10,86,infections per kg of meat consumed,1252,118,67,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,87,86,84,1,0,0,0,0,128,0,-1--1--1,,1|(1287,173)|
+10,88,Acute GE Cases,1836,206,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,89,91,88,4,0,0,22,0,0,0,-1--1--1,,1|(1701,208)|
+1,90,91,79,100,0,0,22,0,0,0,-1--1--1,,1|(1554,208)|
+11,91,1190,1600,208,7,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,92,symptomatic infections,1600,236,44,19,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,93,rate of symptomatic cases,1755,46,67,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,94,93,91,1,0,0,0,0,128,0,-1--1--1,,1|(1736,142)|
+1,95,79,92,1,0,0,0,0,128,0,-1--1--1,,1|(1525,241)|
+12,96,48,1472,46,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,97,99,96,4,0,0,22,0,0,0,-1--1--1,,1|(1469,71)|
+1,98,99,79,100,0,0,22,0,0,0,-1--1--1,,1|(1469,148)|
+11,99,48,1469,96,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,100,asymptomatic infections,1523,96,49,19,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,101,93,100,1,0,0,0,0,128,0,-1--1--1,,1|(1668,38)|
+1,102,79,99,1,0,0,0,0,128,0,-1--1--1,,1|(1424,144)|
+1,103,104,88,100,0,0,22,0,0,0,-1--1--1,,1|(1936,206)|
+11,104,1300,2004,206,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,105,GE Recovery,2004,225,43,11,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,106,recovery rate,2016,90,45,11,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,107,88,104,1,0,0,0,0,128,0,-1--1--1,,1|(1936,190)|
+1,108,106,105,0,0,0,0,0,128,0,-1--1--1,,1|(2010,150)|
+10,109,ReA Cases,1616,368,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,110,GBS Cases,1833,500,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,111,48,1840,2,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,112,114,111,4,0,0,22,0,0,0,-1--1--1,,1|(1832,48)|
+1,113,114,88,100,0,0,22,0,0,0,-1--1--1,,1|(1832,137)|
+11,114,48,1832,88,1,1,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,115,Death by CPY,1832,100,47,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,116,IBD Cases,2073,365,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,117,119,109,4,0,0,22,0,0,0,-1--1--1,,1|(1693,360)|
+1,118,119,88,100,0,0,22,0,0,0,-1--1--1,,1|(1836,360)|
+11,119,1586,1737,360,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,120,ReA development,1737,380,59,11,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,121,123,110,4,0,0,22,0,0,0,-1--1--1,,1|(1837,454)|
+1,122,123,88,100,0,0,22,0,0,0,-1--1--1,,1|(1837,320)|
+11,123,1278,1837,422,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,124,GBS development,1904,422,59,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,125,127,116,4,0,0,22,0,0,0,-1--1--1,,1|(1994,360)|
+1,126,127,88,100,0,0,22,0,0,0,-1--1--1,,1|(1836,360)|
+11,127,1234,1949,360,7,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,128,IBD development,1949,380,59,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,129,88,120,1,0,0,0,0,128,0,-1--1--1,,1|(1808,316)|
+1,130,88,124,1,0,0,0,0,128,0,-1--1--1,,1|(1863,334)|
+1,131,88,128,1,0,0,0,0,128,0,-1--1--1,,1|(1865,305)|
+10,132,ReA rate,1669,422,31,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,133,GBS rate,1780,444,31,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,134,IBD rate,2021,433,29,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,135,death rate,2027,14,36,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,136,88,114,1,0,0,0,0,128,0,-1--1--1,,1|(1891,121)|
+1,137,135,114,1,0,0,0,0,128,0,-1--1--1,,1|(1933,-4)|
+1,138,132,120,1,0,0,0,0,128,0,-1--1--1,,1|(1709,401)|
+1,139,133,123,1,0,0,0,0,128,0,-1--1--1,,1|(1809,428)|
+1,140,134,128,1,0,0,0,0,128,0,-1--1--1,,1|(1995,402)|
+10,141,weeks per year,1537,173,51,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,142,FINAL TIME,1665,297,55,11,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,143,TIME STEP,1549,296,51,11,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,144,FINAL TIME,1604,146,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,145,144,100,0,0,0,0,0,64,0,-1--1--1,,1|(1576,128)|
+1,146,141,100,1,0,0,0,0,64,0,-1--1--1,,1|(1515,145)|
+10,147,TIME STEP,1687,104,51,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,148,147,100,1,0,0,0,0,128,0,-1--1--1,,1|(1611,86)|
+1,149,147,91,1,0,0,0,0,128,0,-1--1--1,,1|(1677,156)|
+1,150,144,91,0,0,0,0,0,128,0,-1--1--1,,1|(1602,172)|
+1,151,141,91,0,0,0,0,0,128,0,-1--1--1,,1|(1568,190)|
+10,152,fly population,641,928,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,153,48,481,924,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,154,156,152,4,0,0,22,0,0,0,-1--1--1,,1|(576,924)|
+1,155,156,153,100,0,0,22,0,0,0,-1--1--1,,1|(514,924)|
+11,156,48,545,924,7,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,157,fly development,545,952,55,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,158,48,640,1064,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,159,161,158,4,0,0,22,0,0,0,-1--1--1,,1|(637,1032)|
+1,160,161,152,100,0,0,22,0,0,0,-1--1--1,,1|(637,971)|
+11,161,48,637,1001,8,7,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,162,fly deaths,681,1001,35,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,163,initial fly population,637,869,37,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,164,163,152,0,0,0,0,0,64,1,-1--1--1,,1|(638,891)|
+1,165,157,161,1,0,0,0,0,128,0,-1--1--1,,1|(592,1004)|
+1,166,152,162,1,0,0,0,0,128,0,-1--1--1,,1|(689,986)|
+10,167,fly lifetime,717,1072,37,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,168,167,162,1,0,0,0,0,128,0,-1--1--1,,1|(700,1036)|
+10,169,balancing constant,344,838,35,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,170,fly development rate,525,840,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,171,169,170,1,0,0,0,0,128,0,-1--1--1,,1|(445,814)|
+10,172,temperature,496,688,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,173,172,170,1,0,0,0,0,128,0,-1--1--1,,1|(529,708)|
+1,174,170,156,1,0,0,0,0,128,0,-1--1--1,,1|(523,881)|
+10,175,Time,310,582,27,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,176,minimum average weekly temperature,530,578,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,177,maximum average weekly temperature,609,630,75,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,178,weeks per year,308,629,59,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,179,pi,294,483,8,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,180,175,172,1,0,0,0,0,128,0,-1--1--1,,1|(405,619)|
+1,181,176,172,1,0,0,0,0,128,0,-1--1--1,,1|(526,633)|
+1,182,177,172,1,0,0,0,0,128,0,-1--1--1,,1|(541,670)|
+1,183,178,172,1,0,0,0,0,128,0,-1--1--1,,1|(398,640)|
+1,184,179,172,1,0,0,0,0,128,0,-1--1--1,,1|(397,531)|
+10,185,start of year offset,315,535,43,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,186,185,172,1,0,0,0,0,128,0,-1--1--1,,1|(405,590)|
+10,187,infectious flies,845,928,51,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,188,proportion of infectious flies,767,853,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,189,152,187,0,0,0,0,0,128,0,-1--1--1,,1|(730,928)|
+1,190,188,187,1,0,0,0,0,128,0,-1--1--1,,1|(832,906)|
+10,191,rate of human exposure to infectious flies,1061,681,76,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,192,rate of chicken exposure to infectious flies,1204,1028,76,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,193,187,33,1,0,0,0,0,128,0,-1--1--1,,1|(1076,986)|
+1,194,192,33,1,0,0,0,0,128,0,-1--1--1,,1|(1224,945)|
+10,195,rate of human infection from environment,1109,784,61,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,196,187,195,1,0,0,0,0,128,0,-1--1--1,,1|(1033,882)|
+1,197,191,195,1,0,0,0,0,128,0,-1--1--1,,1|(1077,740)|
+1,198,195,84,1,0,0,0,0,128,0,-1--1--1,,1|(1417,540)|
+1,199,68,195,1,0,0,0,0,128,0,-1--1--1,,1|(1311,604)|
+10,200,DALY,1489,520,19,11,0,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,201,Cost of Illness,2105,718,48,11,0,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,202,DALYs per GE Case,1669,817,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,203,202,200,1,0,0,0,0,128,0,-1--1--1,,1|(1553,705)|
+10,204,DALYs per ReA Case,1729,732,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,205,DALYs per GBS Case,1708,665,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,206,DALYs per IBD Case,1784,804,49,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,207,206,200,1,0,0,0,0,128,0,-1--1--1,,1|(1608,696)|
+1,208,204,200,1,0,0,0,0,128,0,-1--1--1,,1|(1624,677)|
+1,209,109,200,1,0,0,0,0,128,0,-1--1--1,,1|(1580,448)|
+1,210,110,200,1,0,0,0,0,128,0,-1--1--1,,1|(1700,530)|
+1,211,205,200,1,0,0,0,0,128,0,-1--1--1,,1|(1597,620)|
+10,212,IBD Cases,1657,482,45,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,213,212,200,1,0,0,0,0,128,0,-1--1--1,,1|(1601,500)|
+10,214,COI per GBS Case,1813,664,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,215,COI per ReA Case,1849,732,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,216,COI per IBD Case,1923,790,59,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,217,COI per GE Case,1859,850,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,218,214,201,1,0,0,0,0,128,0,-1--1--1,,1|(1967,649)|
+1,219,215,201,1,0,0,0,0,128,0,-1--1--1,,1|(1967,705)|
+1,220,216,201,1,0,0,0,0,128,0,-1--1--1,,1|(2009,769)|
+1,221,217,201,1,0,0,0,0,128,0,-1--1--1,,1|(2003,818)|
+10,222,ReA Cases,1987,486,47,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,223,222,201,1,0,0,0,0,128,0,-1--1--1,,1|(2067,549)|
+1,224,110,201,1,0,0,0,0,128,0,-1--1--1,,1|(2025,584)|
+1,225,116,201,1,0,0,0,0,128,0,-1--1--1,,1|(2129,526)|
+12,226,0,2273,949,175,47,8,7,0,44,-1,0,0,0,-1--1--1,255-0-255,Chiller|30||0-0-0,0,0,0,0,0,0
+To fix: 2) the other infection routes for chickens
+10,227,recovered GE,2267,204,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,228,104,227,4,0,0,22,0,0,0,-1--1--1,,1|(2119,206)|
+1,229,227,201,1,0,0,0,0,64,0,-1--1--1,,1|(2241,460)|
+10,230,recovered GE,1485,405,53,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,231,230,200,0,0,0,0,0,128,0,-1--1--1,,1|(1486,455)|
+10,232,"CPY-positive chickens",676,678,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,233,"CPY-negative chickens",827,666,51,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,234,"proportion of CPY-positive chickens",748,738,75,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,235,232,234,1,0,0,0,0,128,0,-1--1--1,,1|(664,718)|
+1,236,233,234,1,0,0,0,0,128,0,-1--1--1,,1|(854,716)|
+1,237,234,188,1,0,0,0,0,128,0,-1--1--1,,1|(734,796)|
+10,238,temperature increase,178,738,43,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,239,average temperature increase,331,687,73,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,240,178,238,1,0,0,0,0,128,0,-1--1--1,,1|(196,662)|
+1,241,175,238,1,0,0,0,0,128,0,-1--1--1,,1|(189,615)|
+1,242,185,238,1,0,0,0,0,128,0,-1--1--1,,1|(169,579)|
+1,243,179,238,1,0,0,0,0,128,0,-1--1--1,,1|(142,530)|
+1,244,239,238,1,0,0,0,0,128,0,-1--1--1,,1|(228,689)|
+1,245,238,172,1,0,0,0,0,128,0,-1--1--1,,1|(365,786)|
+10,246,temperature increase by 2050,316,753,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,247,246,239,1,0,0,0,0,128,0,-1--1--1,,1|(395,743)|
+1,248,178,239,1,0,0,0,0,128,0,-1--1--1,,1|(324,643)|
+10,249,temperature switch,82,808,43,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,250,249,238,1,0,0,0,0,128,0,-1--1--1,,1|(104,747)|
+10,251,consumer food preparation behaviour lever,1611,940,75,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,252,meat consumption behaviour,1403,906,64,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,253,251,252,1,0,0,0,0,128,0,-1--1--1,,1|(1507,959)|
+1,254,252,40,1,0,0,0,0,128,0,-1--1--1,,1|(1263,681)|
+10,255,food preparation policy,1477,305,57,19,8,3,0,4,0,0,0,0,-1--1--1,192-128-192,|12||0-0-0,0,0,0,0,0,0
+1,256,201,251,1,0,0,0,0,128,0,-1--1--1,,1|(1945,904)|
+10,257,consumer food preparation behaviour threshold,1619,1074,64,41,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,258,257,251,0,0,0,0,0,64,0,-1--1--1,,1|(1615,1007)|
+10,259,meat consumption behaviour 2,1500,819,64,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,260,251,259,1,0,0,0,0,128,0,-1--1--1,,1|(1595,871)|
+1,261,259,86,1,0,0,0,0,128,0,-1--1--1,,1|(1396,624)|
+10,262,week,1148,278,19,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,263,262,40,0,0,0,0,0,64,0,-1--1--1,,1|(1141,304)|
+10,264,food safety and handling policy,1061,607,54,19,8,3,0,4,0,0,0,0,-1--1--1,192-128-192,|12||0-0-0,0,0,0,0,0,0
+10,265,infection risk from birds,938,804,45,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,268,265,195,1,0,0,0,0,128,0,-1--1--1,,1|(1021,820)|
+///---\\\
+:L<%^E!@
+1:potatosmaller
+9:potatosmaller
+23:0
+15:0,0,0,0,0,0
+19:70,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:"proportion of CPY-positive chickens"
+35:Date
+36:YYYY-MM-DD
+37:2020
+38:1
+39:1
+40:3
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:40
+25:1500
+26:1500
+91:0
+90:0
+87:0
+75:
+43:
