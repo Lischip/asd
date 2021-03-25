@@ -53,9 +53,7 @@ This analysis contains three main sub-models:
 \end{itemize}
 
 \subsubsection*{Environmental}
-%LISETTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEH
 %IDENTIFY ARCHETYPES
-%WHY IS THIS SO LONG AA
 
 \begin{figure*}[!ht]
 	\centering
@@ -85,7 +83,7 @@ An increase in Dutch population size is not expected to increase the \textit{Bra
 % add sub-model diagram here
 This sub-model (presented in Figure \ref{fig:transmission_submodel}) is a simplification of Rommens' 2020 model of dynamics of transmission in farms, broilers and slaughterhouses \parencite{rommens_infected_2020}. It is represented in our model as a stock-flow structure in which healthy chickens become infected chickens with \textit{Campylobacter} at the 'infection with \textit{Campylobacter}' rate. These infected chickens then become contaminated chicken meat when \textit{Campylobacter} positive chickens are slaughtered. Healthy chickens  contaminated chicken meat stock via '\textit{Campylobacter} negative chickens being slaughtered with cross-contamination. The contaminated chicken meat stock is reduced as contaminated chicken meat is consumed. The population of healthy chickens are also reduced by the flow variable '\textit{Campylobacter} negative chickens slaughtered without contamination'.
 
-%David
+%David (still gotta do this, sorry, stupid climate change took me longer than expected)
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{images/Transmission submodel.png}
@@ -111,17 +109,44 @@ The causal structure adopted for this sub-model focuses on connecting variables 
 %What were the key assumptions made in developing the model?
     %Take from validation spreadsheet
     %Include simplifications of real-world circumstances (e.g. acute campy coming before chronic conditions)
+\subsubsection{Assumptions}
+The main assumptions made in modelling these causal structures are:
+\begin{itemize}
+    \item Demand for chicken meat exactly matches supply of chicken meat
+    \item All chicken meat consumed in the Netherlands is produced in the Netherlands
+    \item The disease burden and cost of illness associated with death from gastroenteritis is accounted for within the DALY and Cost of Illness values used.
+    \item The development of chronic disease is assumed to always occur subsequent to a case of acute gastroenteritis (in reality, some cases will develop chronic disease without first developing gastronenteritis, following a \textbf{Campylobacter} infection.
+\end{itemize}
+
+Multiple assumptions on the values of individual parameters have been made, due to the absence of adequate literature. Where this is the case, the assumption has been noted in \textcolor{red}{table x in appendix y}.
+\subsubsection{Simplifications}
 
 \subsection{Model Specification}
 %What are the main mechanisms/variables/parameters in our model?
+\subsubsection{Mechanisms employed}
+The main mechanisms employed in each part of the model are as follows:
+\begin{itemize}
+    \item Chicken infections: the chicken infections part of the model focuses on stock-flow structures to model accumulation and delays in the infection of chickens.
+    \item Cost of illness: the cost of illness model relies on accumulation over time, while using a pulse-train mechanism to 'empty' the annual occurrence of acute illness.
+    \item Environmental transmission: this part of the model replicates empirical models of insect development cycles, and translates this to prevalence of environmental transmission of \textit{Campylobacter} by disease vectors.
+\end{itemize}
 
+A full and detailed list of variables and parameters used in the model are detailed in \textcolor{red}{APPENDIX}.
 %What software was used for the modelling?
+\subsubsection{Modelling software used}
 The system was modelled using VenSim PLE software developed by Ventana Systems Inc.
 %Model Settings
     %Why was the integration method chosen?
+    
+\subsubsection{Integration method}
 The model uses Euler as the integration method. Euler was considered an attractive integration method for this model as it is suitable for integrating over non-linear and discontinuous functions (such as the pulse trains used to drain stocks), and it is a simple a direct method of integration. However, it does present some limitations in computational inefficiencies.
+
+\subsubsection{Time step}
     %Why was the time step chosen?
-TBC
+The time step of \textcolor{red}{X} was selected as behaviour of the model was consistent for this time step, and for half this time step. This suggests that the time steps are small enough such that the derivative of the model is constant between two very close points in time.
+\textcolor{red}{Consider adding screenshot to show difference between two step sizes}
+
+\subsubsection{Time period}
     %Why was the time period chosen
 The time period of \textcolor{red}{X} years was chosen to be able to show the effects of incremental changes in climate variability, whilst maintaining a small enough time step such that the transmission within chicken farms is realistic.
 \subsection{Model Verification & Validation}
@@ -146,11 +171,50 @@ Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. 
 
 %Validation requires three steps:
     %Show how the data matches or does not match historical data (explain why)
-\cite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands.
+    
+\textbf{Human cases} \\
+\textcite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands in 2018, 67.000 in 2017 and 79.000 in 2016.
 
-\parencite{nepluvi_rapportage_2019}
+\textbf{chickens} \\
+\textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broilerchickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses.
+
+%source of campylobacter
+In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry
+\parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume this transmission route can be found in the environment, and because of these facts, we assume the environmental transmission routes play a bigger role. Around $20$-$60\%$ of the human infections are from the environment.
+
+\textbf{Meats} \\
+From 2012 to 2018 around $35$-$40\%$ of tested Dutch store-bought meat products contained \textit{Campylobacter} \parencite{vlaanderen_staat_2019, cuperus_surveillance_2020}.
+
+
+\textbf{DALYs} \\
+\parencite{vlaanderen_staat_2019} \\
+2016 2017 2018 \\
+3.573 3.074 3.201
+
+\textbf{CoI} \\
+\parencite{vlaanderen_staat_2019} \\
+64 55 64 M\euro{} \\
+why is our COI stacking? shouldn't it reset after a year?\\
+same with Dalys \\
+so the Dalys are too high and the CoI is too low lol
+
+\textbf{flies} \\
+No data found.
+
+\textbf{Extra}\\
+\textcite{vlaanderen_staat_2019} and curperus also show the actual human infections confirmed by laboratoria from 2006-2018, and the numbers for the Netherlands. I assumed these were uninteresting, since we also care about untested individuals
+
+The use of antacids may increase one's chances of getting Campylobacteriosis. This is structural uncertainty we could include.
+
+\textcite{vlaanderen_staat_2019} shows that campylobacter is becoming resistant against antibiotics: also uncertainty.
+
+
+I suppose the factor wild birds play can also be considered uncertain. There are still a lot of gaps in the literature regarding disease transmission amongst birds and from birds to other animal taxa.
+
 
     %Conduct an extreme values test to test the dynamic hypothesis and range of model applicability and provide comment to the reader on the boundaries of the model's effective use. Tell the reader the conditions under which the model behaves reliably
+    
+    
     %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
     
 \subsection{Experimental setup}
