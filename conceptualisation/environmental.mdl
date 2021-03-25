@@ -1,16 +1,11 @@
 {UTF-8}
-disease risk from environment  = A FUNCTION OF( disease risk from wild birds,infectious flies\
-		)
-	~	
-	~		|
-
-rate of chicken infection from environment  = A FUNCTION OF( disease risk from environment\
-		,infectious flies,rate of human exposure to environmental disease vectors) ~~|
+rate of chicken infection from environment  = A FUNCTION OF( infectious flies,rate of human exposure to environmental disease vectors\
+		) ~~|
 rate of chicken infection from environment=
 	~	
 	~		|
 
-rate of human infection from environment  = A FUNCTION OF( disease risk from environment\
+rate of human infection from environment  = A FUNCTION OF( disease risk from wild birds\
 		,infectious flies,rate of chicken exposure to environmental disease vectors) ~~|
 rate of human infection from environment=
 	~	
@@ -95,8 +90,8 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 10,1,temperature trend,236,228,46,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
 10,2,fly development,278,323,52,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 1,3,1,2,1,0,0,0,0,128,0,-1--1--1,,1|(238,272)|
-10,4,rate of human infection from environment,823,235,74,19,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|0||0-0-0,0,0,0,0,0,0
-10,5,rate of chicken infection from environment,805,351,50,28,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|0||0-0-0,0,0,0,0,0,0
+10,4,rate of human infection from environment,823,235,74,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,rate of chicken infection from environment,805,351,50,28,8,3,0,0,0,0,0,0,0,0,0,0,0,0
 10,6,fly population,454,343,43,11,0,131,0,1,0,0,0,0,0-128-255,0-0-0,|12||0-0-0,1,0,0,0,0,0
 1,7,2,6,1,0,0,0,0,128,0,-1--1--1,,1|(342,343)|
 10,8,infectious flies,587,315,45,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
@@ -107,16 +102,12 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 1,13,10,4,1,0,0,0,0,128,0,-1--1--1,,1|(938,237)|
 10,14,proportion of infectious flies,587,345,49,19,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
 1,15,14,8,0,1,0,0,0,64,0,-1--1--1,,1|(587,326)|
-10,16,"disease risk from CPY-positive chickens",406,216,73,19,8,3,0,4,0,0,0,0,-1--1--1,255-160-0,|0||0-0-0,0,0,0,0,0,0
-1,17,16,8,1,0,0,0,0,128,0,-1--1--1,,1|(439,280)|
-10,18,disease risk from wild birds,553,210,54,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
-1,20,8,4,0,1,0,0,0,64,0,-1--1--1,,1|(685,281)|
-1,21,8,5,0,1,0,0,0,64,0,-1--1--1,,1|(686,330)|
-10,22,disease risk from environment,670,271,54,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,23,18,22,1,0,0,0,0,128,0,-1--1--1,,1|(581,254)|
-1,24,8,22,1,0,0,0,0,128,0,-1--1--1,,1|(651,310)|
-1,25,22,4,1,0,0,0,0,128,0,-1--1--1,,1|(759,269)|
-1,26,22,5,1,0,0,0,0,128,0,-1--1--1,,1|(755,288)|
+10,16,"disease risk from CPY-positive chickens",435,209,73,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,16,8,1,0,0,0,0,128,0,-1--1--1,,1|(460,266)|
+10,18,disease risk from wild birds,581,213,54,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,18,4,1,0,0,0,0,128,0,-1--1--1,,1|(633,239)|
+1,20,8,4,1,0,0,0,0,128,0,-1--1--1,,1|(684,323)|
+1,21,8,5,1,0,0,0,0,128,0,-1--1--1,,1|(668,363)|
 ///---\\\
 :L<%^E!@
 9:Current
@@ -127,7 +118,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 42:1
 72:0
 73:0
-5:rate of human infection from environment
+5:"disease risk from CPY-positive chickens"
 35:Date
 36:YYYY-MM-DD
 37:2000
