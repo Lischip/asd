@@ -81,13 +81,13 @@ An increase in Dutch population size is not expected to increase the \textit{Bra
 
 \subsubsection*{Infected chickens}
 % add sub-model diagram here
-This sub-model (presented in Figure \ref{fig:transmission_submodel}) is a simplification of Rommens' 2020 model of dynamics of transmission in farms, broilers and slaughterhouses \parencite{rommens_infected_2020}. It is represented in our model as a stock-flow structure in which healthy chickens become infected chickens with \textit{Campylobacter} at the 'infection with \textit{Campylobacter}' rate. These infected chickens then become contaminated chicken meat when \textit{Campylobacter} positive chickens are slaughtered. Healthy chickens  contaminated chicken meat stock via '\textit{Campylobacter} negative chickens being slaughtered with cross-contamination. The contaminated chicken meat stock is reduced as contaminated chicken meat is consumed. The population of healthy chickens are also reduced by the flow variable '\textit{Campylobacter} negative chickens slaughtered without contamination'.
+The CLD presented in Figure \ref{fig:transmission_submodel} is a simplification of Rommens' 2020 model of dynamics of transmission  and contamination in farms, broilers and slaughterhouses \parencite{rommens_infected_2020}. Healthy chickens become infected with \textit{Campylobacter} due to environmental disease vectors such as flies \parencite{royden_role_2016}, that themselves can become infected from chicken \parencite{skovgard_retention_2011}. These infected chickens then can become contaminated chicken meat when slaughtered, and they can also cause cross-contamination, making the meat of healthy chicken also potentially contaminated when it enters into contact with the bacteria \parencite{berndtson_campylobacter_1996}. Contaminated meat is consumed and that will have a chance of infecting humans \parencite{wilson_tracing_2008}.
 
-%David (still gotta do this, sorry, stupid climate change took me longer than expected)
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{images/Transmission submodel.png}
-\caption{The conceptual chicken infection sub-model}
+\caption{Conceptual causal loop diagram for chicken infection and contamination}
 \label{fig:transmission_submodel}
 \end{figure}
 
@@ -98,7 +98,7 @@ Other internal variables in this model included probabilities of infection, whic
 %Emily
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{images/COI_submodel.png}
+\includegraphics[width=\textwidth]{images/COI_submodel.png}
 \caption{The conceptual Cost of Illness sub-model}
 \end{figure}
 The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Symptomatic infections are assumed to all develop acute gastroenteritis, with a proportion of all cases either recovering, or subsequently developing chronic illnesses. Each of these outcomes contribute to key public health metrics of Disability Adjusted Life Years (DALYs) for these infections, and the Cost of Illness for all \textit{Campylobacter} infections. 
@@ -146,6 +146,8 @@ The model uses Euler as the integration method. Euler was considered an attracti
 The time step of \textcolor{red}{X} was selected as behaviour of the model was consistent for this time step, and for half this time step. This suggests that the time steps are small enough such that the derivative of the model is constant between two very close points in time.
 \textcolor{red}{Consider adding screenshot to show difference between two step sizes}
 
+\textcolor{red}{Results presented start at Week X to allow for effects of delays and time constants to settle}
+
 \subsubsection{Time period}
     %Why was the time period chosen
 The time period of \textcolor{red}{X} years was chosen to be able to show the effects of incremental changes in climate variability, whilst maintaining a small enough time step such that the transmission within chicken farms is realistic.
@@ -165,6 +167,8 @@ Unit verification was performed by checking all variable units for ensure consis
 
 Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. The time unit used in the model is \textit{week}, to properly integrate seasonal changes in temperature across the year, months being to big and days too detailed. But for this same reason, DALY and COI are commonly reported per year. To deal with this, a PULSE TRAIN function was installed between stocks \textit{CPY Cases} and \textit{Acute GE Cases}. The PULSE TRAIN accumulates all \textit{Campylobacteriosis} cases over 52 weeks before transferring them to the cost of illness submodel. This can then be used as an input per year for the COI submodel. The units of the PULSE train remain in weeks when the time unit should be thought of as year, as happens after. 
     %Confirm that you've used the appropriate numerical technique/time step and add one line saying, 'behaviour of the model for the chosen time step and half that time step is consistent, this indicates that the appropriate time step and integration method has been used'
+    
+The time step verification was performed by running the model at several different time steps. The time steps chosen so the integration method (Euler) is valid and is XXX. When halving the time step, we found that model returned similar model behaviour, with the exception of one flow, the \textit{symptomatic infections}. This is because this flow uses a PULSE TRAIN, as described above and this pulse train depends on the time step. Because of this, when the time step 
 
     
 \subsubsection{Validation}    
@@ -179,7 +183,7 @@ Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. 
 \textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broilerchickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses.
 
 %source of campylobacter
-In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry
+In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry.
 \parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume this transmission route can be found in the environment, and because of these facts, we assume the environmental transmission routes play a bigger role. Around $20$-$60\%$ of the human infections are from the environment.
 
 \textbf{Meats} \\
@@ -191,6 +195,9 @@ From 2012 to 2018 around $35$-$40\%$ of tested Dutch store-bought meat products 
 2016 2017 2018 \\
 3.573 3.074 3.201
 
+% diagnosis of chronic diseases attributed to CBD has increased in the past years
+% whole numbers lol
+
 \textbf{CoI} \\
 \parencite{vlaanderen_staat_2019} \\
 64 55 64 M\euro{} \\
@@ -199,7 +206,7 @@ same with Dalys \\
 so the Dalys are too high and the CoI is too low lol
 
 \textbf{flies} \\
-No data found.
+
 
 \textbf{Extra}\\
 \textcite{vlaanderen_staat_2019} and curperus also show the actual human infections confirmed by laboratoria from 2006-2018, and the numbers for the Netherlands. I assumed these were uninteresting, since we also care about untested individuals
@@ -221,7 +228,33 @@ I suppose the factor wild birds play can also be considered uncertain. There are
 %5.	Experimental setup
  %   a.	Introduce main uncertainties (potentially with table)
   %  b.	Explain scenario and policy logic
+  
         %Parametric experiments - change parameters and observe behaviour (do multivariate for all, and univariate for one or two key variables)
         %Structural experiments - change a structure (e.g. add feedback) and observe behaviour 
    % c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
 
+%Policies in environment
+\begin{itemize}
+\item 1. rate of human exposure to infected flies
+local campaigns promoting measures like:
+keeping your organic garbage shut, using fly nets
+install pest control measures, including variables such as: intensity of extermination / frequency
+install threshold fly population value that activates pest control. The aim is to counteract effects of population growth to infected flies and infection rates.
+
+Note: could we connect fly population or proportion of infected flies to exposure rate??
+\end{itemize}
+%Policies on chicken farms
+\begin{itemize}
+\item 1. rate of cross contamination
+a measure is installed to regularly change water usage of slaughter house equipment
+\item 2. 
+
+\subsubsection{Food safety behaviours and policies}
+\end{itemize}
+%Policies in COI 
+\begin{itemize}
+    \item Food safety and handling: Policy connecting cost of illness to proportion of contaminated chicken
+    \item Behavioural link from DALYs to either infections per kg consumed OR kg of chicken meat consumed. There is a structural uncertainty related to how consumer behaviour might change. Will individuals reduce their chicken consumption or will they be more careful in food handling?
+    % 
+    \item 
+\end{itemize}
