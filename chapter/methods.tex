@@ -186,16 +186,13 @@ The time step verification was performed by running the model at several differe
 %Validation requires three steps:
     %Show how the data matches or does not match historical data (explain why)
     
-\textbf{Human cases} \\
-\textcite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands in 2018, 67.000 in 2017 and 79.000 in 2016.
+\textcite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands in 2018, 67.000 in 2017 and 79.000 in 2016. We plotted the amount of cases produced by our model against the average of these three values. The results can be seen in Figure~\ref{fig:val_human_cases} Our model never exceeds that number, since it is a simplified version of reality, and certain disease vectors have been left out.
 
-\textbf{chickens} \\
-\textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broilerchickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses.
+\textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broilerchickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses. As can be seen in Figure~\ref{fig:val_chickens}, in our model this number is an order of magnitude lower. NEED TO GIVE REASON
 
-%source of campylobacter
-In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry.
-\parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume this transmission route can be found in the environment, and because of these facts, we assume the environmental transmission routes play a bigger role. Around $20$-$60\%$ of the human infections are from the environment.
+In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry \parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume this transmission route can be found in the environment, and because of these facts, we assume the environmental transmission routes play a bigger role. Around $20$-$60\%$ of the human infections are from the environment. As can be seen in Figure~\ref{fig:val_sources} this is not the case in our model. The majority of the infections stem from food consumption. NEED TO GIVE REASON
 
+We also validated our DALYs and Cost of Illness against the datapoints from RIVM. We plotted them against the average of the values mentioned in \citetitle{vlaanderen_staat_2019}, 
 \textbf{DALYs} \\
 \parencite{vlaanderen_staat_2019} \\
 2016 2017 2018 \\
