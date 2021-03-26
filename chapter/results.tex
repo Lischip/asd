@@ -1,4 +1,4 @@
-In this chapter the results from the experiments will be shown and analyzed. First off, the model will be discussed without any policies in effect. Then, the results will be discussed and briefly analysed per policy or policy lever . 
+In this chapter the results from the experiments will be shown and analyzed. First, the model will be discussed without any policies in effect. Following this, the base model is tested for it's performance against multiple scenarios. Finally, the policies are implemented, and their robustness to the earlier scenarios tested. This analysis serves an interpretation of the relative cost-effectiveness of the chosen policies, allowing for comparison of real-world cost of implementation. 
 
 \iffalse
 1.	Show and explain results without policies
@@ -7,9 +7,9 @@ In this chapter the results from the experiments will be shown and analyzed. Fir
 \fi
 \subsection{Results of the model without policies}
 
-The model was first run without any policies in place to study the effects of the scenarios on the situation as is. 
+The model was first run without any policies in place to study the effects of the scenarios on the situation as is. Afterwards, it will be run as a part of the scenarios to see how the status quo fares in our defined scenarios. 
 
-\subsubsection{Base}
+\subsubsection{Base model}
 \label{s:b_base}
 The model was run without any scenarios to generate behaviour, dubbed the base run. The behaviour of the KPIs was studied for this base behaviour.
 
@@ -55,6 +55,8 @@ The model produces a stair-like graph for the cost of illness, where we had hypo
 \subsection{Consequences of scenarios for model behaviour}
 \subsubsection{Population scenarios}
 
+Based on population projections \parencite{nidi_nidi_2020} we ran the sensitivity analysis and got the results in figures \ref{fig:pop_coi}, \ref{fig:pop_meat}, \ref{fig:pop_chicken}, and \ref{fig:pop_human}. Because a population increase also increases demand for chicken, generating a reaction across the model than can be appreciated in the increased contaminated chicken meat stock as well. Because more people get infected in total and present symptoms, the cost of illness also increases.
+
 \begin{figure}[h!]
     \centering
     \begin{minipage}{0.45\textwidth}
@@ -91,6 +93,8 @@ The model produces a stair-like graph for the cost of illness, where we had hypo
 
 \textbf{Average temperature increase}
 
+Based on climate change projections \parencite{knmi_knmi_2015} we ran the sensitivity analysis and got the results in figures \ref{fig:temp_coi}, \ref{fig:temp_meat}, \ref{fig:temp_chicken}, and \ref{fig:temp_human}. Temperature increasing aids in the development of disease vectors, which has a direct impact on human infections, besides also affecting indirectly through the food borne route of transmission. This results in increased cost of illness proportional to the increase in temperature over the years.
+
 \begin{figure}[h!]
     \centering
     \begin{minipage}{0.45\textwidth}
@@ -125,6 +129,8 @@ The model produces a stair-like graph for the cost of illness, where we had hypo
 
 \textbf{Seasonal temperature increase}
 
+There is uncertainty in how the temperature might increase in the future. It seems that the increase is not uniform throughout the year, but that instead summers might warm up faster than winters. We modelled this uncertainty and compared the scenarios. The seasonal variation in temperature increase leads to longer warmer periods compared to cold periods, which also affects disease vector propagation and has an impact in infections and subsequently in the cost of illness. This can be appreciated in figures. \ref{fig:season_coi}, \ref{fig:season_meat}, \ref{fig:season_chicken}, and \ref{fig:season_human}.
+
 \begin{figure}[h!]
     \centering
     \begin{minipage}{0.45\textwidth}
@@ -145,10 +151,10 @@ The model produces a stair-like graph for the cost of illness, where we had hypo
     \centering
     \begin{minipage}{0.45\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{images/sensitivity/Seasonal temperature chicken infection.png} 
+        \includegraphics[width=1\textwidth]{images/sensitivity/Seasonal temperature chicken infection.png}
         \caption{Chicken infections from environment in the different temperature seasonality scenarios}
         \label{fig:season_chicken}
-    \end{minipage}\hfill
+    \end{minipage}
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{images/sensitivity/Seasonal temperature human infection.png}
@@ -159,17 +165,52 @@ The model produces a stair-like graph for the cost of illness, where we had hypo
 
 \subsubsection{Public health scenarios}
 
+On figure \ref{fig:symptom_COI} we can see the result of rate of symptomatic infections changing, which is a behavior that has been observed recently \parencite{medema_assessment_1996}. This only bring changes to the cost of illness, as infections remain the same across the model, but the severity of the disease requires more treatment.
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{images/sensitivity/Symptomatic COI.png} 
+    \includegraphics[width=0.45\textwidth]{images/sensitivity/Symptomatic COI.png} 
     \caption{Cost of illness in the different symptomatic infection scenarios}
     \label{fig:symptom_COI}
 \end{figure}
 
 \subsubsection{Multivariate sensitivity analysis}
 
+We ran multivariate analysis to account for the compounded effect of different uncertainties, and the results can be found in figures \ref{fig:multi_coi}, \ref{fig:multi_meat}, \ref{fig:multi_chicken}, and \ref{fig:multi_human}. The observed change is mostly regarding numerical sensitivity, but we can see that the contaminated chicken meat can overshoot at times, which is the result of people refusing to eat meat as a result of increased infections, but the chicken were already in the production cycle so there was excess production.
 
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate COI.png} % first figure itself
+        \caption{Cost of Illness in the multivariate analysis}
+        \label{fig:multi_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate contaminated meat.png} % second figure itself
+        \caption{Contaminated chicken meat in the multivariate analysis}
+        \label{fig:multi_meat}
+    \end{minipage}
+\end{figure}
 
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate chicken infection.png} 
+        \caption{Chicken infections from environment in the multivariate analysis}
+        \label{fig:multi_chicken}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate human infection.png}
+        \caption{Human infections from environment in the multivariate analysis}
+        \label{fig:multi_human}
+    \end{minipage}
+\end{figure}
+
+\newpage
 \subsection{Consequences of policies under scenarios}
 \subsubsection{Base model}
 
@@ -191,7 +232,7 @@ A policy regarding slaughtering was modeled into the base model, which will be t
     \end{minipage}
 \end{figure} 
 
-The model acts according to reason. It can be seen that once the food safety and handling policy goes into effect, the stock of contaminated meat decreases before slowly increases again. This shows that it has an immediate effect, which stays over time but then continues growing. 
+Model behaviour under this policy is reasonable. Once the food safety and handling policy goes into effect, the stock of contaminated meat decreases before slowly increasing again. This shows that it has an immediate effect, which stays over time but then continues growing. 
 
 The odd spikes in Figure \ref{fig:p_meat} are similar to the ones as explained in section \ref{s:b_base}. 
 
@@ -213,12 +254,71 @@ Another policy implemented was the campaign to limit human exposure to flies, du
     \end{minipage}
 \end{figure} 
 
-It can be seen in Figure \ref{fig:p2_meat} that the policy removes the strange peaks in the baserun. This is most likely due to the fact that the policy lowers the number of \textit{Campylobacter} cases, which doesn't decrease of chicken meat consumption. This means that the threshold isn't met to trigger the meat consumption behaviour while the stock of contaminated meat decreases accordingly. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.45\textwidth]{images/p2_humanenvo.jpeg}
+\caption{Human infections from the environment in the No Fly Zone base run }
+\label{fig:p2_humanenvo}
+\end{figure}
 
-Another fly related policy which was implemented is the the Pest Control policy. This Pest Control policy entails the influence onto the fly population 
+It can be seen in Figure \ref{fig:p2_meat} that the policy removes the strange peaks in the baserun. This is most likely due to the fact that the policy lowers the number of \textit{Campylobacter} cases, which mitigates the decrease of chicken meat consumption. This means that the threshold isn't met to trigger the meat consumption behaviour while the stock of contaminated meat decreases accordingly. 
+
+Another fly related policy which was implemented is the the Pest Control policy. This Pest Control policy entails a policy that target the infectious flies and attempts to exterminate these fly populations in areas they would most likely be found, such as slaughterhouses and chicken farms.  
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/p3_coi.jpeg} 
+        \caption{Cost of Illness in the No Fly Zone base run}
+        \label{fig:p2_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/p3_meat.jpeg}
+        \caption{Contaminated chicken meat in the No Fly Zone base run}
+        \label{fig:p2_meat}
+    \end{minipage}
+\end{figure} 
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/p3_chicken.jpeg} 
+        \caption{Chicken infections from the environment in the Pest Control base run}
+        \label{fig:p2_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/p3_human.jpeg}
+        \caption{Human infections from the environment in the Pest Control base run}
+        \label{fig:p2_meat}
+    \end{minipage}
+\end{figure} 
+
+Two more policies regarding food were implemented, named food behaviour and preparation policies. Similar to the Safe Slaughtering policy, these policies go into effect when Cost of Illness reaches the 100 million threshold. These policies act on
+\textit{consumption rate per person} and \textit{infections per kg of meat} respectively, by reducing these by 20\%.  
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/foodbehaviourpolicy.png} 
+        \caption{KPIs under food behaviour policy}
+        \label{fig:foodbehav}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/foodpreparationpolicy.png}
+        \caption{KPIs under food preparation policy}
+        \label{fig:foodprep}
+    \end{minipage}
+\end{figure}
 
 \subsubsection{Population scenarios}
 
+\textcolor{red}{To the reviewers, we haven't done this section and onwards yet.}
 
 \subsubsection{Climate scenarios}
 
