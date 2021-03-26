@@ -130,6 +130,7 @@ The cost of illness associated with \textit{Campylobacter} infections was modell
 The causal structure adopted for this sub-model focuses on connecting variables based on available scientific data. Due to the underlying complexity of DALY and Cost of Illness metrics \parencite{jo_cost--illness_2014}, a top-down approach to applying these variables has been taken. As such, variables have been used for some elements that might otherwise have been modelled as stocks (e.g. DALYs and Cost of Illness). Additionally, this more simplistic approach is considered appropriate, as we are not concerned with the detailed dynamics of transmission and recovery (as might be done in an SIR model), but only with the ultimate KPIs of 'DALY' and 'Cost of Illness'.
 
 \subsection{Key Assumptions}
+\label{s:assumptions}
 %What were the key assumptions made in developing the model?
     %Take from validation spreadsheet
     %Include simplifications of real-world circumstances (e.g. acute campy coming before chronic conditions)
@@ -230,7 +231,6 @@ The time step verification was performed by running the model at several differe
 
 % WHY???? 
 
-    
 \subsubsection{Validation}    
 
 %Validation requires three steps:
@@ -239,8 +239,7 @@ The time step verification was performed by running the model at several differe
 The complete validation can be read in Appendix~\ref{ch:validation}. We have summarised the findings below:
 
 \begin{itemize}
-    \item The number of human cases with campylobacteriosis is valid, but too many of these infections find their source in the consumption of infected meat
-    \item In the model the portion of chickens is infected with \textit{Campylobacter} is too small REASON
+    \item The number of human cases with campylobacteriosis is valid, and most of these infections stem from the environment
     \item The model calculates more DALYs than the literature, which may be an indication that often doctors are unable to trace the diagnosis back to \textit{Campylobacter}
     \item The Cost of Illness is lower than the literature used to validate, this is probably due to the different indicators used. The model used similar indicators as \textcite{mangen_campylobacteriosis_2007}, whereas the validation data was less transparent on how they calculated their Cost of Illness.
 \end{itemize}
@@ -273,7 +272,7 @@ Variable & Range \\
 \hline
 \endhead
 %
-minimum average weekly temperature & \\
+minimum average weekly temperature & TBD \\
 maximum average weekly temperature & \\
 initial fly population & \\
 infection risk from birds & \\
@@ -283,7 +282,7 @@ slaughter rate & \\
 \end{longtable}
     
     %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
-? 
+Refer to Section \ref{s:b_base} where the behaviour of the base model without policies is examined. In this section, the differences and similarities between the model and the dynamic hypothesis are discussed.
     
 \subsection{Experimental setup}
 %5.	Experimental setup
@@ -293,9 +292,16 @@ slaughter rate & \\
         %Parametric experiments - change parameters and observe behaviour (do multivariate for all, and univariate for one or two key variables)
         %Structural experiments - change a structure (e.g. add feedback) and observe behaviour 
    % c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
-\textcolor{red}{We should be more explicit about which of these experiments/policies are parametric, and which are structural?}
+
+To answer our research question, experiments were set up around the three components in the research question: climate, population and public health. 
+
+The structural uncertainties resulted in six policies that will be tested. These policies were designed based on reality and are capable of providing a view of the policies' cost effectiveness and robustness. These policies will be discussed in subsection \ref{s:environmentalfactors} to \ref{s:foodbehaviour}. 
+
+The parametric uncertainties were used to devise a sensitivity analysis. The parameters are the projection of the Dutch population, the temperature increase in the coming 30 years and the cost of illness. 
+
 %Policies in environment
 \subsubsection{Environmental factors and policies to control disease vectors}
+\label{s:environmentalfactors}
 \begin{itemize}
     \item Public campaigns to prevent human exposure to infected flies: on the season when the disease vector is more prevalent, urge the population to keep organic waste properly closed and use fly nets \parencite{hald_use_2007}. Similar measures are used to prevent the reproduction of disease carrying mosquitoes in tropical countries. %I know this for a fact because tropical country, but we might want to add a source.
     \item Pest control measures: when a certain threshold of fly population is reached, the government can initiate extermination campaigns to limit the spread of diseases. This can be generalized, or localized only around farms.
@@ -307,16 +313,15 @@ slaughter rate & \\
 \subsubsection{Chicken production and policies}
 %Policies on chicken farms
 \begin{itemize}
-    \item Improve sanitation of slaughterhouse process and equipment: requirement for slaughterhouse equipment to be cleaned using water that is frequently changed to prevent cross-contamination. Additionally, this can be accompanied by the use of UV radiation to aid in the decontamination process without altering the sensory quality of the meat \textcolor{red}{Suggest shortening this sentence - this information, while interesting, doesn't necessarily add to the policy. Better to talk about expected impact of policy than about how the policy is specifically implemented?} \parencite{isohanni_use_2009}.
+    \item Improve sanitation of slaughterhouse process and equipment: requirement for slaughterhouse equipment to be cleaned using water that is frequently changed to prevent cross-contamination. This can also be enhanced by the use of UV radiation to aid in the decontamination process without altering the sensory quality of the meat \parencite{isohanni_use_2009}.
     \item Logistic slaughter: process infected chicken last to prevent cross-contamination of chicken meat. Requires testing for infection in farms and it is possible for undetected infected chickens to go first \parencite{evers_predicted_2004}. 
 \end{itemize}
 
 \subsubsection{Food safety behaviours and policies}
+\label{s:foodbehaviour}
 
 %Policies in COI 
 \begin{itemize}
     \item Food safety and handling: Policy connecting cost of illness to proportion of contaminated chicken
     \item Behavioural link from DALYs to either infections per kg consumed OR kg of chicken meat consumed. There is a structural uncertainty related to how consumer behaviour might change. Will individuals reduce their chicken consumption or will they be more careful in food handling?
-    % 
-    \item 
 \end{itemize}
