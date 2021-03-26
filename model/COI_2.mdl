@@ -15,6 +15,7 @@ INITIAL TIME  = 0
 	~	The initial time for the simulation.
 	|
 
+SAVEPER  = 
         TIME STEP 
 	~	Month [0,?]
 	~	The frequency with which output is stored.
