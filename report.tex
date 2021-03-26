@@ -33,6 +33,7 @@
 \usepackage{aliascnt}
 \usepackage{eurosym}
 \usepackage{gensymb}
+\usepackage{lscape}
 
 \usepackage[style=apa]{biblatex}
 \addbibresource{asd.bib}
@@ -143,6 +144,7 @@
 	bottom=2.5cm,
 }
 
+\usepackage{multirow}
 
 \begin{document}
 	\pagenumbering{gobble}
@@ -198,6 +200,10 @@
 %\section*{EXAMPLEEEEEEEEEEEEEEEEES}
 %\input{chapter/examples}
 
+\section*{Abstract}
+\input{chapter/abstract}
+
+\pagebreak
 
 \section*{Glossary}
 \input{chapter/glossary}
@@ -252,7 +258,9 @@
 \section{Model documentation}
 \label{ch:model_documentation}
 \include{appendix/model_doc}
-\include{appendix/validation}
+\section{Validation}
+\label{ch:validation} 
+\input{appendix/validation}
 \section{Report log}
 \label{ch:report_log}
 \input{appendix/elias_log}
