@@ -799,10 +799,8 @@ $192-192-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,60,0
 1,285,284,93,0,0,0,0,0,128,0,-1--1--1,,1|(1873,373)|
 ///---\\\
 :L<%^E!@
-1:Current symptomatic.vdfx
-1:20% more symptomatic.vdfx
-1:20% less symptomatic.vdfx
-9:20% more symptomatic
+1:Multivariate sensitivity
+9:Multivariate sensitivity
 23:0
 18:draft_ULTIMATEMODEL_0020.vsc
 20:draft_ULTIMATEMODEL_0020.lst
@@ -814,7 +812,7 @@ $192-192-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,60,0
 72:0
 73:0
 4:Time
-5:rate of human infection from environment
+5:contaminated meat
 35:Date
 36:YYYY-MM-DD
 37:2020
