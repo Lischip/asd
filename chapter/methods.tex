@@ -11,6 +11,7 @@ An important aspect to system dynamics models are the aforementioned accumulatio
    % b.	Describe dynamic hypothesis
 
 \subsection{Conceptualisation}
+\label{s:conceptualisation}
 The model will focus on the economic impacts and health care costs associated with \textit{Campylobacter}-contaminated chicken meat. The dynamic hypothesis includes three KPIs that will be examined to answer the research question: 
 \begin{itemize}
     % \item Number of infected chicken flocks: is expected to increase with worsening climate conditions and no interventions.
@@ -22,7 +23,8 @@ The model will focus on the economic impacts and health care costs associated wi
  
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{images/dynamic_hypo.png}
+\includegraphics[width=\textwidth]{images/dynamic_hypo.jpeg}
+%0.5 text width is too small man
 \caption{The aggregated causal loop diagram for the dynamic hypothesis}
 \end{figure}
  
@@ -36,6 +38,7 @@ The sub-model of 'Infected Chickens' encompasses the majority of Rommens' origin
 
 \subsubsection*{Dynamic Hypothesis}
 % is it okay to merge with conceptualisation?
+% yes, I think so - M
 
 \subsection{Explanation of model}
 %3.	Explain model (also refer to Appendix A)
@@ -57,12 +60,12 @@ This analysis contains three main sub-models:
 
 \begin{figure*}[!ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/environmental_submodel2.png}
+	\includegraphics[width=1\textwidth]{images/environmental_submodel2.png}
 	\caption{Diagram of the environmental sub-model}
 	\label{fig:environmental_submodel}
 \end{figure*}
 
-\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore, this has a big role in determining the chance of infection by biological disease vectors mentioned before. This can be seen in Figure~\ref{fig:environmental_submodel}. The main biological disease vectors have been determined to be flies and wild birds \parencite{mughini-gras_quantifying_2016}. Both vectors are considered to be major spreaders as they actively excrete \texitt{Campylobacter} on surfaces and human food \parencite{french_molecular_2009, hald_influxed_2008, berndtson_campylobacter_1996}.
+\textit{Campylobacter} need humid surfaces to live, so surface water is recognised as a key player. Since animal faeces and runoff from agriculture and slaughterhouses enter nearby bodies of water, it is considered a good indicator for the amount of \textit{Campylobacter} present in the environment. Therefore, this has a big role in determining the chance of infection by biological disease vectors mentioned before. This can be seen in Figure~\ref{fig:environmental_submodel}. The main biological disease vectors have been determined to be flies and wild birds \parencite{mughini-gras_quantifying_2016}. Both vectors are considered to be major spreaders as they actively excrete \textit{Campylobacter} on surfaces and human food \parencite{french_molecular_2009, hald_influxed_2008, berndtson_campylobacter_1996}.
 
 It seems that the vector potential of flies is mainly determined by the \textit{Brachycera} suborder of the order \textit{Diptera}, and to be more specific by the \textit{Musca domestica}, which is more commonly known as the house fly \parencite{hald_influxed_2008}. We therefore opt to use the \textit{Musca domestica} as the model organism to represent the effects of the \textit{Diptera} insect order. \cite{skovgard_retention_2011} suggests that \textit{Musca domestica} are mainly short distance carriers of \textit{Campylobacter}. Therefore, the risk of transmission by \textit{Musca deomstica} is particularly high when the populations are greatest, which is during summer \parencite{royden_role_2016}. \cite{hald_use_2007} showed that preventing flies from entering houses in the summer of 2006 caused a significant drop in the prevalence of \textit{Campylobacter} at farms.
 
@@ -81,13 +84,14 @@ An increase in Dutch population size is not expected to increase the \textit{Bra
 
 \subsubsection*{Infected chickens}
 % add sub-model diagram here
-This sub-model (presented in Figure \ref{fig:transmission_submodel}) is a simplification of Rommens' 2020 model of dynamics of transmission in farms, broilers and slaughterhouses \parencite{rommens_infected_2020}. It is represented in our model as a stock-flow structure in which healthy chickens become infected chickens with \textit{Campylobacter} at the 'infection with \textit{Campylobacter}' rate. These infected chickens then become contaminated chicken meat when \textit{Campylobacter} positive chickens are slaughtered. Healthy chickens  contaminated chicken meat stock via '\textit{Campylobacter} negative chickens being slaughtered with cross-contamination. The contaminated chicken meat stock is reduced as contaminated chicken meat is consumed. The population of healthy chickens are also reduced by the flow variable '\textit{Campylobacter} negative chickens slaughtered without contamination'.
+The CLD presented in Figure \ref{fig:transmission_submodel} is a simplification of Rommens' 2020 model of dynamics of transmission  and contamination in farms, broilers and slaughterhouses \parencite{rommens_infected_2020}. Healthy chickens become infected with \textit{Campylobacter} due to environmental disease vectors such as flies \parencite{royden_role_2016}, that themselves can become infected from chicken \parencite{skovgard_retention_2011}. These infected chickens then can become contaminated chicken meat when slaughtered, and they can also cause cross-contamination, making the meat of healthy chicken also potentially contaminated when it enters into contact with the bacteria \parencite{berndtson_campylobacter_1996}. Contaminated meat is consumed and that will have a chance of infecting humans \parencite{wilson_tracing_2008}.
 
-%David (still gotta do this, sorry, stupid climate change took me longer than expected)
+This section of the model behaves as the "success to the successful" archetype \parencite{pruyt_triple_2013}, where the feedback loops around the rate of chicken infection imply that when there are low infections, it is prone to stay that way, but when infections rise, it is difficult to limit their growth. The implications for our model is that a small push in the direction of infections can have big implications.
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{images/Transmission submodel.png}
-\caption{The conceptual chicken infection sub-model}
+\caption{Conceptual causal loop diagram for chicken infection and contamination}
 \label{fig:transmission_submodel}
 \end{figure}
 
@@ -98,7 +102,7 @@ Other internal variables in this model included probabilities of infection, whic
 %Emily
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{images/COI_submodel.png}
+\includegraphics[width=\textwidth]{images/COI_submodel.png}
 \caption{The conceptual Cost of Illness sub-model}
 \end{figure}
 The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Symptomatic infections are assumed to all develop acute gastroenteritis, with a proportion of all cases either recovering, or subsequently developing chronic illnesses. Each of these outcomes contribute to key public health metrics of Disability Adjusted Life Years (DALYs) for these infections, and the Cost of Illness for all \textit{Campylobacter} infections. 
@@ -146,25 +150,35 @@ The model uses Euler as the integration method. Euler was considered an attracti
 The time step of \textcolor{red}{X} was selected as behaviour of the model was consistent for this time step, and for half this time step. This suggests that the time steps are small enough such that the derivative of the model is constant between two very close points in time.
 \textcolor{red}{Consider adding screenshot to show difference between two step sizes}
 
+\textcolor{red}{Results presented start at Week X to allow for effects of delays and time constants to settle}
+
 \subsubsection{Time period}
     %Why was the time period chosen
 The time period of \textcolor{red}{X} years was chosen to be able to show the effects of incremental changes in climate variability, whilst maintaining a small enough time step such that the transmission within chicken farms is realistic.
-\subsection{Model Verification & Validation}
+
+\textcolor{red}{David: probs about 30 years (until 2050), else it is difficult to see any change from climate change, verify this with group on Friday.}
+
+\subsection{Model Verification and Validation}
 %4.	Validation
  %   a.	Use various tests to argue why model is fit for purpose
 In this subsection we'll verify and validate the model. Verification will be done through a comparison with the conceptualisation of the model, as well as a unit verification and a time step verification. 
 
 \subsubsection{Verification}
 
-
 % From meeting with Jill:
 %Verification requires three steps:
     %Check that the causal diagrams match the stock-flow diagrams, and add one line saying "this was checked'
+    
+To verify the conceptualisation, it was checked that the causal diagram construed in chapter \ref{s:conceptualisation} matches the model built. There have been some addedums to the model, but the functions still match.  
     %Check that the units are consistent with the real world and add one line saying 'units were checked for material consistency'. -- DONE
 Unit verification was performed by checking all variable units for ensure consistency with real-world equivalents. There was one anomalous variable in the model which could not be mapped to a physical value. This refers to the \textit{balancing constant} that feeds into the \textit{rate of fly development}. This was added under the assumption that temperature linearly correlates to fly populations, as documented by \citeauthor{blanckenhorn_adaptive_1998}, 1998. This factor allows conversion from the units of temperature (degrees) to fly development rate (MFly per week). This cannot be done without adding a go-between, which, in our case, is the balancing constant. 
 
 Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. The time unit used in the model is \textit{week}, to properly integrate seasonal changes in temperature across the year, months being to big and days too detailed. But for this same reason, DALY and COI are commonly reported per year. To deal with this, a PULSE TRAIN function was installed between stocks \textit{CPY Cases} and \textit{Acute GE Cases}. The PULSE TRAIN accumulates all \textit{Campylobacteriosis} cases over 52 weeks before transferring them to the cost of illness submodel. This can then be used as an input per year for the COI submodel. The units of the PULSE train remain in weeks when the time unit should be thought of as year, as happens after. 
     %Confirm that you've used the appropriate numerical technique/time step and add one line saying, 'behaviour of the model for the chosen time step and half that time step is consistent, this indicates that the appropriate time step and integration method has been used'
+    
+The time step verification was performed by running the model at several different time steps. The time step \textcolor{red}{X} is chosen so the integration method (Euler) is valid. When halving the time step, we found that model returned similar model behaviour, with the exception of one flow, the \textit{symptomatic infections}. This is because this flow uses a PULSE TRAIN, as described above and this pulse train depends on the time step. Because of this, when the time step is halved, the PULSE TRAIN becomes far bigger. However, this has no effect on the stock it goes into, the number of acute cases 
+
+% WHY???? 
 
     
 \subsubsection{Validation}    
@@ -172,35 +186,22 @@ Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. 
 %Validation requires three steps:
     %Show how the data matches or does not match historical data (explain why)
     
-\textbf{Human cases} \\
-\textcite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands in 2018, 67.000 in 2017 and 79.000 in 2016.
+\textcite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands in 2018, 67.000 in 2017 and 79.000 in 2016. We plotted the amount of cases produced by our model against the average of these three values. The results can be seen in Figure~\ref{fig:val_human_cases} Our model never exceeds that number, since it is a simplified version of reality, and certain disease vectors have been left out.
 
-\textbf{chickens} \\
-\textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broilerchickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses.
+\textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broilerchickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses. As can be seen in Figure~\ref{fig:val_chickens}, in our model this number is an order of magnitude lower. NEED TO GIVE REASON
 
-%source of campylobacter
-In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry
-\parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume this transmission route can be found in the environment, and because of these facts, we assume the environmental transmission routes play a bigger role. Around $20$-$60\%$ of the human infections are from the environment.
+In the Netherlands the (unsanitary) preparation and / or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry \parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume this transmission route can be found in the environment, and because of these facts, we assume the environmental transmission routes play a bigger role. Around $20$-$60\%$ of the human infections are from the environment. As can be seen in Figure~\ref{fig:val_sources} this is not the case in our model. The majority of the infections stem from food consumption. NEED TO GIVE REASON
 
-\textbf{Meats} \\
-From 2012 to 2018 around $35$-$40\%$ of tested Dutch store-bought meat products contained \textit{Campylobacter} \parencite{vlaanderen_staat_2019, cuperus_surveillance_2020}.
+We also validated our DALYs and Cost of Illness against the datapoints from RIVM. We plotted them against the average of the values mentioned in \citetitle{vlaanderen_staat_2019}. As can be seen in Figure~\ref{fig:val_dalys} our model determines higher DALYs than given in the literature. This indicates that in the real world there are a lot of cases of chronic diseases overlooked. There are probably a lot more chronic diseases that can be traced back to \textit{Campylobacter}. Perhaps the specialists are overlooking the bacterium as a cause, or they are simply unable to pinpoint the cause.
+
+In Figure~\ref{fig:val_coi} it can be seen that the Cost of Illness calculated by the model is lower than the validation data. This is probably due to the fact that we only look at 3 chronic conditions and the acute conditions. It may also be the case \citeauthor{vlaanderen_staat_2019} has used a different value as the cost per condition. We calibrated our values with the values mentioned by \textcite{mangen_campylobacteriosis_2007}.
+
+It is estimated there are around 17 million species of \textit{Diptera} per person \parencite{gorman_trillions_2017}. We are only interested in \textit{Musca domestica}. It is unknown what their numbers are in the Netherlands, and we are unable to estimate. However, it has been guessed that the population of Houseflies will increase by 244\% by 2080 \parencite{mcalister_secret_2017}. In The amount of flies in our model after 1 year is 20.000 of which 7.700 are infectious (TIME STEP = 0.0625). This is probably not a proper reflection of the real world, but one can assume that it is only 7.700 flies that have directly caused a disease in humans and/or chickens.
+
+The model also includes an Infection risk from birds (2.5e-05). There are about 1.3 million birds in the Netherlands \parencite{noauthor_miljoenen_2019}. There was no literature on the risk from birds, so we assumed a somewhat safe value. We doubt \textit{Campylobacter} will ever be exterminated due to the presence of these environmental factors, even if we are somehow able to keep our farms, slaughterhouses and stores \textit{Campylobacter}free.
 
 
-\textbf{DALYs} \\
-\parencite{vlaanderen_staat_2019} \\
-2016 2017 2018 \\
-3.573 3.074 3.201
-
-\textbf{CoI} \\
-\parencite{vlaanderen_staat_2019} \\
-64 55 64 M\euro{} \\
-why is our COI stacking? shouldn't it reset after a year?\\
-same with Dalys \\
-so the Dalys are too high and the CoI is too low lol
-
-\textbf{flies} \\
-No data found.
-
+\iffalse
 \textbf{Extra}\\
 \textcite{vlaanderen_staat_2019} and curperus also show the actual human infections confirmed by laboratoria from 2006-2018, and the numbers for the Netherlands. I assumed these were uninteresting, since we also care about untested individuals
 
@@ -210,18 +211,68 @@ The use of antacids may increase one's chances of getting Campylobacteriosis. Th
 
 
 I suppose the factor wild birds play can also be considered uncertain. There are still a lot of gaps in the literature regarding disease transmission amongst birds and from birds to other animal taxa.
-
+\fi
 
     %Conduct an extreme values test to test the dynamic hypothesis and range of model applicability and provide comment to the reader on the boundaries of the model's effective use. Tell the reader the conditions under which the model behaves reliably
-    
+We conducted extreme values tests on multiple values, which yielded the following results regarding their applicable ranges:
+
+\begin{longtable}[c]{l|l}
+\caption{Results of the extreme values test}
+\label{tab:extreme_values}
+Variable & Range \\
+\hline
+\endfirsthead
+%
+\multicolumn{2}{c}%
+{{\bfseries Table \thetable\ continued from previous page}} \\
+Variable & Range \\
+\hline
+\endhead
+%
+minimum average weekly temperature & \\
+maximum average weekly temperature & \\
+initial fly population & \\
+infection risk from birds & \\
+rate of symptomatic cases & \\
+infections per kg of meat consumed & \\
+slaughter rate & \\
+\end{longtable}
     
     %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
+??
     
 \subsection{Experimental setup}
 %5.	Experimental setup
  %   a.	Introduce main uncertainties (potentially with table)
   %  b.	Explain scenario and policy logic
+  
         %Parametric experiments - change parameters and observe behaviour (do multivariate for all, and univariate for one or two key variables)
         %Structural experiments - change a structure (e.g. add feedback) and observe behaviour 
    % c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
 
+%Policies in environment
+\subsubsection{Environmental factors and policies to control disease vectors}
+\begin{itemize}
+    \item Public campaigns to prevent human exposure to infected flies: on the season when the disease vector is more prevalent, urge the population to keep organic waste properly closed and use fly nets \parencite{hald_use_2007}. Similar measures are used to prevent the reproduction of disease carrying mosquitoes in tropical countries. %I know this for a fact because tropical country, but we might want to add a source.
+    \item Pest control measures: when a certain threshold of fly population is reached, the government can initiate extermination campaigns to limit the spread of diseases. This can be generalized, or localized only around farms.
+%install pest control measures, including variables such as: intensity of extermination / frequency
+%install threshold fly population value that activates pest control. The aim is to counteract effects of population growth to infected flies and infection rates.
+%Note: could we connect fly population or proportion of infected flies to exposure rate??
+\end{itemize}
+
+\subsubsection{Chicken production and policies}
+%Policies on chicken farms
+\begin{itemize}
+    \item Improve sanitation of slaughterhouse equipment: requirement for slaughterhouse equipment to be cleaned using water that is frequently changed to prevent cross-contamination. Additionally, this can be accompanied by the use of UV radiation to aid in the decontamination process without altering the sensory quality of the meat \parencite{isohanni_use_2009}.
+    \item Logistic slaughter: process infected chicken last to prevent cross-contamination of chicken meat. Requires testing for infection in farms and it is possible for undetected infected chickens to go first \parencite{evers_predicted_2004}. 
+\end{itemize}
+
+\subsubsection{Food safety behaviours and policies}
+
+%Policies in COI 
+\begin{itemize}
+    \item Food safety and handling: Policy connecting cost of illness to proportion of contaminated chicken
+    \item Behavioural link from DALYs to either infections per kg consumed OR kg of chicken meat consumed. There is a structural uncertainty related to how consumer behaviour might change. Will individuals reduce their chicken consumption or will they be more careful in food handling?
+    % 
+    \item 
+\end{itemize}
