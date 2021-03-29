@@ -239,9 +239,11 @@ The time step verification was performed by running the model at several differe
 The complete validation can be read in Appendix~\ref{ch:validation}. We have summarised the findings below:
 
 \begin{itemize}
-    \item The number of human cases with campylobacteriosis is valid, and most of these infections stem from the environment
+    \item $\ddfrac{1}{17}$ of the Dutch population gets symptoms from campylobacteriosis in our model. {\color{pink} Why is this valid?}
+    \item Most of the causes of campylobacteriosis originate from the envrionment, and not from the consumption of meat. This is conform the literature.
+    \item The proportion of infected chickens in the base model corresponds to the expected proportion in the real world.
     \item The model calculates more DALYs than the literature, which may be an indication that often doctors are unable to trace the diagnosis back to \textit{Campylobacter}
-    \item The Cost of Illness is lower than the literature used to validate, this is probably due to the different indicators used. The model used similar indicators as \textcite{mangen_campylobacteriosis_2007}, whereas the validation data was less transparent on how they calculated their Cost of Illness.
+    \item The Cost of Illness is lower than the literature used to validate, this is probably due to the fact that we only look at three chronic cases and the acute cases.
 \end{itemize}
 
 \iffalse
@@ -257,11 +259,11 @@ I suppose the factor wild birds play can also be considered uncertain. There are
 \fi
 
     %Conduct an extreme values test to test the dynamic hypothesis and range of model applicability and provide comment to the reader on the boundaries of the model's effective use. Tell the reader the conditions under which the model behaves reliably
-We conducted extreme values tests on multiple values, which yielded the following results regarding their applicable ranges:
+We conducted extreme conditions tests on multiple values. We only took into consideration their effect on \textit{symptomatic infections}. This yielded the results shown in Table~\ref{tab:extreme_conditions}.
 
 \begin{longtable}[c]{l|l}
-\caption{Results of the extreme values test}
-\label{tab:extreme_values} \\
+\caption{Results of the extreme conditions test}
+\label{tab:extreme_conditions} \\
 Variable & Range \\
 \hline
 \endfirsthead
