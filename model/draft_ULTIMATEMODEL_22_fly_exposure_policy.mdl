@@ -12,7 +12,7 @@ temperature increase by 2050= WITH LOOKUP (
 	~		|
 
 scenario switch=
-	10
+	0
 	~	Dmnl
 	~		|
 
@@ -37,13 +37,12 @@ population by 2020= WITH LOOKUP (
 	|
 
 rate of human exposure to infectious flies=
-	0.001 * IF THEN ELSE(exposure control policies , 0.8 , 1 )
+	0.001 * IF THEN ELSE(exposure control policies = 1 , 0.8 , 1 )
 	~	Cases/(MFly*Person*Week)
 	~		|
 
 exposure control policies=
-	IF THEN ELSE(temperature > temperature threshold, 1 , 2
-	 )
+	IF THEN ELSE(temperature > temperature threshold, 1 , 0)
 	~	Dmnl
 	~		|
 
@@ -808,7 +807,7 @@ $192-192-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,60,0
 1,289,288,262,1,0,0,0,0,128,0,-1--1--1,,1|(1583,1211)|
 10,290,temperature threshold,1326,1227,43,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,291,290,262,1,0,0,0,0,64,0,-1--1--1,,1|(1448,1246)|
-10,292,scenario switch,440,209,100,56,8,3,0,42,0,0,0,0,-1--1--1,0-0-0,Arial Black|30||0-255-0,0,0,0,0,0,0
+10,292,scenario switch,433,217,100,56,8,3,0,42,0,0,0,0,-1--1--1,0-0-0,Arial Black|30||0-255-0,0,0,0,0,0,0
 10,294,scenario switch,275,1136,34,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
 1,295,294,248,1,0,0,0,0,128,0,-1--1--1,,1|(111,1092)|
 10,296,scenario switch,1930,167,34,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
@@ -818,8 +817,19 @@ $192-192-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,60,0
 1,300,299,271,1,0,0,0,0,128,0,-1--1--1,,1|(1398,716)|
 ///---\\\
 :L<%^E!@
-1:fly_exposure_base.vdfx
-9:fly_exposure_pc1
+1:fe_scen_11.vdfx
+1:fe_scen_10.vdfx
+1:fe_scen_9.vdfx
+1:fe_scen_8.vdfx
+1:fe_scen_7.vdfx
+1:fe_scen_6.vdfx
+1:fe_scen_5.vdfx
+1:fe_scen_4.vdfx
+1:fe_scen_3.vdfx
+1:fe_scen_base.vdfx
+1:fe_scen_2.vdfx
+1:fe_scen_1.vdfx
+9:fe_scen_base
 23:0
 18:draft_ULTIMATEMODEL_0020.vsc
 20:draft_ULTIMATEMODEL_0020.lst
@@ -831,7 +841,7 @@ $192-192-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,60,0
 72:0
 73:0
 4:Time
-5:rate of symptomatic cases modifier
+5:scenario switch
 35:Date
 36:YYYY
 37:2020
