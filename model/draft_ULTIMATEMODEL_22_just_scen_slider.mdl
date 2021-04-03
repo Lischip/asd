@@ -25,16 +25,14 @@ rate of symptomatic cases modifier= WITH LOOKUP (
 	scenario switch,
 		([(0,0)-(12,2)],(0,1),(9,1),(10,0.9),(11,1.1),(12,1.1) ))
 	~	Dmnl
-	~	For some reason this was 1.2 before I implemented the scenario switch
-	|
+	~		|
 
 population by 2020= WITH LOOKUP (
 	scenario switch,
 		([(0,0)-(12,3e+07)],(0,1.94e+07),(1,1.94e+07),(2,2.16e+07),(3,1.71e+07),(4,1.94e+07\
 		),(11,1.94e+07),(12,2.16e+07) ))
 	~	Person
-	~	For some reason this was 1.728e+07 before I implemented the scenario switch
-	|
+	~		|
 
 rate of human exposure to infectious flies=
 	0.001
@@ -812,22 +810,22 @@ $192-192-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,50,0
 10,290,scenario switch,1689,735,34,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
 1,291,290,270,1,0,0,0,0,128,0,-1--1--1,,1|(1732,776)|
 10,292,fly population control policy,668,1284,47,19,8,3,0,4,0,0,0,0,-1--1--1,192-128-192,|12||0-0-0,0,0,0,0,0,0
-12,293,0,453,277,188,94,3,252,0,0,0,0,0,0,0,0,0,0,0,0
+12,293,1837484,453,277,188,94,3,252,0,0,0,0,0,0,0,0,0,0,0,0
 scenario switch,1,12,1
 ///---\\\
 :L<%^E!@
-1:fe_scen_11
-1:fe_scen_10
-1:fe_scen_9
-1:fe_scen_8
-1:fe_scen_7
-1:fe_scen_6
-1:fe_scen_5
-1:fe_scen_4
-1:fe_scen_3
-1:fe_scen_base
-1:fe_scen_2
-1:fe_scen_1
+1:fe_scen_11.vdfx
+1:fe_scen_10.vdfx
+1:fe_scen_9.vdfx
+1:fe_scen_8.vdfx
+1:fe_scen_7.vdfx
+1:fe_scen_6.vdfx
+1:fe_scen_5.vdfx
+1:fe_scen_4.vdfx
+1:fe_scen_3.vdfx
+1:fe_scen_base.vdfx
+1:fe_scen_2.vdfx
+1:fe_scen_1.vdfx
 9:fe_scen_base
 23:0
 18:draft_ULTIMATEMODEL_0020.vsc
@@ -840,7 +838,7 @@ scenario switch,1,12,1
 72:0
 73:0
 4:Time
-5:rate of symptomatic cases modifier
+5:population by 2020
 35:Date
 36:YYYY
 37:2020
