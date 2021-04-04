@@ -11,7 +11,7 @@ consumer food preparation behaviour lever=
 	~		|
 
 known CPY cases= 
-	SMOOTH N(CPY Cases,time to know about CPY cases, CPY Cases, 1)
+	SMOOTH N(CPY Cases,time to know about CPY cases, CPY Cases, 3)
 	~	Cases
 	~		|
 
@@ -841,7 +841,7 @@ scenario switch,1,12,1
 72:0
 73:0
 4:Time
-5:Acute GE Cases
+5:known CPY cases
 35:Date
 36:YYYY
 37:2020

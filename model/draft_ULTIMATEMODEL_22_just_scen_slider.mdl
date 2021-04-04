@@ -11,7 +11,7 @@ consumer food preparation behaviour lever=
 	~		|
 
 known CPY cases= 
-	SMOOTH N(CPY Cases,time to know about CPY cases, CPY Cases, 1)
+	SMOOTH N(CPY Cases,time to know about CPY cases, CPY Cases, 3)
 	~	Cases
 	~		|
 
