@@ -1,6 +1,6 @@
 {UTF-8}
-known CPY cases=
-	SMOOTH N(CPY Cases,time to know about CPY cases, CPY Cases, 1)
+known CPY cases= 
+	SMOOTH N(CPY Cases,time to know about CPY cases, CPY Cases, 3)
 	~	Cases
 	~		|
 
@@ -1495,7 +1495,7 @@ $255-128-192,0,Calibri|12||0-0-0|0-0-0|255-128-192|-1--1--1|-1--1--1|96,96,40,0
 72:0
 73:0
 4:Time
-5:consumer food preparation behaviour lever
+5:known CPY cases
 35:Date
 36:YYYY
 37:2020
