@@ -60,7 +60,7 @@ def get_data(DATA, df, scenarios):
         return _meat_processing(df, scenarios)
 
 #What's the name of ur file?
-loc = "cb_data"
+loc = "ss_data"
 
 policydict = {"cb" : "Consumption behaviour",
              "fs" : "Food safety",
