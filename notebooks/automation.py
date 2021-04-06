@@ -9,6 +9,7 @@ from enum import Enum
 def _processing(df, scenarios):
     global namedict
     df = df.loc[df.index.str.split("_").str[-1].isin(scenarios)].T
+    df.columns = scenarios
     df.columns = df.columns.to_series().apply(lambda value: namedict[value.split("_")[-1]])
     df.index = df.index.astype("float")
     return df
@@ -113,7 +114,16 @@ for name, scenarios in scenario_dict.items():
 
     data_df = data_processing(loc)
 
-    base_df = data_processing("00_data")
+    location = "../data/" + loc + ".txt"
+    df = pd.read_csv(location, delimiter="\t", dtype="string")
+    df = df.iloc[:, :-1]
+    # Ok, so as we all know Python is retarded when it comes to memory allocation, which means we have to resort ugly constructs like this
+    temp = df.iloc[:, 1:].applymap(lambda value: float(value.replace("M", '')) * 1000000 if "M" in value else value)
+    temp = temp.apply(pd.to_numeric)
+    df = pd.concat([df.iloc[:, 0], temp], axis=1)
+    # df = pd.DataFrame(df.iloc[:,0]).join(temp)
+    df.set_index("Date", inplace=True)
+    base_df=df
 
     #cost of illness
 
