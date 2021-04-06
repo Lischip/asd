@@ -1,6 +1,7 @@
-\subsection{Model explanation}
 This chapter detailed the processes and decisions underlying the composition of the model used to answer the research question. It contains seven main subsections. First the use of system dynamics for the problem domain is explained and established. Then, the model is conceptualised through a series of causal loop diagrams, and the different components of the model are explained. From here, the key assumptions made during model development are documented and justified, and details of the model specification explained. Finally steps taken to verify and validate the model are discussed, and the details of experimental setup are established.
+
 \subsection{How is System Dynamics used?}
+
 An important aspect to system dynamics models are the aforementioned accumulations, delays and feed-backs. Accumulations, more commonly referred to as stock variables refer to some value material or entities within a system. Through flow or rate variables stocks dynamically change over time, leading to the aforementioned delay and feed-back effects \parencite{sterman_system_2001}. To build the sub-models for the study on \textit{Campylobacter} appropriate variables had to be chosen to represent these features. In the case of, infected populations of humans and flocks would act modelled as stocks, whilst various transmission routes provide flow variables between them. This naturally produces delays, as it takes time for the disease to spread, symptoms to surface and potential hospitalisation. Feed-back loops will also arise as \textit{Campylobacter}, as the number of contaminated chicken flocks, causes more spread of \textit{Campylobacter} in the environment, and in turn the more \textit{Campylobacter} in the environment, the more easily chicken flocks are infected. Furthermore the model was subdivided into multiple subsystems, which will be explained in the following paragraphs. 
 
 %1.	Explain basics of SD
@@ -44,7 +45,7 @@ As a result from Figure \ref{fig:aggregrated_cld}, dynamic hypotheses for the KP
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.55\textwidth]{images/KPI_dynamic_hypo.png}
+\includegraphics[width=0.50\textwidth]{images/KPI_dynamic_hypo.png}
 \caption{Dynamic hypothesis for the KPIs}
 \label{fig:dynamic_hypothesis}
 \end{figure}
@@ -56,7 +57,7 @@ Secondly, it is expected that the effect of disease vectors will behave in accor
 Thirdly, the cost of illness will increase exponentially as the chronic cases will accumulate over time. 
 
 
-\subsection{Explanation of model}
+\subsection{Model Explanation}
 %3.	Explain model (also refer to Appendix A)
  %   a.	Describe sub-models
   %  b.	Explain most important assumptions
@@ -108,9 +109,9 @@ The CLD presented in Figure \ref{fig:transmission_submodel} is a simplification 
 
 This section of the model behaves as the "success to the successful" archetype \parencite{pruyt_triple_2013}, where the feedback loops around the rate of chicken infection imply that when there are low infections, it is prone to stay that way, but when infections rise, it is difficult to limit their growth. The implications for our model is that a small push in the direction of infections can have big implications.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.75\textwidth]{images/Transmission submodel.png}
+\includegraphics[width=0.50\textwidth]{images/Transmission submodel.png}
 \caption{Conceptual causal loop diagram for chicken infection and contamination}
 \label{fig:transmission_submodel}
 \end{figure}
@@ -120,12 +121,14 @@ Other internal variables in this model included probabilities of infection, whic
 
 \subsubsection*{Cost of illness}
 %Emily
+
+The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Symptomatic infections are assumed to all develop acute gastroenteritis, with a proportion of all cases either recovering, or subsequently developing chronic illnesses. Each of these outcomes contribute to key public health metrics of Disability Adjusted Life Years (DALYs) for these infections, and the Cost of Illness for all \textit{Campylobacter} infections. 
+
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{images/COI_submodel.png}
+\includegraphics[width=0.75\textwidth]{images/COI_submodel.png}
 \caption{The conceptual Cost of Illness sub-model}
 \end{figure}
-The cost of illness associated with \textit{Campylobacter} infections was modelled and calculated based primarily on a 2007 study by Mangen \parencite{mangen_campylobacteriosis_2007}. The Infected Persons stock is split off into symptomatic and asymptomatic infections. Symptomatic infections are assumed to all develop acute gastroenteritis, with a proportion of all cases either recovering, or subsequently developing chronic illnesses. Each of these outcomes contribute to key public health metrics of Disability Adjusted Life Years (DALYs) for these infections, and the Cost of Illness for all \textit{Campylobacter} infections. 
 
 The causal structure adopted for this sub-model focuses on connecting variables based on available scientific data. Due to the underlying complexity of DALY and Cost of Illness metrics \parencite{jo_cost--illness_2014}, a top-down approach to applying these variables has been taken. As such, variables have been used for some elements that might otherwise have been modelled as stocks (e.g. DALYs and Cost of Illness). Additionally, this more simplistic approach is considered appropriate, as we are not concerned with the detailed dynamics of transmission and recovery (as might be done in an SIR model), but only with the ultimate KPIs of 'DALY' and 'Cost of Illness'.
 
@@ -134,27 +137,22 @@ The causal structure adopted for this sub-model focuses on connecting variables 
 %What were the key assumptions made in developing the model?
     %Take from validation spreadsheet
     %Include simplifications of real-world circumstances (e.g. acute campy coming before chronic conditions)
-\subsubsection{Assumptions}
 The main assumptions made in modelling these causal structures are:
 \begin{itemize}
-    \item Demand for chicken meat exactly matches supply of chicken meat
-    \item All chicken meat consumed in the Netherlands is produced in the Netherlands
-    \item The disease burden and cost of illness associated with death from gastroenteritis is accounted for within the DALY and Cost of Illness values used.
-    \item The development of chronic disease is assumed to always occur subsequent to a case of acute gastroenteritis (in reality, some cases will develop chronic disease without first developing gastronenteritis, following a \textit{Campylobacter} infection.
-    \item There is no recovered population, meaning that infected people are able to be reinfected
-    \item Policies were implemented using switches, connecting directly to the variable it is meant to address. This is not realistic as policies will exhibit side effects. To more accurately integrate policies into the system,  a group modelling approach is recommended, including relevant stakeholders such as farmers, policy experts, and public health practitioners \parencite{vennix_group_1999}.
+    \item All chicken meat consumed in the Netherlands is produced in the Netherlands and the population of the Netherlands cannot eat more than is produced in the Netherlands. 
+    \item Cross-contamination in the slaughtering process depends on the proportion of total infected chickens present at the moment of slaughtering. This is based on the amount of \textit{Campylobacter} negative chicken, which represents the amount of negative chicken being slaughtered, not merely existing. 
+    \item The development of chronic disease is assumed to always occur subsequent to a case of acute gastroenteritis (in reality, some cases will develop chronic disease without first developing gastronenteritis, following a \textit{Campylobacter} infection
+    \item There is no recovered population, meaning that infected people are able to be reinfected and do not become immune.
 \end{itemize}
 
 Multiple assumptions on the values of individual parameters have been made, due to the absence of adequate literature. Where this is the case, the assumption has been noted in \textcolor{red}{table x in appendix y}.
-\subsubsection{Simplifications}
 
 \subsection{Model Specification}
 %What are the main mechanisms/variables/parameters in our model?
-\subsubsection{Mechanisms employed}
 The main mechanisms employed in each part of the model are as follows:
 \begin{itemize}
     \item Chicken infections: the chicken infections part of the model focuses on stock-flow structures to model accumulation and delays in the infection of chickens.
-    \item Cost of illness: the cost of illness model relies on accumulation over time, while using a pulse-train mechanism to 'empty' the annual occurrence of acute illness.
+    \item Cost of Illness: the cost of illness model relies on accumulation over time, while using a pulse-train mechanism to 'empty' the annual occurrence of acute illness.
     \item Environmental transmission: this part of the model replicates empirical models of insect development cycles, and translates this to prevalence of environmental transmission of \textit{Campylobacter} by disease vectors.
 \end{itemize}
 
@@ -170,16 +168,16 @@ The model uses Euler as the integration method. Euler was considered an attracti
 
 \subsubsection{Time step}
     %Why was the time step chosen?
-The time step of 0.0625 was selected as behaviour of the model was consistent for this time step, and for half this time step. This suggests that the time steps are small enough such that the derivative of the model is constant between two very close points in time.
-\textcolor{red}{Consider adding screenshot to show difference between two step sizes}
+The time step of 0.0625 was selected as behaviour of the model was consistent for this time step, and for half this time step (see Figure \ref{fig:cpy cases with time step}). This suggests that the time steps are small enough such that the derivative of the model is constant between two very close points in time.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{images/timestep.PNG}
+\includegraphics[width=0.65\textwidth]{images/timestep.PNG}
 \caption{Peak CPY Cases with time steps 0.0625 and 0.03125}
+\label{fig:cpy cases with time step}
 \end{figure}
 
-\textcolor{red}{Results presented start at Week X to allow for effects of delays and time constants to settle}
+
 Results of this model are presented starting at the 53rd week (1 year and 1 week through the simulation). This is to allow for the model behaviour to be stabilize, since all stocks are given initial values of zero. This also allows for behaviour to be reported starting in the year 2021.
 
 \subsubsection{Time period}
@@ -219,6 +217,7 @@ In this subsection we'll verify and validate the model. Verification will be don
     
 To verify the conceptualisation, it was checked that the causal diagram construed in chapter \ref{s:conceptualisation} matches the model built. There have been some addedums to the model, but the functions still match.  
     %Check that the units are consistent with the real world and add one line saying 'units were checked for material consistency'. -- DONE
+    
 Unit verification was performed by checking all variable units for ensure consistency with real-world equivalents. There was one anomalous variable in the model which could not be mapped to a physical value. This refers to the \textit{balancing constant} that feeds into the \textit{rate of fly development}. This was added under the assumption that temperature linearly correlates to fly populations, as documented by \citeauthor{blanckenhorn_adaptive_1998}, 1998. This factor allows conversion from the units of temperature (degrees) to fly development rate (MFly per week). This cannot be done without adding a go-between, which, in our case, is the balancing constant. 
 
 Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. The time unit used in the model is \textit{week}, to properly integrate seasonal changes in temperature across the year, months being to big and days too detailed. But for this same reason, DALY and COI are commonly reported per year. To deal with this, a PULSE TRAIN function was installed between stocks \textit{CPY Cases} and \textit{Acute GE Cases}. The PULSE TRAIN accumulates all \textit{Campylobacteriosis} cases over 52 weeks before transferring them to the cost of illness submodel. This can then be used as an input per year for the COI submodel. The units of the PULSE train remain in weeks when the time unit should be thought of as year, as happens after. 
@@ -229,7 +228,7 @@ The time step verification was performed by running the model at several differe
 % WHY???? 
 
 \subsubsection{Validation}    
-
+\textcolor{red}{Lisette - have you interpreted the results of validation anywhere in terms of which ranges the model is valid within, or does this still need to be done?}
 %Validation requires three steps:
     %Show how the data matches or does not match historical data (explain why)
 
@@ -294,7 +293,7 @@ Refer to Section \ref{s:b_base} where the behaviour of the base model without po
 
 To answer our research question, experiments were set up around the three components in the research question: climate, population and public health. 
 
-The structural uncertainties resulted in six policies that will be tested. These policies were designed based on reality and are capable of providing a view of the policies' cost effectiveness and robustness. These policies will be discussed in subsection \ref{s:environmentalfactors} to \ref{s:foodbehaviour}. 
+The structural and parametric uncertainties resulted in five policies that will be tested. These policies were designed based on reality and are capable of providing a view of the policies' cost effectiveness and robustness. These policies will be discussed in subsection \ref{s:environmentalfactors} to \ref{s:foodbehaviour}. 
 
 The parametric uncertainties were used to devise a sensitivity analysis. The parameters are the projection of the Dutch population, the temperature increase in the coming 30 years and the cost of illness. 
 
@@ -313,7 +312,6 @@ The parametric uncertainties were used to devise a sensitivity analysis. The par
 %Policies on chicken farms
 \begin{itemize}
     \item Improve sanitation of slaughterhouse process and equipment: requirement for slaughterhouse equipment to be cleaned using water that is frequently changed to prevent cross-contamination. This can also be enhanced by the use of UV radiation to aid in the decontamination process without altering the sensory quality of the meat \parencite{isohanni_use_2009}.
-    \item Logistic slaughter: process infected chicken last to prevent cross-contamination of chicken meat. Requires testing for infection in farms and it is possible for undetected infected chickens to go first \parencite{evers_predicted_2004}. 
 \end{itemize}
 
 \subsubsection{Food safety behaviours and policies}
@@ -324,3 +322,8 @@ The parametric uncertainties were used to devise a sensitivity analysis. The par
     \item Food safety and handling: Policy connecting cost of illness to proportion of contaminated chicken
     \item Behavioural link from DALYs to either infections per kg consumed OR kg of chicken meat consumed. There is a structural uncertainty related to how consumer behaviour might change. Will individuals reduce their chicken consumption or will they be more careful in food handling?
 \end{itemize}
+
+\subsubsection*{Note on policy implementation}
+Policies were implemented using switches, connecting directly to the variable it is meant to address. This is not realistic as policies will exhibit side effects. To more accurately integrate policies into the system,  a group modelling approach is recommended, including relevant stakeholders such as farmers, policy experts, and public health practitioners \parencite{vennix_group_1999}.
+
+More details on the policies and on their implementations can be read in Appendix~\ref{ch:det_policies}.

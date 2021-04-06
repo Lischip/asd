@@ -35,6 +35,7 @@
 \usepackage{gensymb}
 \usepackage{lscape}
 \usepackage{csquotes}
+\usepackage{pdfpages}
 
 \usepackage[style=apa]{biblatex}
 \addbibresource{asd.bib}
@@ -260,10 +261,14 @@
 \appendix
 \section{Model documentation}
 \label{ch:model_documentation}
-\input{appendix/model_doc}
+\includepdf[pages=-]{data/Stock Flow Variable Details.pdf}
+%\input{appendix/model_doc}
 \section{Validation}
 \label{ch:validation} 
 \input{appendix/validation}
+\section{Details on policies}
+\label{ch:det_policies} 
+\input{appendix/policies}
 \section{Report log}
 \label{ch:report_log}
 \input{appendix/elias_log}
