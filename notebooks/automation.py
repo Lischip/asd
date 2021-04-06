@@ -70,6 +70,12 @@ t = ["4", "5", "6"]
 s = ["7","8"]
 pu = ["9", "10"]
 
+scenario_dict= {"Base and Worst Case": bw,
+                "Population": po,
+                "Temperature": t,
+                "Seasonal": s,
+                "Public health": pu}
+
 # What scenarios do u want plotted from policy?
 scenarioss = [bw, po, t,s, pu]
 
@@ -99,7 +105,7 @@ simulcmap = "viridis"
 cmap = plt.cm.get_cmap(simulcmap, len(namedict))
 cmapcolors = cmap(range(len(namedict)))
 
-for scenarios in scenarioss:
+for name, scenarios in scenario_dict.items():
     base_scenarios = scenarios
     num_scen = len(scenarios) if len(scenarios) > len(base_scenarios) else len(base_scenarios)
     colors = np.array([list(cmapcolors[int(x)]) if x != "base" else list(cmapcolors[0]) for x in scenarios])
@@ -127,7 +133,7 @@ for scenarios in scenarioss:
     plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.13 - (0.02 * num_scen), 1, 1),
                loc="lower center")
 
-    plt.savefig("../images/" + loc[:2] + "_coi.png", dpi=300, bbox_inches='tight')
+    plt.savefig("../images/" + loc[:2] + "_" + name +"_coi.png", dpi=300, bbox_inches='tight')
     plt.show()
 
     # contaminated chicken meat
@@ -149,5 +155,7 @@ for scenarios in scenarioss:
     plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.13 - (0.02 * num_scen), 1, 1),
                loc="lower center")
     ax.grid(True)
-    plt.savefig("../images/" + loc[:2] + "_meat.png", dpi=300, bbox_inches='tight')
+    plt.savefig("../images/" + loc[:2] + "_" + name +"_meat.png", dpi=300, bbox_inches='tight')
     plt.show()
+
+print("Done!")
