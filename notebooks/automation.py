@@ -60,13 +60,19 @@ def get_data(DATA, df, scenarios):
         return _meat_processing(df, scenarios)
 
 #What's the name of ur file?
-loc = "fe_data"
+loc = "cb_data"
+
+policydict = {"cb" : "Consumption behaviour",
+             "fs" : "Food safety",
+             "pc": "Pest control",
+             "fe": "Fly exposure",
+             "ss" : "Safe slaughtering"}
 
 #What's ur policy called?
-policy = "Fly exposure"
+policy = policydict[loc[:2]]
 
 bw = ["base", "12"]
-po = ["1", "2", "3"]
+po = ["base", "2", "3"]
 t = ["4", "5", "6"]
 s = ["7","8"]
 pu = ["9", "10"]
@@ -97,8 +103,10 @@ namedict = {"base": "base",
 class DATA(Enum):
     COI = "Cost of Illness"
     DALY = "DALY"
+    COIACC = "Cost of Illness"
+    DALYACC = "DALY"
     MEAT = "contaminated meat"
-    ENVH = "rate of human infection from environment"
+    ENVH = "human infection from environment"
     ENVC = "rate of chicken infection from environment"
 
 # Because we like colour consistency
@@ -114,16 +122,7 @@ for name, scenarios in scenario_dict.items():
 
     data_df = data_processing(loc)
 
-    location = "../data/" + loc + ".txt"
-    df = pd.read_csv(location, delimiter="\t", dtype="string")
-    df = df.iloc[:, :-1]
-    # Ok, so as we all know Python is retarded when it comes to memory allocation, which means we have to resort ugly constructs like this
-    temp = df.iloc[:, 1:].applymap(lambda value: float(value.replace("M", '')) * 1000000 if "M" in value else value)
-    temp = temp.apply(pd.to_numeric)
-    df = pd.concat([df.iloc[:, 0], temp], axis=1)
-    # df = pd.DataFrame(df.iloc[:,0]).join(temp)
-    df.set_index("Date", inplace=True)
-    base_df=df
+    base_df = data_processing("00_data")
 
     #cost of illness
 
@@ -166,6 +165,108 @@ for name, scenarios in scenario_dict.items():
                loc="lower center")
     ax.grid(True)
     plt.savefig("../images/" + loc[:2] + "_" + name +"_meat.png", dpi=300, bbox_inches='tight')
+    plt.show()
+
+    #accumulated cost of illness
+
+    policy_coi = get_data(DATA.COIACC, data_df, scenarios)
+    base_coi = get_data(DATA.COIACC, base_df, base_scenarios)
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+
+    if policy_meat.shape[1] >= 1:
+        sns.lineplot(data=policy_coi.loc[policy_coi.index >= 2021.75], color=colors, dashes=[(1, 0)] * len(scenarios))
+    if base_meat.shape[1] >= 1:
+        sns.lineplot(data=base_coi.loc[base_coi.index >= 2021.75], color=colors_base,
+                     dashes=[(4, 2)] * len(base_scenarios))
+
+    plt.xlabel('Year');
+    plt.ylabel('Euro')
+    plt.title(policy + ': Accumulated Cost of Illness')
+    plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.13 - (0.02 * num_scen), 1, 1),
+               loc="lower center")
+    ax.grid(True)
+    plt.savefig("../images/" + loc[:2] + "_acoi.png", dpi=300, bbox_inches='tight')
+    plt.show()
+
+    #human infection
+
+    policy_envh = get_data(DATA.ENVH, data_df, scenarios)
+    base_envh = get_data(DATA.ENVH, base_df, base_scenarios)
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+
+    sns.lineplot(data=policy_envh.loc[policy_envh.index >= 2021.75], color=colors, dashes=[(1, 0)] * len(scenarios))
+    sns.lineplot(data=base_envh.loc[base_envh.index >= 2021.75], color=colors_base,
+                 dashes=[(4, 2)] * len(base_scenarios))
+
+    plt.xlabel('Year');
+    plt.ylabel('Persons')
+    plt.title(policy + ': Humans infected by environment')
+    plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0.9, -0.1 - (0.02 * num_scen)),
+               loc="center right")
+    ax.grid(True)
+    plt.savefig("../images/" + loc[:2] + "_humaninfection.png", dpi=300, bbox_inches='tight')
+    plt.show()
+
+    # chicken infection
+    policy_envc = get_data(DATA.ENVC, data_df, scenarios)
+    base_envc = get_data(DATA.ENVC, base_df, base_scenarios)
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+
+    sns.lineplot(data=policy_envc.loc[policy_envh.index >= 2021.75], color=colors, dashes=[(1, 0)] * len(scenarios))
+    sns.lineplot(data=base_envc.loc[base_envh.index >= 2021.75], color=colors_base,
+                 dashes=[(4, 2)] * len(base_scenarios))
+
+    plt.xlabel('Year');
+    plt.ylabel('Ratio')
+    plt.title(policy + ': Ratio of chickens infected by environment')
+    plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0.9, -0.1 - (0.02 * num_scen)),
+               loc="center right")
+    ax.grid(True)
+    plt.savefig("../images/" + loc[:2] + "_chickeninfection.png", dpi=300, bbox_inches='tight')
+    plt.show()
+
+    #daly
+    policy_daly = get_data(DATA.DALY, data_df, scenarios)
+    base_daly = get_data(DATA.DALY, base_df, base_scenarios)
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+
+    if policy_daly.shape[1] >= 1:
+        sns.lineplot(data=policy_daly[2022:], color=colors, dashes=[(1, 0)] * len(scenarios))
+    if base_daly.shape[1] >= 1:
+        sns.lineplot(data=base_daly[2022:], color=colors, dashes=[(4, 2)] * len(base_scenarios))
+
+    plt.xlabel('Year');
+    plt.ylabel('Euro')
+    plt.title(policy + ': DALYs')
+
+    plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.13 - (0.02 * num_scen), 1, 1),
+               loc="lower center")
+    ax.grid(True)
+
+    plt.savefig("../images/" + loc[:2] + "_daly.png", dpi=300, bbox_inches='tight')
+    plt.show()
+
+    #accumulated daly
+
+    policy_daly = get_data(DATA.DALYACC, data_df, scenarios)
+    base_daly = get_data(DATA.DALYACC, base_df, base_scenarios)
+
+    fig, ax = plt.subplots(figsize = (10,10))
+
+    if policy_meat.shape[1] >= 1:
+        sns.lineplot(data=policy_daly.loc[policy_daly.index >= 2021.75], color=colors, dashes=[(1, 0)] * len(scenarios))
+    if base_meat.shape[1] >= 1:
+        sns.lineplot(data=base_daly.loc[base_daly.index >= 2021.75], color=colors_base, dashes=[(4, 2)] * len(base_scenarios))
+
+    plt.xlabel('Year'); plt.ylabel('Euro')
+    plt.title(policy + ': Accumulated DALYs')
+    plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.13-(0.02*num_scen), 1, 1), loc="lower center")
+    ax.grid(True)
+    plt.savefig("../images/" + loc[:2] + "_adaly.png", dpi=300, bbox_inches='tight')
     plt.show()
 
 print("Done!")
