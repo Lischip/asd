@@ -90,7 +90,7 @@ scenario_dict= {"Base and Worst Case": bw,
 # What scenarios do u want plotted from policy?
 scenarioss = [bw, po, t,s, pu]
 
-namedict = {"base": "base",
+namedict = {"base": "Base run",
             "1": "Population: medium increase",
             "2": "Population: large increase",
             "3": "Population: decrease",
@@ -118,7 +118,9 @@ simulcmap = "viridis"
 cmap = plt.cm.get_cmap(simulcmap, len(namedict))
 cmapcolors = cmap(range(len(namedict)))
 
-for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
+#for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
+for loc in ("ec_data", "ss_data"):
+
     policy = policydict[loc[:2]]
     for name, scenarios in scenario_dict.items():
         base_scenarios = scenarios
@@ -196,7 +198,7 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.16 - (0.02 * num_scen), 1, 1),
                    loc="lower center")
         ax.grid(True)
-        plt.savefig("../images/" + loc[:2] + "_acoi.png", dpi=300, bbox_inches='tight')
+        plt.savefig("../images/" + loc[:2] + "_" + name  + "_acoi.png", dpi=300, bbox_inches='tight')
         plt.show()
         del policy_coi
         del base_coi
@@ -218,7 +220,7 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.16 - (0.02 * num_scen), 1, 1),
                    loc="lower center")
         ax.grid(True)
-        plt.savefig("../images/" + loc[:2] + "_humaninfection.png", dpi=300, bbox_inches='tight')
+        plt.savefig("../images/" + loc[:2] + "_" + name + "_humaninfection.png", dpi=300, bbox_inches='tight')
         plt.show()
         del policy_envh
         del base_envh
@@ -239,7 +241,7 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.16 - (0.02 * num_scen), 1, 1),
                    loc="lower center")
         ax.grid(True)
-        plt.savefig("../images/" + loc[:2] + "_chickeninfection.png", dpi=300, bbox_inches='tight')
+        plt.savefig("../images/" + loc[:2] + "_" + name + "_chickeninfection.png", dpi=300, bbox_inches='tight')
         plt.show()
 
         del policy_envc
@@ -264,7 +266,7 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
                    loc="lower center")
         ax.grid(True)
 
-        plt.savefig("../images/" + loc[:2] + "_daly.png", dpi=300, bbox_inches='tight')
+        plt.savefig("../images/" + loc[:2] + "_" + name + "_daly.png", dpi=300, bbox_inches='tight')
         plt.show()
 
         #accumulated daly
@@ -283,7 +285,7 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         plt.title(policy + ': Accumulated DALYs')
         plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.16-(0.02*num_scen), 1, 1), loc="lower center")
         ax.grid(True)
-        plt.savefig("../images/" + loc[:2] + "_adaly.png", dpi=300, bbox_inches='tight')
+        plt.savefig("../images/" + loc[:2] + "_" + name + "_adaly.png", dpi=300, bbox_inches='tight')
         plt.show()
         del policy_daly
         del base_daly
