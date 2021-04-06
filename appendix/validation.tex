@@ -1,3 +1,183 @@
+\subsection{Multivariate analysis}
+
+We ran multivariate analysis to account for the compounded effect of different uncertainties, and the results can be found in figures \ref{fig:multi_coi}, \ref{fig:multi_meat}, \ref{fig:multi_chicken}, and \ref{fig:multi_human}. The observed change is mostly regarding numerical sensitivity, but we can see that the contaminated chicken meat can overshoot at times, which is the result of people refusing to eat meat as a result of increased infections, but the chicken were already in the production cycle so there was excess production.
+
+% ADD HOW MANY RUNS
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate COI.png} % first figure itself
+        \caption{Cost of Illness in the multivariate analysis}
+        \label{fig:multi_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate contaminated meat.png} % second figure itself
+        \caption{Contaminated chicken meat in the multivariate analysis}
+        \label{fig:multi_meat}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate chicken infection.png} 
+        \caption{Chicken infections from environment in the multivariate analysis}
+        \label{fig:multi_chicken}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate human infection.png}
+        \caption{Human infections from environment in the multivariate analysis}
+        \label{fig:multi_human}
+    \end{minipage}
+\end{figure}
+
+
+\subsection{Sensitivity Analysis}
+\subsubsection{Population scenarios}
+
+Based on population projections \parencite{nidi_nidi_2020} we ran the sensitivity analysis and got the results in figures \ref{fig:pop_coi}, \ref{fig:pop_meat}, \ref{fig:pop_chicken}, and \ref{fig:pop_human}. Because a population increase also increases demand for chicken, generating a reaction across the model than can be appreciated in the increased contaminated chicken meat stock as well. Because more people get infected in total and present symptoms, the cost of illness also increases.
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Population COI.png} % first figure itself
+        \caption{Cost of Illness in the different population scenarios}
+        \label{fig:pop_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Population contaminated meat.png} % second figure itself
+        \caption{Contaminated chicken meat in the different population scenarios}
+        \label{fig:pop_meat}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Population chicken infection.png} 
+        \caption{Chicken infections from environment in the different population scenarios}
+        \label{fig:pop_chicken}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Population human infection.png}
+        \caption{Human infections from environment in the different population scenarios}
+        \label{fig:pop_human}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Climate scenarios}
+
+% EXPLICITLY MENTION THIS IS UNIVARIATE
+
+\textbf{Average temperature increase}
+
+Based on climate change projections \parencite{knmi_knmi_2015} we ran the sensitivity analysis and got the results in figures \ref{fig:temp_coi}, \ref{fig:temp_meat}, \ref{fig:temp_chicken}, and \ref{fig:temp_human}. Temperature increasing aids in the development of disease vectors, which has a direct impact on human infections, besides also affecting indirectly through the food borne route of transmission. This results in increased cost of illness proportional to the increase in temperature over the years.
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Temperature projection COI.png} % first figure itself
+        \caption{Cost of Illness in the different temperature increase scenarios}
+        \label{fig:temp_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Temperature projection contaminated meat.png} % second figure itself
+        \caption{Contaminated chicken meat in the different temperature increase scenarios}
+        \label{fig:temp_meat}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Temperature projection chicken infection.png} 
+        \caption{Chicken infections from environment in the different temperature increase scenarios}
+        \label{fig:temp_chicken}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Temperature projection human infection.png}
+        \caption{Human infections from environment in the different temperature increase scenarios}
+        \label{fig:temp_human}
+    \end{minipage}
+\end{figure}
+
+\textbf{Seasonal temperature increase}
+
+There is uncertainty in how the temperature might increase in the future. It seems that the increase is not uniform throughout the year, but that instead summers might warm up faster than winters. We modelled this uncertainty and compared the scenarios. The seasonal variation in temperature increase leads to longer warmer periods compared to cold periods, which also affects disease vector propagation and has an impact in infections and subsequently in the cost of illness. This can be appreciated in figures. \ref{fig:season_coi}, \ref{fig:season_meat}, \ref{fig:season_chicken}, and \ref{fig:season_human}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Seasonal temperature COI.png} % first figure itself
+        \caption{Cost of Illness in the different temperature seasonality scenarios}
+        \label{fig:season_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Seasonal temperature contaminated meat.png} % second figure itself
+        \caption{Contaminated chicken meat in the different temperature seasonality scenarios}
+        \label{fig:season_meat}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Seasonal temperature chicken infection.png}
+        \caption{Chicken infections from environment in the different temperature seasonality scenarios}
+        \label{fig:season_chicken}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Seasonal temperature human infection.png}
+        \caption{Human infections from environment in the different temperature seasonality scenarios}
+        \label{fig:season_human}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Public health scenarios}
+
+On figure \ref{fig:symptom_COI} we can see the result of rate of symptomatic infections changing, which is a behavior that has been observed recently \parencite{medema_assessment_1996}. This only bring changes to the cost of illness, as infections remain the same across the model, but the severity of the disease requires more treatment.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/sensitivity/Symptomatic COI.png} 
+    \caption{Cost of illness in the different symptomatic infection scenarios}
+    \label{fig:symptom_COI}
+\end{figure}
+
+\subsection{Extreme conditions}
+
+\ldots
+
+\ldots
+
+\ldots
+
+\ldots
+
+\ldots
+
+\ldots
+
+
+\subsection{Comparison to real world data}
+
 \textcite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands in 2018, 67.000 in 2017 and 79.000 in 2016. We plotted the amount of cases produced by our model against the average of these three values. The results can be seen in Figure~\ref{fig:val_human_cases}. We can see the stock in our model is a good reflection of the real world. 
 
 \textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broilerchickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses. As can be seen in Figure~\ref{fig:val_chickens}, our base model has similar values for each year.
