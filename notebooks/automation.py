@@ -114,22 +114,22 @@ class DATA(Enum):
 
 # Because we like colour consistency
 simulcmap = "tab10"
-cmap = plt.cm.get_cmap(simulcmap, len(namedict))
-cmapcolors = cmap(range(len(namedict)))
+cmap = plt.cm.get_cmap(simulcmap, 10)
+cmapcolors = cmap(range(10))
 
 colordict = {"Base run": cmapcolors[0],
-            # "1": "Population: medium increase",
+            #"Population: medium increase": cmapcolors[0],
             "Population: large increase":  cmapcolors[1],
             "Population: decrease":  cmapcolors[2],
             "Temperature: increase 1 degree":  cmapcolors[3],
-            "Temperature: increase 1.5 degrees":  cmapcolors[4],
-            "Temperature: increase 2 degrees":  cmapcolors[5],
-            "Seasonality: no temperature change" :  cmapcolors[6],
-            "Seasonality: Fast temperature change" :  cmapcolors[7],
-            "Seasonality: linear temperature change" :  cmapcolors[8],
-            "Public health: 10% fewer symptoms" :  cmapcolors[9],
-            "Public health: 10% more symptoms":  cmapcolors[10],
-            "Worst case":  cmapcolors[11]}
+            "Temperature: increase 1.5 degrees":  cmapcolors[0],
+            "Temperature: increase 2 degrees":  cmapcolors[4],
+            "Seasonality: no temperature change" :  cmapcolors[5],
+            "Seasonality: Fast temperature change" :  cmapcolors[6],
+            "Seasonality: linear temperature change" :  cmapcolors[0],
+            "Public health: 10% fewer symptoms" :  cmapcolors[7],
+            "Public health: 10% more symptoms":  cmapcolors[9],
+            "Worst case":  cmapcolors[8]}
 
 for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
     policy = policydict[loc[:2]]
@@ -150,11 +150,11 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         fig, ax = plt.subplots(figsize=(10, 10))
 
         if policy_coi.shape[1] >= 1:
-            # sns.lineplot(data=policy_coi[2022:], palette=colordict, dashes=[(1, 0)] * len(scenarios))]
-            sns.lineplot(data=policy_coi[2022:], dashes=[(1, 0)] * len(scenarios))
+            sns.lineplot(data=policy_coi[2022:], palette=colordict, dashes=[(1, 0)] * len(scenarios))
+            #sns.lineplot(data=policy_coi[2022:], dashes=[(1, 0)] * len(scenarios))
         if base_coi.shape[1] >= 1:
-            # sns.lineplot(data=base_coi[2022:], palette=colordict, dashes=[(4, 2)] * len(base_scenarios))
-            sns.lineplot(data=base_coi[2022:], dashes=[(4, 2)] * len(base_scenarios))
+            sns.lineplot(data=base_coi[2022:], palette=colordict, dashes=[(4, 2)] * len(base_scenarios))
+            #sns.lineplot(data=base_coi[2022:], dashes=[(4, 2)] * len(base_scenarios))
 
         plt.xlabel('Year');
         plt.ylabel('Euro')
@@ -176,12 +176,11 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         fig, ax = plt.subplots(figsize=(10, 10))
 
         if policy_meat.shape[1] >= 1:
-            # sns.lineplot(data=policy_meat.loc[policy_meat.index >= 2021.75], palette=colordict, dashes=[(1, 0)] * len(scenarios))
-            sns.lineplot(data=policy_meat.loc[policy_meat.index >= 2021.75], dashes=[(1, 0)] * len(scenarios))
+            sns.lineplot(data=policy_meat.loc[policy_meat.index >= 2021.75], palette=colordict, dashes=[(1, 0)] * len(scenarios))
+            #sns.lineplot(data=policy_meat.loc[policy_meat.index >= 2021.75], dashes=[(1, 0)] * len(scenarios))
         if base_meat.shape[1] >= 1:
-            # sns.lineplot(data=base_meat.loc[base_meat.index >= 2021.75], palette=colordict,
-            #              dashes=[(4, 2)] * len(base_scenarios))
-            sns.lineplot(data=base_meat.loc[base_meat.index >= 2021.75], dashes=[(4, 2)] * len(base_scenarios))
+            sns.lineplot(data=base_meat.loc[base_meat.index >= 2021.75], palette=colordict, dashes=[(4, 2)] * len(base_scenarios))
+            #sns.lineplot(data=base_meat.loc[base_meat.index >= 2021.75], dashes=[(4, 2)] * len(base_scenarios))
 
         plt.xlabel('Year');
         plt.ylabel('Kg')
@@ -203,10 +202,9 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         fig, ax = plt.subplots(figsize=(10, 10))
 
         if policy_coi.shape[1] >= 1:
-            sns.lineplot(data=policy_coi.loc[policy_coi.index >= 2021.75], dashes=[(1, 0)] * len(scenarios))
+            sns.lineplot(data=policy_coi.loc[policy_coi.index >= 2021.75], dashes=[(1, 0)] * len(scenarios), palette=colordict)
         if base_coi.shape[1] >= 1:
-            sns.lineplot(data=base_coi.loc[base_coi.index >= 2021.75],
-                         dashes=[(4, 2)] * len(base_scenarios))
+            sns.lineplot(data=base_coi.loc[base_coi.index >= 2021.75], dashes=[(4, 2)] * len(base_scenarios), palette=colordict)
 
         plt.xlabel('Year');
         plt.ylabel('Euro')
@@ -227,9 +225,8 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
 
         fig, ax = plt.subplots(figsize=(10, 10))
 
-        sns.lineplot(data=policy_envh.loc[policy_envh.index >= 2021.75], dashes=[(1, 0)] * len(scenarios))
-        sns.lineplot(data=base_envh.loc[base_envh.index >= 2021.75],
-                     dashes=[(4, 2)] * len(base_scenarios))
+        sns.lineplot(data=policy_envh.loc[policy_envh.index >= 2021.75], dashes=[(1, 0)] * len(scenarios), palette=colordict)
+        sns.lineplot(data=base_envh.loc[base_envh.index >= 2021.75], dashes=[(4, 2)] * len(base_scenarios), palette=colordict)
 
         plt.xlabel('Year');
         plt.ylabel('Persons')
@@ -249,9 +246,8 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
 
         fig, ax = plt.subplots(figsize=(10, 10))
 
-        sns.lineplot(data=policy_envc.loc[policy_envc.index >= 2021.75], dashes=[(1, 0)] * len(scenarios))
-        sns.lineplot(data=base_envc.loc[base_envc.index >= 2021.75],
-                     dashes=[(4, 2)] * len(base_scenarios))
+        sns.lineplot(data=policy_envc.loc[policy_envc.index >= 2021.75], dashes=[(1, 0)] * len(scenarios), palette=colordict)
+        sns.lineplot(data=base_envc.loc[base_envc.index >= 2021.75], dashes=[(4, 2)] * len(base_scenarios), palette=colordict)
 
         plt.xlabel('Year');
         plt.ylabel('Ratio')
@@ -273,9 +269,9 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         fig, ax = plt.subplots(figsize=(10, 10))
 
         if policy_daly.shape[1] >= 1:
-            sns.lineplot(data=policy_daly[2022:], dashes=[(1, 0)] * len(scenarios))
+            sns.lineplot(data=policy_daly[2022:], dashes=[(1, 0)] * len(scenarios), palette=colordict)
         if base_daly.shape[1] >= 1:
-            sns.lineplot(data=base_daly[2022:], dashes=[(4, 2)] * len(base_scenarios))
+            sns.lineplot(data=base_daly[2022:], dashes=[(4, 2)] * len(base_scenarios), palette=colordict)
 
         plt.xlabel('Year');
         plt.ylabel('Euro')
@@ -297,9 +293,9 @@ for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         fig, ax = plt.subplots(figsize = (10,10))
 
         if policy_daly.shape[1] >= 1:
-            sns.lineplot(data=policy_daly.loc[policy_daly.index >= 2021.75],  dashes=[(1, 0)] * len(scenarios))
+            sns.lineplot(data=policy_daly.loc[policy_daly.index >= 2021.75],  dashes=[(1, 0)] * len(scenarios), palette=colordict)
         if base_daly.shape[1] >= 1:
-            sns.lineplot(data=base_daly.loc[base_daly.index >= 2021.75],  dashes=[(4, 2)] * len(base_scenarios))
+            sns.lineplot(data=base_daly.loc[base_daly.index >= 2021.75],  dashes=[(4, 2)] * len(base_scenarios), palette=colordict)
 
         plt.xlabel('Year'); plt.ylabel('Euro')
         plt.title(policy + ': Accumulated DALYs')
