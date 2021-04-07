@@ -63,15 +63,15 @@ Scenario analysis demonstrated that while safe slaughtering is relatively robust
     \centering
     \begin{minipage}{0.45\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{images/ss_Base and Worst Case_meat.png} 
-        \caption{Contaminated chicken meat in the best and worst case scenario}
-        \label{fig:ss_bwc_meat}
+        \includegraphics[width=1\textwidth]{images/ss_Base and Worst Case_acoi.png}
+        \caption{Accumulated cost of illness under best and worst case scenario, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:ss_bwc_acoi}
     \end{minipage}\hfill
     \begin{minipage}{0.45\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{images/ss_Base and Worst Case_acoi.png}
-        \caption{Accumulated cost of illness under best and worst case scenario}
-        \label{fig:ss_bwc_acoi}
+        \includegraphics[width=1\textwidth]{images/ss_Base and Worst Case_meat.png} 
+        \caption{Contaminated chicken meat in the best and worst case scenario, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:ss_bwc_meat}
     \end{minipage}
 \end{figure}
 
@@ -82,18 +82,50 @@ Based on these results, we would not recommend prioritising a safe slaughtering 
 
 \subsubsection{Pest Control}
 \label{sec: pest control}
-The Pest Control policy was found to be robust against climate change scenarios, with no observable difference between KPI outcomes for different climate scenarios. This is because the policy is pegged to temperature, effectively capping propagation of flies at higher temperatures. However, it is less robust to changes in seasonality, wherein after 2030, there is a divergence in outcomes. For scenarios with greater seasonality, the policy of controlling fly populations is less capable of responding to larger variation in temperature.
+The Pest Control policy was found to be robust against climate change scenarios, with no observable difference between KPI outcomes for different climate scenarios, as can be seen in Figure \ref{fig:pc_seas_meat}. This is because the policy is pegged to temperature, effectively capping propagation of flies at higher temperatures. However, it is less robust to changes in seasonality, wherein after 2030, there is a divergence in outcomes. For scenarios with greater seasonality, the policy of controlling fly populations is less capable of responding to larger variation in temperature. 
 
-Predictably, the policy doesn't influence changes in public health scenarios, as the effects are too far downstream of the policy for pest control to have a material impact.
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/pc_Seasonal_meat.png}
+        \caption{Contaminated chicken meat under different seasonality conditions, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:pc_seas_meat}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/pc_Base and Worst Case_acoi.png} 
+        \caption{Accumulative cost of illness under the base and worst case scenarios, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:pc_bwc_acoi}
+    \end{minipage}
+\end{figure}
 
-As pest control is robust to climate variation, we recommend that policy-makers consider this as an effective policy under futures with climate uncertainty, but should be paired with other policies to manage for downstream effects (especially with respect to public health scenarios). In the near term, this policy is unlikely to be cost-effective, however, from 2030 onward (assuming climate projections are representative), the economic effects of the policy will be large enough (more than €10 million) to justify expenditure on this policy.
+Predictably, the policy doesn't influence changes in public health scenarios, as the effects are too far downstream of the policy for pest control to have a material impact. 
+
+As pest control is robust to climate variation, we recommend that policy-makers consider this as an effective policy under futures with climate uncertainty, but should be paired with other policies to manage for downstream effects (especially with respect to public health scenarios). In the near term, this policy is unlikely to be cost-effective, however, from 2030 onward (assuming climate projections are representative), the economic effects of the policy will be large enough (more than €10 million) to justify expenditure on this policy, as shown in Figure \ref{fig:pc_bwc_acoi}. 
 
 Note: This policy is implemented without delay. It was assumed that if a policy is in place to exterminate flies once temperature exceeds 20 degrees Celsius, government can effectively trigger an immediate extermination at relevant locations.
 
 \subsubsection{Food safety and handling}
 \label{sec: food safety}
-The Food Safety policy is a robust policy in terms of reducing food-borne \textit{Campylobacter} infections. This is evidenced in the figure (%fs_population_meat)
+The Food Safety policy is a robust policy in terms of reducing food-borne \textit{Campylobacter} infections. This is evidenced in the Figure \ref{fig:fs_pop_meat}
 whereby the gap between the amount of contaminated meat with and without the policy in place widens over time across all scenarios. Even under higher population estimates, this policy is effective for reducing this case load.
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/fs_Population_meat.png}
+        \caption{Contaminated chicken meat under different population scenarios, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:fs_pop_meat}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/fs_Base and Worst Case_acoi.png} 
+        \caption{Accumulative cost of illness under the base and worst case scenarios, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:fs_bwc_acoi}
+    \end{minipage}
+\end{figure}
 
 However, this policy is considerably less effective and robust against environmental transmission, (rate of human infections/chicken infections from environment) where the policy has limited  (or no) effects under all scenarios.
 
@@ -105,13 +137,45 @@ As for the safe slaughtering policy, this policy has only a modest cost effectiv
 
 This policy only activates under the worst case scenario. Essentially, this policy represents a last resort for the government. It's assumed that the government will not enact this policy except for under extenuating circumstances, whereby case numbers get so high that all other policy options are exhausted, and the government needs to ask citizens to reduce poultry consumption.
 
-What can be seen is that when the policy is enacted, the amount of contaminated chicken meat decreases drastically. After some time, it even shows behaviour that is more desirable than without the policy enacted. However, the financial benefits of the policy aren't significant for quite a while, meaning that the savings for the government are minimal over the course of multiple years. 
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/cb_Population_meat.png}
+        \caption{Contaminated chicken meat under different population scenarios, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:pc_pop_meat}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/cb_Base and Worst Case_acoi.png}
+        \caption{Accumulative cost of illness under the base and worst case scenarios, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:pc_bwc_acoi}
+    \end{minipage}
+\end{figure}
+
+What can be seen is that when the policy is enacted, the amount of contaminated chicken meat decreases drastically. After some time, it even shows behaviour that is more desirable than without the policy enacted. However, the financial benefits of the policy aren't significant for quite a while, meaning that the savings for the government are minimal over the course of multiple years.
 
 It is worth noting that this policy has an overlap with the consumption behavior that is already embedded in the model, that is, people might reduce their consumption on their own regardless of what government recommends, so the value added from this policy compared to the voluntary consumption reduction is even smaller.
 
 \subsubsection{Reducing human exposure to flies}
 \label{reducing human exposure to flies}
 Reducing human exposure to flies was found to be the most robust of all the policies examined. It is also the second most cost-effective of the policies examined, in terms of reducing cost of illness. This is evident in (figure ec acoi worst best). This policy is effective for reducing the human-related KPIs (Cost of Illness, DALYs, Human Environmental Infections) across all scenarios. 
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/ec_Public health_adaly.png}
+        \caption{Accumulated DALYs under different public health scenarios, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:ec_public_daly}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/ec_Base and Worst Case_acoi.png} 
+        \caption{Accumulative cost of illness under the base and worst case scenarios, solid lines represent conditions with policy, dashed lines are condition without policy}
+        \label{fig:ec_bwc_acoi}
+    \end{minipage}
+\end{figure}
 
 It's believed that this policy is effective as it is a quick and direct means of reducing environmental infection, which subsequently reduces downstream KPIs. It doesn't require change in inelastic behaviour and doesn't replicate an existing behavioural uncertainty (like for changing consumption behaviour) so effects on infections can be observed relatively rapidly.
 
