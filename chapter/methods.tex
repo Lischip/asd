@@ -207,7 +207,7 @@ Unit verification was performed by checking all variable units for ensure consis
 Another noteworthy unit is that of the flow of \textit{Symptomatic infections}. The time unit used in the model is \textit{week}, to properly integrate seasonal changes in temperature across the year, months being to big and days too detailed. But for this same reason, DALY and COI are commonly reported per year. To deal with this, a PULSE TRAIN function was installed between stocks \textit{CPY Cases} and \textit{Acute GE Cases}. The PULSE TRAIN accumulates all \textit{Campylobacteriosis} cases over 52 weeks before transferring them to the cost of illness submodel. This can then be used as an input per year for the COI submodel. The units of the PULSE train remain in weeks when the time unit should be thought of as year, as happens after. 
     %Confirm that you've used the appropriate numerical technique/time step and add one line saying, 'behaviour of the model for the chosen time step and half that time step is consistent, this indicates that the appropriate time step and integration method has been used'
     
-The time step verification was performed by running the model at several different time steps. The time step 0.0625 is chosen so the integration method (Euler) is valid.  
+The time step verification was performed by running the model at several different time steps. The time step 0.0625 is chosen so the integration method (Euler) is valid. When halving the time step, we found that model returned similar model behaviour, with the exception of one flow, the \textit{symptomatic infections}. This is because this flow uses a PULSE TRAIN, as described above and this pulse train depends on the time step. Because of this, when the time step is halved, the PULSE TRAIN becomes far bigger. However, this has no effect on the stock it goes into, the number of acute cases. 
 
 % WHY???? 
 
@@ -215,11 +215,6 @@ The time step verification was performed by running the model at several differe
 
 %Validation requires three steps:
     %Show how the data matches or does not match historical data (explain why)
-    
-When halving the time step, we found that model returned similar model behaviour, with the exception of one flow, the \textit{symptomatic infections}. This is because this flow uses a PULSE TRAIN, as described above and this pulse train depends on the time step. Because of this, when the time step is halved, the PULSE TRAIN becomes far bigger. However, this has no effect on the stock it goes into, the number of acute cases.
-    
-    
-%
 
 The complete validation can be read in Appendix~\ref{ch:validation}. We have summarised the findings below:
 
@@ -268,6 +263,7 @@ Visualizations for these situations can be found in Appendix \ref{s:extreme_cond
     
     %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
 % Refer to Section \ref{s:b_base} where the behaviour of the base model without policies is examined. In this section, the differences and similarities between the model and the dynamic hypothesis are discussed.
+The output of the model matches the dynamic hypothesis,
     
 \subsection{Experimental setup}
 %5.	Experimental setup
