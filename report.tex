@@ -1,4 +1,5 @@
-\documentclass[a4paper,11, oneside]{article}
+ 
+ \documentclass[a4paper,11, oneside]{article}
 
 %\title{Unused Title}
 \usepackage{graphicx}
@@ -12,9 +13,18 @@
 
 % Use helvet if uarial cannot be installed
 %\usepackage{uarial}
-\usepackage[scaled]{helvet}
+%\usepackage[scaled]{helvet}
 
-\renewcommand{\familydefault}{\sfdefault}
+
+% \usepackage{tgbonum}
+% \renewcommand{\familydefault}{\sfdefault}
+% \usepackage[T1]{fontenc}
+
+\usepackage[cmintegrals,cmbraces]{newtxmath}
+\usepackage{ebgaramond-maths}
+\usepackage[T1]{fontenc}
+
+
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{courier}
@@ -36,6 +46,7 @@
 \usepackage{lscape}
 \usepackage{csquotes}
 \usepackage{pdfpages}
+
 
 \usepackage[style=apa]{biblatex}
 \addbibresource{asd.bib}
@@ -115,16 +126,15 @@
 
 \newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
 
-
-%\hypersetup{
-%	colorlinks,
-%	citecolor=AMAZINGPINK,
-%	linkcolor=NewBlue1,
-%	urlcolor=Blue
-%	%	citebordercolor=Violet,
-%	%	filebordercolor=Red,
-%	%	linkbordercolor=Blue
-%}
+% \hypersetup{
+% 	colorlinks,
+% 	citecolor=AMAZINGPINK,
+% 	linkcolor=NewBlue1,
+% 	urlcolor=Blue
+% 	%	citebordercolor=Violet,
+% 	%	filebordercolor=Red,
+% 	%	linkbordercolor=Blue
+% }
 
  \hypersetup{
  	colorlinks,
@@ -261,14 +271,16 @@
 \appendix
 \section{Model documentation}
 \label{ch:model_documentation}
-\includepdf[pages=-]{data/Stock Flow Variable Details.pdf}
+\includepdf[pages=-,landscape=true]{data/Stock Flow Variable Details.pdf}
 %\input{appendix/model_doc}
 \section{Validation}
 \label{ch:validation} 
 \input{appendix/validation}
-\section{Details on policies}
+\clearpage
+\section{Details on policies and experiments}
 \label{ch:det_policies} 
 \input{appendix/policies}
+\clearpage
 \section{Report log}
 \label{ch:report_log}
 \input{appendix/elias_log}

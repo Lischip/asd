@@ -1,3 +1,4 @@
+%TC:ignore
 \subsection{Multivariate analysis}
 
 We ran multivariate analysis to account for the compounded effect of different uncertainties, and the results can be found in figures \ref{fig:multi_coi}, \ref{fig:multi_meat}, \ref{fig:multi_chicken}, and \ref{fig:multi_human}. The observed change is mostly regarding numerical sensitivity, but we can see that the contaminated chicken meat can overshoot at times, which is the result of people refusing to eat meat as a result of increased infections, but the chicken were already in the production cycle so there was excess production.
@@ -156,25 +157,70 @@ On figure \ref{fig:symptom_COI} we can see the result of rate of symptomatic inf
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.45\textwidth]{images/sensitivity/Symptomatic COI.png} 
+    \includegraphics[width=0.45\textwidth]{images/extremes/Symptomatic COI.png} 
     \caption{Cost of illness in the different symptomatic infection scenarios}
     \label{fig:symptom_COI}
 \end{figure}
 
 \subsection{Extreme conditions}
+\label{s:extreme_conditions}
 
-\ldots
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/extremes/Temperature_fly_population.png} 
+        \caption{Effect of extreme temperature increase values on fly population}
+        \label{fig:temp_fly}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/extremes/Fly_population_contaminated_meat.png} 
+        \caption{Effect of extreme initial fly population values on proportion of contaminated meat}
+        \label{fig:fly_meat}
+    \end{minipage}
+\end{figure}
 
-\ldots
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/extremes/Chicken_arriving_contaminated_meat.png} 
+        \caption{Effect of extreme chicken arriving to hatcheries values on contaminated meat}
+        \label{fig:chicken_meat}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/extremes/Infections_per_kg_CPY_cases.png} 
+        \caption{Effect of extreme values of infections per kg of meat consumed on Campylobacteriosis cases}
+        \label{fig:infections_cases}
+    \end{minipage}
+\end{figure}
 
-\ldots
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/extremes/base_infectious_flies_proportion_flies.png} 
+        \caption{Effect of extreme base infectious flies values on proportion of infected flies}
+        \label{fig:fly_meat}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/extremes/Base_chicken_exposure_contaminated_meat.png} 
+        \caption{Effect of extreme base chicken exposure rates on proportion of contaminated meat}
+        \label{fig:exposure_meat}
+    \end{minipage}
+\end{figure}
 
-\ldots
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/extremes/CPY_reproduction_contaminated_meat.png} 
+    \caption{Effect of extreme CPY reproduction on proportion of contaminated meat}
+    \label{fig:reproduction_meat}
+\end{figure}
 
-\ldots
-
-\ldots
-
+%The extreme high value of temperature increase evidences a problem in the model, as fly reproduction is unreasonably high since extreme temperatures are likely to create a harsher environment for them as well. For the extreme high values of initial fly population and base infectious flies, the model reports a proportion of contaminated meat that is greater than the total amount of meat, which should not be possible. A similar thing happens with base infections flies and base chicken exposure rate, which can cause more infectious flies than there are total flies. When chicken arriving from hatcheries are decreased (and thus made lower than the demand), the model can handle the situation because it does not allow for consumption of more chicken that are available, but when instead it is raised, the excess supply is never dumped, creating an issue of accumulating meat indefinitely which is not realistic. Lastly, when infections per kg of meat consumed are raised 20 times its original value, it can bring issues of too many people being infected, since our model does not account for immunity of population, all population is indefinitely susceptible which becomes a problem when infection numbers are very big.
 
 \subsection{Comparison to real world data}
 
@@ -234,3 +280,5 @@ The model also includes an Infection risk from birds (2.5e-05). There are about 
 	    \label{fig:val_coi}
     \end{minipage}
 \end{figure*}
+
+%TC:endignore
