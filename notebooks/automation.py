@@ -65,9 +65,9 @@ def get_data(data, df, scenarios):
 #What's the name of ur file?
 loc = "cb_data"
 
-policydict = {"cb" : "Poultry consumption behaviour",
+policydict = {"cb" : "Consumption behaviour",
              "fs" : "Food safety and handling",
-             "pc": "Pest control",
+             "pc": "Fly population control",
              "ec": "Exposure control",
              "ss" : "Safe slaughtering",
              "00": "No policies"}
@@ -119,18 +119,44 @@ cmap = plt.cm.get_cmap(simulcmap, 10)
 cmapcolors = cmap(range(10))
 
 colordict = {namedict["base"] : cmapcolors[0],
+            namedict["base"] + ", w/ policy" : cmapcolors[0],
+            namedict["base"] + ", w/o policy": cmapcolors[0],
             namedict["1"] : cmapcolors[0],
+            namedict["1"] + ", w/ policy"  : cmapcolors[0],
+            namedict["1"] + ", w/o policy" : cmapcolors[0],
             namedict["2"] :  cmapcolors[1],
+            namedict["2"] + ", w/ policy"  :  cmapcolors[1],
+            namedict["2"] + ", w/o policy" : cmapcolors[1],
             namedict["3"] :  cmapcolors[2],
+            namedict["3"] + ", w/ policy" : cmapcolors[2],
+            namedict["3"] + ", w/o policy" : cmapcolors[2],
             namedict["4"] :  cmapcolors[3],
+            namedict["4"] + ", w/ policy" :  cmapcolors[3],
+            namedict["4"]  + ", w/o policy"  :  cmapcolors[3],
             namedict["5"] :  cmapcolors[0],
+            namedict["5"] + ", w/ policy" : cmapcolors[0],
+            namedict["5"]  + ", w/o policy"  : cmapcolors[0],
             namedict["6"] :  cmapcolors[4],
+            namedict["6"] + ", w/ policy" :  cmapcolors[4],
+            namedict["6"] + ", w/o policy" :  cmapcolors[4],
             namedict["7"] :  cmapcolors[5],
-            namedict["8"] :  cmapcolors[6],
+            namedict["7"] + ", w/ policy" : cmapcolors[5],
+            namedict["7"] + ", w/o policy"  : cmapcolors[5],
+            namedict["8"] : cmapcolors[6],
+            namedict["8"] + ", w/ policy" :  cmapcolors[6],
+            namedict["8"] + ", w/o policy"  :  cmapcolors[6],
             namedict["9"] :  cmapcolors[0],
+            namedict["9"] + ", w/ policy" : cmapcolors[0],
+            namedict["9"] + ", w/o policy"  : cmapcolors[0],
             namedict["10"] :  cmapcolors[7],
+            namedict["10"] + ", w/ policy" : cmapcolors[7],
+            namedict["10"] + ", w/o policy"  : cmapcolors[7],
             namedict["11"] :  cmapcolors[9],
-            namedict["12"] :  cmapcolors[8]}
+            namedict["11"] + ", w/ policy" : cmapcolors[9],
+            namedict["11"] + ", w/o policy"  : cmapcolors[9],
+            namedict["12"] : cmapcolors[8],
+            namedict["12"] + ", w/ policy" : cmapcolors[8],
+            namedict["12"] + ", w/o policy"  :  cmapcolors[8]}
 
 for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
     policy = policydict[loc[:2]]
@@ -148,6 +174,13 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         base_coi = get_data(DATA.COI, base_df, base_scenarios)
         policy_coi = policy_coi.reindex(base_coi.columns, axis=1)
 
+        for df in [policy_coi, base_coi]:
+            for column in policy_coi.columns:
+                df[column] /= 1000000
+
+        policy_coi = policy_coi.add_suffix(', w/ policy')
+        base_coi = base_coi.add_suffix(', w/o policy')
+
         fig, ax = plt.subplots(figsize=(10, 10))
 
         if policy_coi.shape[1] >= 1:
@@ -158,7 +191,7 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
             #sns.lineplot(data=base_coi[2022:], dashes=[(4, 2)] * len(base_scenarios))
 
         plt.xlabel('Year');
-        plt.ylabel('Euro')
+        plt.ylabel('Cost (million Euro)')
         plt.title(policy + ': Cost of Illness')
         plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.13 - (0.02 * num_scen), 1, 1),
                    loc="lower center")
@@ -174,6 +207,13 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         base_meat = get_data(DATA.MEAT, base_df, base_scenarios)
         policy_meat = policy_meat.reindex(base_meat.columns, axis=1)
 
+        for df in [policy_meat, base_meat]:
+            for column in policy_meat.columns:
+                df[column] /= 1000000
+
+        policy_meat = policy_meat.add_suffix(', w/ policy')
+        base_meat = base_meat.add_suffix(', w/o policy')
+
         fig, ax = plt.subplots(figsize=(10, 10))
 
         if policy_meat.shape[1] >= 1:
@@ -184,7 +224,7 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
             #sns.lineplot(data=base_meat.loc[base_meat.index >= 2021.75], dashes=[(4, 2)] * len(base_scenarios))
 
         plt.xlabel('Year');
-        plt.ylabel('Kg')
+        plt.ylabel('Chicken meat (million kg)')
         plt.title(policy + ': Contaminated chicken meat')
         plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.13 - (0.02 * num_scen), 1, 1),
                    loc="lower center")
@@ -200,6 +240,13 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         base_coi = get_data(DATA.COIACC, base_df, base_scenarios)
         policy_coi = policy_coi.reindex(base_coi.columns, axis=1)
 
+        for df in [policy_coi, base_coi]:
+            for column in policy_coi.columns:
+                df[column] /= 1000000
+
+        policy_coi = policy_coi.add_suffix(', w/ policy')
+        base_coi = base_coi.add_suffix(', w/o policy')
+
         fig, ax = plt.subplots(figsize=(10, 10))
 
         if policy_coi.shape[1] >= 1:
@@ -208,7 +255,7 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
             sns.lineplot(data=base_coi.loc[base_coi.index >= 2021.75], dashes=[(4, 2)] * len(base_scenarios), palette=colordict)
 
         plt.xlabel('Year');
-        plt.ylabel('Euro')
+        plt.ylabel('Cost (million euro)')
         plt.title(policy + ': Accumulated Cost of Illness')
         plt.legend(title="Scenarios", ncol=2, fancybox=True, bbox_to_anchor=(0, -0.16 - (0.02 * num_scen), 1, 1),
                    loc="lower center")
@@ -223,6 +270,8 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         policy_envh = get_data(DATA.ENVH, data_df, scenarios)
         base_envh = get_data(DATA.ENVH, base_df, base_scenarios)
         policy_envh = policy_envh.reindex(base_envh.columns, axis=1)
+        policy_envh = policy_envh.add_suffix(', w/ policy')
+        base_envh = base_envh.add_suffix(', w/o policy')
 
         fig, ax = plt.subplots(figsize=(10, 10))
 
@@ -244,6 +293,8 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         policy_envc = get_data(DATA.ENVC, data_df, scenarios)
         base_envc = get_data(DATA.ENVC, base_df, base_scenarios)
         policy_envc = policy_envc.reindex(base_envc.columns, axis=1)
+        policy_envc = policy_envc.add_suffix(', w/ policy')
+        base_envc = base_envc.add_suffix(', w/o policy')
 
         fig, ax = plt.subplots(figsize=(10, 10))
 
@@ -266,6 +317,8 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         policy_daly = get_data(DATA.DALY, data_df, scenarios)
         base_daly = get_data(DATA.DALY, base_df, base_scenarios)
         policy_daly = policy_daly.reindex(base_daly.columns, axis=1)
+        policy_daly = policy_daly.add_suffix(', w/ policy')
+        base_daly = base_daly.add_suffix(', w/o policy')
 
         fig, ax = plt.subplots(figsize=(10, 10))
 
@@ -290,6 +343,8 @@ for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
         policy_daly = get_data(DATA.DALYACC, data_df, scenarios)
         base_daly = get_data(DATA.DALYACC, base_df, base_scenarios)
         policy_daly = policy_daly.reindex(base_daly.columns, axis=1)
+        policy_daly = policy_daly.add_suffix(', w/ policy')
+        base_daly = base_daly.add_suffix(', w/o policy')
 
         fig, ax = plt.subplots(figsize = (10,10))
 
