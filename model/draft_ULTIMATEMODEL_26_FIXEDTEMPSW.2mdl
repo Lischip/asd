@@ -1,6 +1,6 @@
 {UTF-8}
 scenario switch=
-	0
+	12
 	~	Dmnl
 	~		|
 
@@ -1725,23 +1725,21 @@ contaminated meat,Graph
 food safety policy switch,0,1,1
 ///---\\\
 :L<%^E!@
-1:cb_scen_1.vdfx
-1:cb_scen_0.vdfx
+1:cb_scen_12.vdfx
+1:cb_scen_11.vdfx
+1:cb_scen_10.vdfx
+1:cb_scen_8.vdfx
+1:cb_scen_7.vdfx
+1:cb_scen_6.vdfx
+1:cb_scen_4.vdfx
+1:cb_scen_3.vdfx
+1:cb_scen_2.vdfx
+1:cb_scen_9.vdfx
+1:cb_scen_5.vdfx
 1:cb_scen_base.vdfx
-1:00_scen_12.vdfx
-1:00_scen_11.vdfx
-1:00_scen_10.vdfx
-1:00_scen_8.vdfx
-1:00_scen_6.vdfx
-1:00_scen_4.vdfx
-1:00_scen_3.vdfx
-1:00_scen_2.vdfx
-1:00_scen_9.vdfx
-1:00_scen_5.vdfx
-1:00_scen_1.vdfx
-1:00_scen_0.vdfx
-1:00_scen_base.vdfx
-9:cb_scen_5
+1:cb_scen_0.vdfx
+1:cb_scen_1.vdfx
+9:cb_scen_12
 23:0
 18:draft_ULTIMATEMODEL_0020.vsc
 20:draft_ULTIMATEMODEL_0020.lst
