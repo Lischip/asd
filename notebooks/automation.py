@@ -69,13 +69,14 @@ policydict = {"cb" : "Poultry consumption behaviour",
              "fs" : "Food safety and handling",
              "pc": "Pest control",
              "ec": "Exposure control",
-             "ss" : "Safe slaughtering"}
+             "ss" : "Safe slaughtering",
+             "00": "No policies"}
 
 #What's ur policy called?
 policy = policydict[loc[:2]]
 
 bw = ["base", "12"]
-po = ["base", "2", "3"]
+po = ["1", "2", "3"]
 t = ["4", "5", "6"]
 s = ["7","8", "9"]
 pu = ["10", "11"]
@@ -90,7 +91,7 @@ scenario_dict= {"Base and Worst Case": bw,
 scenarioss = [bw, po, t,s, pu]
 
 namedict = {"base": "Base run",
-            # "1": "Population: medium increase",
+            "1": "Population: medium increase",
             "2": "Population: large increase",
             "3": "Population: decrease",
             "4": "Temperature: increase 1 degree",
@@ -117,21 +118,21 @@ simulcmap = "tab10"
 cmap = plt.cm.get_cmap(simulcmap, 10)
 cmapcolors = cmap(range(10))
 
-colordict = {"Base run": cmapcolors[0],
-            #"Population: medium increase": cmapcolors[0],
-            "Population: large increase":  cmapcolors[1],
-            "Population: decrease":  cmapcolors[2],
-            "Temperature: increase 1 degree":  cmapcolors[3],
-            "Temperature: increase 1.5 degrees":  cmapcolors[0],
-            "Temperature: increase 2 degrees":  cmapcolors[4],
-            "Seasonality: no temperature change" :  cmapcolors[5],
-            "Seasonality: Fast temperature change" :  cmapcolors[6],
-            "Seasonality: linear temperature change" :  cmapcolors[0],
-            "Public health: 10% fewer symptoms" :  cmapcolors[7],
-            "Public health: 10% more symptoms":  cmapcolors[9],
-            "Worst case":  cmapcolors[8]}
+colordict = {namedict["base"] : cmapcolors[0],
+            namedict["1"] : cmapcolors[0],
+            namedict["2"] :  cmapcolors[1],
+            namedict["3"] :  cmapcolors[2],
+            namedict["4"] :  cmapcolors[3],
+            namedict["5"] :  cmapcolors[0],
+            namedict["6"] :  cmapcolors[4],
+            namedict["7"] :  cmapcolors[5],
+            namedict["8"] :  cmapcolors[6],
+            namedict["9"] :  cmapcolors[0],
+            namedict["10"] :  cmapcolors[7],
+            namedict["11"] :  cmapcolors[9],
+            namedict["12"] :  cmapcolors[8]}
 
-for loc in ("cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
+for loc in ("00_data", "cb_data", "fs_data", "pc_data", "ec_data", "ss_data"):
     policy = policydict[loc[:2]]
     for name, scenarios in scenario_dict.items():
         base_scenarios = scenarios
