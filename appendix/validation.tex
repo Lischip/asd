@@ -1,37 +1,14 @@
 %TC:ignore
-Several validation tests, in accordance with \cite{forrester_tests_1980}, were conducted for this research. Their outputs are shown in this chapter. We start presenting our findings on the extreme conditions test, then we show the results of the sensitivity analysis, and we conclude this chapter by comparing the data of the model to real-world values.
+In order to build confidence in our system dynamics model and ascertain whether our model is fit for purpose, we conducted tests on model structure and behaviour. These tests are in accordance with \cite{forrester_tests_1980}. Their outputs are shown in this chapter. We start presenting our findings on the extreme conditions test, then we show the results of the sensitivity analysis, and we conclude this chapter by comparing the data of the model to real-world values.
 
 \subsection{Extreme conditions test}
 \label{s:extreme_conditions}
 
-
-\begin{table}[]
-\centering
-\begin{tabular}{|l|c|c|}
-\hline
-\textbf{Variable}                             & \textbf{Extreme low} & \textbf{Extreme high} \\ \hline
-\textit{Temperature   increase by 2050}       & -1                   & 25                    \\ \hline
-\textit{Initial fly population}               & 0                    & 1                     \\ \hline
-\textit{Chicken arriving from   hatcheries}   & Halved               & Doubled               \\ \hline
-\textit{infections per kg of meat   consumed} & Halved               & 20x                   \\ \hline
-\textit{Base infectious flies}                & 0                    & 0.8                   \\ \hline
-\textit{base chicken exposure rate}           & 0                    & 0.8                   \\ \hline
-\textit{CPY reproduction in chickens}         & 0                    & 4                     \\ \hline
-\end{tabular}
-\caption{Variable values used for extreme conditions testing.}
-\label{tab:extreme_values}
-\end{table}
-
-
 To test the structure of the model, we subjected it to extreme conditions to evaluate if the model behaves accordingly. Figures~\ref{fig:temp_fly} to~\ref{fig:reproduction_meat} show the results. The time horizon of these graphs is slightly bigger from the graphs used to show the results. We opted to also show the year the model takes to reach an equilibrium, which results in some interesting behaviour. In other words, we get to see the behaviour of the model in 2020.
 
-As can be seen in Figure~\ref{fig:temp_fly}, the fly population becomes unrealistically high when the temperature gets extremely high. For instance, if throughout the year the Netherlands would have a temperature of 100 \degree c, we would have around 500 times more flies in the Netherlands in summer than in the baseline scenario. This is very unrealistic, as in the real world, those flies would die of the extreme heat. In the graph we show the results when \textit{the temperature increase by 2050} is set to 25 opposed to the 1.5 \degree c of the baseline scenario.
+As can be seen in Figure~\ref{fig:temp_fly}, the fly population becomes unrealistically high when the temperature gets extremely high. For instance, if throughout the year the Netherlands would have a temperature of 100 \degree c, we would have around 500 times more flies in the Netherlands in summer than in the baseline scenario. This is very unrealistic, as in the real world, those flies would die of the extreme heat. In the graph we show the results when \textit{the temperature increase by 2050} is set to 25 opposed to the 1.5 \degree c of the baseline scenario. The flies are completely unaffected by the harsher environment.
 
-In Figure~\ref{fig:fly_meat}, we show what happens to the KPI \textit{proportion of contaminated meat} once the initial fly population is 0 flies and 1 million flies (1 Mfly). As can be seen, when the population is 0, relatively little meat becomes infected by the environment. However, when it is set to 1 million, we see unusual behaviour before the model equilibriates. 
-
-and actually 50\% of the meat is contaminated.
-
-{\color{pink}{should these images be adjusted to reflect the time horizon we're interested in?}}
+In Figure~\ref{fig:fly_meat}, we show what happens to the KPI \textit{proportion of contaminated meat} once the initial fly population is 0 flies and 1 million flies (1 Mfly). As can be seen, when the population is 0, relatively little meat becomes infected by the environment. However, when it is set to 1 million, we see unusual behaviour before the model reaches homeostasis in 2021. This is impossible behaviour, as a proportion should never be able to become negative or exceed 1. This is because the amount of infectious flies is so big as a result of this initial value, the rate of chicken infection from environment becomes 2.8. In hindsight, the formula should have included a maximum. The vertex of \textit{proportion of contaminated meat} is explained by the fact that there is more demand for chicken meat than is actually available in the stock, therefore both the \textit{contaminated slaughtered chickens} and the\textit{total chickens slaughtered}, which are used to calculate the ratio, are negative. Once equilibrium is reached, the behaviour of the model becomes the same as the behaviour of the baseline: around 50\% of the meats are contaminated in summer, and around 23\% in winter. This is a testament why the first year is out of the time horizon of our research, as it is inaccurate. After this first year the model is still valuable to analyse.
 
 \begin{figure}[h!]
     \centering
@@ -49,9 +26,9 @@ and actually 50\% of the meat is contaminated.
     \end{minipage}
 \end{figure}
 
-We also subjected extremes on the flow \textit{chickens arriving from hatcheries} and, as to be expected, when doubled, the amount of contaminated meat grows massively, this does not propagate to the \textit{Cost of Illness}, as the meats are just stored and the demand has not increased. The meats are just stored (in the model they are just waiting in the stock), whereas halving it actually does decrease the \textit{Cost of Illness}, since there is less meat available for consumption, and therefore a decreased risk of human infection via food.
+We also subjected extremes on the flow \textit{chickens arriving from hatcheries}. The results are shown in Figure~\ref{fig:chicken_meat}. As to be expected, when doubled, the amount of contaminated meat grows massively, this does not propagate to the \textit{Cost of Illness}, as the meats are just stored and the demand has not increased. The meats are just stored (in the model they are just waiting in the stock), whereas halving it actually does decrease the \textit{Cost of Illness}, since the model recognises that the population cannot consume more chicken meat than available, and therefore there is a decreased risk of human infection via food. 
 
-Next, we investigated the \textit{infections per kg of meat consumed}. When the value from the baseline run is halved, we do not see a significance difference in the amount of CPY cases: a decrease of around 3\%, whereas when we multiply this value by twenty, the amount of CPY cases increase with around 170\%.
+Next, we investigated the \textit{infections per kg of meat consumed}. When the value from the baseline run is halved, we do not see a significance difference in the amount of CPY cases: a decrease of around 3\%, whereas when we multiply this value by twenty, the amount of CPY cases increase with around 170\%. This is more than reasonably can get infected. The model does not account for people who have become immune to \text{Campylobacter}, and therefore the entire population is always at risk of becoming infected. This can be seen in Figure~\ref{fig:infections_cases}
 
 \begin{figure}[h!]
     \centering
@@ -69,13 +46,17 @@ Next, we investigated the \textit{infections per kg of meat consumed}. When the 
     \end{minipage}
 \end{figure}
 
+We also took a closer look at the effect of \textit{Base infected flies} on \textit{proportion of infectious flies}. As shown in Figure~\ref{fig:prop_flies}, we found that by setting this value to the extreme 0, the proportion becomes really low.  The only way for flies to get infected in the model is by getting infected by the chickens on the farms. By setting \texit{Base infected flies} to 0.8, the \texit{proportion of infectious flies} variable becomes an impossible ratio (over 1). This is due to the formula used to calculate the proportion, which adds the base infectious flies to the amount of flies infected by chickens. 
+
+Next, we investigated the effect of \textit{base chicken exposure rate} on the KPI \textit{contaminated meat}. The results of the extremes we subjected the model to can be seen in Figure~\ref{fig:exposure_meat}. The value used in the baseline is 0.1, and by setting it to 0, we see a decrease in \textit{proportion of contaminated meat} of around 20\% in both summer and winter. It nearly reaches a proportion of 0 in winter. When it is set to 0.8, the proportion is, once again, unreal. More than 100\% of the meat is contaminated in the summer. This is because there are more \textit{contaminated slaughtered chickens} than \textit{total chickens slaughtered}, which is also something that is impossible in real life. It is caused by the fact that we neglected including a floor function the \textit{CPY-negative chickens} stock. There simply are not enough CPY-negative chickens, and it therefore turns negative. Because of this, a negative amount of chickens are slaughtered with and without cross-contamination, which decreases the \textit{total chickens slaughtered}.
+
 \begin{figure}[h!]
     \centering
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/extremes/base_infectious_flies_proportion_flies.png} 
         \caption{Effect of extreme base infectious flies values on proportion of infected flies}
-        \label{fig:fly_meat}
+        \label{fig:prop_flies}
     \end{minipage}
     \begin{minipage}{0.45\textwidth}
         \centering
@@ -84,6 +65,8 @@ Next, we investigated the \textit{infections per kg of meat consumed}. When the 
         \label{fig:exposure_meat}
     \end{minipage}
 \end{figure}
+
+Finally, we explored the extremes of \textit{CPY reproduction in chickens}. When it is set to the extreme 4, the model reports a proportion of contaminated meat greater than 1, which is an unreasonable proportion. The explanation for this behaviour is similar to the explanation of the previous extreme conditions test: there are more contaminated chickens slaughtered than total chickens slaughtered.This is because the flow \textit{slaughtering without cross-contamination} is always negative, and therefore decreases the \textit{total chickens slaughtered}. The behaviour of this flow is explained by the value of \texit{rate of cross contamination}, which is around 2.4 in the summer. The reason for this high rate can be directly traced back to \texit{CPY reproduction in chickens}, which is used as a multiplyer in \texit{rate of cross contamination}. At the other extreme, we see a decrease in \textit{contaminated meat consumption}, with the most significant difference in summer (a decrease of 40\% opposed to 25\% in winter). This is simply because there is significant less contaminated meat to consume (about 1 million kg less).
 
 \begin{figure}[h!]
     \centering
@@ -97,9 +80,7 @@ Next, we investigated the \textit{infections per kg of meat consumed}. When the 
 
 \subsection{Multivariate analysis}
 
-We ran multivariate analysis to account for the compounded effect of different uncertainties, and the results can be found in figures \ref{fig:multi_coi}, \ref{fig:multi_meat}, \ref{fig:multi_chicken}, and \ref{fig:multi_human}. The observed change is mostly regarding numerical sensitivity, but we can see that the contaminated chicken meat can overshoot at times, which is the result of people refusing to eat meat as a result of increased infections, but the chicken were already in the production cycle so there was excess production.
-
-% ADD HOW MANY RUNS
+We ran multivariate analysis to account for the compounded effect of different uncertainties, and the results can be found in Figures \ref{fig:multi_coi}, \ref{fig:multi_meat}, \ref{fig:multi_chicken}, and \ref{fig:multi_human}. We employed VenSim's built-in Sensitivity feature and let it run 200 simulations. We assigned certain parameters a maximum of 110\% of their original value, and a minimum of 90\% of their original value. The observed change is mostly regarding numerical sensitivity, but we can see that the contaminated chicken meat can overshoot at times, which is the result of people refusing to eat meat as a result of increased infections, but the chicken were already in the production cycle so there was excess production.
 
 \begin{figure}[h!]
     \centering
@@ -133,10 +114,11 @@ We ran multivariate analysis to account for the compounded effect of different u
     \end{minipage}
 \end{figure}
 
-
+\newpage 
 \subsection{Sensitivity Analysis}
-\subsubsection{Population scenarios}
+To realise the model, we resorted to assumptions, as certain data was unavailable. We were interested in knowing how sensitive the model was to changes of these parameters. We wanted to assess the impact of the parametric changes under all 3 types of scenarios.
 
+\subsubsection{Population scenarios}
 Based on population projections \parencite{nidi_nidi_2020} we ran the sensitivity analysis and got the results in figures \ref{fig:pop_coi}, \ref{fig:pop_meat}, \ref{fig:pop_chicken}, and \ref{fig:pop_human}. Because a population increase also increases demand for chicken, generating a reaction across the model than can be appreciated in the increased contaminated chicken meat stock as well. Because more people get infected in total and present symptoms, the cost of illness also increases.
 
 \begin{figure}[h!]
@@ -253,7 +235,7 @@ On figure \ref{fig:symptom_COI} we can see the result of rate of symptomatic inf
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.45\textwidth]{images/extremes/Symptomatic COI.png} 
+    \includegraphics[width=0.45\textwidth]{images/sensitivity/Symptomatic COI.png} 
     \caption{Cost of illness in the different symptomatic infection scenarios}
     \label{fig:symptom_COI}
 \end{figure}
