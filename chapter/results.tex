@@ -8,7 +8,7 @@ In this chapter the results from the experiments will be shown and analysed. Fir
 \subsection{Base Model}
 \label{s:baserun}
 
-The model was run without any scenarios to generate behaviour, dubbed the base run. The behaviour of the KPIs was studied for this base behaviour.
+The model was run without any scenarios to generate baseline behaviour and the behaviour of KPIs examined.
 
 \begin{figure}[h!]
     \centering
@@ -48,7 +48,7 @@ The contaminated meat stock (Figure \ref{fig:b_meat}) exhibits unusual behaviour
 
 Secondly, we did not account for seasonality in the development of the contaminated meat stock. It had been conceptualised in the aggregate sense. 
 
-Finally, the model produces a stair-like graph for the cost of illness, where we had hypothesised a straight line instead. This has to do with the switch in units mentioned in section \ref{s:verification}. The increase in Cost of Illness occurs once every 52 weeks, resulting in the stairs we can see in (Figure \ref{fig:b_coi}). Had the time step been consistent, it would have resulted in a straight line as hypothesised. 
+Finally, the model produces a stair-like graph for the cost of illness, where we had hypothesised a straight line instead. This has to do with the switch in units mentioned in section \ref{s:verification}. The increase in Cost of Illness occurs once yearly, resulting in the steps in (Figure \ref{fig:b_coi}). A continuous time step would have resulted in a straight line as hypothesised. 
 
 \subsection{Policy Robustness}
 In this section, results of scenario testing of each of the policies was examined, to understand which policies were most robust and most cost effective, to inform policy recommendations.
@@ -149,9 +149,9 @@ This policy only activates under the worst case scenario. Essentially, this poli
     \end{minipage}
 \end{figure}
 
-What can be seen is that when the policy is enacted, the amount of contaminated chicken meat decreases drastically. After some time, it even shows behaviour that is more desirable than without the policy enacted. However, the financial benefits of the policy aren't significant for quite a while, as seen in Figure \ref{fig:pc_bwc_acoi}. 
+What we see is that when the policy is enacted, the amount of contaminated chicken meat decreases drastically. After some time, it even shows behaviour that is more desirable than without the policy enacted. However, the financial benefits of the policy aren't significant for quite a while, as seen in Figure \ref{fig:pc_bwc_acoi}. 
 
-It is worth noting that this policy has an overlap with the consumption behaviour that is already embedded in the model. People might reduce their consumption on their own regardless of what government recommends, so the value added from this policy compared to the voluntary consumption reduction is even smaller.
+It is worth noting that this policy has an overlap with the consumption behaviour that is already embedded in the model. People might reduce their consumption on their own regardless of what the government recommends, so the value added from this policy compared to the voluntary consumption reduction is even smaller.
 
 \subsubsection{Reducing human exposure to flies}
 \label{reducing human exposure to flies}
@@ -173,6 +173,8 @@ Reducing human exposure to flies was found to be the most robust of all the poli
     \end{minipage}
 \end{figure}
 
-It is believed that this policy is effective as it is a quick and direct means of reducing environmental infection, which subsequently reduces downstream KPIs. It doesn't require change in inelastic behaviour and doesn't replicate an existing behavioural uncertainty (like for changing consumption behaviour) so effects on infections can be observed relatively rapidly.
+It is believed that this policy is effective as it is a quick and direct means of reducing environmental infection, which subsequently reduces downstream KPIs. It does not require change in inelastic behaviour and doesn't replicate an existing behavioural uncertainty (like for changing consumption behaviour) so effects on infections can be observed relatively rapidly.
 
-Given the cost-effectiveness and robustness of this policy, we would recommend that this policy be employed by the Dutch government to reduce human infection from environmental sources. We also recommend that further investigation into this policy be performed to ensure that it is representative of reality (for instance, by incorporating additional pathways for environmental transmission to occur). This may ultimately reduce the effectiveness of the policy, but would generate a more realistic picture for decision-makers.
+Given the cost-effectiveness and robustness of this policy, we would recommend that this policy to be considered by the Dutch government and to be further investigated (for instance, by incorporating additional environmental transmission pathways). This may ultimately reduce the effectiveness of the policy, but would provide more realistic insight for decision-makers.
+
+%be employed by the Dutch government to reduce human infection from environmental sources. We also recommend that further investigation into this policy be performed to ensure that it is representative of reality (for instance, by incorporating additional pathways for environmental transmission to occur).

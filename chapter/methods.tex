@@ -39,14 +39,7 @@ The model focuses on public health and economic impacts associated with \textit{
 Conceptualisation of the model structure is shown in Figure \ref{fig:aggregrated_cld}. The model will focus on farms and slaughterhouses collectively, rather than individual types of farms. This aligns better with decision-making regarding the aggregate impacts of policy choices across the entire poultry industry in the Netherlands. This aggregation level excludes most of the internal processes of slaughterhouses and broilers, as these are too detailed for this scope. Furthermore, this model will not be using age cohorts because the public health and cost of illness metrics already incorporate age weightings \parencite{mangen_campylobacteriosis_2007}.  %David: did we introduce the definition of DALYs already before this? Emily: No, I just defined the acronym. We included it in earlier work, but it might have been removed at some stage. DALYs are explained in the model explanation section.
 \subsubsection*{Model Boundaries}
 
-This model draws wider boundaries than Rommens' original model \parencite{rommens_infected_2020}. This work focuses on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factors. Moreover, with the internal components of the farms and slaughterhouses simplified, this allows for more focus on environmental transmission pathways. Variables considered in and out of scope are shown in Figure \ref{fig:bullseye}.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.90\textwidth]{images/bullseye.png}
-\caption{Bullseye diagram for variables considered within model boundaries}
-\label{fig:bullseye}
-\end{figure}
+This model draws wider boundaries than Rommens' original model \parencite{rommens_infected_2020}. This work focuses on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factors. Moreover, with the internal components of the farms and slaughterhouses simplified, this allows for more focus on environmental transmission pathways. 
 
 The sub-model of 'Infected Chickens' encompasses the relevant features of Rommens' original model \parencite{rommens_infected_2020}. The following sections detail model structure and behaviour. 
 
@@ -159,7 +152,7 @@ The main mechanisms employed in each part of the model are as follows:
     
 \end{itemize} % David: isn't this the same as talking about the submodels? I say remove, if anything we can briefly say how those models interact with one another. Emily - this is the section I was asking about this morning. Really not sure what we are expected to include here that isn't covered in the model documentation.
 
-A full and detailed list of variables and parameters used in the model are detailed in Appendix \ref{ch:model_documentation}
+A complete list of variables and parameters used in the model are detailed in Appendix \ref{ch:model_documentation}
 
 \subsubsection{Modelling software used}
 The system was modelled using VenSim PLE software developed by Ventana Systems Inc.
@@ -171,7 +164,7 @@ Euler was considered an adequate integration method for this model as it is suit
 
 \subsubsection{Time step}
     %Why was the time step chosen?
-The time step was halved from 0.5 until no significant changes in output could be detected. Then time steps are small enough such that the derivative of the model is constant between two very close points in time. Time step 0.0625 was selected as behaviour of the model was consistent with that of lower time steps (see Figure \ref{fig:cpy cases with time step}).
+The time step must be small enough such that the derivative of the model is constant between two points close in time. A Time step of 0.0625 was selected, as behaviour of the model was consistent with that of lower time steps (see Figure \ref{fig:cpy cases with time step}).
 
 \begin{figure}[h!]
 \centering
@@ -189,7 +182,7 @@ The time period of 30 years (1560 weeks) was chosen to be able to show the effec
 \subsection{Model Verification and Validation}
 %4.	Validation
  %   a.	Use various tests to argue why model is fit for purpose
-In this subsection the model verify and validate the model. Verification will be done through a comparison with the conceptualisation of the model, as well as a unit verification and a time step verification. 
+In this subsection the model will be undergo verification and validation. Verification will be done through a comparison with the conceptualisation of the model, as well as a unit and a time step verification. 
 
 \subsubsection{Verification}
 \label{s:verification}
@@ -201,7 +194,7 @@ In this subsection the model verify and validate the model. Verification will be
 To verify the conceptualisation, the causal diagram construed in chapter \ref{s:conceptualisation} was compared with the model built. There have been some addenda to the model, but the functions still match.  
     %Check that the units are consistent with the real world and add one line saying 'units were checked for material consistency'. -- DONE
     
-Unit verification was performed by checking all variable units for ensure consistency with real-world equivalents. The only noteworthy unit is that of the flow \textit{Symptomatic infections}. The model's time unit is set to \textit{week}, to facilitate seasonal temperature throughout the year. However, DALY and COI are commonly reported per year. To deal with this unit difference, a PULSE TRAIN function is modeled between stocks \textit{CPY Cases} and \textit{Acute GE Cases}. This accumulates all \textit{Campylobacteriosis} cases over 52 weeks before transferring them to the cost of illness submodel. This 'transforms' the unit into years for the COI submodel. The units of the PULSE train remain in weeks when the time unit should be thought of as year, as happens after. 
+Units were checked to ensure consistency with real-world equivalents. The only noteworthy unit is that of the flow \textit{Symptomatic infections}. The model's time unit is set to \textit{week}, to facilitate seasonal temperature throughout the year. As DALY and COI are reported per year, a PULSE TRAIN function is modeled between stocks \textit{CPY Cases} and \textit{Acute GE Cases} to convert time units. This accumulates all \textit{Campylobacteriosis} cases over 52 weeks before transferring them to the cost of illness submodel. This 'transforms' the unit into years for the COI submodel. The units of the PULSE train remain in weeks when the time unit should be thought of as year, as happens after. 
     %Confirm that you've used the appropriate numerical technique/time step and add one line saying, 'behaviour of the model for the chosen time step and half that time step is consistent, this indicates that the appropriate time step and integration method has been used'
     
 The time step verification was performed by running the model at several different time steps. The time step 0.0625 is chosen so the integration method (Euler) is valid. When halving the time step, we found that model returned similar model behaviour, 
