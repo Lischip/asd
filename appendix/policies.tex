@@ -12,19 +12,19 @@ We elaborate on the scenarios used to test these policies in Subsection~\ref{ch:
 Two policies were implemented with regards to environmental factors and the biological disease vectors. Both are triggered by temperature, as this is the main driver of the population growth of flies, as explained in Section~\ref{fig:environmental_submodel}.
 
 \subsubsection{Exposure control policy}
-This policy decreases human exposure to infected flies: on the season when the disease vector is more prevalent, public campaigns will urge the population to keep organic waste properly closed and use fly nets \parencite{hald_use_2007}. Similar measures are used to prevent the reproduction of disease carrying mosquitoes in tropical countries. %I know this for a fact because tropical country, but we might want to add a source.
+This policy decreases human exposure to infected flies: on the season when the disease vector is more prevalent, public campaigns will urge the population to keep organic waste properly closed and use fly nets \parencite{hald_use_2007}. Similar measures are used to prevent the spread of disease carrying mosquitoes in tropical countries \parencite{govella_why_2012}. %I know this for a fact because tropical country, but we might want to add a source.
 
 The closed-loop policy is triggered by the temperature. If the temperature is above 20\degree c, the policy goes in effect. This temperature is based on the findings by \cite{schou_temperature_2013}. It assumes an immediate reduce of 20\% on the rate of human exposure to infectious flies. It was also assumed there would be an information delay of 2 weeks from the onset of the policy to full implementation.
 
 \subsubsection{Fly population control policy}
-When a certain threshold of fly population is reached, the government can initiate extermination campaigns to limit the spread of diseases. This can be generalized, or localized only around farms.
+When a certain threshold of fly population is reached, the government can initiate extermination campaigns to limit the spread of diseases. This can be generalised, or localised only around farms.
 
 Likewise to the Exposure control policy, this policy is activated by temperature. Once the temperature gets above 20\degree c, the policy goes into effect. This immediately reduces the fly population to 80\%. We assume the effect is immediate, as this policy is not dependent on people's behaviour: the government can instantiate these immediately.
 
 \iffalse
 \begin{itemize}
     \item Public campaigns to prevent human exposure to infected flies: on the season when the disease vector is more prevalent, urge the population to keep organic waste properly closed and use fly nets \parencite{hald_use_2007}. Similar measures are used to prevent the reproduction of disease carrying mosquitoes in tropical countries. %I know this for a fact because tropical country, but we might want to add a source.
-    \item Pest control measures: when a certain threshold of fly population is reached, the government can initiate extermination campaigns to limit the spread of diseases. This can be generalized, or localized only around farms.
+    \item Pest control measures: when a certain threshold of fly population is reached, the government can initiate extermination campaigns to limit the spread of diseases. This can be generalised, or localised only around farms.
 %install pest control measures, including variables such as: intensity of extermination / frequency
 %install threshold fly population value that activates pest control. The aim is to counteract effects of population growth to infected flies and infection rates.
 %Note: could we connect fly population or proportion of infected flies to exposure rate??
@@ -43,12 +43,12 @@ This policy would try to address and improve the level of hygiene of slaughterho
 In the model this was implemented by adding a switch variable that turned on if the COI of the the previous year exceed a certain amount, in this case set to \euro 15 million, to reduce the \textit{rate of cross-contamination cross-contamination} by 20\%. It is of note that the switch activates the modifier immediately upon reaching the threshold, thus operating under the assumption that there is no delay in policy trigger and its implementation. In reality it will take time to adopt the policy, but effects are negligible at the 30-year time scale.
 
 \subsubsection{Food safety and handling policy}
-This policy deals with the way chicken products are handled by both consumers and actors in the production cycle of chicken meat. If the quality of the routines in the preparation, transport and storage of chicken  products is increased, there will be a reduction in foodborne illnesses such as campylobacteriosis REF NEEDED.
+This policy deals with the way chicken products are handled by both consumers and actors in the production cycle of chicken meat. If the quality of the routines in the preparation, transport and storage of chicken  products is increased, there will be a reduction in foodborne illnesses such as campylobacteriosis~\parencite{shane_campylobacter_2000}.
 
 When the Cost of Illness of past year has exceeded the threshold value of \euro 15 million, this policy is triggered. So, effectively, there is a delay of 1 year. There is 20\% less chance to get infected by the consumption of meat once this policy is in effect.
 
 \subsubsection{Consumption behaviour policy}
-With this policy, instead of attempting to disrupt \textit{Camplyobacter} transmission routes among chickens and other animals, it circumvents the central issue and addresses meat consumption. This would include any measure that would dissuade or restrict the consumption of chicken meat throughout the population, e.g. campaigns, meat tax, etc.
+With this policy, instead of attempting to disrupt \textit{Campylobacter} transmission routes among chickens and other animals, it circumvents the central issue and addresses meat consumption. This would include any measure that would dissuade or restrict the consumption of chicken meat throughout the population, e.g. campaigns, meat tax, etc.
 
 The policy also operates with a threshold-activated switch. The threshold was set higher to \euro 22 million compared to the safe slaughtering policy, as it is seen as "last resort", because it seems unlikely that meat bans would be complied to, nor be implemented in the first place, as meat consumption in the Netherlands is still on the rise.
 
@@ -67,7 +67,7 @@ Policies were implemented using switches, connecting directly to the variable it
 
 \iffalse
 \subsubsection{Effect of policies on the base model}
-A policy regarding slaughtering was modeled into the base model, which will be tested under the same scenarios as the base model. The food safety and handling policy, also dubbed the Safe Slaughtering policy, goes into effect when Cost of Illness reaches a certain threshold, set at a 100 million euros. This policy means that the rate of cross-contamination drops by 20\%.  
+A policy regarding slaughtering was modelled into the base model, which will be tested under the same scenarios as the base model. The food safety and handling policy, also dubbed the Safe Slaughtering policy, goes into effect when Cost of Illness reaches a certain threshold, set at a 100 million euros. This policy means that the rate of cross-contamination drops by 20\%.  
 
 \begin{figure}[h!]
     \centering
@@ -89,7 +89,7 @@ Model behaviour under this policy is reasonable. Once the food safety and handli
 
 The odd spikes in Figure \ref{fig:p_meat} are similar to the ones as explained in section \ref{s:b_base}. 
 
-Another policy implemented was the campaign to limit human exposure to flies, dubbed the No Fly Zone. This campaign would inform the Dutch population on how to minimize attractive environments for fly propagation. This policy reduces the rate of human exposure to infectious flies by 20\%. 
+Another policy implemented was the campaign to limit human exposure to flies, dubbed the No Fly Zone. This campaign would inform the Dutch population on how to minimise attractive environments for fly propagation. This policy reduces the rate of human exposure to infectious flies by 20\%. 
 
 \begin{figure}[h!]
     \centering
