@@ -1,5 +1,17 @@
 %TC:ignore
-In order to build confidence in our system dynamics model and ascertain whether our model is fit for purpose, we conducted tests on model structure and behaviour. These tests are in accordance with \cite{forrester_tests_1980}. Their outputs are shown in this chapter. We start presenting our findings on the extreme conditions test, then we show the results of the sensitivity analysis, and we conclude this chapter by comparing the data of the model to real-world values.
+In order to build confidence in our system dynamics model and ascertain whether our model is fit for purpose, we conducted tests on model structure and behaviour. These tests are in accordance with \cite{forrester_tests_1980}. Their outputs are shown in this chapter. First, we present the boundaries of the model. Second, we present our findings on the extreme conditions test. Next, we show the results of the sensitivity analysis, and we conclude this chapter by comparing the data of the model to real-world values.
+
+\subsection{Model Boundaries}
+A number of variables were considered in conceptualisation of the model, with most excluded from the specification. Explicit definition of variables considered in and out of scope are shown in  Figure \ref{fig:bullseye}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.90\textwidth]{images/bullseye.png}
+\caption{Bullseye diagram for variables considered within model boundaries}
+\label{fig:bullseye}
+\end{figure}
+
+We included all relevant structures to address the research question. Some structures were left out because they did not fit the aggregation level.
 
 \subsection{Extreme conditions test}
 \label{s:extreme_conditions}
@@ -77,48 +89,13 @@ Finally, we explored the extremes of \textit{CPY reproduction in chickens}. When
 
 %The extreme high value of temperature increase evidences a problem in the model, as fly reproduction is unreasonably high since extreme temperatures are likely to create a harsher environment for them as well. For the extreme high values of initial fly population and base infectious flies, the model reports a proportion of contaminated meat that is greater than the total amount of meat, which should not be possible. A similar thing happens with base infections flies and base chicken exposure rate, which can cause more infectious flies than there are total flies. When chicken arriving from hatcheries are decreased (and thus made lower than the demand), the model can handle the situation because it does not allow for consumption of more chicken that are available, but when instead it is raised, the excess supply is never dumped, creating an issue of accumulating meat indefinitely which is not realistic. Lastly, when infections per kg of meat consumed are raised 20 times its original value, it can bring issues of too many people being infected, since our model does not account for immunity of population, all population is indefinitely susceptible which becomes a problem when infection numbers are very big.
 
+\subsection{Sensitivity Analyses}
+To realise the model, we resorted to assumptions, as certain data was unavailable. We were interested in knowing how sensitive the model was to changes in these parameters. We wanted to assess the impact of the parametric changes under all 3 types of scenarios, individually, and combined.
 
-\subsection{Multivariate analysis}
+\subsubsection{Univariate Sensitivity Analysis}
+With univariate sensitivity analysis only one parameter was varied at a time, while the other parameters of the system remained constant. We wanted to test all submodels of our system and therefore varied the following parameters: \textit{projected population by 2050}, \textit{temperature increase by 2050}, \textit{temperature switch},  and \textit{rate of symptomatic case modifier}. The first parameter determines population growth, the second parameter determines the maximum temperature of the next 30 years, the third parameter determines how temperature is expected to increase, and the laast parameter how many people will actually show symptoms when infected with \textit{Campylobacter}.
 
-We ran multivariate analysis to account for the compounded effect of different uncertainties, and the results can be found in Figures \ref{fig:multi_coi}, \ref{fig:multi_meat}, \ref{fig:multi_chicken}, and \ref{fig:multi_human}. We employed VenSim's built-in Sensitivity feature and let it run 200 simulations. We assigned certain parameters a maximum of 110\% of their original value, and a minimum of 90\% of their original value. The observed change is mostly regarding numerical sensitivity, but we can see that the contaminated chicken meat can overshoot at times, which is the result of people refusing to eat meat as a result of increased infections, but the chicken were already in the production cycle so there was excess production.
-
-\begin{figure}[h!]
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate COI.png} % first figure itself
-        \caption{Cost of Illness in the multivariate analysis}
-        \label{fig:multi_coi}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate contaminated meat.png} % second figure itself
-        \caption{Contaminated chicken meat in the multivariate analysis}
-        \label{fig:multi_meat}
-    \end{minipage}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate chicken infection.png} 
-        \caption{Chicken infections from environment in the multivariate analysis}
-        \label{fig:multi_chicken}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate human infection.png}
-        \caption{Human infections from environment in the multivariate analysis}
-        \label{fig:multi_human}
-    \end{minipage}
-\end{figure}
-
-\newpage 
-\subsection{Sensitivity Analysis}
-To realise the model, we resorted to assumptions, as certain data was unavailable. We were interested in knowing how sensitive the model was to changes of these parameters. We wanted to assess the impact of the parametric changes under all 3 types of scenarios.
-
-\subsubsection{Population scenarios}
+\paragraph{Population growth}
 Based on population projections \parencite{nidi_nidi_2020} we ran the sensitivity analysis and got the results in figures \ref{fig:pop_coi}, \ref{fig:pop_meat}, \ref{fig:pop_chicken}, and \ref{fig:pop_human}. Because a population increase also increases demand for chicken, generating a reaction across the model than can be appreciated in the increased contaminated chicken meat stock as well. Because more people get infected in total and present symptoms, the cost of illness also increases.
 
 \begin{figure}[h!]
@@ -153,11 +130,7 @@ Based on population projections \parencite{nidi_nidi_2020} we ran the sensitivit
     \end{minipage}
 \end{figure}
 
-\subsubsection{Climate scenarios}
-
-% EXPLICITLY MENTION THIS IS UNIVARIATE
-
-\textbf{Average temperature increase}
+\paragraph{Average temperature increase}
 
 Based on climate change projections \parencite{knmi_knmi_2015} we ran the sensitivity analysis and got the results in figures \ref{fig:temp_coi}, \ref{fig:temp_meat}, \ref{fig:temp_chicken}, and \ref{fig:temp_human}. Temperature increasing aids in the development of disease vectors, which has a direct impact on human infections, besides also affecting indirectly through the food borne route of transmission. This results in increased cost of illness proportional to the increase in temperature over the years.
 
@@ -193,7 +166,7 @@ Based on climate change projections \parencite{knmi_knmi_2015} we ran the sensit
     \end{minipage}
 \end{figure}
 
-\textbf{Seasonal temperature increase}
+\paragraph{Seasonal temperature increase}
 
 There is uncertainty in how the temperature might increase in the future. It seems that the increase is not uniform throughout the year, but that instead summers might warm up faster than winters. We modelled this uncertainty and compared the scenarios. The seasonal variation in temperature increase leads to longer warmer periods compared to cold periods, which also affects disease vector propagation and has an impact in infections and subsequently in the cost of illness. This can be appreciated in figures. \ref{fig:season_coi}, \ref{fig:season_meat}, \ref{fig:season_chicken}, and \ref{fig:season_human}.
 
@@ -229,7 +202,7 @@ There is uncertainty in how the temperature might increase in the future. It see
     \end{minipage}
 \end{figure}
 
-\subsubsection{Public health scenarios}
+\paragraph{Rate of symptomatic infections} %multiple?
 
 On figure \ref{fig:symptom_COI} we can see the result of rate of symptomatic infections changing, which is a behaviour that has been observed recently \parencite{medema_assessment_1996}. This only bring changes to the cost of illness, as infections remain the same across the model, but the severity of the disease requires more treatment.
 
@@ -240,13 +213,50 @@ On figure \ref{fig:symptom_COI} we can see the result of rate of symptomatic inf
     \label{fig:symptom_COI}
 \end{figure}
 
+\subsubsection{Multivariate Sensitivity Analysis}
+
+We ran multivariate analysis to account for the compounded effect of different uncertainties, and the results can be found in Figures \ref{fig:multi_coi}, \ref{fig:multi_meat}, \ref{fig:multi_chicken}, and \ref{fig:multi_human}. We employed VenSim's built-in Sensitivity feature and let it run 200 simulations. We assigned certain parameters a maximum of 110\% of their original value, and a minimum of 90\% of their original value. The parameters we subjected to this were: \textit{temperature increase by 2050}, \textit{projected population by 2050}, \textit{temperature switch}, \textit{rate of symptomatic cases modifier}, \textit{COI modifier}. The \textit{COI modifier} was a variable we built in purely for the Multivariate Sensitivity Analysis, as it is uncertain whether the costs for treating the chronic conditions changes overtime. The observed change is mostly regarding numerical sensitivity, but we can see that the contaminated chicken meat can overshoot at times, which is the result of people refusing to eat meat as a result of increased infections, but the chicken were already in the production cycle so there was excess production.
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate COI.png} % first figure itself
+        \caption{Cost of Illness in the multivariate analysis}
+        \label{fig:multi_coi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate contaminated meat.png} % second figure itself
+        \caption{Contaminated chicken meat in the multivariate analysis}
+        \label{fig:multi_meat}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate chicken infection.png} 
+        \caption{Chicken infections from environment in the multivariate analysis}
+        \label{fig:multi_chicken}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/sensitivity/Multivariate human infection.png}
+        \caption{Human infections from environment in the multivariate analysis}
+        \label{fig:multi_human}
+    \end{minipage}
+\end{figure}
+
+
 \subsection{Comparison to real world data}
 
 \textcite{vlaanderen_staat_2019} estimated there were around 71.000 cases of Campylobacteriosis in the Netherlands in 2018, 67.000 in 2017 and 79.000 in 2016. We plotted the amount of cases produced by our model against the average of these three values. The results can be seen in Figure~\ref{fig:val_human_cases}. We can see the stock in our model is a good reflection of the real world. 
 
 \textcite{nepluvi_rapportage_2019} monstered broiler chickens weekly in 2018, and found $41,9$-$58.1\%$ of broiler chickens were tested positive for \textit{Campylobacter}. This concerns chickens from slaughterhouses. As can be seen in Figure~\ref{fig:val_chickens}, our base model has similar values for each year.
 
-In the Netherlands the (unsanitary) preparation and/or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry \parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume the biggest transmission routes can be found in the environment. In the base model, around 5.70\% of the infections stem from the preparation and/or consumption of chicken. This can be seen in Figure~\ref{fig:val_sources}. It may be the case that the environment plays a bigger role than we previously assumed, after all, it is easier to trace back the cause to undercooked meat than to a wild bird.
+In the Netherlands the (unsanitary) preparation and/or consumption of chicken were attributed to $20$-$30\%$ of infections in 2018. However, around $50$-$80\%$ of cases can be attributed to \textit{Campylobacter} strains associated with poultry \parencite{cuperus_surveillance_2020, nepluvi_rapportage_2019}. Therefore, it is safe to assume that there are multiple transmission routes. We assume the biggest transmission routes can be found in the environment. In the base model, around 5.77\% of the infections stem from the preparation and/or consumption of chicken. This can be seen in Figure~\ref{fig:val_sources}. It may be the case that the environment plays a bigger role than we previously assumed, after all, it is easier to trace back the cause to undercooked meat than to a wild bird.
 
 Numbers on the average amount of chicken meat consumption per Dutch person differ, but they are between 0.22 and 0.47 kg of chicken meat per week~\parencite{schotman_europese_2018, waveningen_university__research_we_2020}. In our model this fluctuates between 0.153 and 0.203 so there is a slight discrepancy.
 
@@ -298,16 +308,5 @@ The model also includes an Infection risk from birds (2.5e-05). There are about 
 	    \label{fig:val_coi}
     \end{minipage}
 \end{figure*}
-
-\subsection{Model Boundaries}
-A number of variables were considered in conceptualisation of the model, with most excluded from the specification. Explicit definition of variables considered in and out of scope are shown in  Figure \ref{fig:bullseye}.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.90\textwidth]{images/bullseye.png}
-\caption{Bullseye diagram for variables considered within model boundaries}
-\label{fig:bullseye}
-\end{figure}
-
 
 %TC:endignore
