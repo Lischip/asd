@@ -11,6 +11,22 @@ What are the economic impacts of Campylobacter under different climate, populati
 
 \textcolor{red}{Answer the research question from the intro}
 
+Through the results, we were able to examine the economic impacts of \textit{Campylobacter} infections, using Cost of Illness as a measure of this impact. Modelling of the system for changing population, public health circumstances, and climate found the following cumulative impacts by the year 2050:
+
+\textcolor{red}{Insert table showing 2050 COI number for base, climate, season, public health and population }
+\begin{table}
+\centering
+\begin{tabular}{ll}
+Model Scenario                        & Economic Impact  \\
+Base                                  & EURXX            \\
+Climate - 2 degrees warming           & EURXX            \\
+Seasonality - warmer summers          & EURXX            \\
+Public health - increased symptomatic & EURXX            \\
+Population - maximum projection       & EURXX           
+\end{tabular}
+\end{table}
+
+The model also generated information on the DALY (public health) impact of \textit{Campylobacter} under different scenarios. This information will be helpful to those in the public health field to compare the effectiveness of different interventions in a relevant public health metric.
 
 \subsection{What is the wider significance of what was found?}
 \textcolor{red}{What are the policy recommendations from this analysis?}
@@ -18,23 +34,24 @@ From this analysis, we can recommend the following combination of policies, to e
 \begin{itemize}
     \item Exposure control: We recommend that the Dutch Government investigate an exposure control policy as specified to reduce environmental infection routes for human \textit{Campylobacter} infections. This approach does have limitations, but was found to be the most effective of the policies implemented in the system dynamics model in reducing human infections.
     \item Pest control: We recommend that the Dutch Government also investigate pest control/targeted extermination campaigns to control fly populations in locations where they are likely to spread \textit{Campylobacter}, as this was found to be the most effective policy for reducing environmental chicken infections.
-    \item Consumption behaviour (retained as a policy of last resort)
+    \item Consumption behaviour (retained as a policy of last resort): We recommend that the Dutch Government formulate a consumption behaviour policy for deployment as a 'policy of last resort' to reduce infections in the short term in response to individual outbreaks of \textit{Campylobacter}. This policy was found to be robust and effective when implemented, but modelling suggested it would only be effective as a policy under extreme circumstances.
 \end{itemize}
 
 \subsection{Limitations and recommendations}
 
-Throughout model development , limitations crop up naturally due to choices being made by the modeler / modelling group. These choices are based on certain assumptions, which a lot of the times are simply approximations or shortcuts to keep model development time reasonable.
+Throughout model development , limitations crop up naturally due to choices being made by the modeller / modelling group. These choices are based on certain assumptions, made to approximate or simplify components to keep model comprehensible and development time reasonable.
 
 \subsubsection{Limitations of Conceptualisation}
 
-For conceptualisation such limitations include mainly the abstraction of certain parts. 
+For conceptualisation such limitations arise mainly through the abstraction of certain parts. For example how the ways flies infect chicken, or and the production and consumption process of chicken meat. Limitations also arise from consciously excluded factors. Surface waters and wild birds represent significant environmental transmission route, but due to time constraints had to be removed after early conceptualisations. 
 
-For example such as the ways flies infect chicken and the consumption of chicken meat. 
+% Other exclusions:
+% no Population cohorts
+% no Climate effects -> no precipitation
 
-Limitations also arise from consciously excluded factors. Surface waters and wild birds represent significant environmental transmission route, but due to time constraints had to be removed from early conceptualizations. 
-
-Another conceptual limitation concerns
-
+% Simplified formalisations:
+% temperature implemented as perfect sine-curve
+% no SIR-components, there is no recovered population
 \subsubsection{Limitations of Formalisation}
 xxx
 
@@ -50,12 +67,13 @@ a b c d e f
 %Validation limitation = no validation with SME.
 \begin{itemize}
     \item Expand the cost of illness and health impacts to look at health system capacity
-    \item Explicitly model sub-components of DALYs for different population compositions to understand implications of aging population
+    \item Explicitly model sub-components of DALYs for different population compositions to understand implications of ageing population
     \item Model human infection from environment in more detail
     \item Reduce uncertainty by conducting household behavioural surveys before and after \textit{Campylobacter} infection
     \item The model can be further improved by employing a group model building method discussed in section \ref{s:assumptions}. This approach would allow for reduction of uncertainty by capturing tacit knowledge regarding effectiveness of policy measures and other structural uncertainties.
     \item The cost of illness was taken as the main indicator for economic impact. This captures economic effects of changes to public health, but not the direct economic effects related to changes in management of farms. Future work should integrate knowledge from farmers and the agricultural industry on the direct costs of implementing policies such as safe slaughtering, or costs incurred by businesses as a result of depressed poultry consumption.
     \item The model assumes supply for chicken meat is strongly coupled to demand for chicken meat. This lends a stability to the model that may not be representative of the system in reality. Future modelling efforts should include means to better reflect the elasticity of demand and supply to policy changes.
-    \item The environmental submodel does not include waterborne infection pathways for either chickens or humans. This is due to both a lack of literature, and difficulty in representing these pathways when considering poultry farming in the Ne 
+    \item The environmental submodel does not include waterborne infection pathways for either chickens or humans. This is due to both a lack of literature, and difficulty in representing these pathways when considering poultry farming in the Netherlands as one homogeneous unit. Future work should investigate water borne pathways for infection, although this may not be feasible at the whole of country scale. 
+    \item Subjective opinions of the modellers - connection to reality
 \end{itemize}
 
