@@ -1,9 +1,37 @@
 %TC:ignore
-Several validation tests, in accordance with  were conducted for this research. Their outputs are shown in this chapter. We start presenting our findings on the extreme conditions test, then we show the results of the sensitivity analysis, and we conclude this chapter by comparing the data of the model to real-world values.
+Several validation tests, in accordance with \cite{forrester_tests_1980}, were conducted for this research. Their outputs are shown in this chapter. We start presenting our findings on the extreme conditions test, then we show the results of the sensitivity analysis, and we conclude this chapter by comparing the data of the model to real-world values.
 
 \subsection{Extreme conditions test}
 \label{s:extreme_conditions}
-To test the structure of the model, we subjected it to extreme conditions to evaluate if the model behaves accordingly. Figures~\ref{fig:temp_fly} to~\ref{fig:reproduction_meat} show the results.
+
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Variable}                             & \textbf{Extreme low} & \textbf{Extreme high} \\ \hline
+\textit{Temperature   increase by 2050}       & -1                   & 25                    \\ \hline
+\textit{Initial fly population}               & 0                    & 1                     \\ \hline
+\textit{Chicken arriving from   hatcheries}   & Halved               & Doubled               \\ \hline
+\textit{infections per kg of meat   consumed} & Halved               & 20x                   \\ \hline
+\textit{Base infectious flies}                & 0                    & 0.8                   \\ \hline
+\textit{base chicken exposure rate}           & 0                    & 0.8                   \\ \hline
+\textit{CPY reproduction in chickens}         & 0                    & 4                     \\ \hline
+\end{tabular}
+\caption{Variable values used for extreme conditions testing.}
+\label{tab:extreme_values}
+\end{table}
+
+
+To test the structure of the model, we subjected it to extreme conditions to evaluate if the model behaves accordingly. Figures~\ref{fig:temp_fly} to~\ref{fig:reproduction_meat} show the results. The time horizon of these graphs is slightly bigger from the graphs used to show the results. We opted to also show the year the model takes to reach an equilibrium, which results in some interesting behaviour. In other words, we get to see the behaviour of the model in 2020.
+
+As can be seen in Figure~\ref{fig:temp_fly}, the fly population becomes unrealistically high when the temperature gets extremely high. For instance, if throughout the year the Netherlands would have a temperature of 100 \degree c, we would have around 500 times more flies in the Netherlands in summer than in the baseline scenario. This is very unrealistic, as in the real world, those flies would die of the extreme heat. In the graph we show the results when \textit{the temperature increase by 2050} is set to 25 opposed to the 1.5 \degree c of the baseline scenario.
+
+In Figure~\ref{fig:fly_meat}, we show what happens to the KPI \textit{proportion of contaminated meat} once the initial fly population is 0 flies and 1 million flies (1 Mfly). As can be seen, when the population is 0, relatively little meat becomes infected by the environment. However, when it is set to 1 million, we see unusual behaviour before the model equilibriates. 
+
+and actually 50\% of the meat is contaminated.
+
+{\color{pink}{should these images be adjusted to reflect the time horizon we're interested in?}}
 
 \begin{figure}[h!]
     \centering
@@ -20,6 +48,10 @@ To test the structure of the model, we subjected it to extreme conditions to eva
         \label{fig:fly_meat}
     \end{minipage}
 \end{figure}
+
+We also subjected extremes on the flow \textit{chickens arriving from hatcheries} and, as to be expected, when doubled, the amount of contaminated meat grows massively, this does not propagate to the \textit{Cost of Illness}, as the meats are just stored and the demand has not increased. The meats are just stored (in the model they are just waiting in the stock), whereas halving it actually does decrease the \textit{Cost of Illness}, since there is less meat available for consumption, and therefore a decreased risk of human infection via food.
+
+Next, we investigated the \textit{infections per kg of meat consumed}. When the value from the baseline run is halved, we do not see a significance difference in the amount of CPY cases: a decrease of around 3\%, whereas when we multiply this value by twenty, the amount of CPY cases increase with around 170\%.
 
 \begin{figure}[h!]
     \centering
