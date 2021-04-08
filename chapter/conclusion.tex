@@ -42,6 +42,33 @@ From this analysis, we recommend the following combination of policies to ensure
 
 Throughout model development , limitations crop up naturally due to choices being made by the modeller / modelling group. These choices are based on certain assumptions, made to approximate or simplify components to keep model comprehensible and development time reasonable.
 
+\begin{table}[h!]
+\centering
+\caption{Limitations and future work}
+\begin{tabular}{ l  p{4cm}  p{4cm}}
+\hline
+Type &
+   Limitation &
+  Future Work \\ \hline
+Conceptualisation &
+  Exclusion of surface water and birds as transmission routes &
+  Reconceptualise environmental submodel to inlude additional vectors \\
+Formalisation &
+  Temperature implemented as perfect sine curve&
+  Integrate more realistic climate models to model more granular/realistic variability \\
+Consumption Behaviour &
+  Public campaign encouraging population to reduce chicken meat consumption when case numbers are high &
+  Reduce 'consumption rate per person' by 0.05 kg/week/person \\
+Food Safety and Handling &
+  Public campaign encouraging improved household food hygiene &
+  Reduce infections per kg of meat consumed by 20\% \\
+Safe Slaughtering &
+  Require slaughterhouses to implement more hygiene measures &
+  Reduce rate of cross contamination by 20\%
+\end{tabular}
+\label{tab:limitations}
+\end{table}
+
 \subsubsection{Limitations of Conceptualisation}
 
 For conceptualisation such limitations arise mainly through the abstraction of certain parts. For example how the ways flies infect chicken, or and the production and consumption process of chicken meat. Limitations also arise from consciously excluded factors. Surface waters and wild birds represent significant environmental transmission route, but due to time constraints had to be removed after early conceptualisations. 
