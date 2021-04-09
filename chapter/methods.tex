@@ -16,7 +16,7 @@ An essential aspect of system dynamics models are accumulations, delays and feed
 
 \subsection{Conceptualisation}
 \label{s:conceptualisation}
-The model focuses on public health and economic impacts associated with \textit{Campylobacter}-contaminated chicken meat. The dynamic hypothesis includes three KPIs that will be examined to answer the research question: 
+The model focuses on public health and economic impacts associated with \textit{Campylobacter}-contaminated chicken meat. The dynamic hypothesis includes three KPIs that were examined to answer the research question: 
 \begin{itemize}
     \item \textbf{Contaminated Chicken Meat}: part of the infected chicken submodel. This KPI is expected to increase with worsening climate conditions and no interventions.
     % \item Concentration of \textit{Campylobacter} in surface waters: as climate effects continue on their current trends, \textit{Campylobacter} will be able to proliferate more easily and consequently contaminate more poultry meat. This contamination would follow an S-growth curve in the coming years considering both a reinforcing loop of the number of contaminated chicken flocks, causing more spread of 
@@ -36,7 +36,7 @@ The model focuses on public health and economic impacts associated with \textit{
 \end{figure}
  
 \subsubsection*{Model Structure}
-Conceptualisation of the model structure is shown in Figure \ref{fig:aggregrated_cld}. The model will focus on farms and slaughterhouses collectively, rather than individual types of farms. This aligns better with decision-making regarding the aggregate impacts of policy choices across the entire poultry industry in the Netherlands. This aggregation level excludes most of the internal processes of slaughterhouses and broilers, as these are too detailed for this scope. Furthermore, this model will not be using age cohorts because the public health and cost of illness metrics already incorporate age weightings \parencite{mangen_campylobacteriosis_2007}.  %David: did we introduce the definition of DALYs already before this? Emily: No, I just defined the acronym. We included it in earlier work, but it might have been removed at some stage. DALYs are explained in the model explanation section.
+Conceptualisation of the model structure is shown in Figure \ref{fig:aggregrated_cld}. The model focuses on farms and slaughterhouses collectively, rather than individual types of farms. This aligns better with decision-making regarding the aggregate impacts of policy choices across the entire poultry industry in the Netherlands. This aggregation level excludes most of the internal processes of slaughterhouses and broilers, as these are too detailed for this scope. Furthermore, this model does not use age cohorts because the public health and cost of illness metrics already incorporate age weightings \parencite{mangen_campylobacteriosis_2007}.  %David: did we introduce the definition of DALYs already before this? Emily: No, I just defined the acronym. We included it in earlier work, but it might have been removed at some stage. DALYs are explained in the model explanation section.
 \subsubsection*{Model Boundaries}
 
 This model draws wider boundaries than Rommens' original model \parencite{rommens_infected_2020}. This work focuses on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factors. Moreover, with the internal components of the farms and slaughterhouses simplified, this allows for more focus on environmental transmission pathways. 
@@ -54,9 +54,9 @@ This conceptualisation informed the dynamic hypothesis for behaviour of KPIs, sh
 \label{fig:dynamic_hypothesis}
 \end{figure}
 
-It is hypothesised that the amount of contaminated chicken meat will slowly increase over time because of the reinforcing loop between the chickens and the disease vectors. 
-Secondly, it is expected that the effect of disease vectors will follow the temperature as one of the disease vectors (flies) will be more present during the warmer months. Along with climate change, this will slowly increase over time as well. 
-Thirdly, the cost of illness will increase exponentially as the chronic cases will accumulate over time. 
+It is hypothesised that the amount of contaminated chicken meat slowly increases over time because of the reinforcing loop between the chickens and the disease vectors. 
+Secondly, it is expected that the effect of disease vectors follows the temperature as one of the disease vectors (flies) is prevalent during the warmer months. Along with climate change, this slowly increases over time as well. 
+Thirdly, the cost of illness increases exponentially as the chronic cases accumulate over time. 
 
 
 \subsection{Model Explanation}
@@ -135,10 +135,10 @@ The causal structure adopted for this sub-model focuses on connecting variables 
     %Include simplifications of real-world circumstances (e.g. acute campy coming before chronic conditions)
 The main assumptions made in modelling these causal structures are:
 \begin{itemize}
-    \item All chicken meat consumed in the Netherlands is produced in the Netherlands and the population of the Netherlands cannot eat more than is produced in the Netherlands.
+    \item All chicken meat consumed in the Netherlands is produced in the Netherlands and the Dutch population cannot eat more than is produced.
     \item All infected meat becomes contaminated meat when slaughtering.
     \item Cross-contamination in the slaughtering process depends on the proportion of total infected chickens present at the moment of slaughtering. %This is based on the amount of \textit{Campylobacter} negative chicken, which represents the amount of negative chicken being slaughtered, not merely existing. % David: probs enough to leave only the first sentence
-    \item The development of chronic disease is assumed to always occur subsequent to a case of acute gastroenteritis (in reality, some cases will develop chronic disease without first developing gastroenteritis, following a \textit{Campylobacter} infection
+    \item The development of chronic disease is assumed to always occur subsequent to a case of acute gastroenteritis (in reality, some cases develop chronic disease without first developing gastroenteritis, following a \textit{Campylobacter} infection
     \item There is no recovered population, meaning that infected people are able to be reinfected and do not become immune.
 \end{itemize}
 
@@ -146,13 +146,43 @@ The main assumptions made in modelling these causal structures are:
 
 \subsection{Model Specification}
 %What are the main mechanisms/variables/parameters/equations in our model?
-The main mechanisms employed in each part of the model are as follows:
-\begin{itemize}
-    \item Environmental transmission: this part of the model replicates empirical models of insect development cycles, and translates this to prevalence of environmental transmission of \textit{Campylobacter} by disease vectors, therefore providing a path of infection for chicken and humans.
-    \item Chicken infections: the chicken infections part of the model describes the mechanisms by which environmental infections enter the food supply for human consumption, creating the foodborne infection mechanism.
-    \item Cost of Illness: captures the annual consequences of foodborne and environmental \textit{Campylobacter infections} on humans. %the the cost of illness model relies on accumulation over time, while using a pulse-train mechanism to 'empty' the annual occurrence of acute illness.
-    
-\end{itemize} % David: isn't this the same as talking about the submodels? I say remove, if anything we can briefly say how those models interact with one another. Emily - this is the section I was asking about this morning. Really not sure what we are expected to include here that isn't covered in the model documentation.
+The main equations of note employed in each submodel are detailed in Table \ref{tab:equations}.
+
+%TC:ignore
+\begin{table}[h!]
+\centering
+\caption{Important equations in each submodel. All functions are over $t$, which signifies the time step.}
+\begin{tabular}{ m{2cm}  p{5cm}  p{5cm}}
+\hline
+Submodel &
+   Equation &
+  Description \\ \hline
+Infected Chickens &
+ $A(t) = B(t) + C(t) \times a $ &
+ Contaminated meat $A(t)$ with $B(t)$ the function of CPY-positive chickens slaughtered, $C(t)$ a function of slaughtering with cross-contamination, and $a$ the meat per chicken-contaminated meat-consumption, a variable used to modify a stock to change units from 'chicken' to 'kg' in the stock flow structure.\\
+Environmental Transmission &
+    $D(t) = a + E(t)$ &
+  Fly development rate $D(t)$ with $a$ being the base development rate of flies and $E(t)$ a function of fly population growth per \degree C.\\
+Cost of Illness &
+%$F(t) = G(t) \times b \times \dfrac{\sum_{k=0}^{48} p(t-k\times\delta)}{t} $
+% \[ F(t) =
+%   \begin{cases}
+%   G(t) \times b \times p(t)  & \quad \text{if } t \text{ is beginning of week}\\
+%     G(t) \times b & \quad \text{else}
+%   \end{cases}
+% \]
+$F(t) = G(t) \times b \times \dfrac{p(t)}{t} $
+
+&
+Symptomatic infections $F(t)$ with $G(t)$ the stock of \textit{campylobacter} cases, $b$ the rate of symptomatic cases, $p(t)$ is a rectangular pulse with the width of the time step that has a rectangular pulse around the 52nd week of each year. $p(t)$ thus empties values from the stock once per year.
+%Symptomatic infections $F(t)$ with $G(t)$ the stock of \textit{campylobacter} cases, $b$ the rate of symptomatic cases, $p(t)$ is a rectangular pulse with the width of the time step, with $\delta$ being the amount of time between pulses. The Pulse Train only activates at the end of a year, so $k$ is the amount of timesteps in a year.
+
+  %Convert time unit from week to year: Pulse train empties values from the stock once per year
+  \\ \hline
+\end{tabular}
+\label{tab:equations}
+\end{table}
+%TC:endignore
 
 A complete list of variables and parameters used in the model are detailed in Appendix \ref{ch:model_documentation}.
 
@@ -254,7 +284,7 @@ Finally, we compared our model to real world data, and made the following observ
 %TC:ignore
 \iffalse
 \textbf{Extra}\\
-\textcite{vlaanderen_staat_2019} and curperus also show the actual human infections confirmed by laboratoria from 2006-2018, and the numbers for the Netherlands. I assumed these were uninteresting, since we also care about untested individuals
+\textcite{vlaanderen_staat_2019} and curperus also show the actual human infections confirmed by laboratories from 2006-2018, and the numbers for the Netherlands. I assumed these were uninteresting, since we also care about untested individuals
 
 The use of antacids may increase one's chances of getting Campylobacteriosis. This is structural uncertainty we could include.
 
@@ -290,7 +320,7 @@ To answer our research question, experiments were set up around the three compon
 
 We identified a number of uncertainties in the model that are summarised in Table \ref{tab:uncertainties}. Parametric uncertainties were used to perform sensitivity analysis in the model, whereas most structural uncertainties were explored to define possible policy interventions.
 %TC:ignore
-\begin{longtable}[]{l|l|l}
+\begin{longtable}[]{|l|l|l|}
 \caption{Summary of uncertainties in the system}
 \label{tab:uncertainties} \\
 \hline
@@ -304,7 +334,7 @@ We identified a number of uncertainties in the model that are summarised in Tabl
 \end{longtable}
 %TC:endignore
 
-The structural and parametric uncertainties resulted in five policies that will be tested. These policies were designed based on reality and are capable of providing a view of the policies' cost effectiveness and robustness. 
+The structural and parametric uncertainties resulted in five policies that were be tested. These policies were designed based on reality and are capable of providing a view of the policies' cost effectiveness and robustness. 
 
 The parametric uncertainties were used to devise a sensitivity analysis and scenario tests for robustness of the policy. The parameters are the projection of the Dutch population, the temperature increase in the coming 30 years and the cost of illness. 
 
@@ -326,7 +356,7 @@ Exposure Control &
   Reduce human exposure to flies by 20\% with delay of one week \\
 Pest Control &
   Extermination of flies in infection prone areas &
-  Reduce 'infectious flies variable' by 20\%, triggered by temperature above 20 degrees \\
+  Reduce 'infectious flies variable' by 20\%, triggered by temperature above 20 \degree \\
 Consumption Behaviour &
   Public campaign encouraging population to reduce chicken meat consumption when case numbers are high &
   Reduce 'consumption rate per person' by 0.05 kg/week/person \\
@@ -345,7 +375,7 @@ Safe Slaughtering &
 \iffalse
 \begin{itemize}
     \item Public campaigns to control human exposure to infected flies: when disease vectors (flies) are more prevalent, the government requires the population to keep organic waste properly closed and use fly nets \parencite{hald_use_2007}.
-    \item Pest control measures: when average temperatures are above 20 degrees Celsius, the government can initiate fly extermination campaigns to limit the spread of diseases.
+    \item Pest control measures: when average temperatures are above 20 \degree Celsius, the government can initiate fly extermination campaigns to limit the spread of diseases.
     \item Improve sanitation of slaughterhouse process and equipment: requirement for slaughterhouse equipment to be cleaned using water that is frequently changed to prevent cross-contamination. This can also be enhanced by the use of UV radiation to aid in the decontamination process without altering the sensory quality of the meat \parencite{isohanni_use_2009}.
     \item Food safety and handling: Policy connecting cost of illness to proportion of contaminated chicken
     \item Behavioural link from DALYs to either infections per kg consumed OR kg of chicken meat consumed. There is a structural uncertainty related to how consumer behaviour might change. Will individuals reduce their chicken consumption or will they be more careful in food handling?
@@ -355,7 +385,7 @@ Safe Slaughtering &
 
 %FOR WHOMEVER IT MAY CONCERN: at the moment there is no duplicate of the following subsubsection in policies.tex.
 \subsubsection*{Note on policy implementation}
-Policies were implemented using switches, connecting directly to the variable it is meant to address. This is not realistic as policies will exhibit side effects. To more accurately integrate policies into the system,  a group modelling approach is recommended, including relevant stakeholders such as farmers, policy experts, and public health practitioners \parencite{vennix_group_1999}. %David: wouldn't this be more of a limitation and recommendation?
+Policies were implemented using switches, connecting directly to the variable it is meant to address. This is not realistic as policies exhibit side effects. To more accurately integrate policies into the system,  a group modelling approach is recommended, including relevant stakeholders such as farmers, policy experts, and public health practitioners \parencite{vennix_group_1999}. %David: wouldn't this be more of a limitation and recommendation?
 
 \subsubsection{Scenarios tested}
 Policies were tested for robustness under different population, temperature change, seasonality and public health scenarios, as shown in Appendix \ref{ch: detexp}.

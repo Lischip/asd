@@ -1,12 +1,13 @@
+%TC:ignore
 In this chapter the results from the experiments will be shown and analysed. First, the model will be discussed without any policies in effect. Following this, the base model is tested for it's performance against multiple scenarios. Finally, the policies are implemented, and their robustness to the earlier scenarios tested. This analysis serves an interpretation of the relative cost-effectiveness of the chosen policies, allowing for comparison of real-world cost of implementation. 
 
-%TC:ignore
+
 \iffalse
 1.	Show and explain results without policies
 2.	Show and explain consequences of scenarios for model behaviour
 3.	Show and explain consequences of policies for each scenario (i.e., robustness) 
 \fi
-%TC:endignore
+
 \subsection{Base Model}
 
 The model was first run without any policies in place to study the effects of the scenarios on the situation as is. Afterwards, it will be run as a part of the scenarios to see how the status quo fares in our defined scenarios. 
@@ -231,7 +232,7 @@ We ran multivariate analysis to account for the compounded effect of different u
 The Pest Control policy was found to be most robust against climate change scenarios, with no observable difference between KPI outcomes for different climate scenarios. This is because the policy is pegged to temperature, effectively capping propagation of flies at higher temperatures. However, it is less robust to changes in seasonality, wherein after 2030, there is a divergence in outcomes. For scenarios with greater seasonality, the policy of controlling fly populations is less capable of responding to larger variation in temperature.
 
 
-Predictably, the policy doesn't influence changes in public health scenarios, as the effects are too far downstream of the policy for pest control to have a material impact.
+Predictably, the policy does not influence changes in public health scenarios, as the effects are too far downstream of the policy for pest control to have a material impact.
 
 As pest control is robust to climate variation, we recommend that policy-makers consider this as an effective policy under futures with climate uncertainty, but should be paired with other policies to manage for downstream effects (especially with respect to public health scenarios). In the near term, this policy is unlikely to be cost-effective, however, from 2030 onward (assuming climate projections are representative), the economic effects of the policy will be large enough (more than EUR 10 million) to justify expenditure on this policy.
 
@@ -248,3 +249,5 @@ Note: This policy is implemented without delay. It was assumed that if a policy 
 
 \subsubsection{Poultry consumption behaviour}
 % This is essentially, an extreme values behaviour. It's assumed that the government will not enact this policy except for under extenuating circumstances, whereby case numbers get so high that all other policy options are exhausted, and the government needs to ask citizens to reduce poultry consumption.
+
+%TC:endignore
