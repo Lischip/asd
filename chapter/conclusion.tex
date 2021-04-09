@@ -1,11 +1,11 @@
-In this section we will answer the research question and tie all individual finding together. Firstly, the results from section \ref{ch:results} will be related to the research question, after which the implications will be discussed. Finally, some suggestions for further research will be made. 
+In this section we answer the research question and tie all individual finding together. The results from section \ref{ch:results} are related to the research question, after which the implications and limitations are discussed. Suggestions for further research are also included. 
 
 \subsection{Key Findings}
 
 The model was built and analysed with the following research question in mind: 
 
 \begin{center}\textit{\textcolor{NiceBlue}{
-What are the economic impacts of Campylobacter under different climate, population, and public health scenarios, and what policy measures can address these? }}
+What are the economic impacts of \textit{Campylobacter} under different climate, population, and public health scenarios, and what policy measures can address these? }}
 \end{center}
 
 
@@ -13,6 +13,7 @@ What are the economic impacts of Campylobacter under different climate, populati
 
 Through the results, we were able to examine the economic impacts of \textit{Campylobacter} infections, using Cost of Illness as a measure of this impact. Modelling of the system for changing population, public health circumstances, and climate found the cumulative impacts by the year 2050 given in Table \ref{tab:coi_conclusion}
 
+%TC:ignore
 \begin{table}[h!]
 \caption{Accumulated Cost of Illness by 2050 under main scenarios}
 \label{tab:coi_conclusion}
@@ -21,14 +22,15 @@ Through the results, we were able to examine the economic impacts of \textit{Cam
 \hline
 Model Scenario                        & Economic Impact  \\ \hline
 Base                                  & €486.9 million           \\
-Climate - 2 degrees warming           & €493.8 million           \\
+Climate - 2 \degree warming           & €493.8 million           \\
 Seasonality - warmer summers          & €495.8 million           \\
 Population - maximum projection       & €514.8 million 			\\
 Public health - increased symptomatic & €535.6 million \\ \hline
 \end{tabular}
 \end{table}
+%TC:endignore
 
-The model also generated information on the DALY (public health) impact of \textit{Campylobacter} under different scenarios. This information will be helpful to those in the public health field to compare the effectiveness of different interventions in a relevant public health metric.
+The model also generated information on the DALY (public health) impact of \textit{Campylobacter} under different scenarios. This information can be helpful to those in the public health field to compare the effectiveness of different interventions in a relevant public health metric.
 
 \subsection{Policy Recommendations}
 %What are the policy recommendations from this analysis?
@@ -36,86 +38,53 @@ From this analysis, we recommend the following combination of policies to ensure
 \begin{itemize}
     \item Exposure control: We recommend that the Dutch Government investigate an exposure control policy as specified to reduce environmental infection routes for human \textit{Campylobacter} infections. This approach does have limitations, but was found to be the most effective of the policies implemented in the system dynamics model in reducing human infections.
     \item Pest control: We recommend that the Dutch Government also investigate pest control/targeted extermination campaigns to control fly populations in locations where they are likely to spread \textit{Campylobacter}, as this was found to be the most effective policy for reducing environmental chicken infections.
-    \item Consumption behaviour (retained as a policy of last resort): We recommend that the Dutch Government formulate a consumption behaviour policy for deployment as a 'policy of last resort' to reduce infections in the short term in response to individual outbreaks of \textit{Campylobacter}. This policy was found to be robust and effective when implemented, but modelling suggested it would only be effective as a policy under extreme circumstances.
+    \item Consumption behaviour (retained as a policy of last resort): We recommend that the Dutch Government formulate a consumption behaviour policy for deployment as a 'policy of last resort' to reduce infections in the short term in response to individual outbreaks of \textit{Campylobacter}. This policy was found to be robust, but only really effective as a policy under extreme circumstances.
 \end{itemize}
 
 Policies for implementation by other stakeholders were not considered through this work.
+
 \subsection{Limitations and Future Work}
 
-In developing the model, choices were made to approximate or simplify components to ensure the model was comprehensible and development time reasonable. These choices present limitations to the model and are documented here, along with recommendations for future work to address these limitations.
+Developing the model, components were approximated or simplified to ensure the model was comprehensible and development time reasonable. These choices present limitations to the model and are documented here, along with recommendations for future work to address them.
 
-Ultimately, the most significant limitation of the work is that of the subjective view of the modellers. Conceptualisation, formalisation, validation and analysis are all subject to the biases and mental models of the group responsible for building the model, and so the model will benefit from external assessment and validation.
+Ultimately, the most significant limitation of the work is that of the subjective view of the modellers. Conceptualisation, formalisation, validation and analysis are all subject to the biases and mental models of the group responsible for building the model, so the model will benefit from external assessment and validation.
 
 % \textcite{vlaanderen_staat_2019} shows that \textit{Campylobacter} is becoming resistant against antibiotics. Might exclude this - not sure how it connects to the model or our scoping?
 
-%TC:ignore
-\iffalse
-\begin{table}[h!]
-\centering
-\caption{Limitations and future work}
-\label{tab:limitations}
-\begin{tabular}{ l  p{4.5cm}  p{6.5cm}}
-\hline
-Type &
-   Limitation &
-  Future Work \\ \hline
-Conceptualisation &
-  Exclusion of surface water and birds as transmission routes &
-  Reconceptualise environmental submodel to include additional vectors \\
-Conceptualisation &
-  Precipitation excluded from climate effects&
-  Include rainfall data and projections (if also including surface water transmission pathways) \\
-Formalisation &
-  Temperature implemented as perfect sine curve&
-  Integrate more realistic climate models to model more granular/realistic variability \\
-Validation &
-  Lack of consultation with stakeholders &
-  Adopt a group. model building approach to gain insights on model validity from relevant agricultural, environmental, and public health stakeholders \\
-Analysis &
-  Range of scenarios tested were limited to available information &
-  Adopt a broader set of feasible external factors (based on expert input) against which to test \\
-Analysis &
-  Cost of illness as a measure of economic impact fails to include non-health related policy impacts &
-  Include costs to retailers and agricultural industry of wasted chicken meat or of implementing hygiene measures \\ \hline
-\end{tabular}
-\end{table}
-\fi
-%TC:endignore
 
 \subsubsection{Limitations of Conceptualisation}
-For conceptualisation, limitations arise mainly through the abstraction of certain parts. For example, the way flies infect chicken or the production and consumption process of chicken meat. Limitations also arise from consciously excluded factors. Surface waters and wild birds represent a significant environmental transmission route but were removed due to time constraints on the modelling process after initial conceptualisation. 
+Conceptualisation limitations arise mainly through the abstraction of certain parts and consciously excluded factors. %Surface waters represent a significant environmental transmission route but were removed due to time constraints on the modelling process after initial conceptualisation. 
+%This is the same, no? as below? Oops, probably
 
-The environmental sub-model does not include waterborne infection pathways for either chickens or humans. This is due to both a lack of literature and difficulty in representing these pathways when considering poultry farming in the Netherlands as one homogeneous unit. Future work should investigate waterborne pathways for infection, although this may not be feasible at a country scale.
+The environmental submodel does not include waterborne infection pathways for either chickens or humans. This is due to a lack of literature and difficulty in representing these pathways when considering poultry farming in the Netherlands as one homogeneous unit. Future work should investigate waterborne pathways for infection. %although this may not be feasible at a country scale.
 
-Precipitation changes were excluded from the modelling of climate and environmental effects during the conceptualisation of the model. As the disease vectors and transmission pathways examined were not significantly influenced by rainfall. Future work should include rainfall in the climate effects and environmental transmission sub-model, especially if other pathways (e.g. waterborne transmission) are included.
-
-Initial conceptualisation of the model excluded impacts on health system capacity from the model (i.e. modelling numbers of patients visiting doctors, hospitals, intensive care). Future work should expand the cost of illness and health impacts to include health system capacity in measures of public health impact.
+Precipitation changes were excluded from the modelling of climate and environmental effects during the conceptualisation of the model, as the disease vectors and transmission pathways examined were not significantly influenced by rainfall. Furthermore, the model excludes impacts on health system capacity from the model (i.e. modelling numbers of patients visiting doctors, hospitals, intensive care). Future work should include rainfall in the climate effects and environmental transmission sub-model and expand the cost of illness and health impacts to include health system capacity in measures of public health impact. 
 
 \subsubsection{Limitations of Formalisation}
-Formalisation of the model from concept to a computer simulation resulted in some changes and simplifications to make it possible to simulate.
+Formalisation of the model resulted in some changes and simplifications in order to simulate. The stability of the model behaviour suggests that some elements may have been oversimplified. This can be addressed through consultation with relevant stakeholders about realistic behaviours.
 
-The temperature in the climate model was implemented as a perfect sine curve. In reality, seasonal fluctuations exhibit more randomness, with intermittent peaks and troughs. Future work should integrate existing validated climate models to model more granular/realistic variability.
+The temperature in the climate model was implemented as a perfect sinusoidal curve. In reality, seasonal fluctuations exhibit more randomness, with intermittent peaks and troughs. Future work should integrate existing validated climate models for more realistic variability.
 
-Due to the focus on the cost of illness only, illness and recovery dynamics were not modelled in full in the COI submodel. This meant that the 'recovered' population was primarily used as a flow to empty the infected population stock, rather than to created a recovered population stock which would, within a Susceptible-Infected-Recovered (SIR) model, typically result in members of the population developing immunity to \textit{Campylobacter}, preventing reinfection in future years. Future work should reconceptualise the COI submodel to include an SIR structure to prevent possible double-counting of infected persons.
+Due to the focus on the COI, illness and recovery dynamics were not fully modelled. There is no recovered population stock which would, within a Susceptible-Infected-Recovered (SIR) model, typically result in members of the population developing immunity to \textit{Campylobacter}, preventing reinfection. Future work should include a SIR structure to prevent possible double-counting of infected persons.
 
-Further to this, there are no population cohorts used in examining public health impacts. This was because the DALY and COI figures used already account for different impacts across different age groups. Future work might consider subscripting the model to explicitly model sub-components of DALYs for different population compositions to understand implications of ageing and other population dynamics.
+Furthermore, there are no population cohorts used in examining public health impacts. This was because the DALY and COI figures used already account for impacts across different age groups. Future work might consider subscripting the model to explicitly model sub-components of DALYs for different population compositions to understand implications of ageing and other population dynamics.
 
-The model assumes supply for chicken meat is strongly coupled to demand for chicken meat. This lends stability to the model that may not be representative of the system in reality. Future modelling efforts should include means to better reflect the elasticity of demand and supply to policy changes.
+The model assumes supply for chicken meat is strongly coupled to demand, lending stability to the model that may not be representative of reality. Future modelling efforts should include means to better reflect the elasticity of demand and supply to policy changes.
 
-In the modelled system, the environmental submodel was structured such that flies do not die under extreme heat conditions. Future modelling of this system should include ceilings on the effect linking temperature to fly population.
+In the modelled system, the environmental submodel was structured such that flies still thrive under extreme heat conditions. Future modelling of this system should include ceilings on the effect linking temperature to fly population.
 % infected chicken can be slaughtered safely in real life (not in the model) - not sure how to write about this one.
 
 \subsubsection{Limitations of Validation}
-Limitations on validation relate to the possible ranges of values that variables can take. In some cases, like temperature and population increase over time, there is significant uncertainty around them. However, in others, like the initial fly population in the Netherlands, there is no data to compare directly with it. Likewise, in extreme conditions testing, it is challenging to assess precise boundaries for the model's validity since it is difficult to define, for example, how many flies or yearly \textit{Campylobacteriosis} cases are too many.
+Limitations on validation relate to the possible ranges of values that variables can take. Surrounding temperature and population increase over time, there is significant uncertainty. And with others, like the initial fly population, there is no data to compare directly with. Similarly, in extreme conditions testing it is challenging to assess precise boundaries for model validity, since it is difficult to define, for example, how many flies are too many.
 
-Uncertainty in the validation of consumption behaviour and related policies might be reduced by conducting household behavioural surveys before and after \textit{Campylobacter} infection. Other elements of the model can be further improved by employing a group model building method discussed in section \ref{s:assumptions}. This approach would reduce uncertainty by capturing tacit knowledge regarding policy measures' effectiveness and other structural uncertainties.
+Uncertainty in the validation of consumption behaviour and related policies might be reduced by conducting household behavioural surveys before and after \textit{Campylobacter} infection. Other elements of the model can be further improved by employing group model building as discussed in section \ref{s:assumptions}, which could reduce uncertainty by capturing tacit knowledge regarding policy measures' effectiveness and other structural uncertainties.
 
-A group model building approach might also help highlight opportunities for new research on the environmental transmission of \textit{Campylobacter}. We found literature was scarce on fly transmission routes through the modelling process, including on how flies infect one another, how they infect other animals, and how other disease vectors (such as wild birds) are involved. Involving subject matter experts in the modelling process might aid in closing this gap.
+A group model building approach might also highlight opportunities for new research on the environmental transmission of \textit{Campylobacter}. We found literature was scarce on fly transmission routes through the modelling process, including on how flies infect one another, how they infect other animals, and how other disease vectors (such as wild birds) are involved. Involving subject matter experts in the modelling process might help close this gap.
 
 \subsubsection{Limitations of Analysis}
-The group model building approach would also benefit the quality of analysis. In analysing the policies and the model, the range of scenarios tested were limited to the available information. A consultative approach could enable the modellers to adopt a broader set of feasible external factors (based on expert input) against which to test the efficacy and robustness.
+Group model building would also benefit the quality of analysis. In analysing the policies and the model, the range of scenarios tested were limited to the available information. A consultative approach could enable the modellers to adopt a broader set of feasible external factors (based on expert input) against which to test the efficacy and robustness.
 
 The cost of illness was taken as the leading indicator for economic impact. This captures the economic effects of public health impacts, but not the direct economic effects related to changes in farm management practices. Future work should integrate knowledge from farmers and the agricultural industry on the direct costs of implementing policies such as safe slaughtering or costs incurred by businesses resulting from depressed poultry consumption.
-
+% ✌️ 
 
 
