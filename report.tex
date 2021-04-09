@@ -47,6 +47,13 @@
 \usepackage{csquotes}
 \usepackage{pdfpages}
 \usepackage{titlesec}
+\usepackage{xpatch}
+
+\xpatchcmd{\section}{%
+  \normalfont\scshape\centering}{%
+  \normalfont\scshape}{\typeout{Success}}{\typeout{Failure}}%
+
+
 
 \usepackage[style=apa]{biblatex}
 \addbibresource{asd.bib}
@@ -280,11 +287,11 @@
 \pagenumbering{roman}
 
 \appendix
-\section{Model documentation}
+%\section{Model documentation}
 \label{ch:model_documentation}
-
 \includepdf[pages=-,landscape=true]{data/Stock Flow Variable Details.pdf}
 %\input{appendix/model_doc}
+\setcounter{section}{1}
 \section{Validation}
 \label{ch:validation} 
 \input{appendix/validation}
