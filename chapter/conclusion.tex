@@ -18,12 +18,13 @@ Through the results, we were able to examine the economic impacts of \textit{Cam
 \label{tab:coi_conclusion}
 \centering
 \begin{tabular}{ll}
-Model Scenario                        & Economic Impact  \\
+\hline
+Model Scenario                        & Economic Impact  \\ \hline
 Base                                  & €486.9 million           \\
 Climate - 2 degrees warming           & €493.8 million           \\
 Seasonality - warmer summers          & €495.8 million           \\
 Population - maximum projection       & €514.8 million 			\\
-Public health - increased symptomatic & €535.6 million 
+Public health - increased symptomatic & €535.6 million \\ \hline
 \end{tabular}
 \end{table}
 
@@ -38,14 +39,17 @@ From this analysis, we recommend the following combination of policies to ensure
     \item Consumption behaviour (retained as a policy of last resort): We recommend that the Dutch Government formulate a consumption behaviour policy for deployment as a 'policy of last resort' to reduce infections in the short term in response to individual outbreaks of \textit{Campylobacter}. This policy was found to be robust and effective when implemented, but modelling suggested it would only be effective as a policy under extreme circumstances.
 \end{itemize}
 
+Policies for implementation by other stakeholders were not considered through this work.
 \subsection{Limitations and Future Work}
 
-Throughout model development , limitations crop up naturally due to choices being made by the modeller / modelling group. These choices are based on certain assumptions, made to approximate or simplify components to keep model comprehensible and development time reasonable.
+In development of the model, choices were made to approximate or simplify components to keep model comprehensible and development time reasonable. These limitations and the opportunities they present for future work are detailed in Table \ref{tab:limitations}
 
+%TC:ignore
 \begin{table}[h!]
 \centering
 \caption{Limitations and future work}
-\begin{tabular}{ l  p{4cm}  p{4cm}}
+\label{tab:limitations}
+\begin{tabular}{ l  p{4.5cm}  p{6.5cm}}
 \hline
 Type &
    Limitation &
@@ -53,22 +57,26 @@ Type &
 Conceptualisation &
   Exclusion of surface water and birds as transmission routes &
   Reconceptualise environmental submodel to inlude additional vectors \\
+Conceptualisation &
+  Precipitation excluded from climate effects&
+  Include rainfall data and projections (if also including surface water transmission pathways) \\
 Formalisation &
   Temperature implemented as perfect sine curve&
   Integrate more realistic climate models to model more granular/realistic variability \\
-Consumption Behaviour &
-  Public campaign encouraging population to reduce chicken meat consumption when case numbers are high &
-  Reduce 'consumption rate per person' by 0.05 kg/week/person \\
-Food Safety and Handling &
-  Public campaign encouraging improved household food hygiene &
-  Reduce infections per kg of meat consumed by 20\% \\
-Safe Slaughtering &
-  Require slaughterhouses to implement more hygiene measures &
-  Reduce rate of cross contamination by 20\%
+Validation &
+  Lack of consultation with stakeholders &
+  Adopt a group. model building approach to gain insights on model validity from relevant agricultural, environmental, and public health stakeholders \\
+Analysis &
+  Range of scenarios tested were limited to available information &
+  Adopt a broader set of feasible external factors (based on expert input) against which to test \\
+Analysis &
+  Cost of illness as a measure of economic impact fails to include non-health related policy impacts &
+  Include costs to retailers and agricultural industry of wasted chicken meat or of implementing hygiene measures \\ \hline
 \end{tabular}
-\label{tab:limitations}
 \end{table}
-
+%TC:endignore
+%TC:ignore
+\iffalse
 \subsubsection{Limitations of Conceptualisation}
 
 For conceptualisation such limitations arise mainly through the abstraction of certain parts. For example how the ways flies infect chicken, or and the production and consumption process of chicken meat. Limitations also arise from consciously excluded factors. Surface waters and wild birds represent significant environmental transmission route, but due to time constraints had to be removed after early conceptualisations. 
@@ -104,4 +112,5 @@ a b c d e f
     \item The environmental submodel does not include waterborne infection pathways for either chickens or humans. This is due to both a lack of literature, and difficulty in representing these pathways when considering poultry farming in the Netherlands as one homogeneous unit. Future work should investigate water borne pathways for infection, although this may not be feasible at the whole of country scale. 
     \item Subjective opinions of the modellers - connection to reality
 \end{itemize}
-
+\fi
+%TC:endignore

@@ -46,7 +46,7 @@
 \usepackage{lscape}
 \usepackage{csquotes}
 \usepackage{pdfpages}
-
+\usepackage{titlesec}
 
 \usepackage[style=apa]{biblatex}
 \addbibresource{asd.bib}
@@ -57,6 +57,11 @@
 %\bibliographystyle{bath}
 %\renewcommand{\bibsection}{}
 
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 
 \makeatletter
@@ -271,6 +276,7 @@
 \appendix
 \section{Model documentation}
 \label{ch:model_documentation}
+
 \includepdf[pages=-,landscape=true]{data/Stock Flow Variable Details.pdf}
 %\input{appendix/model_doc}
 \section{Validation}
