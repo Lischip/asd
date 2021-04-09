@@ -41,7 +41,7 @@ Conceptualisation of the model structure is shown in Figure \ref{fig:aggregrated
 
 This model draws wider boundaries than Rommens' original model \parencite{rommens_infected_2020}. This work focuses on climate, population, and policy effects (both on production and consumption) and the subsequent economic impacts of these factors. Moreover, with the internal components of the farms and slaughterhouses simplified, this allows for more focus on environmental transmission pathways. 
 
-The sub-model of 'Infected Chickens' encompasses the relevant features of Rommens' original model \parencite{rommens_infected_2020}. The following sections detail model structure and behaviour. 
+The sub-model of 'Infected Chickens' encompasses the relevant features of this original model \parencite{rommens_infected_2020}. The following sections detail model structure and behaviour. 
 
 \subsubsection*{Dynamic Hypothesis}
 
@@ -154,7 +154,7 @@ The main mechanisms employed in each part of the model are as follows:
     
 \end{itemize} % David: isn't this the same as talking about the submodels? I say remove, if anything we can briefly say how those models interact with one another. Emily - this is the section I was asking about this morning. Really not sure what we are expected to include here that isn't covered in the model documentation.
 
-A complete list of variables and parameters used in the model are detailed in Appendix \ref{ch:model_documentation}
+A complete list of variables and parameters used in the model are detailed in Appendix \ref{ch:model_documentation}.
 
 \subsubsection{Modelling software used}
 The system was modelled using VenSim PLE software developed by Ventana Systems Inc.
@@ -184,7 +184,7 @@ The time period of 30 years (1560 weeks) was chosen to be able to show the effec
 \subsection{Model Verification and Validation}
 %4.	Validation
  %   a.	Use various tests to argue why model is fit for purpose
-In this subsection the model will be undergo verification and validation. Verification will be done through a comparison with the conceptualisation of the model, as well as a unit and a time step verification. 
+In this subsection the model was subjected to several verification and validation. Verification was done through a comparison with the conceptualisation of the model, as well as a unit and a time step verification. 
 
 \subsubsection{Verification}
 \label{s:verification}
@@ -211,14 +211,16 @@ The time step verification was performed by running the model at several differe
 %Validation requires three steps:
     %Show how the data matches or does not match historical data (explain why)
 
-Several tests were performed to ascertain whether the model was fit for purpose \parencite{forrester_tests_1980}. The complete Validation can be read in Appendix~\ref{ch:validation}.
+Several tests were performed to ascertain whether the model was fit for purpose \parencite{forrester_tests_1980}. The complete Validation (including visuals) can be found in Appendix~\ref{ch:validation}.
 
-The appendix also elaborates on the model boundary. The model boundary determines the kind of policies that can be tested, and also vice versa, the policies we were interested in shaped the model boundary. We included the pathways we deemed interesting for our research question, and the tests we have performed are only concerned with these pathways.
+Before presenting the conclusions of our validations, let us emphasise that the model is mostly conform the dynamic hypothesis: our interpretation of how the system's structure results in behaviour, with some minor differences. All submodels interact with each other as expected. Visualisations and commentary on model performance relative to the dynamic hypothesis is given in Section \ref{s:baserun}.
+    
+Appendix~\ref{ch:validation} also elaborates on the model boundary. The model boundary determines the kind of policies that can be tested, and vice versa: the policies we were interested in shaped the model boundary. We included the pathways we deemed interesting for our research question, and the tests we have performed are only concerned with these pathways.
 
-To find the boundaries withing which the model works, we tested extreme conditions. The first and most obvious boundary is regarding time, as the \textit{final time} of the model cannot be higher than 30 years, since information such as temperature increase due to climate change and population projections are only defined until that date. Other extreme conditions tested can be found in table \ref{tab:extreme_values_results}.
+We first explored the extremes of these boundaries: to what parametric changes is the system sensitive? The first and most obvious boundary is regarding time, as the \textit{final time} of the model cannot be higher than 30 years, since information such as temperature increase due to climate change and population projections are only defined until that date. Other extreme conditions tested can be found in table \ref{tab:extreme_values_results}.
 
 %TC:ignore
-\begin{longtable}[c]{m{8em} m{2em} m{2em} m{22em}}
+\begin{longtable}[c]{m{8em} m{3em} m{3em} m{24em}}
 \caption{Variable values used for extreme conditions testing and test results.}
 \label{tab:extreme_values_results}\\
 \hline
@@ -238,9 +240,9 @@ Variable & Extreme low & Extreme high & Result \\
 \end{longtable}
 %TC:endignore
 
-Next we conducted multiple sensitivity analyses. We found that the system is fairly reliable when in the univariate tests. The results of the multivariate sensitivity analysis showed that there is quite some numeric sensitivity. This is mainly due to people changing their consumer behaviour, and meat piling up as a result.
+Next, we conducted multiple sensitivity analyses. We found that the system is fairly reliable when in the univariate tests. The results of the multivariate sensitivity analysis showed that there is quite some numeric sensitivity. This is mainly due to people changing their consumer behaviour, and meat piling up as a result.
 
-Finally we compared our model to real world data, and made the following observations:
+Finally, we compared our model to real world data, and made the following observations:
 \begin{itemize}
     \item The number of people with campylobacteriosis is slightly higher in the model than in the estimates, but the difference is within an acceptable range.
     \item Most of the cases of campylobacteriosis originate from the environment and not from poultry consumption, conform to literature.
@@ -269,12 +271,12 @@ I suppose the factor wild birds play can also be considered uncertain. There are
 
 %The extreme high value of \textit{temperature increase} evidences a problem in the model, as fly reproduction is unreasonably high since extreme temperatures are likely to create a harsher environment for them as well. For the extreme high values of \textit{initial fly population}, \textit{CPY reproduction in chickens}, and \textit{base chicken exposure rate} In the model reports a proportion of contaminated meat that is greater than the total amount of meat, which should not be possible. A similar thing happens with \textit{base infections flies}, which can cause more infectious flies than there are total flies. When \textit{chicken arriving from hatcheries} are decreased (and thus made lower than the demand), the model can handle the situation because it does not allow for consumption of more chicken that are available, but when instead it is raised, the excess supply is never dumped, creating an issue of accumulating meat indefinitely which is not realistic. Lastly, when \textit{infections per kg of meat} consumed are raised 20 times its original value, it can bring issues of too many people being infected, since our model does not account for immunity of population, all population is indefinitely susceptible which becomes a problem when infection numbers are very big.% David: I feel like this could be restructured, and some of it might be fully sent to the appendix, but I'm not sure how to tackle it. Maybe add an additional column in the table above?
 % Screw it, I'm modding the table
-
-Visualisations for these situations can be found in Appendix \ref{s:extreme_conditions}.
     
     %Generate the mode of behaviour/dynamic hypothesis - does it match, why or why not?
 % Refer to Section \ref{s:b_base} where the behaviour of the base model without policies is examined. In this section, the differences and similarities between the model and the dynamic hypothesis are discussed.
-The output of the model matches the dynamic hypothesis, with some minor differences. Visualisations and commentary on model performance relative to the dynamic hypothesis is given in Section \ref{s:baserun}
+\iffalse
+The output of the model matches the dynamic hypothesis, with some minor differences. Visualisations and commentary on model performance relative to the dynamic hypothesis is given in Section \ref{s:baserun}.
+\fi
     
 \subsection{Experimental setup}
 %5.	Experimental setup
@@ -286,7 +288,7 @@ The output of the model matches the dynamic hypothesis, with some minor differen
    % c.	Number of runs, numerical integration method & time step, versions, etc.: all justified
 To answer our research question, experiments were set up around the three components in the research question: climate, population and public health. 
 
-We identified a number of uncertainties in the model that are summarised in Table \ref{tab:uncertainties}. Parametric uncertainties will be used to perform sensitivity analysis in the model, whereas most structural uncertainties will be explored to define possible policy interventions.
+We identified a number of uncertainties in the model that are summarised in Table \ref{tab:uncertainties}. Parametric uncertainties were used to perform sensitivity analysis in the model, whereas most structural uncertainties were explored to define possible policy interventions.
 %TC:ignore
 \begin{longtable}[]{l|l|l}
 \caption{Summary of uncertainties in the system}
@@ -314,7 +316,7 @@ The policies tested on the model were implemented as described in Table \ref{tab
 \begin{table}[h!]
 \centering
 \caption{Policies tested and their parameterisation}
-\begin{tabular}{ l  p{3.8cm}  p{3.8cm}}
+\begin{tabular}{ l  p{5cm}  p{5cm}}
 \hline
 Policy Name &
    Description &
